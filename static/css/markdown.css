@@ -1,0 +1,162 @@
+/* Slightly Modified Version of Byword By Adam Schwartz: */
+/*
+ * This document has been created with Marked.app <http://markedapp.com>.
+ * Copyright 2011 Brett Terpstra
+ * ---------------------------------------------------------------------------
+ * Please leave this notice in place, along with any additional credits below.
+ *
+ * Byword.css theme is based on Byword.app <http://bywordapp.com>
+ * Authors: @brunodecarvalho, @jpedroso, @rcabaco
+ * Copyright 2011 Metaclassy, Lda. <http://metaclassy.com>
+ */
+ 
+/* headings */
+.markdown h1{font-size:1.5em;}
+.markdown h2{font-size:1.3em;}
+.markdown h3{font-size:1.1em;}
+.markdown h1, h2 {
+    margin-bottom:12px;
+}
+.markdown h1:first-child {
+    margin-top:0;
+}
+.markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+    margin-top:12px;
+    margin-bottom:0;
+}
+.markdown h5, .markdown h6 {
+    font-size:0.9em;
+    line-height:1.0em;
+}
+/* end of headings */
+.markdown article p {
+    margin:0 0 24px 0;
+}
+.markdown hr {
+    width: 100%;
+    margin: 1em auto;
+    border: 0;
+    color: #eee;
+    background-color: #ccc;
+    height: 1px;
+}
+/* lists */
+.markdown ol {
+    list-style: outside decimal;
+}
+.markdown ul {
+    list-style: outside disc;
+}
+.markdown ol, .markdown ul {
+    padding-left:0;
+    margin-bottom:24px;
+}
+.markdown ol li {
+    margin-left:28px;
+}
+.markdown ul li {
+    margin-bottom:8px;
+    margin-left:16px;
+}
+.markdown ol:last-child, .markdown ul:last-child {
+    margin:0;
+}
+.markdown li > ol, .markdown li > ul {
+    padding-left:12px;
+}
+.markdown dl {
+    margin-bottom:24px;
+}
+.markdown dl dt {
+    font-weight:bold;
+    margin-bottom:8px;
+}
+.markdown dl dd {
+    margin-left:0;
+    margin-bottom:12px;
+}
+.markdown dl dd:last-child, .markdown dl:last-child {
+    margin-bottom:0;
+}
+/* end of lists */
+.markdown pre {
+    /*white-space: pre-wrap;*/
+    white-space:pre;
+    width: 96%;
+    margin-bottom: 24px;
+    overflow: hidden;
+    padding: 3px 10px;
+    border-radius: 3px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+.markdown code {
+    /*white-space: nowrap;*/
+    white-space:pre-wrap;
+    font-size: 1.1em;
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+.markdown pre code {
+    /*white-space: pre-wrap;*/
+    white-space:pre;
+    overflow-x:auto;
+    border: none;
+    padding: 0.2em;
+    background-color: transparent;
+    border-radius: 0;
+}
+.markdown blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    width: 96%;
+    padding: 0 10px;
+    border-left: 3px solid #ddd;
+    color: #777;
+}
+.markdown table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-spacing: 0;
+}
+.markdown table th {
+    padding: 3px 10px;
+    background-color: #eee;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+.markdown table tr {
+}
+.markdown table td {
+    padding: 3px 10px;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+.markdown caption {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.markdown figure {
+    display: block;
+    text-align: center;
+}
+.markdown img {
+    border: none;
+    display: block;
+    margin: 1em auto;
+    max-width: 100%;
+}
+.markdown figcaption {
+    font-size: 0.8em;
+    font-style: italic;
+}
+.markdown mark {
+    background: #fefec0;
+    padding:1px 3px;
+}

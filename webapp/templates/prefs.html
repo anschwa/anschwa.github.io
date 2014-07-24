@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ title|lower }}</h2>
+<article id="prefs_wrap" class="site_content"> <!--Special ID!!-->
+  <form id="prefs_form">
+    <div>
+      <p><label>Font Size:</label>
+        <select id="font" name="font" id="font">
+          <option value="125%">+20</option>
+          <option value="112.5%">+10</option>
+          <option value="100%" selected="selected">Browser Default</option>
+          <option value="93.8%">-10</option>
+          <option value="81.3%">-20</option>
+      </select></p>
+      <p><span>Border Color:</span>
+        <select id="border" name="border" id="border">
+          <option value="#000" selected="selected">Default (Black)</option>
+          <option value="#2c799b">Blue</option>
+          <option value="#005d04">Green</option>
+      </select></p>
+      <p><label>Underline Color:</label>
+        <select id="underline" name="underline" id="underline">
+          <option value="#000" selected="selected">Default (Black)</option>
+          <option value="#2c799b">Blue</option>
+          <option value="#005d04">Green</option>
+      </select></p>
+    </div>
+    <input type="button" name="save" id="save" value="Save">
+  </form>
+</article>
+{% endblock %}

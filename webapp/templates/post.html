@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  {# <h2 style="display: inline;"><span class="underline_link"><a href="/blog">back</span></a></h2> #}
+  <h2 style="display: inline;">{{ title|lower }}</h2>
+  {% for post in posts %}
+    <article class="markdown site_content">
+        <h1 class="post_title">
+          <a href="{{ url_for('view_page', page_path=post.path) }}">
+            <span class="underline_link">{{ post.meta.title }}</span>
+          </a>
+        </h1>
+      <section class="post_content">{{ post }}</section>
+      <a href="{{ url_for('view_page', page_path=post.path) }}">
+        <p class="post_date">{{ post.meta.date.strftime("%A, %B %d, %Y. %I:%M %p") }}</p>
+      </a>
+    </article>
+  {% endfor %}
+  <p id="view_more_p"><a id="view_more_a" href="{{ url_for('archive') }}">
+      <span id="view_more_span">More</span></a>
+  </p>
+{% endblock %}
