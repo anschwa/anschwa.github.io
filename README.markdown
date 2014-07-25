@@ -1,7 +1,7 @@
 daschwa.github.io
 =================
 
-My personal [website](daschwa.github.io), powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
+My personal [website](http://daschwa.github.io/), powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
 
 
 # Project Setup
