@@ -1,7 +1,8 @@
-adamschwartz.io
-===============
+daschwa.github.io
+=================
 
-My personal website, powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
+My personal [website](daschwa.github.io), powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
+
 
 # Project Setup
 
