@@ -15,11 +15,16 @@ My projects.
 ## Linux
 
 ## OS X
+### Hydra WM
 ### Slate WM
 
 ## Raspberry Pi
 
 ## Git
+
+## Screen
+
+## AutoJump
 
 ## Music
 ### cmus
