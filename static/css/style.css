@@ -60,12 +60,12 @@ body{
 /*	min-width: 588px;*/
   max-width: 1000px;
   
-	-webkit-display: flex;
+	display: -webkit-flex;
   -webkit-flex-grow: 1;
   -webkit-flex-shrink: 1;
   -webkit-flex-direction: row;
 
-	-moz-display: flex;
+	display: -moz-flex;
   -moz-flex-direction: row;
   -moz-flex-grow: 1;
   -moz-flex-shrink: 1;
@@ -134,12 +134,12 @@ nav ul li{
   /*this is the left bar*/
   border-left: 1px solid #000;
 
-  -webkit-display:  flex;
+  display:  -webkit-flex;
   -webkit-flex-grow: 2;
   -webkit-flex-shrink: 2;
   -webkit-flex-direction: column;
 
-	-moz-display: flex;
+	display: -moz-flex;
   -moz-flex-direction: column;
   -moz-flex-grow: 2;
   -moz-flex-shrink: 2;
