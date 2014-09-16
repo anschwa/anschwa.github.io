@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta name="mobile-web-app-capable" content="yes">
     <!--========-->
-    <link rel="stylesheet" href="/static/lib/highlight/styles/custom2.css" />
     <link rel="stylesheet" href="/static/css/markdown.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/responsive.css" />
+    <link rel="stylesheet" href="/static/css/pygments_tomorrow.css">
     <!--=======-->
     <link rel="icon" type="image/png" href="/static/images/favicon.png" />
     <link rel="apple-touch-icon" href="/static/images/apple-touch-icon-152.png" />
@@ -155,19 +155,19 @@ Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu
 leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
 <hr />
-<p>Code snippet <code>(non-highlighted code goes here.</code></p>
+<p>Code snippet <code>(non-highlighted code goes here.)</code></p>
 <p>code block:</p>
-<div class="codehilite"><pre><span class="n">bob</span> <span class="o">::</span> <span class="n">Int</span> <span class="o">-&gt;</span> <span class="n">Int</span>
-    <span class="n">bob</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="n">where</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
-                    <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<div class="codehilite"><pre><span class="nf">six</span> <span class="ow">::</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+<span class="nf">six</span> <span class="ow">=</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span> <span class="kr">where</span> <span class="n">a</span> <span class="ow">=</span> <span class="mi">2</span>
+                <span class="n">b</span> <span class="ow">=</span> <span class="mi">3</span>
 </pre></div>
 
 
 <h2>Step Two</h2>
-<div class="codehilite"><pre><span class="nx">def</span> <span class="nx">simple_function</span><span class="o">:</span>
-<span class="err">#</span><span class="k">this</span> <span class="nx">does</span> <span class="nx">a</span> <span class="nx">cool</span> <span class="nx">thing</span><span class="p">.</span>
-<span class="nx">thing</span> <span class="o">=</span> <span class="s2">&quot;hello world&quot;</span>
-<span class="k">return</span> <span class="nx">thing</span>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">simple_function</span><span class="p">():</span>
+    <span class="c"># this does a cool thing.</span>
+    <span class="n">thing</span> <span class="o">=</span> <span class="s">&quot;hello world&quot;</span>
+    <span class="k">return</span> <span class="n">thing</span>
 </pre></div>
 
 
@@ -215,8 +215,6 @@ Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
     <!-- Load jQuery and scipts-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/static/lib/jquery-2.0.3.min.js"><\/script>')</script>
-    <script src="/static/lib/highlight/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
     <script type="text/javascript" src="/static/js/script.js"></script>
   </body>
 </html>

@@ -6,6 +6,7 @@ from __future__ import absolute_import
 from datetime import datetime
 from calendar import month_name
 from flask import render_template, abort
+from flask_flatpages import pygments_style_defs
 from .app import app, pages
 
 

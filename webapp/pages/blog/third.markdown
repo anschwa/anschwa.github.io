@@ -6,8 +6,8 @@ This is my first post.
 [Search for cats](http://www.google.com/search?q=cats)
 
 ## And example heading
-
-    #example code block
+    :::python
+    # example code block
     def my_function():
         hw = "hello world"
         print hw

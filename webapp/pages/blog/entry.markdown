@@ -23,21 +23,21 @@ Cras justo odio, dapibus ac facilisis in, egestas eget quam.
  
 ---
 
-Code snippet `(non-highlighted code goes here.`
+Code snippet `(non-highlighted code goes here.)`
 
 code block:
 
- 
-
-    bob :: Int -> Int
-        bob = a*b where a = 2
-                        b = 3
+    :::haskell
+    six :: Int -> Int
+    six = a*b where a = 2
+                    b = 3
 
 ## Step Two ##
-    def simple_function:
-    #this does a cool thing.
-    thing = "hello world"
-    return thing
+    :::python
+    def simple_function():
+        # this does a cool thing.
+        thing = "hello world"
+        return thing
 ---
 
 And now you are done!
