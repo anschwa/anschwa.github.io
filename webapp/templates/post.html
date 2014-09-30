@@ -11,7 +11,7 @@
         </h1>
       <section class="post_content">{{ post }}</section>
       <a href="{{ url_for('view_page', page_path=post.path) }}">
-        <p class="post_date">{{ post.meta.date.strftime("%A, %B %d, %Y. %I:%M %p") }}</p>
+        <p class="post_date">{{ post.meta.date.strftime("%A, %B %d, %Y. %H:%M") }}</p>
       </a>
     </article>
   {% endfor %}
