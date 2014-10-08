@@ -5,13 +5,15 @@ $('document').ready(function(){
     var font = getCookie('font');
     var border = getCookie('border');
     var underline = getCookie('underline');
+    var theme = getCookie('theme');
 
-    console.log(font+" "+border+" "+underline);
+    console.log(font+" "+border+" "+underline+" "+theme);
 
-    // Apply custom display prefs
+    // Apply custom display preferences
     $('body').css('font-size', font);
     $('a').css('color', underline);
     changeColor(border);
+    changeTheme(theme);
 
 });
 
@@ -33,22 +35,30 @@ $('#underline').change(function(){
     $('a').css('color', underline);
 });
 
+$('#theme').change(function(){
+    var theme = $('#theme').val();
+    changeTheme(theme);
+});
+
 // Send info and set cookie.
 $('body').on('click', '#save', function(){
 
     var font = $('#font').val();
     var border = $('#border').val();
     var underline = $('#underline').val();
+    var theme = $('#theme').val();
 
     // set cookies
-    document.cookie = "font="+font+";expires=Mon, 1, Jan 2015 12:00:00 GMT;path=/";
-    document.cookie = "border="+border+";expires=Mon, 1, Jan 2015 12:00:00 GMT;path=/";
-    document.cookie = "underline="+underline+";expires=Mon, 1, Jan 2015 12:00:00 GMT;path=/";
+    document.cookie = "font="+font+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";
+    document.cookie = "border="+border+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";
+    document.cookie = "underline="+underline+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";
+    document.cookie = "theme="+theme+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";
 
     // delete cookies
-    /*document.cookie = "font="+font+";expires=Mon, 1, Jan 1970 12:00:00 GMT;path=/"
-      document.cookie = "border="+border+";expires=Mon, 1, Jan 1970 12:00:00 GMT;path=/"
-      document.cookie = "underline="+underline+";expires=Mon, 1, Jan 1970 12:00:00 GMT;path=/"*/
+    /*document.cookie = "font="+font+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";
+      document.cookie = "border="+border+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";
+      document.cookie = "underline="+underline+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";
+      document.cookie = "theme="+theme+";expires=Mon, 1, Jan 2016 12:00:00 GMT;path=/";*/
 
 });
 
@@ -62,24 +72,22 @@ function changeColor(line_color){
     // media query change
     function updateColor(mq) {
 
-        $('.site_content').css('border-bottom', '1px solid '+line_color);
-
         if (mq.matches){
-          // matches mobile
-          $('#main_section').css('border-left', 'none');
-          $('#main_section').css('border-top', '1px solid '+line_color);
-        }
-        else {
-          // desktop site
-          $('#main_section').css('border-top', 'none');
-          $('#main_section').css('border-left', '1px solid '+line_color);
-          // test against refresh
-          test = $('nav').css('position');
-          if (test == 'static'){
             // matches mobile
             $('#main_section').css('border-left', 'none');
             $('#main_section').css('border-top', '1px solid '+line_color);
-          }
+        }
+        else {
+            // desktop site
+            $('#main_section').css('border-top', 'none');
+            $('#main_section').css('border-left', '1px solid '+line_color);
+            // test against refresh
+            test = $('nav').css('position');
+            if (test == 'static'){
+                // matches mobile
+                $('#main_section').css('border-left', 'none');
+                $('#main_section').css('border-top', '1px solid '+line_color);
+            }
         }
 
     }
@@ -100,6 +108,23 @@ function changeColor(line_color){
         updateColor(mq);
     }
 }
+
+
+// Change the theme.
+function changeTheme(theme){
+    if (theme == 'white'){
+        // make white
+        $('body').css('background-color', '#fff');
+        $('#inner-hex').css('fill', '#fff');
+        $('.markdown pre, .markdown code').css('background-color', '#fff');
+    }else{
+        // make grey
+        $('body').css('background-color', '#ebebeb');
+        $('#inner-hex').css('fill', '#F5F5F5');
+        $('.markdown pre .markdown code').css('background-color', '#eee');
+    }
+}
+
 
 // reads value of cookie
 function getCookie(cname){
