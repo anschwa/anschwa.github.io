@@ -86,7 +86,7 @@
 }
 
 /****************Target Medium-BIG-Desktop*******************/
-@media only screen and (max-width:700px){
+@media only screen and (max-width:720px), only screen and (max-height:700px){
     /*************HOMEPAGE STYLE START**********/
     #banner.homepage{
         width: auto;
