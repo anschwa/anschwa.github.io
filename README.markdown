@@ -7,7 +7,7 @@ My personal [website](http://daschwa.github.io/), powered by [Flask](http://flas
 # Project Setup
 
 ## Virtualenv
-* `sudo pip install virtualenv`
+* `pip install virtualenv`
 * `cd my_flask_project`
 * `virtualenv venv`    
 
