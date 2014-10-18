@@ -10,9 +10,7 @@
           </a>
         </h1>
       <section class="post_content">{{ post }}</section>
-      <a href="{{ url_for('view_page', page_path=post.path) }}">
-        <p class="post_date">{{ post.meta.date.strftime("%A, %B %d, %Y. %H:%M") }}</p>
-      </a>
+      <p class="post_date">{{ post.meta.date.strftime("%A, %B %d, %Y. %H:%M") }}</p>
     </article>
   {% endfor %}
   <p id="view_more_p"><a id="view_more_a" href="{{ url_for('archive') }}">
