@@ -90,6 +90,7 @@
     background-color: #eee;
     border: 1px solid #ddd;
 }
+
 .markdown code {
     /*white-space: nowrap;*/
     white-space:pre-wrap;
@@ -107,6 +108,10 @@
     padding: 0.2em;
     background-color: transparent;
     border-radius: 0;
+}
+.codehilite > pre {
+		background-color: #2d2d2d;
+		border: 1px solid #ccc;
 }
 .markdown blockquote {
     margin-left: 0;
