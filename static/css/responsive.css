@@ -45,9 +45,9 @@
         border-top:1px solid #000;
     }
 
-    .site_content{
-        margin-left:1.25em;
-    }
+    /* .site_content{ */
+    /*     margin-left:1.25em; */
+    /* } */
 
     #archives{
         display:-webkit-flex;

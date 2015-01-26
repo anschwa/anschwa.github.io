@@ -152,7 +152,7 @@ nav ul li{
 
 .site_content{
   display: block;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   padding-bottom: 10px;
   min-width: 200px;
 
