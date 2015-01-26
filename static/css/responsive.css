@@ -135,7 +135,11 @@
     nav.homepage{
         font-size: 1.1em;
     }
-/*************HOMEPAGE STYLE END************/
+    /*************HOMEPAGE STYLE END************/
+    
+    .post_date {
+        text-align: center;
+    }
 }
 
 /*************Target only Phones & Tablets****************/
