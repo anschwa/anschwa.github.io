@@ -1,5 +1,5 @@
 title: Projects
-date: 2015-07-12
+date: 2015-07-20
 
 # ES6 Typing Test
 A simple HTML5 typing test webapp written with
@@ -17,20 +17,15 @@ A programmable 42% mechanical keyboard for Dvorak.
 - [view source](https://github.com/daschwa/ma42)
 - [keyboard layout editor](http://adamschwartz.io/tmk_keyboard/editor/ma42/)
 
-# Books
-A list of books I have read since high school.
+# emacs.d
+My complete Emacs configuration.
 
-- [view source](https://github.com/daschwa/books)
+- [view source](https://github.com/daschwa/emacs.d)
 
 # dotfiles
 My dotfiles.
 
 - [view source](https://github.com/daschwa/dotfiles)
-
-# emacs.d
-My complete Emacs configuration.
-
-- [view source](https://github.com/daschwa/emacs.d)
 
 # daschwa.github.io
 This website, powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
@@ -63,6 +58,6 @@ Find and remove duplicate files.
 - [view source](https://github.com/daschwa/dupy)
 
 # PyCryption
-PyCryption is an "simple" RSA encryption program with a GUI built from wxPython. This was made for educational purposes, and should be used as such.
+PyCryption is an "simple" RSA encryption program with a GUI built from wxPython. This was made for educational purposes and should be used as such.
 
 - [view source](https://github.com/daschwa/pycryption)

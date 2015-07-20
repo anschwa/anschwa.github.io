@@ -1,4 +1,9 @@
 title: About
-date: 2014-04-19 05:35:25
+date: 2015-07-20
 
 About me.
+
+# Books
+A list of books I have read since high school.
+
+- [view source](https://github.com/daschwa/books)
