@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# python 3 import support
-from __future__ import absolute_import
-
 from datetime import datetime
 from calendar import month_name
 from flask import render_template, abort
@@ -122,7 +119,7 @@ def archive():
 
     # Sort the dates of the listed posts.
     date_dict_sorted = {}
-    for key in date_dict_no_sort.iterkeys():
+    for key in date_dict_no_sort:
         date_dict_sorted[key] = sort_my_posts(date_dict_no_sort[key])
 
     # sorted by posts only

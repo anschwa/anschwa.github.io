@@ -3,7 +3,7 @@
   <h2>archive</h2>
   
   <article id="archives" class="post_content">
-    {% for month, posts in archives.iteritems()|sort(reverse=true) %}
+    {% for month, posts in archives.items()|sort(reverse=true) %}
     
       {# Remove the timestamp used to sort the archive by replacing
          it with an empty string so that only the month and year shows
