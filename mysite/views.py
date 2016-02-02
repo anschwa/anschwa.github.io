@@ -5,7 +5,7 @@ from calendar import month_name
 from flask import render_template, abort
 from flask_flatpages import pygments_style_defs
 from .app import app, pages
-
+from .myprojects import get_repos
 
 # quick function to sort posts.
 def sort_my_posts(posts):
@@ -14,7 +14,7 @@ def sort_my_posts(posts):
 
 ########## Assign Variables. ##########
 nav_items = ['Blog', 'Projects', "Archive",
-             ['GitHub', 'https://github.com/daschwa']]
+             ['GitHub', 'https://github.com/anschwa']]
 
 
 ########## Context Processors ##########
@@ -57,11 +57,14 @@ def about():
 
 @app.route('/projects/')
 def projects():
+    repo_dict = get_repos()
+    repo_data = list(repo_dict.items())
+    sorted_repos = sorted(repo_data, key=lambda k: k[1]['date'], reverse=True)
     content = [page for page in pages if
                page.meta['title'] == 'Projects' if 'date' in page.meta]
 
-    return render_template('simple.html', title='Projects', content=content[0],
-                           nav_items=nav_items)
+    return render_template('projects.html', title='Projects', content=content[0],
+                           repo_data=sorted_repos, nav_items=nav_items)
 
 
 @app.route('/prefs/')

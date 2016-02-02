@@ -12,3 +12,4 @@ __pycache__/
 .DS_Store
 venv/
 build/
+github_repos.json
