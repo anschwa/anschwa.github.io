@@ -59,7 +59,8 @@ def about():
 def projects():
     repo_dict = get_repos()
     repo_data = list(repo_dict.items())
-    sorted_repos = sorted(repo_data, key=lambda k: k[1]['date'], reverse=True)
+    sort_by = "stars"
+    sorted_repos = sorted(repo_data, key=lambda k: k[1][sort_by], reverse=True)
     content = [page for page in pages if
                page.meta['title'] == 'Projects' if 'date' in page.meta]
 

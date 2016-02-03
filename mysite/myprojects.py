@@ -17,10 +17,18 @@ wanted_repos = [
     "stiltdb",
     "pycryption",
     "nbimporter",
+    "savetheyak",
 ]
 
-github_repo_names = [ "MA42 Keyboard", "ES6 Typing Test", "PyCryption",
-                      "Helm iTunes", "jChat", "STiLT DB",]
+# TODO Use these names when applicable.
+github_repo_names = ["MA42 Keyboard",
+                     "ES6 Typing Test",
+                     "PyCryption",
+                     "Helm iTunes",
+                     "jChat",
+                     "STiLT DB",
+                     "Save The Yak",
+                     ]
 
 # If there is not an existing repository file, retrieve one.
 if not os.path.isfile(github_repo_file):
@@ -32,16 +40,16 @@ with open(github_repo_file) as file:
     my_repos = json.loads(file.read())
 
 # Get desired info from repository file
-# TODO add to dictionary from list: ["description", "html_url", "created_at", etc]
 # TODO follow languages_url for full list.
 for r in my_repos:
     if r["name"] in wanted_repos:
-        github_repo_data[r["name"]] = {"description" : r["description"],
-                                       "link" : r["html_url"],
-                                       "date" : r["updated_at"],
+        github_repo_data[r["name"]] = {"description": r["description"],
+                                       "link": r["html_url"],
+                                       "created": r["created_at"],
+                                       "updated": r["updated_at"],
                                        "stars": r["stargazers_count"],
                                        "language": r["language"],
-        }
+                                       }
 
 
 def get_repos():

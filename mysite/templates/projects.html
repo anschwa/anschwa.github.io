@@ -7,7 +7,8 @@
   <h2>{{ repo[0] }}</h2>
   <p>{{ repo[1]['description'] }}</p>
   <ul>
-    <li class="project-date">Updated: {{ repo[1]['date'][:10] }}</li>
+    <li class="project-date">Updated: {{ repo[1]['updated'][:10] }}</li>
+    <li class="project-date">Created: {{ repo[1]['created'][:10] }}</li>
     <li>Stars: {{ repo[1]['stars'] }}</li>
     <li>Language: {{ repo[1]['language'] }}</li>
     <li><a href="{{ repo[1]['link'] }}">View on GitHub</a></li>
