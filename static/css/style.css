@@ -29,12 +29,18 @@
 #inner-hex{
   fill: #F5F5F5;
 }
+
+#gravatar {
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
 /************LOGO STYLE END************/
 
 a{
   text-decoration: none;
   /*color: #005d04; green*/
-  /*color: #2c799b; blue*/
+  /*color: #2c799b; Blue*/
   color: #000; /*underline color*/
 }
 
