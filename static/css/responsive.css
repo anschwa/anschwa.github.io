@@ -82,7 +82,11 @@
     nav.homepage{
         font-size: 2.3em;
     }
-/*************HOMEPAGE STYLE END************/
+    /*************HOMEPAGE STYLE END************/
+
+    #gravatar {
+        margin: 0 auto;
+    }
 }
 
 /****************Target Medium-BIG-Desktop*******************/
@@ -96,7 +100,7 @@
     nav.homepage{
         font-size: 1.8em;
     }
-/*************HOMEPAGE STYLE END************/
+    /*************HOMEPAGE STYLE END************/
 }
 
 /****************Target Medium-SMALL-Desktop*******************/
@@ -110,7 +114,7 @@
     nav.homepage{
         font-size: 1.4em;
     }
-/*************HOMEPAGE STYLE END************/
+    /*************HOMEPAGE STYLE END************/
 }
 
 /*************Target Small-Desktop & Phones, Tablets****************/
@@ -136,7 +140,7 @@
         font-size: 1.1em;
     }
     /*************HOMEPAGE STYLE END************/
-    
+
     .post_date {
         text-align: center;
     }
