@@ -44,7 +44,13 @@ nav a {
     text-align: justify;
 }
 
-.content p { font-size: 120%; }
+.content p {
+    font-size: 120%;
+    margin: 1em 0;
+}
+
+.content p:first-child, .content p:last-child { margin: 0; }
+
 .content h2 { margin-top: 1rem; }
 .content header { margin-bottom: 1rem; }
 .title { text-align: center; }
