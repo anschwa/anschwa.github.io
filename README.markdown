@@ -1,7 +1,7 @@
 anschwa.github.io
 =================
 
-My personal [website](http://daschwa.github.io/), powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
+My personal [website](http://anschwa.github.io/), powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
 
 
 # Project Setup
@@ -9,7 +9,7 @@ My personal [website](http://daschwa.github.io/), powered by [Flask](http://flas
 Clone the repo
 
 ```
-$ git clone https://github.com/daschwa/daschwa.github.io.git
+$ git clone https://github.com/anschwa/anschwa.github.io.git
 ```
 
 Install the necessary Python packages (requires Python 2.7 or 3.4.n with pip):
