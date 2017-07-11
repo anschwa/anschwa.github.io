@@ -25,16 +25,16 @@ p code { color: #657b83; }
 }
 
 /* Sidebar  Navigation */
-nav li {
+.menu li {
     list-style: none;
     display: inline-block;
     margin: 0.2em;
 }
 
-nav a {
+.menu a {
     text-decoration: none;
     color: #657b83;
-    font-size: 120%;
+    font-size: 1.2em;
 }
 
 /* Main Content */
