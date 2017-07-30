@@ -1,5 +1,7 @@
 anschwa.github.io
 =================
+I no longer use this version of my site, but still think it's a nice example of a simple flask project.
+
 
 My personal [website](http://anschwa.github.io/), powered by [Flask](http://flask.pocoo.org/) and hosted on [GitHub Pages](https://pages.github.com/).
 
