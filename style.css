@@ -28,7 +28,7 @@ p code { color: #657b83; }
 .menu li {
     list-style: none;
     display: inline-block;
-    margin: 0.2em;
+    margin: 0.2em 0.8em 0.2em 0.2em;
 }
 
 .menu a {
