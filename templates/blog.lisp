@@ -33,7 +33,7 @@ hello moon
        (:h1 "Blog")
        (:ul :class "menu" (:li (:a :href "#archive/" "Archive")))
        (:article
-        :class "content"
+        :class "content blog-content"
         (:header
          (:h2 :class "title"
               (:a :href "#2016/06/welcome-to-my-blog" "Welcome to my blog"))

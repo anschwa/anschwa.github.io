@@ -44,6 +44,8 @@ p code { color: #657b83; }
     text-align: justify;
 }
 
+.blog-content { margin-top: -4rem; }
+
 .content p {
     font-size: 120%;
     margin: 1em 0;
@@ -84,7 +86,7 @@ footer {
 }
 
 footer, footer a { color: #657b83; }
-footer p { font-size: 100% !important }
+footer p { font-size: 100% !important; }
 
 /* Source Code */
 div.sourceCode, .example {
