@@ -16,7 +16,8 @@ function build {
     command -v wget > /dev/null 2>&1 || { echo "Do you have wget installed?" >&2; exit 1; }
 
     # Build the static site
-    pages=("blog/" "projects/" "style.css" "me.jpg")
+    # the homepage is represented by the empty string
+    pages=("" "blog/" "projects/" "style.css" "me.jpg")
 
     for x in "${pages[@]}"
     do
@@ -37,7 +38,6 @@ function deploy {
 if [ $1 ] && [ $1 = "build" ]; then
     build
 elif [ $1 ] && [ $1 = "deploy" ]; then
-    build
     deploy
 else
     echo "You must specify a valid option."

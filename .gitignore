@@ -12,6 +12,7 @@ __pycache__/
 .DS_Store
 venv/
 build/
+build.bak/
 github_repos.json
 books.txt
 projects.json

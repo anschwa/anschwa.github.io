@@ -72,13 +72,17 @@ exec ros -Q -- $0 "$@"
 (defun stop-server ()
   (clack:stop *clack-server*))
 
+(defun build-app ()
+  (progn
+    (start-server)
+    (inferior-shell:run/s '(./manage.sh build))
+    (stop-server)))
+
 (defun main (&optional option)
   "apparently roswell kills the lisp process after executing, so we
 need to run the manage.sh script from here"
-  (cond ((string-equal option "build")
-         (progn
-           (start-server)
-           (inferior-shell:run/s '(./manage.sh build))
-           (stop-server)))
+  (cond ((string-equal option "build") (build-app))
         ((string-equal option "deploy")
-         (inferior-shell:run/s '(./manage.sh deploy)))))
+         (progn
+           (build-app)
+           (inferior-shell:run/s '(./manage.sh deploy))))))
