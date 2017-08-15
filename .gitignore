@@ -13,3 +13,5 @@ __pycache__/
 venv/
 build/
 github_repos.json
+books.txt
+projects.json

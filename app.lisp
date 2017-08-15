@@ -1,3 +1,9 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+
 ;;; My personal website in common lisp
 ;;; Powered by ningle: https://github.com/fukamachi/ningle
 ;;; Adam Schwartz 2017-07-10
@@ -5,6 +11,7 @@
 (ql:quickload :clack)
 (ql:quickload :ningle)
 (ql:quickload :cl-ppcre)
+(ql:quickload :inferior-shell)
 
 (import 'lack.builder:builder)
 
@@ -14,6 +21,7 @@
 (load "templates/blog.lisp")
 
 (defparameter *app* (make-instance 'ningle:<app>))
+(defparameter *clack-server* nil)
 
 (defparameter *static-directory*
   (merge-pathnames #P"static/" *default-pathname-defaults*))
@@ -22,7 +30,7 @@
 (setf *books-file* "books.txt")
 (setf *projects-url* "https://api.github.com/users/anschwa/repos")
 (setf *projects-file* "projects.json")
-;; (get-latest-content) ; run to update books and projects if needed
+(get-latest-content) ; run to update books and projects if needed
 
 ;; Define Routes
 (setf (ningle:route *app* "/")
@@ -49,16 +57,28 @@
                     (first url) (second url) (third url)))))
 
 ;; Launch App
-(defparameter *clack-server*
-  (clack:clackup
-   (builder
-    (:static
-     :path (lambda (path)
-             (if (ppcre:scan "\\.css$|\\.jpg$|\\.js$" path)
-                 path   ; only host the static files we want
-                 nil))  ; otherwise we get a 'Not Found' for all pages
-     :root *static-directory*)
-    *app*)))
+(defun start-server ()
+  (setf *clack-server*
+        (clack:clackup
+         (builder
+          (:static
+           :path (lambda (path)
+                   (if (ppcre:scan "\\.css$|\\.jpg$|\\.js$" path)
+                       path   ; only host the static files we want
+                       nil))  ; otherwise we get a 'Not Found' for all pages
+           :root *static-directory*)
+          *app*))))
 
 (defun stop-server ()
   (clack:stop *clack-server*))
+
+(defun main (&optional option)
+  "apparently roswell kills the lisp process after executing, so we
+need to run the manage.sh script from here"
+  (cond ((string-equal option "build")
+         (progn
+           (start-server)
+           (inferior-shell:run/s '(./manage.sh build))
+           (stop-server)))
+        ((string-equal option "deploy")
+         (inferior-shell:run/s '(./manage.sh deploy)))))

@@ -9,15 +9,17 @@ My personal website. Written in common lisp, powered by [[https://github.com/fuk
 Loading =app.lisp= should start a webserver with =clack= running at =localhost:5000=.
 
 * Deployment
-1. Run the =./build.sh= script while the site is running at
+** Method One:
+1. Run =./app.lisp deploy= to build and update site.
+
+** Method Two:
+1. Run the =./manage.sh build= script while the site is running at
    =localhost:5000= under =clack=.
-2. Commit the contents of =site/= to =master=.
+2. Commit any changes to =origin/app=
+3. Run =./manage.sh deploy= to update site.
 
 * Todo
 - make =base.lisp= template
-- automate deployment
-  - =asdf:run-program=
-  - [[https://github.com/davisp/ghp-import][gh-pages]] python script: =ghp-import -b master -m "[deploy] Build" -p $site=
 - turn project into =asdf= package
 
 * References

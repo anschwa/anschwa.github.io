@@ -84,6 +84,7 @@ footer {
 }
 
 footer, footer a { color: #657b83; }
+footer p { font-size: 100% }
 
 /* Source Code */
 div.sourceCode, .example {
