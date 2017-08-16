@@ -16,6 +16,7 @@ exec ros -Q -- $0 "$@"
 (import 'lack.builder:builder)
 
 (load "utils.lisp")
+(load "templates/base.lisp")
 (load "templates/about.lisp")
 (load "templates/projects.lisp")
 (load "templates/blog.lisp")
@@ -25,6 +26,9 @@ exec ros -Q -- $0 "$@"
 
 (defparameter *static-directory*
   (merge-pathnames #P"static/" *default-pathname-defaults*))
+
+(defparameter *blog-directory*
+  (merge-pathnames #P"blog-posts/helloworld.html" *default-pathname-defaults*))
 
 (setf *books-url* "https://raw.githubusercontent.com/anschwa/books/master/readme.org")
 (setf *books-file* "books.txt")
@@ -43,7 +47,7 @@ exec ros -Q -- $0 "$@"
         (render-projects projects)))
 
 (setf (ningle:route *app* "/blog/")
-      (let ((posts ()))
+      (let ((posts (list *blog-directory*)))
         (render-blog posts)))
 
 (setf (ningle:route *app* "/blog/archive/")

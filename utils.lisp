@@ -7,18 +7,16 @@
 (ql:quickload :drakma)
 (ql:quickload :cl-who)
 (ql:quickload :yason)
+
+;; some cl-who settings
 (setf (cl-who:html-mode) :html5)
+(setf cl-who:*attribute-quote-char* #\")
 
 ;; define global vars
 (defvar *books-url*)
 (defvar *projects-url*)
 (defvar *books-file*)
 (defvar *projects-file*)
-
-;; cl-who mini example
-(cl-who:with-html-output-to-string
-    (htm nil :indent nil)
-  (:cite "hello,"))
 
 (defun fetch-page (url file)
   "fetch the contents of a webpage and write it to a file if it
@@ -146,3 +144,9 @@ doesn't already exist"
 
 ;; (print (car (get-projects-as-html (load-projects *projects-file*))))
 
+(defun file-to-string (path)
+  "Reads an entire file into a string"
+  (with-open-file (stream path)
+    (let ((data (make-string (file-length stream))))
+      (read-sequence data stream)
+      data)))

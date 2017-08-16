@@ -8,6 +8,7 @@
      (:head
       (:meta :charset "UTF-8")
       (:title "Adam Schwartz")
+      (:meta :name "description" :content "Hi, I'm a Computer Science major at Earlham College and have a passion for programming languages, web development, privacy, and Emacs.")
       (:link :href "../style.css" :rel "stylesheet"))
      (:body
       (:header
@@ -21,8 +22,4 @@
        :class "content"
        (:h1 "Projects")
        (cl-who:str projects))
-      (:footer
-       (:p "&copy; 2014-"
-           "<script>document.write(new Date().getFullYear());</script>"
-           " Adam Schwartz | "
-           (:a :href "https://github.com/anschwa/anschwa.github.io" "View on GitHub")))))))
+      (cl-who:str (render-footer))))))

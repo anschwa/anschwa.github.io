@@ -20,6 +20,7 @@ hello moon
      (:head
       (:meta :charset "UTF-8")
       (:title "Adam Schwartz")
+      (:meta :name "description" :content "Hi, I'm a Computer Science major at Earlham College and have a passion for programming languages, web development, privacy, and Emacs.")
       (:link :href "../style.css" :rel "stylesheet"))
      (:body
       (:header
@@ -34,29 +35,5 @@ hello moon
        (:ul :class "menu" (:li (:a :href "#archive/" "Archive")))
        (:article
         :class "content blog-content"
-        (:header
-         (:h2 :class "title"
-              (:a :href "#2016/06/welcome-to-my-blog" "Welcome to my blog"))
-         (:p :class "timestamp" (:time "June 17, 2016")))
-        (:section
-         (:p "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.")
-         (:p "Here is some python.")
-         (cl-who:str *example-code*)
-         (:p
-          "Vitae, "
-          (:a :href "http://example.com" "auctor eu augue")
-          " ut lectus arcu, bibendum at varius vel, pharetra vel "
-          (:strong "turpis")
-          " nunc eget lorem dolor, sed viverra. Aliquam sem et tortor "
-          (:code "consequat id")
-          " porta nibh "
-          (:em "venenatis")
-          " cras.")
-         (:p "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas faucibus mollis interdum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Donec sed odio dui.")
-         (:p "Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Sed posuere consectetur est at lobortis. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.")
-         (:p "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur."))
-        (:footer
-         (:p "&copy; 2014-"
-             "<script>document.write(new Date().getFullYear());</script>"
-             " Adam Schwartz | "
-             (:a :href "https://github.com/anschwa/anschwa.github.io" "View on GitHub")))))))))
+          (cl-who:str (file-to-string (first posts)))))
+       (cl-who:str (render-footer))))))
