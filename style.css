@@ -79,6 +79,8 @@ a:hover {
     margin-bottom: 0.5em;
 }
 
+img.gravatar { width: 200px; height: 200px; }
+
 /* Site Footer */
 footer {
     margin-top: 2em;
@@ -86,7 +88,6 @@ footer {
 }
 
 footer, footer a { color: #657b83; }
-footer p { font-size: 100% !important; }
 
 /* Source Code */
 div.sourceCode, .example {
