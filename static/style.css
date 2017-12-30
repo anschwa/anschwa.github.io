@@ -53,6 +53,9 @@ p code { color: #657b83; }
 
 .content p:first-child, .content p:last-child { margin: 0; }
 
+.content ul { list-style-position: inside; }
+.projects p { margin: 0; }
+
 .content h2 { margin-top: 1rem; }
 .content header { margin-bottom: 1rem; }
 .title { text-align: center; }
@@ -65,7 +68,7 @@ p code { color: #657b83; }
 .content h2 a {
     color: #657b83;
     text-decoration: underline;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 a:hover {

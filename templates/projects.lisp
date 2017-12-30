@@ -18,8 +18,8 @@
              (:ul (:li (:a :href "../blog/" "Blog"))
                   (:li (:a :href "../projects/" "Projects"))
                   (:li (:a :href "https://github.com/anschwa" "GitHub")))))
+      (:h1 "Projects")
       (:section
-       :class "content"
-       (:h1 "Projects")
+       :class "content projects"
        (cl-who:str projects))
       (cl-who:str (render-footer))))))

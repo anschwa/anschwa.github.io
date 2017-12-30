@@ -1,17 +1,5 @@
 ;; Blog Page
 
-(defparameter *example-code* "<div class=\"sourceCode\" rundoc-language=\"python\" rundoc-results=\"output\" rundoc-exports=\"both\"><pre class=\"sourceCode python rundoc-block\"><code class=\"sourceCode python\"><span class=\"im\">from</span> __future__ <span class=\"im\">import</span> print_function
-
-<span class=\"kw\">def</span> hello(noun<span class=\"op\">=</span><span class=\"st\">&quot;world&quot;</span>):
-    <span class=\"co\">&quot;&quot;&quot;Say hello to a thing&quot;&quot;&quot;</span>
-    <span class=\"bu\">print</span>(<span class=\"st\">&quot;hello&quot;</span>, noun)
-
-hello()
-hello(<span class=\"st\">&quot;moon&quot;</span>)</code></pre></div>
-<pre class=\"example\"><code>hello world
-hello moon
-</code></pre>")
-
 (defun render-blog (posts)
   "renders the blog page as an html string"
   (cl-who:with-html-output-to-string (htm nil :prologue t :indent nil)
