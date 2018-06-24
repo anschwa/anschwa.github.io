@@ -10,9 +10,8 @@ __pycache__/
 
 # My Stuff
 .DS_Store
+Pipfile
 venv/
 build/
-build.bak/
-github_repos.json
 books.txt
 projects.json
