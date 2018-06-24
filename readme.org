@@ -1,0 +1,38 @@
+#+TITLE: anschwa.github.io
+#+AUTHOR: Adam Schwartz
+#+DATE: May 19, 2018
+#+OPTIONS: ':true *:true toc:nil num:nil
+
+My personal website, powered by [[https://golang.org/][go]] and hosted on [[https://pages.github.com/][github-pages]].
+
+* Development
+#+BEGIN_SRC text
+git clone git@github.com:anschwa/anschwa.github.io.git
+cd anschwa.github.io
+pipenv install # pip install pipenv
+vgo run app.go # go get -u golang.org/x/vgo
+
+# build static site
+vgo run app.go -build
+#+END_SRC
+
+Or you can use [[https://github.com/pilu/fresh][fresh]] to automatically reload the app. You should
+probably run =vgo build= first however.
+
+* Content
+=app.go= tries to use [[http://pandoc.org/][pandoc]] for rendering page content. If you don't
+have it installed, page content will be assumed to be =HTML=. This
+means any document format supported by =pandoc= will be properly
+rendered on the site, whether that be =org-mode=, =markdown=, =LaTeX=,
+or even Microsoft Word.
+
+* Deployment
+#+BEGIN_SRC text
+cd anschwa.github.io/app
+vgo run app.go -deploy -update
+#+END_SRC
+
+* TODO
+- Get Archive working
+- Each blog post should link to previous and next posts
+- Make having a list of recent posts look nice
