@@ -21,14 +21,13 @@ probably run =vgo build= first however.
 
 * Content
 =app.go= tries to use [[http://pandoc.org/][pandoc]] for rendering page content. If you don't
-have it installed, page content will be assumed to be =HTML=. This
-means any document format supported by =pandoc= will be properly
-rendered on the site, whether that be =org-mode=, =markdown=, =LaTeX=,
-or even Microsoft Word.
+have it installed, page content is assumed to be =HTML=. This means
+any document format supported by =pandoc= will be properly rendered on
+the site, whether that be =org-mode=, =markdown=, or even =LaTeX=.
 
 * Deployment
 #+BEGIN_SRC text
-cd anschwa.github.io/app
+cd anschwa.github.io
 vgo run app.go -deploy -update
 #+END_SRC
 
