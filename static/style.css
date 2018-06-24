@@ -28,7 +28,7 @@ p code { color: #657b83; }
 .menu li {
     list-style: none;
     display: inline-block;
-    margin: 0.2em 0.8em 0.2em 0.2em;
+    margin: 0.2em;
 }
 
 .menu a {
@@ -106,6 +106,19 @@ pre.sourceCode, .example { color: #d3d0c8; }
 .example { background-color: #747369; }
 .sourceCode .co { color: #a09f93; }
 .sourceCode .st {  color: #99cc99; }
+
+pre.sourceCode a:hover{
+    background: none;
+    text-decoration: none;
+}
+
+/* Show line numbers */
+/* pre.sourceCode a.sourceLine::before { */
+/*     content: attr(data-line-number); */
+/*     margin-right: 1em; */
+/*     text-align: right; */
+/*     vertical-align: baseline; */
+/* } */
 
 /* Add markdown syntax to content */
 /* p strong:before { content:'*'; }

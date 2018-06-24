@@ -1,0 +1,1 @@
+Hi, I'm a recent graduate from [[https://earlham.edu/][Earlham College]] and have a passion for programming languages, web development, privacy, and Emacs.

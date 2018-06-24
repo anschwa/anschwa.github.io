@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{.Title}}</title>
+    <meta name="description" content="{{.Meta}}">
+    <link href="../style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="masthead"><a class="logo" href="../">Adam Schwartz</a>
+      <nav class="menu">
+        <ul>
+          <li><a href="../blog">Blog</a></li>
+          <li><a href="../projects">Projects</a></li>
+          <li><a href="https://github.com/anschwa">GitHub</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <h1>Blog</h1>
+      <ul class="menu">
+        <li><a href="#archive/">Archive</a></li>
+      </ul>
+      {{$post := .Blog}}
+        <article class="content blog-content">
+          <header>
+            <h2 class="title"><a href="#2018/05/welcome-to-my-blog">Welcome to my blog</a></h2>
+            <p class="timestamp"><time>{{$post.Date}}</time></p>
+          </header>
+          <section>
+            {{$post.Body}}
+          </section>
+        </article>
+    </section>
+    {{template "footer"}}
+  </body>
+</html>

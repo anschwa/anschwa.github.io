@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{.Title}}</title>
+    <meta name="description" content="{{.Meta}}">
+    <link href="../style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="masthead"><a class="logo" href="../">Adam Schwartz</a>
+      <nav class="menu">
+        <ul>
+          <li><a href="../blog">Blog</a></li>
+          <li><a href="../projects">Projects</a></li>
+          <li><a href="https://github.com/anschwa">GitHub</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="content projects">
+      <h1>Projects</h1>
+      {{range $repo := .Projects}}
+      <h2><a href="{{$repo.URL}}">{{$repo.Name}}</a></h2>
+      <p>{{$repo.Description}}</p>
+      <ul>
+        <li class="project-date">Updated: {{$repo.Updated}}</li>
+        <li class="project-date">Created: {{$repo.Created}}</li>
+        <li>Language: {{$repo.Language}}</li>
+        <li>Stars: {{$repo.Stars}}</li>
+      </ul>
+      {{end}}
+    </section>
+    {{template "footer"}}
+  </body>
+</html>
