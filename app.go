@@ -167,7 +167,7 @@ type Post struct {
 type Page struct {
 	Title    string
 	Meta     string
-	Book     Book
+	Books    []Book
 	Projects Projects
 	Body     template.HTML
 	Blog     Post
@@ -239,7 +239,13 @@ func currentBooks(filename string) []Book {
 
 	// check both title and author line at the same time
 	parsedBooks := []Book{}
-	for i := 0; i < len(books); i += 2 {
+	lenBooks := len(books)
+
+	if lenBooks < 2 {
+		return parsedBooks
+	}
+
+	for i := 0; i < lenBooks; i += 2 {
 		b := Book{}
 
 		if title := books[i]; title[1] == '.' {
@@ -325,7 +331,7 @@ func startServer(server *http.Server, shutdown chan os.Signal) {
 		Title: "Adam Schwartz",
 		Meta:  description,
 		Body:  renderPage("./pages/about.org"),
-		Book:  currentBooks("books.txt")[0],
+		Books: currentBooks("books.txt"),
 	}
 
 	projects := Page{

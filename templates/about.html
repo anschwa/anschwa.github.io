@@ -21,7 +21,9 @@
       <p class="gravatar"><img class="gravatar" src="me.jpg"></p>
       {{.Body}}
       <h2>Books</h2>
-      <p>I'm currently reading <cite>{{.Book.Title}},</cite> by {{.Book.Author}}.</p>
+      {{range .Books}}
+      <p>I'm currently reading <cite>{{.Title}},</cite> by {{.Author}}.</p>
+      {{end}}
       <p>Check out the complete <a href="https://github.com/anschwa/books">list of books</a> I've read since high school.</p>
     </section>
     {{template "footer"}}
