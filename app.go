@@ -28,11 +28,6 @@ func check(err error) {
 	}
 }
 
-type Fetcher interface {
-	Fetch(uri string) (urls []string, err error)
-	Save(uri string) (err error)
-}
-
 type Site struct {
 	Host    string
 	Dir     string
@@ -77,7 +72,7 @@ func (s *Site) Fetch(uri string) (urls []string) {
 	}
 }
 
-// Save each webpage as `index.html` in it's own directory. Otherwise, just save the file.
+// Try to save each webpage as `index.html` in it's own directory. Otherwise, save the file as is.
 func (s *Site) Save(uri string) {
 	page := "/"
 	if base := filepath.Base(uri); base != filepath.Base(s.Host) {
@@ -114,14 +109,13 @@ func (s *Site) Save(uri string) {
 	return
 }
 
-// Freeze uses fetcher to recursively crawl pages starting with url,
-// to a maximum of depth.
+// Freeze recursively crawls pages to a maximum of depth.
 //
 // Example Usage:
-//	site := Site{"http://localhost:8080", "./build", make(map[string]bool)}
-//	Freeze(site.Host, 4, &site)
+//  site := Site{"http://localhost:8080", "./build", make(map[string]bool)}
+//  Freeze(site.Host, 4, &site)
 func Freeze(uri string, depth int, site *Site) {
-	// TODO: Fetch URLs in parallel.
+	// TODO: Fetch URLs concurrently.
 
 	req, err := url.ParseRequestURI(uri)
 	check(err)
@@ -324,8 +318,8 @@ func makeHandler(template string, page *Page) http.HandlerFunc {
 
 func startServer(server *http.Server, shutdown chan os.Signal) {
 	description := `Hi, I'm a recent graduate from Earlham College and
-	have a passion for programming languages, web development,
-	privacy, and Emacs.`
+    have a passion for programming languages, web development,
+    privacy, and Emacs.`
 
 	about := Page{
 		Title: "Adam Schwartz",
