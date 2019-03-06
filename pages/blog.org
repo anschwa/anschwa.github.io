@@ -1,7 +1,5 @@
 Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
 
-Just a program:
-
 #+BEGIN_SRC c
   #include <stdio.h>
 
