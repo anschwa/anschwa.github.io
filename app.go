@@ -17,6 +17,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
+	"strings"
 	"time"
 
 	"golang.org/x/net/html"
@@ -226,7 +227,7 @@ func currentBooks(filename string) []Book {
 		} else if line == "" {
 			continue
 		} else if found == true {
-			books = append(books, line)
+			books = append(books, strings.TrimSpace(line))
 		}
 	}
 	check(scanner.Err())
@@ -250,9 +251,10 @@ func currentBooks(filename string) []Book {
 				b.Title = title[3:]
 			}
 		}
-		if author := books[i+1]; author[3] == '-' {
-			b.Author = author[5:]
+		if author := books[i+1]; author[0] == '-' {
+			b.Author = author[2:]
 		}
+
 		parsedBooks = append(parsedBooks, b)
 	}
 
@@ -318,8 +320,8 @@ func makeHandler(template string, page *Page) http.HandlerFunc {
 
 func startServer(server *http.Server, shutdown chan os.Signal) {
 	description := `Hi, I'm a recent graduate from Earlham College and
-    have a passion for programming languages, web development,
-    privacy, and Emacs.`
+	have a passion for programming languages, web development,
+	privacy, and Emacs.`
 
 	about := Page{
 		Title: "Adam Schwartz",
