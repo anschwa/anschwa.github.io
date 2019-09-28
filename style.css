@@ -97,7 +97,7 @@ div.sourceCode, .example {
     margin: 0.4em auto;
     padding: 0.4em;
     line-height: 100%;
-    overflow: auto;
+    overflow: scroll;
     font-family: monospace;
 }
 
