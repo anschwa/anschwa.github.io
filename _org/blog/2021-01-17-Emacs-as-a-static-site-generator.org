@@ -1,0 +1,65 @@
+#+TITLE: Emacs as a static site generator
+#+AUTHOR: Adam Schwartz
+#+DATE: January 17, 2021
+#+OPTIONS: title:nil
+#+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../index.org][About]]
+- [[file:../blog/index.org][Blog]]
+- [[file:../ceramics/index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* Emacs as a static site generator
+
+This website is generated from Emacs using ~M-x org-publish~.
+
+#+BEGIN_SRC emacs-lisp
+(require 'ox-publish)
+
+(defvar my/website-org-path "~/anschwa.github.io")
+(defvar my/website-org-base-directory (concat my/website-org-path "/org/"))
+(defvar my/website-org-publishing-directory (concat my/website-org-path "/public_html/"))
+(defvar my/website-head-extra
+  (let ((viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"))
+    (concat viewport "\n")))
+
+(setq org-html-htmlize-output-type 'inline-css) ; Uses current theme for syntax highlighting
+(setq org-publish-project-alist
+      `(
+        ("website" :components ("website-content" "website-static"))
+         ("website-content"
+          :base-extension "org"
+          :base-directory ,my/website-org-base-directory
+          :publishing-directory ,my/website-org-publishing-directory
+          :publishing-function org-html-publish-to-html
+          :recursive t
+
+          ;; Disable some defaults
+          :html-link-home ""
+          :html-link-up ""
+          :html-head-include-default-style nil
+          :html-head-include-scripts nil
+          :html-preamble nil
+          :html-postamble nil
+
+          ;; Custom options
+          :headline-levels 4
+          :language "en"
+          :html-html5-fancy t
+          :html-head-extra ,my/website-head-extra
+          :with-date t
+          :with-emphasize t              ; *:t
+          :with-smart-quotes t           ; *:t
+          :with-sub-superscript nil      ; ^:nil
+          :with-toc nil                  ; toc:nil
+          :section-numbers nil           ; num:nil
+          :html-wrap-src-lines t)
+
+         ("website-static"
+          :base-directory ,my/website-org-base-directory
+          :publishing-directory ,my/website-org-publishing-directory
+          :base-extension "css\\|js\\|jpg\\|png\\|pdf"
+          :publishing-function org-publish-attachment
+          :recursive t)))
+#+END_SRC

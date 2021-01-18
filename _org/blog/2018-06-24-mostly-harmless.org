@@ -1,0 +1,29 @@
+#+TITLE: Mostly Harmless
+#+AUTHOR: Adam Schwartz
+#+DATE: June 24, 2018
+#+OPTIONS: title:nil
+#+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../index.org][About]]
+- [[file:../blog/index.org][Blog]]
+- [[file:../ceramics/index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* Mostly Harmless
+
+#+CAPTION: A mostly harmless program
+#+BEGIN_SRC C :eval never-export :results output :exports both
+#include <stdio.h>
+
+#define SIX 1+5
+#define NINE 8+1
+
+int main() {
+    printf("%d * %d = %d\n", SIX, NINE, SIX * NINE);
+    return 0;
+}
+#+END_SRC
+
+#+RESULTS[9c9568cf4742e2fd062c32a32f3572a9141e5324]:
+: 6 * 9 = 42

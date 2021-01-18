@@ -1,0 +1,34 @@
+#+TITLE: Blog
+#+AUTHOR: Adam Schwartz
+#+DATE: January 17, 2021
+#+OPTIONS: title:nil
+#+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../index.org][About]]
+- [[file:index.org][Blog]]
+- [[file:../ceramics/index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* 2021
+- [2021-01-17 Sun] [[file:2021-01-17-Emacs-as-a-static-site-generator.org][Emacs as a static site generator]]
+
+* 2018
+- [2018-06-24 Sun] [[file:2018-06-24-mostly-harmless.org][Mostly Harmless]]
+- [2018-06-24 Sun] This site is powered by Go
+- [2018-05-15 Tue] Started working at Diagnotes
+- [2018-05-05 Sat] Graduated with a BA from Earlham College
+
+* 2017
+- [2017-08-15 Tue] This site is powered by Common-Lisp
+
+* 2016
+- [2016-06-20 Mon] Website redesign
+- [2016-02-17 Wed] Declared major as Computer Science
+
+* 2015
+- [2015-07-12 Sun] Reflecting on past programming projects
+
+* 2014
+- [2014-10-16 Thu] This site is powered by Flask
+- [2014-07-24 Thu] Initial commit: I have a website
