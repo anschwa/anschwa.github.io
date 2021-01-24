@@ -22,10 +22,10 @@ Science, minor in Philosophy, and a few semesters of Studio Ceramics.
 
 I have a passion for programming languages, web development, privacy, and Emacs.
 
-** Books
+* Books
 I'm currently reading /Philosophy in the Tragic Age of the Greeks/, by Friedrich Nietzsche.
 
 Check out what else [[https://github.com/anschwa/books][I've been reading]].
 
-** Work
+* Work
 I currently work at [[https://www.diagnotes.com/][Diagnotes]] as a software engineer.

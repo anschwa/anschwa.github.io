@@ -1,7 +1,7 @@
 #+TITLE: Blog
 #+AUTHOR: Adam Schwartz
 #+DATE: January 17, 2021
-#+OPTIONS: title:nil
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
 
 #+ATTR_HTML: :class nav

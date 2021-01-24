@@ -7,6 +7,9 @@ body { padding: 20px; }
 ul > li { margin: 0.25em 0; }
 h1 { margin-bottom: 0.25em; 0; }
 
+#preamble { text-align: center; }
+#postamble { margin-top: 1em; text-align: center; font-style: italic; }
+
 #content { max-width: 80ch; margin: 0 auto; padding: 0 20px; }
 #content h2, h2, h4 { margin: 0.5em 0; }
 #content > ul.nav { margin-bottom: 20px; }

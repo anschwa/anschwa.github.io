@@ -2,6 +2,8 @@
 #+AUTHOR: Adam Schwartz
 #+DATE: June 24, 2018
 #+OPTIONS: title:nil
+#+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
 
 #+ATTR_HTML: :class nav
@@ -11,6 +13,8 @@
 - [[https://github.com/anschwa][Github]]
 
 * Mostly Harmless
+June 24, 2018
+
 
 #+CAPTION: A mostly harmless program
 #+BEGIN_SRC C :eval never-export :results output :exports both

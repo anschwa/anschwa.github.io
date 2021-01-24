@@ -2,6 +2,8 @@
 #+AUTHOR: Adam Schwartz
 #+DATE: January 17, 2021
 #+OPTIONS: title:nil
+#+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
 
 #+ATTR_HTML: :class nav
@@ -24,6 +26,7 @@ This website is generated from Emacs using ~M-x org-publish~.
   (let ((viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"))
     (concat viewport "\n")))
 
+(setq org-html-metadata-timestamp-format "%Y-%m-%d")
 (setq org-html-htmlize-output-type 'inline-css) ; Uses current theme for syntax highlighting
 (setq org-publish-project-alist
       `(
@@ -54,6 +57,8 @@ This website is generated from Emacs using ~M-x org-publish~.
           :with-sub-superscript nil      ; ^:nil
           :with-toc nil                  ; toc:nil
           :section-numbers nil           ; num:nil
+          :html-preamble "<p>Published: %d</p>"
+          :html-postamble "<p>Last updated: %C</p>"
           :html-wrap-src-lines t)
 
          ("website-static"

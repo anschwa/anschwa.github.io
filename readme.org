@@ -8,13 +8,14 @@ My personal website is generated from Emacs using ~org-publish~.
 #+BEGIN_SRC emacs-lisp
 (require 'ox-publish)
 
-(defvar my/website-org-path "~/Development/anschwa.github.io")
+(defvar my/website-org-path "~/Documents/anschwa.github.io")
 (defvar my/website-org-base-directory (concat my/website-org-path "/_org/"))
-(defvar my/website-org-publishing-directory my/website-org-path)
+(defvar my/website-org-publishing-directory (concat my/website-org-path "/"))
 (defvar my/website-head-extra
   (let ((viewport "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />"))
     (concat viewport "\n")))
 
+(setq org-html-metadata-timestamp-format "%Y-%m-%d")
 (setq org-html-htmlize-output-type 'inline-css) ; Uses current theme for syntax highlighting
 (setq org-publish-project-alist
       `(
