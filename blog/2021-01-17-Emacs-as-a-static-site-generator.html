@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-01-24 -->
+<!-- 2021-01-25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Emacs as a static site generator</title>
@@ -22,71 +22,71 @@
 <li><a href="https://github.com/anschwa">Github</a></li>
 </ul>
 
-<div id="outline-container-org2fc3e39" class="outline-2">
-<h2 id="org2fc3e39">Emacs as a static site generator</h2>
-<div class="outline-text-2" id="text-org2fc3e39">
+<div id="outline-container-org5d9f5b3" class="outline-2">
+<h2 id="org5d9f5b3">Emacs as a static site generator</h2>
+<div class="outline-text-2" id="text-org5d9f5b3">
 <p>
 This website is generated from Emacs using <code>M-x org-publish</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><code>(require 'ox-publish)</code>
-<code></code>
-<code>(defvar my/website-org-path "~/anschwa.github.io")</code>
-<code>(defvar my/website-org-base-directory (concat my/website-org-path "/org/"))</code>
-<code>(defvar my/website-org-publishing-directory (concat my/website-org-path "/public_html/"))</code>
-<code>(defvar my/website-head-extra</code>
-<code>  (let ((viewport "&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /&gt;"))</code>
-<code>    (concat viewport "\n")))</code>
-<code></code>
-<code>(setq org-html-metadata-timestamp-format "%Y-%m-%d")</code>
-<code>(setq org-html-htmlize-output-type 'inline-css) ; Uses current theme for syntax highlighting</code>
-<code>(setq org-publish-project-alist</code>
-<code>      `(</code>
-<code>        ("website" :components ("website-content" "website-static"))</code>
-<code>         ("website-content"</code>
-<code>          :base-extension "org"</code>
-<code>          :base-directory ,my/website-org-base-directory</code>
-<code>          :publishing-directory ,my/website-org-publishing-directory</code>
-<code>          :publishing-function org-html-publish-to-html</code>
-<code>          :recursive t</code>
-<code></code>
-<code>          ;; Disable some defaults</code>
-<code>          :html-link-home ""</code>
-<code>          :html-link-up ""</code>
-<code>          :html-head-include-default-style nil</code>
-<code>          :html-head-include-scripts nil</code>
-<code>          :html-preamble nil</code>
-<code>          :html-postamble nil</code>
-<code></code>
-<code>          ;; Custom options</code>
-<code>          :headline-levels 4</code>
-<code>          :language "en"</code>
-<code>          :html-html5-fancy t</code>
-<code>          :html-head-extra ,my/website-head-extra</code>
-<code>          :with-date t</code>
-<code>          :with-emphasize t              ; *:t</code>
-<code>          :with-smart-quotes t           ; *:t</code>
-<code>          :with-sub-superscript nil      ; ^:nil</code>
-<code>          :with-toc nil                  ; toc:nil</code>
-<code>          :section-numbers nil           ; num:nil</code>
-<code>          :html-preamble "&lt;p&gt;Published: %d&lt;/p&gt;"</code>
-<code>          :html-postamble "&lt;p&gt;Last updated: %C&lt;/p&gt;"</code>
-<code>          :html-wrap-src-lines t)</code>
-<code></code>
-<code>         ("website-static"</code>
-<code>          :base-directory ,my/website-org-base-directory</code>
-<code>          :publishing-directory ,my/website-org-publishing-directory</code>
-<code>          :base-extension "css\\|js\\|jpg\\|png\\|pdf"</code>
-<code>          :publishing-function org-publish-attachment</code>
-<code>          :recursive t)))</code>
+<pre class="src src-emacs-lisp">(require 'ox-publish)
+
+(defvar my/website-org-path <span style="color: #a52a2a;">"~/anschwa.github.io"</span>)
+(defvar my/website-org-base-directory (concat my/website-org-path <span style="color: #a52a2a;">"/org/"</span>))
+(defvar my/website-org-publishing-directory (concat my/website-org-path <span style="color: #a52a2a;">"/public_html/"</span>))
+(defvar my/website-head-extra
+  (let ((viewport <span style="color: #a52a2a;">"&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" /&gt;"</span>))
+    (concat viewport <span style="color: #a52a2a;">"\n"</span>)))
+
+(setq org-html-metadata-timestamp-format <span style="color: #a52a2a;">"%Y-%m-%d"</span>)
+(setq org-html-htmlize-output-type 'inline-css) <span style="color: #5c5c5c;">; </span><span style="color: #5c5c5c;">Uses current theme for syntax highlighting</span>
+(setq org-publish-project-alist
+      `(
+        (<span style="color: #a52a2a;">"website"</span> <span style="font-weight: bold;">:components</span> (<span style="color: #a52a2a;">"website-content"</span> <span style="color: #a52a2a;">"website-static"</span>))
+         (<span style="color: #a52a2a;">"website-content"</span>
+          <span style="font-weight: bold;">:base-extension</span> <span style="color: #a52a2a;">"org"</span>
+          <span style="font-weight: bold;">:base-directory</span> ,my/website-org-base-directory
+          <span style="font-weight: bold;">:publishing-directory</span> ,my/website-org-publishing-directory
+          <span style="font-weight: bold;">:publishing-function</span> org-html-publish-to-html
+          <span style="font-weight: bold;">:recursive</span> t
+
+          <span style="color: #5c5c5c;">;; </span><span style="color: #5c5c5c;">Disable some defaults</span>
+          <span style="font-weight: bold;">:html-link-home</span> <span style="color: #a52a2a;">""</span>
+          <span style="font-weight: bold;">:html-link-up</span> <span style="color: #a52a2a;">""</span>
+          <span style="font-weight: bold;">:html-head-include-default-style</span> nil
+          <span style="font-weight: bold;">:html-head-include-scripts</span> nil
+          <span style="font-weight: bold;">:html-preamble</span> nil
+          <span style="font-weight: bold;">:html-postamble</span> nil
+
+          <span style="color: #5c5c5c;">;; </span><span style="color: #5c5c5c;">Custom options</span>
+          <span style="font-weight: bold;">:headline-levels</span> 4
+          <span style="font-weight: bold;">:language</span> <span style="color: #a52a2a;">"en"</span>
+          <span style="font-weight: bold;">:html-html5-fancy</span> t
+          <span style="font-weight: bold;">:html-head-extra</span> ,my/website-head-extra
+          <span style="font-weight: bold;">:with-date</span> t
+          <span style="font-weight: bold;">:with-emphasize</span> t              <span style="color: #5c5c5c;">; </span><span style="color: #5c5c5c;">*:t</span>
+          <span style="font-weight: bold;">:with-smart-quotes</span> t           <span style="color: #5c5c5c;">; </span><span style="color: #5c5c5c;">*:t</span>
+          <span style="font-weight: bold;">:with-sub-superscript</span> nil      <span style="color: #5c5c5c;">; </span><span style="color: #5c5c5c;">^:nil</span>
+          <span style="font-weight: bold;">:with-toc</span> nil                  <span style="color: #5c5c5c;">; </span><span style="color: #5c5c5c;">toc:nil</span>
+          <span style="font-weight: bold;">:section-numbers</span> nil           <span style="color: #5c5c5c;">; </span><span style="color: #5c5c5c;">num:nil</span>
+          <span style="font-weight: bold;">:html-preamble</span> <span style="color: #a52a2a;">"&lt;p&gt;Published: %d&lt;/p&gt;"</span>
+          <span style="font-weight: bold;">:html-postamble</span> <span style="color: #a52a2a;">"&lt;p&gt;Last updated: %C&lt;/p&gt;"</span>
+          <span style="font-weight: bold;">:html-wrap-src-lines</span> t)
+
+         (<span style="color: #a52a2a;">"website-static"</span>
+          <span style="font-weight: bold;">:base-directory</span> ,my/website-org-base-directory
+          <span style="font-weight: bold;">:publishing-directory</span> ,my/website-org-publishing-directory
+          <span style="font-weight: bold;">:base-extension</span> <span style="color: #a52a2a;">"css</span><span style="color: #a52a2a; font-weight: bold;">\\</span><span style="color: #a52a2a; font-weight: bold;">|</span><span style="color: #a52a2a;">js</span><span style="color: #a52a2a; font-weight: bold;">\\</span><span style="color: #a52a2a; font-weight: bold;">|</span><span style="color: #a52a2a;">jpg</span><span style="color: #a52a2a; font-weight: bold;">\\</span><span style="color: #a52a2a; font-weight: bold;">|</span><span style="color: #a52a2a;">png</span><span style="color: #a52a2a; font-weight: bold;">\\</span><span style="color: #a52a2a; font-weight: bold;">|</span><span style="color: #a52a2a;">pdf"</span>
+          <span style="font-weight: bold;">:publishing-function</span> org-publish-attachment
+          <span style="font-weight: bold;">:recursive</span> t)))
 </pre>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2021-01-24</p>
+<p>Last&nbsp;updated:&nbsp;2021-01-25</p>
 </div>
 </body>
 </html>
