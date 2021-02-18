@@ -25,6 +25,11 @@ I have a passion for programming languages, web development, privacy, and Emacs.
 * Books
 I'm currently reading /Philosophy in the Tragic Age of the Greeks/, by Friedrich Nietzsche.
 
+Up next is:
+- /The Making of a Counter Culture: Reflections on the Technocratic Society and Its Youthful Opposition/ by Theodore Roszak
+- /REWORK/ by Jason Fried and David Heinemeier Hansson
+- /Elixir in Action/ by Saša Jurić
+
 Check out what else [[https://github.com/anschwa/books][I've been reading]].
 
 * Work

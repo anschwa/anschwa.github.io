@@ -4,6 +4,7 @@
 
 a:hover { background-color: #f9f9f9; }
 body { padding: 20px; }
+ul { margin-left: 1.5em; }
 ul > li { margin: 0.25em 0; }
 h1 { margin-bottom: 0.25em; 0; }
 
