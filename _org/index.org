@@ -20,8 +20,6 @@
 Hi, I graduated from [[https://earlham.edu/][Earlham College]] in 2018 with a BA in Computer
 Science, minor in Philosophy, and a few semesters of Studio Ceramics.
 
-I have a passion for programming languages, web development, privacy, and Emacs.
-
 * Books
 I'm currently reading /Philosophy in the Tragic Age of the Greeks/, by Friedrich Nietzsche.
 

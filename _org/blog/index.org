@@ -17,7 +17,7 @@
 - [2018-06-24 Sun] [[file:2018-06-24-mostly-harmless.org][Mostly Harmless]]
 - [2018-06-24 Sun] This site is powered by Go
 - [2018-05-15 Tue] Started working at Diagnotes
-- [2018-05-05 Sat] Graduated with a BA from Earlham College
+- [2018-05-05 Sat] Graduated from Earlham College
 
 * 2017
 - [2017-08-15 Tue] This site is powered by Common-Lisp
