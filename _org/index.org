@@ -1,6 +1,7 @@
 #+TITLE: Adam Schwartz
 #+AUTHOR: Adam Schwartz
 #+DESCRIPTION: emacs, sriracha, zappa.
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="css/style.css" />
 
 #+ATTR_HTML: :class nav
