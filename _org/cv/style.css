@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+* { margin: 0; padding: 0; }
+
+a:hover { background-color: #f9f9f9; }
+body { padding: 20px; font-size: 100%; }
+ul { margin-left: 1.25em; }
+ul > li { margin: 0.25em 0; }
+h1 { margin-bottom: 0.25em; 0; }
+h3 { font-weight: normal; margin: 0.5em 0; }
+
+#preamble { text-align: center; }
+#postamble { margin-top: 1em; text-align: left; font-style: italic; }
+
+#content { padding: 0 20px; }
+#content h2, h2, h4 { margin: 0.5em 0; }
+#content p { margin: 1em 0; line-height: 1.5em; }

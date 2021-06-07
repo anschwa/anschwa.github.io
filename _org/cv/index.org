@@ -1,0 +1,76 @@
+#+TITLE: Resume / CV
+#+AUTHOR: Adam Schwartz
+#+DATE: June 6, 2021
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+HTML_HEAD: <link rel="stylesheet" href="./style.css" />
+#+HTML_HEAD: <link rel="stylesheet" href="./print.css" media="print" />
+
+#+ATTR_HTML: :class print
+- Name: Adam Schwartz
+- Website: [[https://anschwa.com]]
+- GitHub: [[https://github.com/anschwa]]
+- Dvorak, Emacs, [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]]
+
+* Education
+** 2014 - 2018: Earlham College, Richmond, IN
+- Degree: Bachelor of Arts
+- Major: Computer Science
+- Minor: Philosophy
+- GPA: 3.78
+- College Honors
+- Awards
+  - 2015, 2017: /All-HCAC Sportsmanship Award/, Heartland College Athletic Conference, Division III Men's Tennis
+  - December 2013: /Earlham Dean's Scholarship/
+
+** 2010 - 2014: New Trier Township High School, Winnetka, IL
+- GPA: 4.05
+- Honor Roll
+- Awards
+  - May 2014: /Business Education Student of the Year Finalist/, New Trier Township High School
+    - Senior Award of Distinction: Demonstrating professionalism and commitment to leadership
+
+* Experience                                                       :noexport:
+** 2018 - Present: *Software Engineer*, Diagnotes, Inc., Indianapolis, IN
+
+** May 2017 - August 2017: *Software Engineer*, Healthx, Indianapolis, IN
+- 10 week internship as a member of the Indianapolis Xtern program, [[https://techpoint.org/xtern/][https://techpoint.org/xtern/]]
+- Develop a program that extracts metadata from the existing
+  Healthx API source code and generates a valid Swagger document
+  expressing the complete RESTful API
+- Use this Swagger document to create a self documenting SDK for the
+  Healthx APIs that automatically generates client libraries for C#,
+  Java, Python, and Node.js
+- The resulting SDK makes it easier for developers to integrate with
+  the Healthx platform by handling OAuth authentication, request
+  validation, and providing examples for common operations.
+
+** August 2016 - January 2017: *CS Department Student Representative*, Earlham College
+
+** May 2016 - August 2016: *Full Stack Web Developer*, Adopt-A-Pet.com, Richmond, IN
+- Three month summer internship with non-profit, http://www.adoptapet.com/
+- Designing RESTful APIs and implementing as Microservices
+- Functional and browser testing of applications
+- Rearchitecture research and proof of concepts with:
+- Choosing Golang for backend web applications
+- Developing RESTful APIs with Swagger.io
+- Using PostgreSQL and JSONB as a viable NoSQL database
+
+** 2015 - 2018: *System Administrator*, Earlham College Computer Science (CS) Department and Cluster Computing Group (CGG)
+- Manage on-campus High Performance Compute (HPC) Clusters for
+  students and faculty research as well the infrastructure that
+  supports our CS, Biology, and, Physics departments.
+- https://cs.earlham.edu/applied-groups/CCG.php
+
+** 2015 - 2018: *Helping Others Program (HOP)*, Earlham College
+- Tutor and teaching assistant for CS courses
+- https://cs.earlham.edu/applied-groups/HOP.php
+
+** December 2015: Web Design *Volunteer Instructor*, Tibetan Career Center, McLeod Ganj, India
+- Organized and taught a one week web design course
+- Students made websites with HTML & CSS and learned how to host them
+
+** March 2014 - April 2014: *Web Design Intern*, Glantz Design, Evanston, IL
+- Four week internship as part of Senior Project
+- Worked with graphic design major from Northwestern University
+- Produced new website for local elementary school
+- Developed in WordPress, can be viewed here: http://orringtonpta.org/

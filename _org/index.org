@@ -33,3 +33,7 @@ Check out what else [[https://github.com/anschwa/books][I've been reading]].
 
 * Work
 I'm building the future of healthcare communication at [[https://www.diagnotes.com/][Diagnotes]].
+
+* Resume / CV
+Previously I've enjoyed keeping [[file:cv/index.org][my resume]] in LaTeX or org-mode but
+now I think HTML is the most appropriate.

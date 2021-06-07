@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+/**************************************************************************/
+/* Override CSS properties for printing or saving as PDF from the browser */
+/**************************************************************************/
+
+h1 { display: none; }
+body { font-size: 60%; }
+
+ul.print { display: flex; justify-content: space-around; }
+ul.print > li { list-style: none; }
