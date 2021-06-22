@@ -4,8 +4,12 @@
 /* Override CSS properties for printing or saving as PDF from the browser */
 /**************************************************************************/
 
+
 h1 { display: none; }
+h1, h2 { font-size: 1.5em; }
 body { font-size: 60%; }
 
-ul.print { display: flex; justify-content: space-around; }
-ul.print > li { list-style: none; }
+ul.print { display: flex; align-items: baseline; justify-content: space-around; }
+ul.print > li { list-style: none; font-size: 1.5em; }
+ul.print > li:first-child { font-weight: bold; font-size: 2.5em; }
+ul.print > li:last-child { display: none; }

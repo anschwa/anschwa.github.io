@@ -6,14 +6,14 @@
 #+HTML_HEAD: <link rel="stylesheet" href="./print.css" media="print" />
 
 #+ATTR_HTML: :class print
-- Name: Adam Schwartz
+- Adam Schwartz
 - Website: [[https://anschwa.com]]
 - GitHub: [[https://github.com/anschwa]]
 - Dvorak, Emacs, [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]]
 
 * Education
 ** 2014 - 2018: Earlham College, Richmond, IN
-- Degree: Bachelor of Arts
+- Bachelor of Arts
 - Major: Computer Science
 - Minor: Philosophy
 - GPA: 3.78
