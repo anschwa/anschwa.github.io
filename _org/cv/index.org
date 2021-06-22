@@ -46,7 +46,9 @@
   validation, and providing examples for common operations.
 - Primary technologies: Java, C#, Open API
 
-** August 2016 - January 2017: *CS Department Student Representative*, Earlham College
+** August 2016 - January 2017: *Computer Science Department Student Representative*, Earlham College
+- Participate in weekly faculty meetings to address concerns, ideas,
+  and questions from fellow students.
 
 ** May 2016 - August 2016: *Full Stack Web Developer*, Adopt-A-Pet.com, Richmond, IN
 - Three month summer internship with non-profit, http://www.adoptapet.com/
@@ -68,7 +70,7 @@
 - https://cs.earlham.edu/applied-groups/HOP.php
 
 ** December 2015: Web Design *Volunteer Instructor*, Tibetan Career Center, McLeod Ganj, India
-- Organized and taught a one week web design course-
+- Organized and taught a one week web design course
 
 ** March 2014 - April 2014: *Web Design Intern*, Glantz Design, Evanston, IL
 - Four week internship
