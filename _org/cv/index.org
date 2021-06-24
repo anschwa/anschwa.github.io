@@ -34,16 +34,13 @@
 - Primary Technologies: Golang, JavaScript, Ruby, PostgreSQL, Docker, AWS
 
 ** May 2017 - August 2017: *Software Engineer*, Healthx, Indianapolis, IN
-- 10 week internship as a member of the Indianapolis Xtern program, [[https://techpoint.org/xtern/][https://techpoint.org/xtern/]]
-- Developed a tool to extract metadata from the existing Healthx API
-  source code and generate an Open API document that expressed the
-  complete RESTful API
-- Use the auto-generated JSON document to create a self documenting
-  SDK for the Healthx APIs that in turn generates client libraries for
-  C#, Java, Python, and Node.js
-- The resulting SDK makes it easier for developers to integrate with
-  the Healthx platform by handling OAuth authentication, request
-  validation, and providing examples for common operations.
+- 10 week internship with Indianapolis TechPoint Xtern program, [[https://techpoint.org/xtern/][https://techpoint.org/xtern/]]
+- Developed a tool to generate a self-documenting SDK for all public
+  APIs by extracting metadata from the Healthx source code.
+- This SDK made it easier for customers to integrate with the Healthx
+  platform by providing client libraries that handle OAuth
+  authentication, request validation, and documentation with examples
+  for common operations.
 - Primary technologies: Java, C#, Open API
 
 ** August 2016 - January 2017: *Computer Science Department Student Representative*, Earlham College
@@ -52,18 +49,16 @@
 
 ** May 2016 - August 2016: *Full Stack Web Developer*, Adopt-A-Pet.com, Richmond, IN
 - Three month summer internship with non-profit, http://www.adoptapet.com/
-- Designed and implemented several microservices to explore the
-  viability of a large re-architecture of existing backend services
 - Participated in company Scrum meetings and worked on various new
   features, bug fixes, and automated tests.
-- Primary technologies: Perl, PHP, PostgreSQL, Golang, Open API
+- Primary technologies: Perl, PHP, PostgreSQL, Golang, Open API, AWS
 
 ** 2015 - 2018: *System Administrator*, Earlham College Cluster Computing Group (CGG)
-- Manage on-campus High Performance Compute Clusters (HPC).
-- This infrastructure supports student work and faculty research
-  across various departments including Biology, Chemistry, Computer
-  Science, Physics, and Psychology.
+- Managed High Performance Compute Clusters (HPC) that supports
+  student work and faculty research across various departments
+  including: Biology, Chemistry, Physics, and Computer Science.
 - https://cs.earlham.edu/applied-groups/CCG.php
+- Primary Technologies: Linux, CentOS, Xen, Torque PBS, InfiniBand
 
 ** 2015 - 2018: *Helping Others Program (HOP)*, Earlham College
 - Tutor and teaching assistant for CS courses
