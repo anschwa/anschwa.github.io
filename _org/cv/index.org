@@ -9,7 +9,8 @@
 - Adam Schwartz
 - Website: [[https://anschwa.com]]
 - GitHub: [[https://github.com/anschwa]]
-- Dvorak, Emacs, [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]]
+- Coffee, Dvorak, Emacs, Sriracha, Zappa
+- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user
 
 * Education
 ** 2014 - 2018: Earlham College, Richmond, IN
