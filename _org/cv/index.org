@@ -10,7 +10,7 @@
 - Website: [[https://anschwa.com]]
 - GitHub: [[https://github.com/anschwa]]
 - Coffee, Dvorak, Emacs, Sriracha, Zappa
-- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user
+- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user, [[https://www.nomodes.com/Larry_Tesler_Consulting/Home.html][No Modes]]
 
 * Education
 ** 2014 - 2018: Earlham College, Richmond, IN
