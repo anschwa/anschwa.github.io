@@ -32,7 +32,7 @@
 
 * Experience
 ** 2018 - Present: *Software Engineer*, Diagnotes, Inc., Indianapolis, IN
-- Primary Technologies: Golang, JavaScript, Ruby, PostgreSQL, Docker, AWS
+- Primary Technologies: Go, JavaScript, Ruby, PostgreSQL, Docker, AWS
 
 ** May 2017 - August 2017: *Software Engineer*, Healthx, Indianapolis, IN
 - 10 week internship with Indianapolis TechPoint Xtern program, [[https://techpoint.org/xtern/][https://techpoint.org/xtern/]]
@@ -52,7 +52,7 @@
 - Three month summer internship with non-profit, http://www.adoptapet.com/
 - Participated in company Scrum meetings and worked on various new
   features, bug fixes, and automated tests.
-- Primary technologies: Perl, PHP, PostgreSQL, Golang, Open API, AWS
+- Primary technologies: Perl, PHP, PostgreSQL, Go, Open API, AWS
 
 ** 2015 - 2018: *System Administrator*, Earlham College Cluster Computing Group (CGG)
 - Managed High Performance Compute Clusters (HPC) that supports

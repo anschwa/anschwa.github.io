@@ -13,9 +13,13 @@
 * About
 
 #+BEGIN_EXPORT html
-<p style="text-align: center;">
-  <img src="img/me.jpg" alt="me laughing" width="200" height="200" style="border-radius: 50%;" />
-</p>
+<figure style="text-align: center;">
+  <img src="img/me.jpg" alt="Me circa 2015 in Dharamshala, India." width="200" height="200" style="width: 200px; border-radius: 50%;" />
+
+  <figcaption style="font-style: italic;">
+    <small>Me circa 2015 in Dharamshala, India.</small>
+  </figcaption>
+</figure>
 #+END_EXPORT
 
 Hi, I graduated from [[https://earlham.edu/][Earlham College]] in 2018 with a BA in Computer
@@ -31,9 +35,17 @@ Up next is:
 
 Check out what else [[https://github.com/anschwa/books][I've been reading]].
 
-* Work
+* Work                                                             :noexport:
 I'm building the future of healthcare communication at [[https://www.diagnotes.com/][Diagnotes]].
 
 * Resume / CV
-Previously I've enjoyed keeping [[file:cv/index.org][my resume]] in LaTeX, but now I think
-HTML is the most appropriate.
+Previously I've enjoyed keeping [[file:cv/index.org][my resume]] in LaTeX, but now I prefer
+using HTML with a custom [[https://developer.mozilla.org/en-US/docs/Web/Guide/Printing#using_a_print_style_sheet][print.css]] file.
+
+#+BEGIN_EXPORT html
+<hr/>
+<figure style="margin: 2em 0;">
+  <blockquote>The only thing we have in common is xenophobia.</blockquote>
+  <figcaption>&mdash;Ferit Güven</figcaption>
+</figure>
+#+END_EXPORT
