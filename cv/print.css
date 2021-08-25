@@ -10,7 +10,7 @@ h1, h2 { font-size: 1.5em; }
 body { font-size: 70%; }
 a, a:active, a:visited { color: black; text-decoration: underline; }
 
-ul.print { display: flex; align-items: baseline; justify-content: space-around; }
-ul.print > li { list-style: none; font-size: 1.5em; }
-ul.print > li:first-child { font-weight: bold; font-size: 2.5em; }
+ul.print { display: flex; align-items: baseline; justify-content: space-between; }
+ul.print > li { list-style: none; font-size: 1em; }
+ul.print > li:first-child { font-weight: bold; font-size: 1.5em; }
 ul.print > li:nth-child(n+4) { display: none; }
