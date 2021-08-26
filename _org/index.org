@@ -40,7 +40,7 @@ using HTML with a custom [[https://developer.mozilla.org/en-US/docs/Web/Guide/Pr
 
 #+BEGIN_EXPORT html
 <hr/>
-<p style="text-align: center; margin: 2em 0; font-style: italic;">
+<blockquote style="text-align: center; margin: 2em 0; font-style: italic;">
   The only thing we have in common is xenophobia.
-</p>
+</blockquote>
 #+END_EXPORT
