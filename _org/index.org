@@ -13,13 +13,9 @@
 * About
 
 #+BEGIN_EXPORT html
-<figure style="text-align: center;">
+<p style="text-align: center;">
   <img src="img/me.jpg" alt="Me circa 2015 in Dharamshala, India." width="200" height="200" style="width: 200px; border-radius: 50%;" />
-
-  <figcaption style="font-style: italic;">
-    <small>Me circa 2015 in Dharamshala, India.</small>
-  </figcaption>
-</figure>
+</p>
 #+END_EXPORT
 
 Hi, I graduated from [[https://earlham.edu/][Earlham College]] in 2018 with a BA in Computer
@@ -44,8 +40,7 @@ using HTML with a custom [[https://developer.mozilla.org/en-US/docs/Web/Guide/Pr
 
 #+BEGIN_EXPORT html
 <hr/>
-<figure style="margin: 2em 0;">
-  <blockquote>The only thing we have in common is xenophobia.</blockquote>
-  <figcaption>&mdash;Ferit Güven</figcaption>
-</figure>
+<p style="text-align: center; margin: 2em 0; font-style: italic;">
+  The only thing we have in common is xenophobia.
+</p>
 #+END_EXPORT
