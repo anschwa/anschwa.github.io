@@ -44,7 +44,7 @@
     - Senior Award of Distinction: Demonstrating professionalism and commitment to leadership
 
 * Experience
-** 2018 - Present: *Software Engineer*, Diagnotes, Inc., Indianapolis, IN
+** May 2018 - August 2021: *Software Engineer*, [[https://www.diagnotes.com/][Diagnotes, Inc.]], Indianapolis, IN
 - Primary Technologies: Go, JavaScript, Ruby, PostgreSQL, Docker, AWS
 
 ** May 2017 - August 2017: *Software Engineer*, Healthx, Indianapolis, IN
