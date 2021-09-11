@@ -26,8 +26,7 @@
 #+END_EXPORT
 
 * Education
-** 2014 - 2018: Earlham College, Richmond, IN
-- Bachelor of Arts
+** (BA) 2014 - 2018: Earlham College, Richmond, IN
 - Major: Computer Science
 - Minor: Philosophy
 - GPA: 3.78
@@ -55,7 +54,7 @@
   platform by providing client libraries that handle OAuth
   authentication, request validation, and documentation with examples
   for common operations.
-- Primary technologies: Java, C#, Ruby, Python, JavaScript, Open API
+- Primary technologies: Java, C#, Ruby, Python, JavaScript, OpenAPI
 
 ** August 2016 - January 2017: *Computer Science Department Student Representative*, Earlham College
 - Participated in weekly faculty meetings to address concerns, ideas,
@@ -63,16 +62,16 @@
 
 ** May 2016 - August 2016: *Full Stack Web Developer*, Adopt-A-Pet.com, Richmond, IN
 - Three month summer internship with non-profit, http://www.adoptapet.com/
-- Participated in company Scrum meetings and worked on various new
-  features, bug fixes, and automated tests.
-- Primary technologies: Perl, PHP, PostgreSQL, Go, Open API, AWS
+- Participated in company meetings and worked on various new features,
+  bug fixes, and automated tests.
+- Primary technologies: Perl, PHP, PostgreSQL, Go, OpenAPI, AWS
 
 ** 2015 - 2018: *System Administrator*, Earlham College Cluster Computing Group (CGG)
-- Managed High Performance Compute Clusters (HPC) that supports
+- Managed High Performance Compute Clusters (HPC) that support
   student work and faculty research across various departments
   including: Biology, Chemistry, Physics, and Computer Science.
 - https://cs.earlham.edu/applied-groups/CCG.php
-- Primary Technologies: Linux, CentOS, Xen, Torque PBS, InfiniBand
+- Primary Technologies: Linux, RHEL, CentOS, Xen, Torque PBS, InfiniBand, Intel SFP+
 
 ** 2015 - 2018: *Helping Others Program (HOP)*, Earlham College
 - Tutor and teaching assistant for CS courses
@@ -86,3 +85,14 @@
 - Worked with graphic design major from Northwestern University
 - Created a new website for a local elementary school, http://orringtonpta.org/
 - Primary technologies: WordPress
+
+* Talks
+- June 18. 2020: Why Emacs?, Dotfiles-Indy
+- June 16, 2020: Using build tags in Go, Golang Indianapolis
+- April 16, 2020: Keep it Simple Dotfiles, Dotfiles-Indy
+- January 8, 2020: Emacs and the Joy of Text Editing, Indy.rb
+- October 23, 2019: Using Modules Replace, Golang Indianapolis
+- August 21, 2019: Lightning Talk on the "go present" presentation tool, Golang Indianapolis
+- July 10, 2018: Don’t Forget To Have Fun, IndyPy
+
+More at: https://github.com/anschwa/talks
