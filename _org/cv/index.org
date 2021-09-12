@@ -87,12 +87,50 @@
 - Primary technologies: WordPress
 
 * Talks
-- June 18. 2020: Why Emacs?, Dotfiles-Indy
-- June 16, 2020: Using build tags in Go, Golang Indianapolis
-- April 16, 2020: Keep it Simple Dotfiles, Dotfiles-Indy
-- January 8, 2020: Emacs and the Joy of Text Editing, Indy.rb
-- October 23, 2019: Using Modules Replace, Golang Indianapolis
-- August 21, 2019: Lightning Talk on the "go present" presentation tool, Golang Indianapolis
-- July 10, 2018: Don’t Forget To Have Fun, IndyPy
+** June 18. 2020: /Why Emacs?/, Dotfiles-Indy
+- What’s the deal with Emacs? I thought Vim was better anyway? Why
+  should I switch from Visual Studio Code? Emacs is weird. Let’s take
+  a look at what makes Emacs unique and highlight how it has inspired
+  the software we use everyday.
+
+** June 16, 2020: /Using build tags in Go/, Golang Indianapolis
+- When it comes to compiling your programs, Go has a few tricks up its
+  sleeve. Build tags are a versatile tool that provide a means to
+  conditionally compile files into your Go program. In this talk we
+  will write a make-believe serverless function that uses build tags
+  to substitute ~package main~ so that we can develop and debug our
+  program locally, while being able to deploy a “pure” production
+  binary. As a bonus, we will look at setting package variables using
+  the ~ldflags -X~ option (see ~go doc cmd/link~).
+
+** April 16, 2020: /Keep it Simple Dotfiles/, Dotfiles-Indy
+- How I manage my dotfiles without any symlinks using a "bare" git repository.
+
+** January 8, 2020: /Emacs and the Joy of Text Editing/, Indy.rb
+- Let’s explore text editing as a tool for thought as we examine the
+  way of EMACS. This talk covers the history of text editors as well
+  as what sets it apart from commercial software and IDEs. Audience
+  participation is encouraged.
+
+** October 23, 2019: /Using Modules Replace/, Golang Indianapolis
+- Go modules give some flexibility for controlling which version of a
+  dependency gets built in your app, however, these mechanisms are not
+  obvious. This talk sets out to demonstrate some of the abilities of
+  ~replace~, ~exclude~, and ~go get~ under modules for substituting package
+  versions or branches on the fly.
+
+** August 21, 2019: /Lightning Talk: Using "go present"/, Golang Indianapolis
+- ~present~ is a neat tool that offers some unique features for giving
+  talks about code. This talk covers how to embed images, websites,
+  and live source code into your presentation as well as address some
+  of the trade-offs you have to make when choosing ~present~ over
+  traditional slide-making software.
+
+** July 10, 2018: /Don’t Forget To Have Fun/, IndyPy
+- It’s easy to get lost and overwhelmed with software development and
+  start to lose interest or motivation when working on projects. I've
+  found it helpful to mix things up and remember to spend time on
+  things you enjoy. This talk shares some of the ways I have been
+  managing my happiness and how it's impacted my work.
 
 More at: https://github.com/anschwa/talks
