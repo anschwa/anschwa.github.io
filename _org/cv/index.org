@@ -13,14 +13,14 @@
 - [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user, [[https://www.nomodes.com/Larry_Tesler_Consulting/Home.html][No Modes]]
 
 #+BEGIN_EXPORT html
-<figure style="text-align: center; margin: 2em 0;">
+<figure style="margin: 2em 0;">
   <blockquote style="font-style: italic;">
     A common mistake that people make when trying to design something
     completely foolproof is to underestimate the ingenuity of complete fools.
   </blockquote>
 
-  <figcaption style="text-align: right;">
-    &mdash; Douglas Adams, <cite>Mostly Harmless</cite>
+  <figcaption>
+    &mdash;Douglas Adams, <cite>Mostly Harmless</cite>
   </figcaption>
 </figure>
 #+END_EXPORT
