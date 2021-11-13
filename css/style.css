@@ -28,12 +28,10 @@ p > code { padding: 0.5em; background-color: #f9f9f9; }
 
 figure {
   margin: 42px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 }
-figure > img {
+figure img {
   padding: 10px;
   width: 100%;
-  object-fit: cover;
+  max-width: 400px;
 }
