@@ -1,0 +1,51 @@
+#+TITLE: Wood Fire I
+#+AUTHOR: Adam Schwartz
+#+DATE: November 13, 2021
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+HTML_HEAD: <link rel="stylesheet" href="../../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../../index.org][About]]
+- [[file:../../blog/index.org][Blog]]
+- [[file:../index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* July 2018
+#+CAPTION: Wood fired stoneware teapot (1a)
+[[file:img/2018-07-26_woodfire-stoneware-teapot-1a.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-teapot-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware teapot (1b)
+[[file:img/2018-07-26-woodfire-stoneware-teapot-1b.jpg][file:img/thumbs/2018-07-26-woodfire-stoneware-teapot-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware mugs (1a)
+[[file:img/2018-07-26_woodfire-stoneware-mugs-1a.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-mugs-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware mugs (1b)
+[[file:img/2018-07-26_woodfire-stoneware-mugs-1b.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-mugs-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware stein (1a)
+[[file:img/2018-07-26_woodfire-stoneware-stein-1a.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-stein-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware stein (1b)
+[[file:img/2018-07-26_woodfire-stoneware-stein-1b.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-stein-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (1a)
+[[file:img/2018-07-26_woodfire-stoneware-vase-1a.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-vase-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (1b)
+[[file:img/2018-07-26_woodfire-stoneware-vase-1b.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-vase-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (2a)
+[[file:img/2018-07-26_woodfire-stoneware-vase-2a.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-vase-2a.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (2b)
+[[file:img/2018-07-26_woodfire-stoneware-vase-2b.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-vase-2b.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (3a)
+[[file:img/2018-07-26_woodfire-stoneware-vase-3a.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-vase-3a.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (3b)
+[[file:img/2018-07-26_woodfire-stoneware-vase-3b.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-vase-3b.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (3c)
+[[file:img/2018-07-26_woodfire-stoneware-vase-3c.jpg][file:img/thumbs/2018-07-26_woodfire-stoneware-vase-3c.jpg]]

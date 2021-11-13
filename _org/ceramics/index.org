@@ -10,7 +10,13 @@
 - [[file:index.org][Ceramics]]
 - [[https://github.com/anschwa][Github]]
 
-#+CAPTION: Wheel-thrown vases by Marguerite Wildenhain. Carved, slipped, and cut. Photograph by Otto Hagel.
+#+CAPTION: My 1950s Amaco #1-101 potters wheel.
 #+ATTR_HTML: :style max-width: 600px;
-#+ATTR_HTML: :alt Several wheel-thrown by Marguerite Wildenhain. Carved, slipped, and cut. Photograph by Otto Hagel.
-[[file:marguerite-wildenhain-vases.jpg]]
+[[file:amaco.jpg]]
+
+* Photo Gallery
+- [[file:earlham/index.org][Earlham]]
+- [[file:woodfire-1/index.org][Wood Fire I]]
+- [[file:woodfire-2/index.org][Wood Fire II]]
+- [[file:woodfire-3/index.org][Wood Fire III]]
+- [[file:ideas/index.org][Ideas]]

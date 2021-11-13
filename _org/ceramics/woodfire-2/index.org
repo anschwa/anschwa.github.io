@@ -1,0 +1,81 @@
+#+TITLE: Wood Fire II
+#+AUTHOR: Adam Schwartz
+#+DATE: November 13, 2021
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+HTML_HEAD: <link rel="stylesheet" href="../../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../../index.org][About]]
+- [[file:../../blog/index.org][Blog]]
+- [[file:../index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* October 2018
+#+CAPTION: Wood fired stoneware cup (1a)
+[[file:img/2018-10-18_woodfire-stoneware-cup-1a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-cup-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware cup (1b)
+[[file:img/2018-10-18_woodfire-stoneware-cup-1b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-cup-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware mug (1a)
+[[file:img/2018-10-18_woodfire-stoneware-mug-1a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-mug-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware mug (1b)
+[[file:img/2018-10-18_woodfire-stoneware-mug-1b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-mug-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware mug (1c)
+[[file:img/2018-10-18_woodfire-stoneware-mug-1c.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-mug-1c.jpg]]
+
+#+CAPTION: Wood fired stoneware mug (1d)
+[[file:img/2018-10-18_woodfire-stoneware-mug-1d.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-mug-1d.jpg]]
+
+#+CAPTION: Wood fired stoneware teapot (1a)
+[[file:img/2018-10-18_woodfire-stoneware-teapot-1a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-teapot-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware teapot (1b)
+[[file:img/2018-10-18_woodfire-stoneware-teapot-1b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-teapot-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (1)
+[[file:img/2018-10-18_woodfire-stoneware-vases-1.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-1.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (2)
+[[file:img/2018-10-18_woodfire-stoneware-vases-2.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-2.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (3)
+[[file:img/2018-10-18_woodfire-stoneware-vases-3.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-3.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (4a)
+[[file:img/2018-10-18_woodfire-stoneware-vases-4a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-4a.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (4b)
+[[file:img/2018-10-18_woodfire-stoneware-vases-4b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-4b.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (5a)
+[[file:img/2018-10-18_woodfire-stoneware-vases-5a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-5a.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (5b)
+[[file:img/2018-10-18_woodfire-stoneware-vases-5b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-5b.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (6a)
+[[file:img/2018-10-18_woodfire-stoneware-vases-6a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-6a.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (6b)
+[[file:img/2018-10-18_woodfire-stoneware-vases-6b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-6b.jpg]]
+
+#+CAPTION: Wood fired stoneware vases (7)
+[[file:img/2018-10-18_woodfire-stoneware-vases-7.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vases-7.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (1a)
+[[file:img/2018-10-18_woodfire-stoneware-vase-1a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vase-1a.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (1b)
+[[file:img/2018-10-18_woodfire-stoneware-vase-1b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vase-1b.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (2a)
+[[file:img/2018-10-18_woodfire-stoneware-vase-2a.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vase-2a.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (2b)
+[[file:img/2018-10-18_woodfire-stoneware-vase-2b.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vase-2b.jpg]]
+
+#+CAPTION: Wood fired stoneware vase (3)
+[[file:img/2018-10-18_woodfire-stoneware-vase-3.jpg][file:img/thumbs/2018-10-18_woodfire-stoneware-vase-3.jpg]]

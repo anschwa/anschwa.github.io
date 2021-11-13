@@ -10,7 +10,7 @@
 - Website: [[https://anschwa.com]]
 - GitHub: [[https://github.com/anschwa]]
 - Coffee, Dvorak, Emacs, Sriracha, Zappa
-- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user, [[https://www.nomodes.com/Larry_Tesler_Consulting/Home.html][No Modes]]
+- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user, [[https://www.nomodes.com/Larry_Tesler_Consulting/CV_files/NOMODES.jpg][No Modes]]
 
 #+BEGIN_EXPORT html
 <figure style="margin: 2em 0;">
@@ -44,6 +44,15 @@
 
 * Experience
 ** May 2018 - August 2021: *Software Engineer*, [[https://www.diagnotes.com/][Diagnotes, Inc.]], Indianapolis, IN
+- Feature development and maintenance of Ruby on Rails application.
+- Worked on several projects to split-out core platform functionality
+  into standalone Go services such as messaging, notification
+  delivery, and file uploads.
+- Lead front-end engineer for several new Vue.js single-page-apps
+  (SPAs) to improve user experience and take advantage of new backed
+  services and product features.
+- Assist with platform upgrades, deployments, and monitoring of
+  production services on AWS.
 - Primary Technologies: Go, JavaScript, Ruby, PostgreSQL, Docker, AWS
 
 ** May 2017 - August 2017: *Software Engineer*, Healthx, Indianapolis, IN

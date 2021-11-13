@@ -27,6 +27,7 @@ pre {
 p > code { padding: 0.5em; background-color: #f9f9f9; }
 
 figure {
+  margin: 42px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
