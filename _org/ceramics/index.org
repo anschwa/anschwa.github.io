@@ -10,12 +10,12 @@
 - [[file:index.org][Ceramics]]
 - [[https://github.com/anschwa][Github]]
 
-#+CAPTION: My 1950s Amaco #1-101 potters wheel.
+#+CAPTION: My 1950s AMACO #1-101 potters wheel.
 #+ATTR_HTML: :style max-width: 600px;
 [[file:amaco.jpg]]
 
 * Photo Gallery
-- [[file:earlham/index.org][Earlham]]
+- [[file:earlham/index.org][Earlham Studio Ceramics]]
 - [[file:woodfire-1/index.org][Wood Fire I]]
 - [[file:woodfire-2/index.org][Wood Fire II]]
 - [[file:woodfire-3/index.org][Wood Fire III]]

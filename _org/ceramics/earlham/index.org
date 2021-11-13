@@ -1,4 +1,4 @@
-#+TITLE: Earlham
+#+TITLE: Earlham Studio Ceramics
 #+AUTHOR: Adam Schwartz
 #+DATE: November 13, 2021
 #+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
