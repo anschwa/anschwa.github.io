@@ -80,7 +80,7 @@
   student work and faculty research across various departments
   including: Biology, Chemistry, Physics, and Computer Science.
 - https://cs.earlham.edu/applied-groups/CCG.php
-- Primary Technologies: Linux, RHEL, CentOS, Xen, Torque PBS, InfiniBand, Intel SFP+
+- Primary Technologies: Linux, RHEL, CentOS, Xen, Torque PBS, InfiniBand, 10GbE
 
 ** 2015 - 2018: *Helping Others Program (HOP)*, Earlham College
 - Tutor and teaching assistant for CS courses
