@@ -48,8 +48,8 @@
 - Worked on several projects to split-out core platform functionality
   into standalone Go services such as messaging, notification
   delivery, and file uploads.
-- Lead front-end engineer for several new Vue.js single-page-apps
-  (SPAs) to improve user experience and take advantage of new backed
+- Lead front-end engineer for several Vue.js single-page-apps (SPAs)
+  to improve user experience and take advantage of new backend
   services and product features.
 - Assist with platform upgrades, deployments, and monitoring of
   production services on AWS.
