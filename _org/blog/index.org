@@ -10,19 +10,6 @@
 - [[file:../ceramics/index.org][Ceramics]]
 - [[https://github.com/anschwa][Github]]
 
-#+BEGIN_EXPORT html
-<figure style="margin: 2em 0;">
-  <blockquote style="font-style: italic;">
-    Je ne dis pas les choses parce que je les pense, je dis les choses
-    pour ne plus les penser.
-  </blockquote>
-
-  <figcaption>
-    &mdash;Michel Foucault
-  </figcaption>
-</figure>
-#+END_EXPORT
-
 * 2021
 - [2021-01-17 Sun] [[file:2021-01-17-Emacs-as-a-static-site-generator.org][Emacs as a static site generator]]
 
@@ -45,3 +32,18 @@
 * 2014
 - [2014-10-16 Thu] This site is powered by Flask
 - [2014-07-24 Thu] Initial commit: I have a website
+
+
+#+BEGIN_EXPORT html
+<hr style="margin-top: 20px;" />
+<figure style="text-align: center; margin: 2em 0;">
+  <blockquote style="font-style: italic;">
+    Je ne dis pas les choses parce que je les pense, je dis les choses
+    pour ne plus les penser.
+  </blockquote>
+
+  <figcaption>
+    &mdash;Michel Foucault
+  </figcaption>
+</figure>
+#+END_EXPORT
