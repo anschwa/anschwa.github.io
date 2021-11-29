@@ -42,6 +42,10 @@ using HTML with a custom [[https://developer.mozilla.org/en-US/docs/Web/Guide/Pr
 #+BEGIN_EXPORT html
 <hr/>
 <blockquote style="text-align: center; margin: 2em 0; font-style: italic;">
-  The only thing we have in common is xenophobia.
+  The only principle that does not inhibit progress is: <em>anything goes</em>.
+
+  <figcaption>
+    &mdash;Paul Feyerabend, <cite>Against Method</cite>
+  </figcaption>
 </blockquote>
 #+END_EXPORT

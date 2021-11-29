@@ -142,4 +142,3 @@
   managing my happiness and how it's impacted my work.
 
 More at: https://github.com/anschwa/talks
-* Conferences

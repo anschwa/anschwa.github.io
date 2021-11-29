@@ -10,7 +10,7 @@
 - [[file:index.org][Ceramics]]
 - [[https://github.com/anschwa][Github]]
 
-#+CAPTION: My 1950s AMACO #1-101 potters wheel.
+#+CAPTION: My old AMACO potters wheel.
 #+ATTR_HTML: :style max-width: 600px;
 [[file:amaco.jpg]]
 
