@@ -37,3 +37,4 @@ figure > img {
   width: 100%;
   object-fit: cover;
 }
+span.listing-number { display: none; }

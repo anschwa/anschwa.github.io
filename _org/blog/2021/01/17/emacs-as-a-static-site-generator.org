@@ -4,7 +4,7 @@
 #+OPTIONS: title:nil
 #+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
 #+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
-#+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
+#+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
 
 #+ATTR_HTML: :class nav
 - [[file:../index.org][About]]

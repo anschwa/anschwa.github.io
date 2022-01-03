@@ -11,10 +11,10 @@
 - [[https://github.com/anschwa][Github]]
 
 * 2021
-- [2021-01-17 Sun] [[file:2021-01-17-Emacs-as-a-static-site-generator.org][Emacs as a static site generator]]
+- [2021-01-17 Sun] [[file:2021/01/17/emacs-as-a-static-site-generator.org][Emacs as a static site generator]]
 
 * 2018
-- [2018-06-24 Sun] [[file:2018-06-24-mostly-harmless.org][Mostly Harmless]]
+- [2018-06-24 Sun] [[file:2018/06/24/mostly-harmless.org][Mostly Harmless]]
 - [2018-06-24 Sun] This site is powered by Go
 - [2018-05-15 Tue] Started working at Diagnotes
 - [2018-05-05 Sat] Graduated from Earlham College
