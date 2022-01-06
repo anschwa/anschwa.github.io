@@ -7,14 +7,19 @@
 #+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
 
 #+ATTR_HTML: :class nav
-- [[file:../index.org][About]]
-- [[file:../blog/index.org][Blog]]
-- [[file:../ceramics/index.org][Ceramics]]
+- [[file:../../../../index.org][About]]
+- [[file:../../../index.org][Blog]]
+- [[file:../../../../ceramics/index.org][Ceramics]]
 - [[https://github.com/anschwa][Github]]
 
 * Mostly Harmless
+/The Hitchhiker's Guide to the Galaxy/ is one of my favorite books.
+Douglas Adams was heavily influenced by society's ever growing
+dependence on technology and the unintended side effects of automated
+systems. In this way, the C programming language truly embodies the
+spirit of Adam's work.
 
-#+CAPTION: A mostly harmless program
+#+CAPTION: A mostly harmless program:
 #+BEGIN_SRC C :eval never-export :results output :exports both
 #include <stdio.h>
 
@@ -29,3 +34,10 @@ int main() {
 
 #+RESULTS[9c9568cf4742e2fd062c32a32f3572a9141e5324]:
 : 6 * 9 = 42
+
+#+BEGIN_QUOTE
+"It can be very dangerous to see things from somebody else's point of
+view without the proper training."
+
+— Douglas Adams, /Mostly Harmless/
+#+END_QUOTE

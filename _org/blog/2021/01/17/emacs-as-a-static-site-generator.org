@@ -7,15 +7,38 @@
 #+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
 
 #+ATTR_HTML: :class nav
-- [[file:../index.org][About]]
-- [[file:../blog/index.org][Blog]]
-- [[file:../ceramics/index.org][Ceramics]]
+- [[file:../../../../index.org][About]]
+- [[file:../../../index.org][Blog]]
+- [[file:../../../../ceramics/index.org][Ceramics]]
 - [[https://github.com/anschwa][Github]]
 
-* Emacs as a static site generator
+* Emacs as a Static Site Generator
 
-This website is generated from Emacs using ~M-x org-publish~.
+I've been hosting my website on [[https://pages.github.com/][GitHub Pages]] since 2014. Over the years
+I have tended to rewrite my website whenever I was learning a new
+programming language.
 
+I started out with a "pure" HTML+CSS website and eventually moved on
+to Python, where I used the [[https://pythonhosted.org/Frozen-Flask/][Frozen-Flask]] package to bundle my Flask
+app into a set of static files. As time went on, I started writing my
+own static site generators: first in Bash+Pandoc, then Common-Lisp,
+and later Go(lang).
+
+Overall I have enjoyed writing my own static site generators and think
+it's a great project for exploring a new programming language. In
+fact, whenever I've tried migrating to one of the popular options like
+[[https://github.com/gohugoio/hugo][Hugo]], I ultimately went back to doing it myself because I hated
+dealing with auto-generated files, customizing themes, and digging
+through incomplete documentation.
+
+I have been using Emacs and [[https://orgmode.org/][Org Mode]] for a long time but never
+explored the ~org-publish~ functionality. It's far from perfect, but
+it's incredibly convenient. Like most things Emacs, ~org-publish~ can
+be configured to do just about anything. So far I only use it to
+generate this website, but my configuration can be easily extended to
+handle several different projects.
+
+This website is generated from Emacs using ~M-x org-publish~
 #+BEGIN_SRC emacs-lisp
 (require 'ox-publish)
 

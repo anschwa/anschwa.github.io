@@ -1,4 +1,4 @@
-#+TITLE: Blog
+#+TITLE: Schwa's Blog
 #+AUTHOR: Adam Schwartz
 #+DATE: January 17, 2021
 #+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
@@ -10,8 +10,11 @@
 - [[file:../ceramics/index.org][Ceramics]]
 - [[https://github.com/anschwa][Github]]
 
+* 2022
+- [2022-01-03] [[file:2022/01/03/installing-freebsd-on-2013-macpro.org][Installing FreeBSD on a 2013 Mac Pro]]
+
 * 2021
-- [2021-01-17 Sun] [[file:2021/01/17/emacs-as-a-static-site-generator.org][Emacs as a static site generator]]
+- [2021-01-17 Sun] [[file:2021/01/17/emacs-as-a-static-site-generator.org][Emacs as a Static Site Generator]]
 
 * 2018
 - [2018-06-24 Sun] [[file:2018/06/24/mostly-harmless.org][Mostly Harmless]]

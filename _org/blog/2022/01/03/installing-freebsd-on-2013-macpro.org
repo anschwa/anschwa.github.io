@@ -1,0 +1,191 @@
+#+TITLE: Installing FreeBSD on a 2013 Mac Pro
+#+AUTHOR: Adam Schwartz
+#+DATE: January 3, 2022
+#+OPTIONS: title:nil
+#+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../../../../index.org][About]]
+- [[file:../../../index.org][Blog]]
+- [[file:../../../../ceramics/index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* Installing FreeBSD on a 2013 Mac Pro
+In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
+listed on Craigslist. Some might have considered this to be a "bad
+move" from the start, but I thought the 2013 Mac Pro was simply the
+most amazing computer ever made and $950 seemed like an absolute
+steal. I was wrong.
+
+Little did I know, the 2013 Mac Pro suffered from severe thermal
+issues and I soon became one of the thousands of unhappy users
+experiencing spontaneous freezing and crashes thought to be caused by
+Apple's proprietary dual AMD FirePro GPUs.
+
+If I was in the market for a new Mac, the right thing to do would have
+been to get an M1 Mac mini. Not only are the M1 Macs faster, they are
+also cheaper and consume significantly less energy[fn:1]. However, I
+wasn't really in the market for a Mac, what I wanted was a server.
+
+As it turns out my 2013 Mac Pro is a very compelling server. It is
+extremely quiet, compact, and rocks a 12-core Intel Xeon E5 with 64GB
+of ECC memory[fn:2]. Unfortunately, I wasn't expecting the thermal
+issues and kernel panics, which made me skeptical of this machine's
+viability as a reliable home server. So mostly, it sat on the self.
+
+Eventually I decided to see if I could install Linux or maybe even
+FreeBSD along side macOS. My hope was that by running on a minimal
+"headless" environment, I could avoid any stability issues due to the
+GPUs. I've been interested in trying out FreeBSD for a while because
+of two very compelling features: ZFS and the base system.[fn:3].
+
+While ZFS has been available on Linux for several years now, I
+consider that to be more "piece of mind" than anything else. I doubt
+the Linux community will ever adopt ZFS as their primary filesystem.
+Meanwhile, FreeBSD has proudly supported ZFS since 2008.
+
+As a user, I really like the unified deployment model of the FreeBSD
+base system. This provides a level of consistency and correctness in
+the operating system that Linux deeply struggles with.
+
+** FreeBSD Installation Notes                                      :noexport:
+- Stuck on installer: "pcib8: power fault detected"
+  - https://forum.netgate.com/topic/126119/pfsense-on-mac-pro
+
+- Hoping there is an option in loader(8) that will get the installer to boot.
+  - https://www.freebsd.org/cgi/man.cgi?query=loader&sektion=8&manpath=freebsd-release-ports
+  - https://www.freebsd.org/cgi/man.cgi?query=pci&sektion=4&format=html
+  - http://www.berklix.com/~jhs/hardware/laptops/
+
+1. Install rEFInd
+   - http://www.rodsbooks.com/refind/
+   - https://www.ianmaddaus.com/post/refind/
+
+2. Boot FreeBSD and Choose "Escape to loader prompt"
+- ~set hw.pci.enable_pcie_hp="0"~  WOWOW it worked!
+- ~boot~
+
+*** Disable hypethreading
+- ~machdep.hyperthreading_allowed=0~
+- sysctl(8) ~sysctl machdep | grep hyper~
+- https://lists.freebsd.org/pipermail/freebsd-smp/2010-May/001685.html
+
+*** Get CPU temp
+- add ~coretemp_load="YES"~ to ~/boot/loader.conf~
+- ~kldload coretemp~
+- ~Check temp: sysctl dev.cpu | grep temperature~
+
+*** Make caps lock as control in console:
+- ~kbdmap~ choose desired keymap (eg: us.dvorak)
+- ~kbdcontrol -d | sed 's/clock/lctrl/g' > ctrlcaps.keymap~ dump current keymap
+- ~kbdcontrol -l ctrlcaps-dvorak.keymap~ load custom keymap
+
+*** check disk performance
+- ~camcontrol devlist~
+- ~diskinfo -tv /dev/adN~
+
+*** Installing on macOS HDD
+1. Use bootcamp assistant to resize HDD and create new partition (85GB)
+2. Reinstall rEFInd
+3. Choose custom partition
+4. delete the bootcamp partition and create a new one.
+5. Finish installation wizard
+6. Add ~autoboot_delay="5"~ and ~hw.pci.enable_pcie_hp="0"~ to ~/boot/loader.conf~ before rebooting.
+7. Reboot and check installation
+8. Reinstall rEFInd
+9. Check macOS and set any custom options to rEFInd.
+
+*** Customizing rEFInd
+- rEFInd will default to the most recently booted OS, so the only
+  configuration I'm doing is setting the timeout to 5s instead of 20.
+- ~mkdir /Volumes/ESP~
+- ~diskutil list~ (find label for EFI Boot eg: disk0s1)
+- ~mount -t msdos /dev/disk0s1 /Volumes/ESP~
+- ~cd /Volumes/ESP/EFI/refind/~
+- http://www.rodsbooks.com/refind/configfile.html
+
+*** Networking
+Check interfaces and enable DHCP on ipv4 and ipv6
+- ~ifconfig -a~
+- add the following to ~/etc/rc.conf~
+  - ~ifconfig_bge1_"DHCP"~
+  - ~ifconfig_bge1_ipv6="inet6 accept_rtadv"~
+- Restart network service: ~/etc/rc.d/netif restart~
+
+*** SSH
+- Take a look at ~/etc/ssh/sshd_config~ but the defaults are good with
+  me. (i.e., no password or root logins)
+
+*** Use UUID for disk labels in /etc/fstab
+By default the FreeBSD installer sets generic drive names in
+~/etc/fstab~. This is a huge pain when you add or remove hard drives
+to your machine because FreeBSD will get confused and refuse to boot.
+
+If you forget to set labels on your drive partitions during
+installation, you will need to add them and update the entries in
+~/etc/fstab~.
+
+Unfortunately the FreeBSD handbook entry on disk labeling is deeply
+ misleading and gives terrible advice.
+- https://docs.freebsd.org/en/books/handbook/geom/#geom-glabel
+
+Instead, what we need to do is set GPT labels on our boot, rootfs,
+swap partitions using the ~gpart~ utility.
+
+1. Boot into single-user-mode
+2. List partitions: ~gpart show -lp~
+3. Check ~/etc/fstab~
+4. List drives with partition data: ~gpart show -lp~
+   - The GPT index will be the number "after the p" on the drive name.
+     eg: ada0p3 is at index 3 on geom ada0.
+   - You can verify this by looking at the output from ~gpart list~
+5. Add label for bootfs: ~gpart modify -i 3 -l bootfs ada0~
+6. Add label for rootfs: ~gpart modify -i 4 -l rootfs ada0~
+7. Add label for swapfs: ~gpart modify -i 5 -l swapfs ada0~
+8. Check that the labels appear in ~gpt list~ and ~gpart show -lp~
+9. Reboot
+10. Check again that the labels appear in ~gpt list~ and ~gpart show -lp~
+11. Backup ~/etc/fstab~ and set the new drive labels
+12. Reboot and hope it works.
+
+
+~rawuuid~ is the UUID unique to a partition while ~rawtype~ is the
+UUID that belongs to the partition type and is not unique (you can
+find them in the table on Wikipedia)
+- https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs
+
+
+So I guess freebsd-boot isn't needed at all for EFI. So whatever time
+to reinstall from scratch and hopefully get the labels to work.
+
+*** Fuse and exFAT support
+It would be nice to be able to mount USB drives...
+
+- ~pkg install fusefs-exfat~
+- ~echo 'fuse_load="YES"' >> /boot/loader.conf/~
+- ~kldload fuse~
+- ~mount.exfat /dev/da0s1 /media/usb~
+
+In addition to using drive labels, we can comment out the mount for
+~/boot/efi~ since we don't actually need it for anything.
+
+* Footnotes
+[fn:1]
+| Power Consumption | Idle  | Max   |
+|-------------------+-------+-------|
+| 2020 Mac mini     | 6.8 W | 39 W  |
+| 2013 Mac Pro      | 44 W  | 270 W |
+
+- https://support.apple.com/en-us/HT201897
+- https://support.apple.com/en-us/HT201796
+- https://support.apple.com/kb/SP697?locale=en_US
+
+[fn:2] I decided to upgrade the CPU and RAM to the maximum
+configuration originally offered by Apple. Back in 2013 this machine
+would have cost over $8,000. Swapping out the CPU was a bit more
+involved than a typical PC but the [[https://www.ifixit.com/Guide/Mac+Pro+Late+2013+CPU+Replacement/21947][iFixit guide]] was really
+comprehensive and the whole process took about two hours.
+
+[fn:3] Honorable mention for no GPL.

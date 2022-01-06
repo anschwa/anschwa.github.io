@@ -16,6 +16,12 @@ h1 { margin-bottom: 0.25em; 0; }
 #content > ul.nav { margin-bottom: 20px; }
 #content p { margin: 1em 0; line-height: 1.5em; }
 
+p > code { padding: 0.5em; }
+code {
+  background-color: #f9f9f9;
+  font-family: monospace;
+}
+
 pre {
   margin: 10px 0;
   padding: 16px;
@@ -23,8 +29,6 @@ pre {
   background-color: #f9f9f9;
   overflow: auto;
 }
-
-p > code { padding: 0.5em; background-color: #f9f9f9; }
 
 figure {
   margin: 42px auto;
@@ -37,4 +41,16 @@ figure > img {
   width: 100%;
   object-fit: cover;
 }
-span.listing-number { display: none; }
+
+blockquote {
+  padding: 0 1em;
+  background-color: #f9f9f9;
+  border-left: 0.5em solid #eeeeee;
+}
+
+.org-src-container .listing-number {
+  display: none;
+}
+
+table tr { text-align: left; }
+table td, table th { padding: 0 10px; }

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-01-06 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installing FreeBSD on a 2013 Mac Pro</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Adam Schwartz">
+<link rel="stylesheet" href="../../../../css/style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div id="preamble" class="status">
+<p>Published:&nbsp;January 3, 2022</p>
+</div>
+<div id="content">
+<ul class="org-ul nav">
+<li><a href="../../../../index.html">About</a></li>
+<li><a href="../../../index.html">Blog</a></li>
+<li><a href="../../../../ceramics/index.html">Ceramics</a></li>
+<li><a href="https://github.com/anschwa">Github</a></li>
+</ul>
+
+<div id="outline-container-org97d94ed" class="outline-2">
+<h2 id="org97d94ed">Installing FreeBSD on a 2013 Mac Pro</h2>
+<div class="outline-text-2" id="text-org97d94ed">
+<p>
+In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
+listed on Craigslist. Some might have considered this to be a &ldquo;bad
+move&rdquo; from the start, but I thought the 2013 Mac Pro was simply the
+most amazing computer ever made and $950 seemed like an absolute
+steal. I was wrong.
+</p>
+
+<p>
+Little did I know, the 2013 Mac Pro suffered from severe thermal
+issues and I soon became one of the thousands of unhappy users
+experiencing spontaneous freezing and crashes thought to be caused by
+Apple&rsquo;s proprietary dual AMD FirePro GPUs.
+</p>
+
+<p>
+If I was in the market for a new Mac, the right thing to do would have
+been to get an M1 Mac mini. Not only are the M1 Macs faster, they are
+also cheaper and consume significantly less energy<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. However, I
+wasn&rsquo;t really in the market for a Mac, what I wanted was a server.
+</p>
+
+<p>
+As it turns out my 2013 Mac Pro is a very compelling server. It is
+extremely quiet, compact, and rocks a 12-core Intel Xeon E5 with 64GB
+of ECC memory<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. Unfortunately, I wasn&rsquo;t expecting the thermal
+issues and kernel panics, which made me skeptical of this machine&rsquo;s
+viability as a reliable home server. So mostly, it sat on the self.
+</p>
+
+<p>
+Eventually I decided to see if the Mac Pro could run Linux or maybe
+even FreeBSD. My hope was that by running on a minimal &ldquo;headless&rdquo;
+environment, I could avoid any stability issues due to the GPUs. I&rsquo;ve
+been interested in trying out FreeBSD for a while because of two very
+compelling features: ZFS and the base system.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+</p>
+
+<p>
+While ZFS has been available on Linux for several years now, I
+consider that to be more &ldquo;piece of mind&rdquo; than anything else. I doubt
+the Linux community will ever adopt ZFS as their primary file system.
+Meanwhile, FreeBSD has proudly supported ZFS since 2008.
+</p>
+
+<p>
+As a user, I really like the unified deployment model of the FreeBSD
+base system. This provides a level of consistency and correctness in
+the operating system that Linux deeply struggles with.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Power Consumption</th>
+<th scope="col" class="org-left">Idle</th>
+<th scope="col" class="org-left">Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">2020 Mac mini</td>
+<td class="org-left">6.8 W</td>
+<td class="org-left">39 W</td>
+</tr>
+
+<tr>
+<td class="org-left">2013 Mac Pro</td>
+<td class="org-left">44 W</td>
+<td class="org-left">270 W</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li><a href="https://support.apple.com/en-us/HT201897">https://support.apple.com/en-us/HT201897</a></li>
+<li><a href="https://support.apple.com/en-us/HT201796">https://support.apple.com/en-us/HT201796</a></li>
+<li><a href="https://support.apple.com/kb/SP697?locale=en_US">https://support.apple.com/kb/SP697?locale=en_US</a></li>
+</ul></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+I decided to upgrade the CPU and RAM to the maximum
+configuration originally offered by Apple. Back in 2013 this machine
+would have cost over $8,000. Swapping out the CPU was a bit more
+involved than a typical PC but the <a href="https://www.ifixit.com/Guide/Mac+Pro+Late+2013+CPU+Replacement/21947">iFixit guide</a> was really
+comprehensive and the whole process took about two hours.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+Honorable mention for no GPL.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p>Last&nbsp;updated:&nbsp;2022-01-06</p>
+</div>
+</body>
+</html>
