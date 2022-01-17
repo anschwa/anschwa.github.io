@@ -4,17 +4,30 @@
 
 a:hover { background-color: #f9f9f9; }
 body { padding: 20px; }
-ul { margin-left: 1.5em; }
-ul > li { margin: 0.25em 0; }
+ul, ol { margin-left: 1.5em; }
+ul > li, ol > li { margin: 0.25em 0; }
 h1 { margin-bottom: 0.25em; 0; }
 
 #preamble { text-align: center; }
 #postamble { margin-top: 1em; text-align: center; font-style: italic; }
 
-#content { max-width: 80ch; margin: 0 auto; padding: 0 20px; }
-#content h2, h2, h4 { margin: 0.5em 0; }
+#content { max-width: 80ch; margin: 0 auto; }
 #content > ul.nav { margin-bottom: 20px; }
 #content p { margin: 1em 0; line-height: 1.5em; }
+
+#content .listing-number,
+#content .figure-number { display: none; }
+
+#content h2,
+#content h2,
+#content h4 { margin: 0.5em 0; }
+
+#content .outline-2,
+#content .outline-3,
+#content .outline-4 { margin: 1em 0; }
+
+#footnotes .footdef { margin: 1em 0; }
+#footnotes .footpara { margin: 0; }
 
 p > code { padding: 0.5em; }
 code {
@@ -36,20 +49,19 @@ figure {
   flex-direction: column;
   align-items: center;
 }
-figure > img {
-  padding: 10px;
+figure img {
   width: 100%;
   object-fit: cover;
 }
 
 blockquote {
-  padding: 0 1em;
-  background-color: #f9f9f9;
-  border-left: 0.5em solid #eeeeee;
+  margin: 1em 2em;
+  border-left: 2px solid #000000;
+  text-align: justify;
 }
-
-.org-src-container .listing-number {
-  display: none;
+blockquote p {
+  margin: 0;
+  padding: 0 1em;
 }
 
 table tr { text-align: left; }

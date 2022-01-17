@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-01-06 -->
+<!-- 2022-01-17 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Installing FreeBSD on a 2013 Mac Pro</title>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<p>Published:&nbsp;January 3, 2022</p>
+<p>Published:&nbsp;January 03, 2022</p>
 </div>
 <div id="content">
 <ul class="org-ul nav">
@@ -22,9 +22,9 @@
 <li><a href="https://github.com/anschwa">Github</a></li>
 </ul>
 
-<div id="outline-container-org97d94ed" class="outline-2">
-<h2 id="org97d94ed">Installing FreeBSD on a 2013 Mac Pro</h2>
-<div class="outline-text-2" id="text-org97d94ed">
+<div id="outline-container-orgb220911" class="outline-2">
+<h2 id="orgb220911">Installing FreeBSD on a 2013 Mac Pro</h2>
+<div class="outline-text-2" id="text-orgb220911">
 <p>
 In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
 listed on Craigslist. Some might have considered this to be a &ldquo;bad
@@ -32,6 +32,13 @@ move&rdquo; from the start, but I thought the 2013 Mac Pro was simply the
 most amazing computer ever made and $950 seemed like an absolute
 steal. I was wrong.
 </p>
+
+
+<figure id="orga8d1a35">
+<img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;">
+
+<figcaption><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</figcaption>
+</figure>
 
 <p>
 Little did I know, the 2013 Mac Pro suffered from severe thermal
@@ -43,38 +50,597 @@ Apple&rsquo;s proprietary dual AMD FirePro GPUs.
 <p>
 If I was in the market for a new Mac, the right thing to do would have
 been to get an M1 Mac mini. Not only are the M1 Macs faster, they are
-also cheaper and consume significantly less energy<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. However, I
+also cheaper and consume significantly less energy.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> However, I
 wasn&rsquo;t really in the market for a Mac, what I wanted was a server.
 </p>
 
 <p>
-As it turns out my 2013 Mac Pro is a very compelling server. It is
+As it turns out, my 2013 Mac Pro is a very compelling server. It is
 extremely quiet, compact, and rocks a 12-core Intel Xeon E5 with 64GB
-of ECC memory<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. Unfortunately, I wasn&rsquo;t expecting the thermal
+of ECC memory.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> Unfortunately, I wasn&rsquo;t expecting the thermal
 issues and kernel panics, which made me skeptical of this machine&rsquo;s
-viability as a reliable home server. So mostly, it sat on the self.
+viability as a reliable home server, so mostly it sat on the shelf.
 </p>
 
 <p>
-Eventually I decided to see if the Mac Pro could run Linux or maybe
-even FreeBSD. My hope was that by running on a minimal &ldquo;headless&rdquo;
-environment, I could avoid any stability issues due to the GPUs. I&rsquo;ve
-been interested in trying out FreeBSD for a while because of two very
-compelling features: ZFS and the base system.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+Eventually, I decided to see if I could install Linux or maybe even
+FreeBSD alongside macOS. My hope was that by running on a minimal
+&ldquo;headless&rdquo; environment, I could avoid any stability issues due to the
+GPUs. Furthermore, I&rsquo;ve been interested in trying out FreeBSD for a
+while because of two very compelling features: ZFS and the base
+system.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
 </p>
 
 <p>
 While ZFS has been available on Linux for several years now, I
 consider that to be more &ldquo;piece of mind&rdquo; than anything else. I doubt
-the Linux community will ever adopt ZFS as their primary file system.
+the Linux community will ever adopt ZFS as their primary filesystem.
 Meanwhile, FreeBSD has proudly supported ZFS since 2008.
 </p>
 
 <p>
-As a user, I really like the unified deployment model of the FreeBSD
+Besides ZFS, I really like the unified deployment model of the FreeBSD
 base system. This provides a level of consistency and correctness in
 the operating system that Linux deeply struggles with.
 </p>
+</div>
+</div>
+
+<div id="outline-container-orgfe8b203" class="outline-2">
+<h2 id="orgfe8b203">FreeBSD Installation Notes</h2>
+<div class="outline-text-2" id="text-orgfe8b203">
+<p>
+This was going to be my first time installing FreeBSD, so luckily I
+had my T470<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> lying around to experiment with. I wasn&rsquo;t expecting the
+installation on the Mac Pro to go smoothly, so having a computer that
+was known to be compatible with FreeBSD was really convenient. I was
+able to run though several installations to get a sense of how things
+will go on the Mac.
+</p>
+
+<p>
+One of the biggest drawbacks to FreeBSD is that there is much less
+content online to help troubleshoot issues or answer all the random
+questions you might have. Fortunately, between the FreeBSD,
+Hackintosh, and Linux communities, I was able to cobble together
+enough information to get a successful multi-booting environment setup
+on the Mac Pro.
+</p>
+
+<p>
+After testing my bootable FreeBSD USB drive on my ThinkPad, I tried to
+boot into it from the Mac by holding down the <i>Option (Alt)</i> key during
+startup. I didn&rsquo;t want to waste my time if I couldn&rsquo;t get FreeBSD to
+boot on the Mac.
+</p>
+
+
+<figure id="orgcd01541">
+<a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</figcaption>
+</figure>
+
+
+<figure id="orgddab8b5">
+<a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 3: </span>Nice! This might actually work</figcaption>
+</figure>
+
+<p>
+I was pretty excited after seeing the FreeBSD boot menu show up. I
+wasn&rsquo;t sure what to expect because the Xeon E5 doesn&rsquo;t have integrated
+graphics and I wasn&rsquo;t sure the AMD FirePro&rsquo;s were going to work.
+Although my enthusiasm didn&rsquo;t last long, only a few seconds into the
+boot process later and it was game over. The console was endlessly
+streaming the text <i>pcib8: Power Fault Detected</i> and became completely
+unresponsive.
+</p>
+
+
+<figure id="org4e6d51e">
+<a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. We&rsquo;re stuck.</figcaption>
+</figure>
+
+<p>
+Somehow, I was able to dig up <a href="https://forum.netgate.com/topic/126119/pfsense-on-mac-pro">an old forum post</a> by someone with this
+exact issue but unfortunately it went unresolved. However, it gave me
+hope a solution was out there.
+</p>
+
+<p>
+I spent about half an hour playing around in the boot menu trying to
+figure out if I could get something to work. <i>Single User Mode</i> had
+the same problem and I wasn&rsquo;t really sure how to use the <i>Loader
+prompt</i>. However, I felt like I was making progress.
+</p>
+
+<p>
+My biggest clue was the <code>pcib8</code> bit. Since this was an error message
+during PCI device initialization, I start searching the web for things
+like &ldquo;FreeBSD pci won&rsquo;t boot&rdquo; and &ldquo;FreeBSD power fault detected&rdquo;.
+</p>
+
+<p>
+Once it became clear that I was on my own with this one, I pulled up
+the FreeBSD manual pages for <a href="https://www.freebsd.org/cgi/man.cgi?query=boot&amp;sektion=8">boot(8)</a>, <a href="https://www.freebsd.org/cgi/man.cgi?loader(8)">loader(8)</a>, and <a href="https://www.freebsd.org/cgi/man.cgi?query=pci&amp;sektion=4">pci(4)</a> then
+started reading through them. I started to get a sense for how the
+FreeBSD boot process worked and was ready to try setting custom boot
+options.
+</p>
+
+<p>
+Miraculously, I discovered a single boot option that fixed my issue.
+Now I could finally get into the FreeBSD installer and live
+environment!
+</p>
+
+<p>
+Here is all I needed to get FreeBSD to boot on the Mac Pro:
+</p>
+<ol class="org-ol">
+<li>Press <code>3</code> to &ldquo;Escape to loader prompt&rdquo;</li>
+<li>Enter: <code>set hw.pci.enable_pcie_hp="0"</code> to disable PCI-express HotPlug</li>
+<li>Enter: <code>boot</code> to boot</li>
+</ol>
+
+
+<figure id="org31d5cf1">
+<a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></figcaption>
+</figure>
+</div>
+
+<div id="outline-container-orga068402" class="outline-3">
+<h3 id="orga068402">Resizing macOS</h3>
+<div class="outline-text-3" id="text-orga068402">
+<p>
+When installing FreeBSD on an machine already using <a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">EFI</a>, you only need
+two partitions: <code>freebsd-root</code> and <code>freebsd-swap</code>. The FreeBSD
+installer calculates size using powers of two (eg: Gibibytes) while
+macOS uses powers of 10 (eg: Gigabyte). I decided on a 4GiB swap and
+80GiB root partition for FreeBSD.
+</p>
+
+<ul class="org-ul">
+<li><code>(84 GiB / 1 GiB) * (2^30 bytes / 1 GB) = 90,194,313,216 bytes</code></li>
+<li><code>(90,194,313,216 bytes / 1 byte) * (1 GB / 10^9 bytes) = 90.194313216</code></li>
+</ul>
+
+<p>
+So we want to resize our macOS partition to <b>90.19 GB</b>
+</p>
+
+<p>
+One of the great features of the &ldquo;new&rdquo; Apple File System <a href="https://en.wikipedia.org/wiki/Apple_File_System">(APFS)</a> is
+that you can resize our startup disk while it&rsquo;s mounted. There&rsquo;s no
+need to reboot into recovery or another live environment.
+</p>
+
+<p>
+It doesn&rsquo;t matter what filesystem you choose because you will create
+the new partitions in the FreeBSD installer. The important part is
+being able to know which partition is which so you don&rsquo;t accidentally
+overwrite macOS.
+</p>
+
+
+<figure id="orgea79d2a">
+<a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</figcaption>
+</figure>
+
+
+<figure id="org22159eb">
+<a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 7: </span>Set the new size for your disk</figcaption>
+</figure>
+
+
+<figure id="org93698d6">
+<a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</figcaption>
+</figure>
+
+
+<figure id="org65dfc70">
+<a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px"></a>
+
+<figcaption><span class="figure-number">Figure 9: </span>Eventually the resize will finish</figcaption>
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org525ebf6" class="outline-3">
+<h3 id="org525ebf6">Installing FreeBSD</h3>
+<div class="outline-text-3" id="text-org525ebf6">
+<p>
+The first step is create the <code>freebsd-root</code> and <code>freebsd-swap</code>
+partitions. Don&rsquo;t forget to add drive labels and enable TRIM support
+if you&rsquo;re using an SSD.
+</p>
+
+<p>
+By default, the FreeBSD installer sets generic drive names in
+<code>/etc/fstab</code>. If you don&rsquo;t use labels, FreeBSD will get confused and
+refuse to boot whenever you add or remove drives.
+</p>
+
+<p>
+If you forget to set labels on your drive partitions during the
+installation, you will need to add them and update the entries in
+<code>/etc/fstab</code> using the <code>gpart</code> utility.
+</p>
+
+
+<figure id="org0e852a1">
+<a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</figcaption>
+</figure>
+
+
+<figure id="orgc6a614b">
+<a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</figcaption>
+</figure>
+
+
+<figure id="org5a150fe">
+<a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</figcaption>
+</figure>
+
+
+<figure id="orgcc71718">
+<a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</figcaption>
+</figure>
+
+
+<figure id="orge395df5">
+<a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</figcaption>
+</figure>
+
+
+<figure id="orgbd9f666">
+<a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 15: </span>Final partition table</figcaption>
+</figure>
+
+
+<figure id="org9a0d08a">
+<a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 16: </span>FreeBSD installation progress</figcaption>
+</figure>
+
+<p>
+After creating your custom partitions, the only thing left to do is
+remember to add <code>hw.pci.enable_pcie_hp="0"</code> to your
+<code>/boot/loader.conf</code> before rebooting. I also ended up adding
+<code>autoboot_delay="5"</code>.
+</p>
+
+
+<figure id="org8b584e1">
+<a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</figcaption>
+</figure>
+
+
+<figure id="org8f66c78">
+<a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></figcaption>
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org75fce95" class="outline-3">
+<h3 id="org75fce95">Post-Installation</h3>
+<div class="outline-text-3" id="text-org75fce95">
+<p>
+It&rsquo;s possible the Mac will default to booting FreeBSD, but you can
+always hold down the <i>Option (Alt)</i> key during boot to select a
+different OS.
+</p>
+</div>
+
+<div id="outline-container-org263c999" class="outline-4">
+<h4 id="org263c999">Use Drive Labels</h4>
+<div class="outline-text-4" id="text-org263c999">
+<p>
+The first thing you should do is open <code>/etc/fstab</code> and switch out the
+drive numbers for your disk labels (Don&rsquo;t forget to make a backup
+first!). You can also comment-out the mount for <code>/boot/efi</code> since the
+machine is going to use Apple&rsquo;s EFI partition instead.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text"><code>$ cat /etc/fstab</code>
+<code># Device        Mountpoint      FStype  Options Dump    Pass#</code>
+<code>/dev/gpt/rootfs /               ufs     rw      1       1</code>
+<code>/dev/gpt/swapfs none            swap    sw      0       0</code>
+<code>#/dev/ada0p1    /boot/efi       msdosfs rw      2       2</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf3e5b19" class="outline-4">
+<h4 id="orgf3e5b19">Disable Hyperthreading</h4>
+<div class="outline-text-4" id="text-orgf3e5b19">
+<ul class="org-ul">
+<li>Check for hyperthreading options: <code>sysctl machdep | grep hyper</code></li>
+<li><code>echo 'machdep.hyperthreading_allowed="0"' &gt;&gt; /boot/loader.conf</code></li>
+<li><a href="https://www.freebsd.org/cgi/man.cgi?query=sysctl&amp;sektion=8">sysctl(8)</a></li>
+<li><a href="https://lists.freebsd.org/pipermail/freebsd-smp/2010-May/001685.html">https://lists.freebsd.org/pipermail/freebsd-smp/2010-May/001685.html</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org304cc0b" class="outline-4">
+<h4 id="org304cc0b">Dvorak and Switching Caps-Lock to Control</h4>
+<div class="outline-text-4" id="text-org304cc0b">
+<ul class="org-ul">
+<li><code>kbdmap</code> Choose desired keymap (eg: us.dvorak)</li>
+<li><code>kbdcontrol -d | sed 's/clock/lctrl/g' &gt; ctrlcaps.keymap</code> Dump current keymap</li>
+<li><code>kbdcontrol -l ctrlcaps-dvorak.keymap</code> Load custom keymap</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org129db64" class="outline-4">
+<h4 id="org129db64">Networking</h4>
+<div class="outline-text-4" id="text-org129db64">
+<ul class="org-ul">
+<li>Check interfaces and enable DHCP on ipv4 and ipv6: <code>ifconfig -a</code></li>
+<li>Add the following to <code>/etc/rc.conf</code>:
+<ul class="org-ul">
+<li><code>ifconfig_bge1_"DHCP"</code></li>
+<li><code>ifconfig_bge1_ipv6="inet6 accept_rtadv"</code></li>
+</ul></li>
+<li>Restart network service: <code>/etc/rc.d/netif restart</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org17c76b0" class="outline-4">
+<h4 id="org17c76b0">SSH</h4>
+<div class="outline-text-4" id="text-org17c76b0">
+<p>
+The default <code>/etc/ssh/sshd_config</code>, looked good to me (i.e., no password or root logins).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6c3062b" class="outline-4">
+<h4 id="org6c3062b">Fuse and exFAT support</h4>
+<div class="outline-text-4" id="text-org6c3062b">
+<p>
+It would be nice to be able to mount USB drives…
+</p>
+<ul class="org-ul">
+<li><code>pkg install fusefs-exfat</code></li>
+<li><code>echo 'fuse_load="YES"' &gt;&gt; /boot/loader.conf/</code></li>
+<li><code>kldload fuse</code></li>
+<li><code>mount.exfat /dev/da0s1 /media/usb</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1a71310" class="outline-4">
+<h4 id="org1a71310">Checking Disk Performance</h4>
+<div class="outline-text-4" id="text-org1a71310">
+<ul class="org-ul">
+<li><code>camcontrol devlist</code></li>
+<li><code>diskinfo -tv /dev/adN</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf161fd1" class="outline-4">
+<h4 id="orgf161fd1">CPU and Sensor Data</h4>
+<div class="outline-text-4" id="text-orgf161fd1">
+<ul class="org-ul">
+<li><code>echo 'coretemp_load="YES"' &gt;&gt; /boot/loader.conf</code></li>
+<li><code>kldload coretemp</code></li>
+<li>Check temperature with: <code>sysctl dev.cpu | grep temperature</code></li>
+</ul>
+
+<p>
+Getting the rest of the Mac Pro&rsquo;s sensor data required patching the
+Apple SMC driver in FreeBSD. If my patch gets accepted, all you will
+need to do is add <code>asmc_load="YES"</code> to <code>boot/loader.conf</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-diff"><code><span style="background-color: #d9d9d9;">--- </span><span style="background-color: #bfbfbf; font-weight: bold;">original/asmc.c</span><span style="background-color: #d9d9d9;">     2021-12-28 23:43:20.905442244 -0600</span></code>
+<code><span style="background-color: #d9d9d9;">+++ </span><span style="background-color: #bfbfbf; font-weight: bold;">my-patch/asmc.c</span><span style="background-color: #d9d9d9;">     2021-12-29 00:10:38.424770226 -0600</span></code>
+<code><span style="background-color: #d9d9d9;">@@ -328,6 +328,15 @@</span></code>
+<code>     ASMC_MP5_TEMPS, ASMC_MP5_TEMPNAMES, ASMC_MP5_TEMPDESCS</code>
+<code>   },</code>
+<code></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       /* Idem for the MacPro 2013 (cylinder) */</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       {</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    "MacPro6,1", "Apple SMC MacPro (2013)",</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_SMS_FUNCS_DISABLED,</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_FAN_FUNCS,</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_LIGHT_FUNCS_DISABLED,</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_MP6_TEMPS, ASMC_MP6_TEMPNAMES, ASMC_MP6_TEMPDESCS</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       },</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span></code>
+<code>   {</code>
+<code>     "MacBookAir1,1", "Apple SMC MacBook Air",</code>
+<code>     ASMC_SMS_FUNCS, ASMC_FAN_FUNCS, NULL, NULL, NULL,</code>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-diff"><code><span style="background-color: #d9d9d9;">--- </span><span style="background-color: #bfbfbf; font-weight: bold;">original/asmcvar.h</span><span style="background-color: #d9d9d9;">  2021-12-28 23:43:12.163365462 -0600</span></code>
+<code><span style="background-color: #d9d9d9;">+++ </span><span style="background-color: #bfbfbf; font-weight: bold;">my-patch/asmcvar.h</span><span style="background-color: #d9d9d9;">  2021-12-29 00:11:36.207227372 -0600</span></code>
+<code><span style="background-color: #d9d9d9;">@@ -581,6 +581,18 @@</span></code>
+<code>           "Te3F", "Te3S", "Te4F", "Te4S", "Te5F", \</code>
+<code>           "Te5S", "TeGG", "TeGP", "TeRG", "TeRP", \</code>
+<code>           "TeRV", "Tp0C", "Tp1C", "TpPS", "TpTG", }</code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">#define ASMC_MP6_TEMPS { "TA0P", "TA1P", "TC0P", "TG0D", "TG0P", \</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       "TG1D", "TG1P", "TM0P", "TM1P", NULL }</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">#define ASMC_MP6_TEMPNAMES     { "ambient_air_1", "ambient_air_2", \</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       "cpu_proximity", "gpu_diode_1", "gpu_proximity_1", "gpu_diode_2", \</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       "gpu_proximity_2", "mem_proximity_1", "mem_proximity_2" }</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">#define ASMC_MP6_TEMPDESCS     { "Ambient Air 1", "Ambient Air 2", \</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       "CPU Proximity", "GPU Diode 1", "GPU Proximity 1", "GPU Diode 2", \</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       "GPU Proximity 2", "Memory Bank A", "Memory Bank B" }</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span></code>
+<code> #define        ASMC_MBA_TEMPS          { "TB0T", NULL }</code>
+<code> #define        ASMC_MBA_TEMPNAMES      { "enclosure" }</code>
+<code> #define        ASMC_MBA_TEMPDESCS      { "Enclosure Bottom" }</code>
+</pre>
+</div>
+
+<p>
+Rebuilding the <code>asmc</code> driver with my patch:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>cd /usr/src/sys/modules/asmc</code>
+<code>make</code>
+<code>make install</code>
+<code>kldunload asmc</code>
+<code>kldload /boot/modules/asmc.ko</code>
+<code># Check /var/log/messages for missing key entries</code>
+<code></code>
+<code># Must add kld_list="/boot/modules/asmc.ko" to /etc/rc.conf instead of asmc_load="YES"</code>
+<code># in /boot/loader.conf so that we find our compiled version of the module</code>
+</pre>
+</div>
+
+<p>
+Checking sensor data:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ sysctl dev.asmc</code>
+<code>dev.asmc.0.temp.mem_proximity_1: 42</code>
+<code>dev.asmc.0.temp.mem_proximity_2: 41</code>
+<code>dev.asmc.0.temp.gpu_proximity_1: 45</code>
+<code>dev.asmc.0.temp.gpu_diode_1: 47</code>
+<code>dev.asmc.0.temp.gpu_proximity_2: 44</code>
+<code>dev.asmc.0.temp.gpu_diode_2: 47</code>
+<code>dev.asmc.0.temp.cpu_proximity: 42</code>
+<code>dev.asmc.0.temp.ambient_air_1: 37</code>
+<code>dev.asmc.0.temp.ambient_air_2: 29</code>
+<code>dev.asmc.0.fan.0.targetspeed: 790</code>
+<code>dev.asmc.0.fan.0.maxspeed: 1900</code>
+<code>dev.asmc.0.fan.0.minspeed: 790</code>
+<code>dev.asmc.0.fan.0.safespeed: -1</code>
+<code>dev.asmc.0.fan.0.speed: 789</code>
+<code>dev.asmc.0.fan.0.id: Main</code>
+<code>dev.asmc.0.%parent: acpi0</code>
+<code>dev.asmc.0.%pnpinfo: _HID=APP0001 _UID=0 _CID=SMC-HURONRIVER</code>
+<code>dev.asmc.0.%location: handle=\_SB_.PCI0.LPCB.SMC_</code>
+<code>dev.asmc.0.%driver: asmc</code>
+<code>dev.asmc.0.%desc: Apple SMC MacPro (2013)</code>
+<code>dev.asmc.%parent:</code>
+</pre>
+</div>
+
+<p>
+Changing fan speed:
+</p>
+<ul class="org-ul">
+<li>View current: <code>sysctl dev.asmc.0.fan.0.speed</code></li>
+<li>Set new: <code>sysctl.dev.asmc.0.fan.0.minspeed=1800</code></li>
+</ul>
+
+<p>
+Submitting my patch:
+</p>
+<ul class="org-ul">
+<li><a href="https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=260781">https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=260781</a></li>
+</ul>
+
+<p>
+Resources:
+</p>
+<ul class="org-ul">
+<li><a href="https://www.freebsd.org/cgi/man.cgi?query=asmc&amp;sektion=4">asmc(4)</a></li>
+<li><a href="https://forums.freebsd.org/threads/macbook7-1-asmc-support.76497/">https://forums.freebsd.org/threads/macbook7-1-asmc-support.76497/</a></li>
+<li><a href="https://github.com/freebsd/freebsd-src/tree/main/sys/dev/asmc">https://github.com/freebsd/freebsd-src/tree/main/sys/dev/asmc</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb6cf675" class="outline-3">
+<h3 id="orgb6cf675">Installing the rEFInd Boot Manager</h3>
+<div class="outline-text-3" id="text-orgb6cf675">
+<p>
+Rather than holding down the <i>Option (Alt)</i> key every time we want to
+boot into a different OS, we can get a graphical boot menu by installing <a href="http://www.rodsbooks.com/refind">rEFInd</a>.
+</p>
+
+<p>
+Here&rsquo;s how to install it:
+</p>
+<ol class="org-ol">
+<li>Download rEFInd and copy it onto a USB drive.</li>
+<li>Reboot your Mac into recovery by holding down <i>Command (Win) + R</i>.</li>
+<li>Open <i>Terminal.app</i>.</li>
+<li>Disable <i>System Integrity Protection (SIP)</i>: <code>csrutil disable</code>.</li>
+<li>Reboot and enter recovery again.</li>
+<li>Open <i>Terminal.app</i> and plug in your USB drive.</li>
+<li>Navigate to the <code>refind</code> directory on your USB drive (Look in <code>/Volumes/</code>).</li>
+<li>Run the installer: <code>./refind-install</code></li>
+<li>Enable SIP: <code>csrutil enable</code>.</li>
+<li>Reboot</li>
+</ol>
+
+
+<figure id="orgfc5f930">
+<a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 19: </span>Installing rEFInd</figcaption>
+</figure>
+
+
+<figure id="orgcec8ef8">
+<a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 20: </span>The rEFInd boot menu</figcaption>
+</figure>
+</div>
+
+<div id="outline-container-org902ae94" class="outline-4">
+<h4 id="org902ae94">Customizing rEFInd</h4>
+<div class="outline-text-4" id="text-org902ae94">
+<ul class="org-ul">
+<li>rEFInd will default to the most recently booted OS, so the only
+configuration I&rsquo;m doing is setting the timeout to 5s instead of 20.</li>
+<li><code>mkdir /Volumes/ESP</code></li>
+<li><code>diskutil list</code> (find label for EFI Boot eg: disk0s1)</li>
+<li><code>mount -t msdos /dev/disk0s1 /Volumes/ESP</code></li>
+<li><code>cd /Volumes/ESP/EFI/refind/</code></li>
+<li><a href="http://www.rodsbooks.com/refind/configfile.html">http://www.rodsbooks.com/refind/configfile.html</a></li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div id="footnotes">
@@ -131,11 +697,15 @@ comprehensive and the whole process took about two hours.
 Honorable mention for no GPL.
 </p></div></div>
 
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+Lenovo ThinkPad T470
+</p></div></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2022-01-06</p>
+<p>Last&nbsp;updated:&nbsp;2022-01-17</p>
 </div>
 </body>
 </html>

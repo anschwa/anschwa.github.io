@@ -1,6 +1,6 @@
 #+TITLE: Installing FreeBSD on a 2013 Mac Pro
 #+AUTHOR: Adam Schwartz
-#+DATE: January 3, 2022
+#+DATE: January 03, 2022
 #+OPTIONS: title:nil
 #+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
 #+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
@@ -19,6 +19,10 @@ move" from the start, but I thought the 2013 Mac Pro was simply the
 most amazing computer ever made and $950 seemed like an absolute
 steal. I was wrong.
 
+#+CAPTION: My 2013 Mac Pro
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/my-mac-pro.jpg]]
+
 Little did I know, the 2013 Mac Pro suffered from severe thermal
 issues and I soon became one of the thousands of unhappy users
 experiencing spontaneous freezing and crashes thought to be caused by
@@ -26,76 +30,373 @@ Apple's proprietary dual AMD FirePro GPUs.
 
 If I was in the market for a new Mac, the right thing to do would have
 been to get an M1 Mac mini. Not only are the M1 Macs faster, they are
-also cheaper and consume significantly less energy[fn:1]. However, I
+also cheaper and consume significantly less energy.[fn:1] However, I
 wasn't really in the market for a Mac, what I wanted was a server.
 
-As it turns out my 2013 Mac Pro is a very compelling server. It is
+As it turns out, my 2013 Mac Pro is a very compelling server. It is
 extremely quiet, compact, and rocks a 12-core Intel Xeon E5 with 64GB
-of ECC memory[fn:2]. Unfortunately, I wasn't expecting the thermal
+of ECC memory.[fn:2] Unfortunately, I wasn't expecting the thermal
 issues and kernel panics, which made me skeptical of this machine's
-viability as a reliable home server. So mostly, it sat on the self.
+viability as a reliable home server, so mostly it sat on the shelf.
 
-Eventually I decided to see if I could install Linux or maybe even
-FreeBSD along side macOS. My hope was that by running on a minimal
+Eventually, I decided to see if I could install Linux or maybe even
+FreeBSD alongside macOS. My hope was that by running on a minimal
 "headless" environment, I could avoid any stability issues due to the
-GPUs. I've been interested in trying out FreeBSD for a while because
-of two very compelling features: ZFS and the base system.[fn:3].
+GPUs. Furthermore, I've been interested in trying out FreeBSD for a
+while because of two very compelling features: ZFS and the base
+system.[fn:3]
 
 While ZFS has been available on Linux for several years now, I
 consider that to be more "piece of mind" than anything else. I doubt
 the Linux community will ever adopt ZFS as their primary filesystem.
 Meanwhile, FreeBSD has proudly supported ZFS since 2008.
 
-As a user, I really like the unified deployment model of the FreeBSD
+Besides ZFS, I really like the unified deployment model of the FreeBSD
 base system. This provides a level of consistency and correctness in
 the operating system that Linux deeply struggles with.
 
-** FreeBSD Installation Notes                                      :noexport:
-- Stuck on installer: "pcib8: power fault detected"
-  - https://forum.netgate.com/topic/126119/pfsense-on-mac-pro
+* FreeBSD Installation Notes
+This was going to be my first time installing FreeBSD, so luckily I
+had my T470[fn:4] lying around to experiment with. I wasn't expecting the
+installation on the Mac Pro to go smoothly, so having a computer that
+was known to be compatible with FreeBSD was really convenient. I was
+able to run though several installations to get a sense of how things
+will go on the Mac.
 
-- Hoping there is an option in loader(8) that will get the installer to boot.
-  - https://www.freebsd.org/cgi/man.cgi?query=loader&sektion=8&manpath=freebsd-release-ports
-  - https://www.freebsd.org/cgi/man.cgi?query=pci&sektion=4&format=html
-  - http://www.berklix.com/~jhs/hardware/laptops/
+One of the biggest drawbacks to FreeBSD is that there is much less
+content online to help troubleshoot issues or answer all the random
+questions you might have. Fortunately, between the FreeBSD,
+Hackintosh, and Linux communities, I was able to cobble together
+enough information to get a successful multi-booting environment setup
+on the Mac Pro.
 
-1. Install rEFInd
-   - http://www.rodsbooks.com/refind/
-   - https://www.ianmaddaus.com/post/refind/
+After testing my bootable FreeBSD USB drive on my ThinkPad, I tried to
+boot into it from the Mac by holding down the /Option (Alt)/ key during
+startup. I didn't want to waste my time if I couldn't get FreeBSD to
+boot on the Mac.
 
-2. Boot FreeBSD and Choose "Escape to loader prompt"
-- ~set hw.pci.enable_pcie_hp="0"~  WOWOW it worked!
-- ~boot~
+#+CAPTION: Holding Option (Alt) to boot with my FreeBSD USB drive
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/live-boot-1.jpg][file:img/thumbs/live-boot-1.jpg]]
 
-*** Disable hypethreading
-- ~machdep.hyperthreading_allowed=0~
-- sysctl(8) ~sysctl machdep | grep hyper~
+#+CAPTION: Nice! This might actually work
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/live-boot-2.jpg][file:img/thumbs/live-boot-2.jpg]]
+
+I was pretty excited after seeing the FreeBSD boot menu show up. I
+wasn't sure what to expect because the Xeon E5 doesn't have integrated
+graphics and I wasn't sure the AMD FirePro's were going to work.
+Although my enthusiasm didn't last long, only a few seconds into the
+boot process later and it was game over. The console was endlessly
+streaming the text /pcib8: Power Fault Detected/ and became completely
+unresponsive.
+
+#+CAPTION: Oh NO! pcib8: Power Fault Detected. We're stuck.
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/power-fault-detected.jpg][file:img/thumbs/power-fault-detected.jpg]]
+
+Somehow, I was able to dig up [[https://forum.netgate.com/topic/126119/pfsense-on-mac-pro][an old forum post]] by someone with this
+exact issue but unfortunately it went unresolved. However, it gave me
+hope a solution was out there.
+
+I spent about half an hour playing around in the boot menu trying to
+figure out if I could get something to work. /Single User Mode/ had
+the same problem and I wasn't really sure how to use the /Loader
+prompt/. However, I felt like I was making progress.
+
+My biggest clue was the ~pcib8~ bit. Since this was an error message
+during PCI device initialization, I start searching the web for things
+like "FreeBSD pci won't boot" and "FreeBSD power fault detected".
+
+Once it became clear that I was on my own with this one, I pulled up
+the FreeBSD manual pages for [[https://www.freebsd.org/cgi/man.cgi?query=boot&sektion=8][boot(8)]], [[https://www.freebsd.org/cgi/man.cgi?loader(8)][loader(8)]], and [[https://www.freebsd.org/cgi/man.cgi?query=pci&sektion=4][pci(4)]] then
+started reading through them. I started to get a sense for how the
+FreeBSD boot process worked and was ready to try setting custom boot
+options.
+
+Miraculously, I discovered a single boot option that fixed my issue.
+Now I could finally get into the FreeBSD installer and live
+environment!
+
+Here is all I needed to get FreeBSD to boot on the Mac Pro:
+1. Press ~3~ to "Escape to loader prompt"
+2. Enter: ~set hw.pci.enable_pcie_hp="0"~ to disable PCI-express HotPlug
+3. Enter: ~boot~ to boot
+
+#+CAPTION: Sucessful boot after setting ~hw.pci.enable_pcie_hp="0"~
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/boot-options.jpg][file:img/boot-options.jpg]]
+
+** Resizing macOS
+When installing FreeBSD on an machine already using [[https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface][EFI]], you only need
+two partitions: ~freebsd-root~ and ~freebsd-swap~. The FreeBSD
+installer calculates size using powers of two (eg: Gibibytes) while
+macOS uses powers of 10 (eg: Gigabyte). I decided on a 4GiB swap and
+80GiB root partition for FreeBSD.
+
+- ~(84 GiB / 1 GiB) * (2^30 bytes / 1 GB) = 90,194,313,216 bytes~
+- ~(90,194,313,216 bytes / 1 byte) * (1 GB / 10^9 bytes) = 90.194313216~
+
+So we want to resize our macOS partition to *90.19 GB*
+
+One of the great features of the "new" Apple File System [[https://en.wikipedia.org/wiki/Apple_File_System][(APFS)]] is
+that you can resize our startup disk while it's mounted. There's no
+need to reboot into recovery or another live environment.
+
+It doesn't matter what filesystem you choose because you will create
+the new partitions in the FreeBSD installer. The important part is
+being able to know which partition is which so you don't accidentally
+overwrite macOS.
+
+#+CAPTION: Choose macOS partition to resize
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/macOS-resize-1.png][file:img/macOS-resize-1.png]]
+
+#+CAPTION: Set the new size for your disk
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/macOS-resize-2.png][file:img/macOS-resize-2.png]]
+
+#+CAPTION: Don't be afraid
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/macOS-resize-3.png][file:img/macOS-resize-3.png]]
+
+#+CAPTION: Eventually the resize will finish
+#+ATTR_HTML: :style max-width: 400px
+[[file:img/macOS-resize-4.png][file:img/macOS-resize-4.png]]
+
+** Installing FreeBSD
+The first step is create the ~freebsd-root~ and ~freebsd-swap~
+partitions. Don't forget to add drive labels and enable TRIM support
+if you're using an SSD.
+
+By default, the FreeBSD installer sets generic drive names in
+~/etc/fstab~. If you don't use labels, FreeBSD will get confused and
+refuse to boot whenever you add or remove drives.
+
+If you forget to set labels on your drive partitions during the
+installation, you will need to add them and update the entries in
+~/etc/fstab~ using the ~gpart~ utility.
+
+#+CAPTION: Choose "Manual Disk Setup"
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/manual-partition.jpg][file:img/thumbs/manual-partition.jpg]]
+
+#+CAPTION: Initial partition table after resizing from macOS
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/initial-partition-table.jpg][file:img/thumbs/initial-partition-table.jpg]]
+
+#+CAPTION: Creating freebsd-root partition
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/freebsd-root.jpg][file:img/thumbs/freebsd-root.jpg]]
+
+#+CAPTION: Enabling TRIM on SSD
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/enable-trim.jpg][file:img/enable-trim.jpg]]
+
+#+CAPTION: Creating freebsd-swap partition
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/freebsd-swap.jpg][file:img/thumbs/freebsd-swap.jpg]]
+
+#+CAPTION: Final partition table
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/final-partition-table.jpg][file:img/thumbs/final-partition-table.jpg]]
+
+#+CAPTION: FreeBSD installation progress
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/installing-progress.jpg][file:img/thumbs/installing-progress.jpg]]
+
+After creating your custom partitions, the only thing left to do is
+remember to add ~hw.pci.enable_pcie_hp="0"~ to your
+~/boot/loader.conf~ before rebooting. I also ended up adding
+~autoboot_delay="5"~.
+
+#+CAPTION: Don't forget to edit ~/boot/loader.conf~ before rebooting
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/install-done.jpg][file:img/thumbs/install-done.jpg]]
+
+#+CAPTION: Editing ~/boot/loader.conf~
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/set-loader-conf.jpg][file:img/thumbs/set-loader-conf.jpg]]
+
+** Post-Installation
+It's possible the Mac will default to booting FreeBSD, but you can
+always hold down the /Option (Alt)/ key during boot to select a
+different OS.
+
+*** Use Drive Labels
+The first thing you should do is open ~/etc/fstab~ and switch out the
+drive numbers for your disk labels (Don't forget to make a backup
+first!). You can also comment-out the mount for ~/boot/efi~ since the
+machine is going to use Apple's EFI partition instead.
+
+#+begin_src text
+$ cat /etc/fstab
+# Device	Mountpoint	FStype	Options	Dump	Pass#
+/dev/gpt/rootfs	/		ufs	rw	1	1
+/dev/gpt/swapfs	none		swap	sw	0	0
+#/dev/ada0p1	/boot/efi	msdosfs	rw	2	2
+#+end_src
+
+*** Disable Hyperthreading
+- Check for hyperthreading options: ~sysctl machdep | grep hyper~
+- ~echo 'machdep.hyperthreading_allowed="0"' >> /boot/loader.conf~
+- [[https://www.freebsd.org/cgi/man.cgi?query=sysctl&sektion=8][sysctl(8)]]
 - https://lists.freebsd.org/pipermail/freebsd-smp/2010-May/001685.html
 
-*** Get CPU temp
-- add ~coretemp_load="YES"~ to ~/boot/loader.conf~
-- ~kldload coretemp~
-- ~Check temp: sysctl dev.cpu | grep temperature~
+*** Dvorak and Switching Caps-Lock to Control
+- ~kbdmap~ Choose desired keymap (eg: us.dvorak)
+- ~kbdcontrol -d | sed 's/clock/lctrl/g' > ctrlcaps.keymap~ Dump current keymap
+- ~kbdcontrol -l ctrlcaps-dvorak.keymap~ Load custom keymap
 
-*** Make caps lock as control in console:
-- ~kbdmap~ choose desired keymap (eg: us.dvorak)
-- ~kbdcontrol -d | sed 's/clock/lctrl/g' > ctrlcaps.keymap~ dump current keymap
-- ~kbdcontrol -l ctrlcaps-dvorak.keymap~ load custom keymap
+*** Networking
+- Check interfaces and enable DHCP on ipv4 and ipv6: ~ifconfig -a~
+- Add the following to ~/etc/rc.conf~:
+  - ~ifconfig_bge1_"DHCP"~
+  - ~ifconfig_bge1_ipv6="inet6 accept_rtadv"~
+- Restart network service: ~/etc/rc.d/netif restart~
 
-*** check disk performance
+*** SSH
+The default ~/etc/ssh/sshd_config~, looked good to me (i.e., no password or root logins).
+
+*** Fuse and exFAT support
+It would be nice to be able to mount USB drives…
+- ~pkg install fusefs-exfat~
+- ~echo 'fuse_load="YES"' >> /boot/loader.conf/~
+- ~kldload fuse~
+- ~mount.exfat /dev/da0s1 /media/usb~
+
+*** Checking Disk Performance
 - ~camcontrol devlist~
 - ~diskinfo -tv /dev/adN~
 
-*** Installing on macOS HDD
-1. Use bootcamp assistant to resize HDD and create new partition (85GB)
-2. Reinstall rEFInd
-3. Choose custom partition
-4. delete the bootcamp partition and create a new one.
-5. Finish installation wizard
-6. Add ~autoboot_delay="5"~ and ~hw.pci.enable_pcie_hp="0"~ to ~/boot/loader.conf~ before rebooting.
-7. Reboot and check installation
-8. Reinstall rEFInd
-9. Check macOS and set any custom options to rEFInd.
+*** CPU and Sensor Data
+- ~echo 'coretemp_load="YES"' >> /boot/loader.conf~
+- ~kldload coretemp~
+- Check temperature with: ~sysctl dev.cpu | grep temperature~
+
+Getting the rest of the Mac Pro's sensor data required patching the
+Apple SMC driver in FreeBSD. If my patch gets accepted, all you will
+need to do is add ~asmc_load="YES"~ to ~boot/loader.conf~.
+
+#+begin_src diff
+--- original/asmc.c	2021-12-28 23:43:20.905442244 -0600
++++ my-patch/asmc.c	2021-12-29 00:10:38.424770226 -0600
+@@ -328,6 +328,15 @@
+     ASMC_MP5_TEMPS, ASMC_MP5_TEMPNAMES, ASMC_MP5_TEMPDESCS
+   },
+
++	/* Idem for the MacPro 2013 (cylinder) */
++	{
++    "MacPro6,1", "Apple SMC MacPro (2013)",
++    ASMC_SMS_FUNCS_DISABLED,
++    ASMC_FAN_FUNCS,
++    ASMC_LIGHT_FUNCS_DISABLED,
++    ASMC_MP6_TEMPS, ASMC_MP6_TEMPNAMES, ASMC_MP6_TEMPDESCS
++	},
++
+   {
+     "MacBookAir1,1", "Apple SMC MacBook Air",
+     ASMC_SMS_FUNCS, ASMC_FAN_FUNCS, NULL, NULL, NULL,
+#+end_src
+
+#+begin_src diff
+--- original/asmcvar.h	2021-12-28 23:43:12.163365462 -0600
++++ my-patch/asmcvar.h	2021-12-29 00:11:36.207227372 -0600
+@@ -581,6 +581,18 @@
+           "Te3F", "Te3S", "Te4F", "Te4S", "Te5F", \
+           "Te5S", "TeGG", "TeGP", "TeRG", "TeRP", \
+           "TeRV", "Tp0C", "Tp1C", "TpPS", "TpTG", }
++
++#define ASMC_MP6_TEMPS	{ "TA0P", "TA1P", "TC0P", "TG0D", "TG0P", \
++	"TG1D", "TG1P", "TM0P", "TM1P", NULL }
++
++#define ASMC_MP6_TEMPNAMES	{ "ambient_air_1", "ambient_air_2", \
++	"cpu_proximity", "gpu_diode_1", "gpu_proximity_1", "gpu_diode_2", \
++	"gpu_proximity_2", "mem_proximity_1", "mem_proximity_2" }
++
++#define ASMC_MP6_TEMPDESCS	{ "Ambient Air 1", "Ambient Air 2", \
++	"CPU Proximity", "GPU Diode 1", "GPU Proximity 1", "GPU Diode 2", \
++	"GPU Proximity 2", "Memory Bank A", "Memory Bank B" }
++
+ #define	ASMC_MBA_TEMPS		{ "TB0T", NULL }
+ #define	ASMC_MBA_TEMPNAMES	{ "enclosure" }
+ #define	ASMC_MBA_TEMPDESCS	{ "Enclosure Bottom" }
+#+end_src
+
+Rebuilding the ~asmc~ driver with my patch:
+#+begin_src text
+cd /usr/src/sys/modules/asmc
+make
+make install
+kldunload asmc
+kldload /boot/modules/asmc.ko
+# Check /var/log/messages for missing key entries
+
+# Must add kld_list="/boot/modules/asmc.ko" to /etc/rc.conf instead of asmc_load="YES"
+# in /boot/loader.conf so that we find our compiled version of the module
+#+end_src
+
+Checking sensor data:
+#+begin_src text
+$ sysctl dev.asmc
+dev.asmc.0.temp.mem_proximity_1: 42
+dev.asmc.0.temp.mem_proximity_2: 41
+dev.asmc.0.temp.gpu_proximity_1: 45
+dev.asmc.0.temp.gpu_diode_1: 47
+dev.asmc.0.temp.gpu_proximity_2: 44
+dev.asmc.0.temp.gpu_diode_2: 47
+dev.asmc.0.temp.cpu_proximity: 42
+dev.asmc.0.temp.ambient_air_1: 37
+dev.asmc.0.temp.ambient_air_2: 29
+dev.asmc.0.fan.0.targetspeed: 790
+dev.asmc.0.fan.0.maxspeed: 1900
+dev.asmc.0.fan.0.minspeed: 790
+dev.asmc.0.fan.0.safespeed: -1
+dev.asmc.0.fan.0.speed: 789
+dev.asmc.0.fan.0.id: Main
+dev.asmc.0.%parent: acpi0
+dev.asmc.0.%pnpinfo: _HID=APP0001 _UID=0 _CID=SMC-HURONRIVER
+dev.asmc.0.%location: handle=\_SB_.PCI0.LPCB.SMC_
+dev.asmc.0.%driver: asmc
+dev.asmc.0.%desc: Apple SMC MacPro (2013)
+dev.asmc.%parent:
+#+end_src
+
+Changing fan speed:
+- View current: ~sysctl dev.asmc.0.fan.0.speed~
+- Set new: ~sysctl.dev.asmc.0.fan.0.minspeed=1800~
+
+Submitting my patch:
+- https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=260781
+
+Resources:
+- [[https://www.freebsd.org/cgi/man.cgi?query=asmc&sektion=4][asmc(4)]]
+- https://forums.freebsd.org/threads/macbook7-1-asmc-support.76497/
+- [[https://github.com/freebsd/freebsd-src/tree/main/sys/dev/asmc]]
+
+** Installing the rEFInd Boot Manager
+Rather than holding down the /Option (Alt)/ key every time we want to
+boot into a different OS, we can get a graphical boot menu by installing [[http://www.rodsbooks.com/refind][rEFInd]].
+
+Here's how to install it:
+1. Download rEFInd and copy it onto a USB drive.
+2. Reboot your Mac into recovery by holding down /Command (Win) + R/.
+3. Open /Terminal.app/.
+4. Disable /System Integrity Protection (SIP)/: ~csrutil disable~.
+5. Reboot and enter recovery again.
+6. Open /Terminal.app/ and plug in your USB drive.
+7. Navigate to the ~refind~ directory on your USB drive (Look in ~/Volumes/~).
+8. Run the installer: ~./refind-install~
+9. Enable SIP: ~csrutil enable~.
+10. Reboot
+
+#+CAPTION: Installing rEFInd
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/refind-install.jpg][file:img/thumbs/refind-install.jpg]]
+
+#+CAPTION: The rEFInd boot menu
+#+ATTR_HTML: :style max-width: 400px;
+[[file:img/refind-boot.jpg][file:img/thumbs/refind-boot.jpg]]
 
 *** Customizing rEFInd
 - rEFInd will default to the most recently booted OS, so the only
@@ -105,71 +406,6 @@ the operating system that Linux deeply struggles with.
 - ~mount -t msdos /dev/disk0s1 /Volumes/ESP~
 - ~cd /Volumes/ESP/EFI/refind/~
 - http://www.rodsbooks.com/refind/configfile.html
-
-*** Networking
-Check interfaces and enable DHCP on ipv4 and ipv6
-- ~ifconfig -a~
-- add the following to ~/etc/rc.conf~
-  - ~ifconfig_bge1_"DHCP"~
-  - ~ifconfig_bge1_ipv6="inet6 accept_rtadv"~
-- Restart network service: ~/etc/rc.d/netif restart~
-
-*** SSH
-- Take a look at ~/etc/ssh/sshd_config~ but the defaults are good with
-  me. (i.e., no password or root logins)
-
-*** Use UUID for disk labels in /etc/fstab
-By default the FreeBSD installer sets generic drive names in
-~/etc/fstab~. This is a huge pain when you add or remove hard drives
-to your machine because FreeBSD will get confused and refuse to boot.
-
-If you forget to set labels on your drive partitions during
-installation, you will need to add them and update the entries in
-~/etc/fstab~.
-
-Unfortunately the FreeBSD handbook entry on disk labeling is deeply
- misleading and gives terrible advice.
-- https://docs.freebsd.org/en/books/handbook/geom/#geom-glabel
-
-Instead, what we need to do is set GPT labels on our boot, rootfs,
-swap partitions using the ~gpart~ utility.
-
-1. Boot into single-user-mode
-2. List partitions: ~gpart show -lp~
-3. Check ~/etc/fstab~
-4. List drives with partition data: ~gpart show -lp~
-   - The GPT index will be the number "after the p" on the drive name.
-     eg: ada0p3 is at index 3 on geom ada0.
-   - You can verify this by looking at the output from ~gpart list~
-5. Add label for bootfs: ~gpart modify -i 3 -l bootfs ada0~
-6. Add label for rootfs: ~gpart modify -i 4 -l rootfs ada0~
-7. Add label for swapfs: ~gpart modify -i 5 -l swapfs ada0~
-8. Check that the labels appear in ~gpt list~ and ~gpart show -lp~
-9. Reboot
-10. Check again that the labels appear in ~gpt list~ and ~gpart show -lp~
-11. Backup ~/etc/fstab~ and set the new drive labels
-12. Reboot and hope it works.
-
-
-~rawuuid~ is the UUID unique to a partition while ~rawtype~ is the
-UUID that belongs to the partition type and is not unique (you can
-find them in the table on Wikipedia)
-- https://en.wikipedia.org/wiki/GUID_Partition_Table#Partition_type_GUIDs
-
-
-So I guess freebsd-boot isn't needed at all for EFI. So whatever time
-to reinstall from scratch and hopefully get the labels to work.
-
-*** Fuse and exFAT support
-It would be nice to be able to mount USB drives...
-
-- ~pkg install fusefs-exfat~
-- ~echo 'fuse_load="YES"' >> /boot/loader.conf/~
-- ~kldload fuse~
-- ~mount.exfat /dev/da0s1 /media/usb~
-
-In addition to using drive labels, we can comment out the mount for
-~/boot/efi~ since we don't actually need it for anything.
 
 * Footnotes
 [fn:1]
@@ -189,3 +425,5 @@ involved than a typical PC but the [[https://www.ifixit.com/Guide/Mac+Pro+Late+2
 comprehensive and the whole process took about two hours.
 
 [fn:3] Honorable mention for no GPL.
+
+[fn:4] Lenovo ThinkPad T470
