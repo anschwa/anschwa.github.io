@@ -11,6 +11,7 @@
 - [[https://github.com/anschwa][Github]]
 
 * 2022
+- [2022-01-23] [[file:2022/01/23/getting-started-with-zfs.org][Getting Started with ZFS]]
 - [2022-01-03] [[file:2022/01/03/installing-freebsd-on-2013-macpro.org][Installing FreeBSD on a 2013 Mac Pro]]
 
 * 2021

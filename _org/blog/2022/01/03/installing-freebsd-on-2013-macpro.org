@@ -57,11 +57,16 @@ the operating system that Linux deeply struggles with.
 
 * FreeBSD Installation Notes
 This was going to be my first time installing FreeBSD, so luckily I
-had my T470[fn:4] lying around to experiment with. I wasn't expecting the
+had my T470 lying around to experiment with. I wasn't expecting the
 installation on the Mac Pro to go smoothly, so having a computer that
 was known to be compatible with FreeBSD was really convenient. I was
 able to run though several installations to get a sense of how things
 will go on the Mac.
+
+The very first thing I did was disable disk encryption (FireVault) on
+the Mac Pro. I'm not sure it would have been a problem, but I didn't
+feel like finding out. I didn't have any issues turning FireVault back
+on after completing the FreeBSD installation process.
 
 One of the biggest drawbacks to FreeBSD is that there is much less
 content online to help troubleshoot issues or answer all the random
@@ -424,6 +429,6 @@ would have cost over $8,000. Swapping out the CPU was a bit more
 involved than a typical PC but the [[https://www.ifixit.com/Guide/Mac+Pro+Late+2013+CPU+Replacement/21947][iFixit guide]] was really
 comprehensive and the whole process took about two hours.
 
-[fn:3] Honorable mention for no GPL.
-
-[fn:4] Lenovo ThinkPad T470
+[fn:3] Honorable mention for no GPL. Please note that /systemd/ is not
+mentioned. Linux is clearly much better off with /systemd/ and the
+complaining needs to stop.

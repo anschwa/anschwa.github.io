@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2022-01-24 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting Started with ZFS</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Adam Schwartz">
+<link rel="stylesheet" href="../../../../css/style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div id="preamble" class="status">
+<p>Published:&nbsp;January 23, 2022</p>
+</div>
+<div id="content">
+<ul class="org-ul nav">
+<li><a href="../../../../index.html">About</a></li>
+<li><a href="../../../index.html">Blog</a></li>
+<li><a href="../../../../ceramics/index.html">Ceramics</a></li>
+<li><a href="https://github.com/anschwa">Github</a></li>
+</ul>
+
+<div id="outline-container-org3bd8c2e" class="outline-2">
+<h2 id="org3bd8c2e">Getting Started with ZFS</h2>
+<div class="outline-text-2" id="text-org3bd8c2e">
+<p>
+These are my notes from setting up a ZFS file server on FreeBSD.
+</p>
+
+<p>
+For this project, I will be configuring four drives in an external
+<a href="https://eshop.macsales.com/item/OWC/TB4MSR0GB/">2.5&ldquo; enclosure from OWC</a> that connects to my <a href="../03/installing-freebsd-on-2013-macpro.html">2013 Mac Pro</a> via
+Thunderbolt 2.
+</p>
+
+<p>
+My plan is to create a mirrored <code>zpool</code> with two 500GB SSDs and have a
+single-disk zpool for my 2TB drive. I have another 128GB SSD in the
+enclosure that will be formatted as UFS for &ldquo;scratch&rdquo; data.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3268986" class="outline-2">
+<h2 id="org3268986">Initializing Drives</h2>
+<div class="outline-text-2" id="text-org3268986">
+<p>
+I like the idea of setting each disk&rsquo;s serial number as the drive
+label because it is an unambiguous reference. Importantly, the serial
+number is nearly always accessible. It&rsquo;s both printed on the physical
+drive and available via disk utility programs. When you need to
+replace a drive, it&rsquo;s <i>really helpful</i> to know exactly what drive to
+touch. (Or type!)
+</p>
+
+<p>
+With that in mind, the first thing we want to do is find where our
+drives are currently located in the machine:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ camcontrol devlist</code>
+<code>&lt;SHGS31-500GS-2 90000Q00&gt;          at scbus0 target 0 lun 0 (pass0,ada0)</code>
+<code>&lt;SHGS31-500GS-2 90000Q00&gt;          at scbus1 target 0 lun 0 (pass1,ada1)</code>
+<code>&lt;M4-CT128M4SSD2 0309&gt;              at scbus2 target 0 lun 0 (pass2,ada2)</code>
+<code>&lt;WDC WD20SPZX-08UA7 02.01A02&gt;      at scbus3 target 0 lun 0 (pass3,ada3)</code>
+<code>&lt;APPLE SSD SM0256G BXW8SA0Q&gt;       at scbus4 target 0 lun 0 (pass4,ada4)</code>
+</pre>
+</div>
+
+<p>
+Now, we have a few ways of getting the serial number, but if you
+decide to grab it from software, please also make sure the same value
+is printed on the actual physical drive label.
+</p>
+
+<p>
+We could use <code>camcontrol identify</code> or <code>geom disk list</code>, but in this
+case we can <code>grep</code> over <code>dmesg</code> in a clever way to grab all our drive
+serial numbers at once.
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ dmesg | grep -B1 'Serial Number'</code>
+<code>ada0: &lt;SHGS31-500GS-2 90000Q00&gt; ACS-3 ATA SATA 3.x device</code>
+<code>ada0: Serial Number ESA8N416111408609</code>
+<code>--</code>
+<code>ada1: &lt;SHGS31-500GS-2 90000Q00&gt; ACS-3 ATA SATA 3.x device</code>
+<code>ada1: Serial Number ESA8N41611140860U</code>
+<code>--</code>
+<code>ada2: &lt;M4-CT128M4SSD2 0309&gt; ACS-2 ATA SATA 3.x device</code>
+<code>ada2: Serial Number 0000000012020907C404</code>
+<code>--</code>
+<code>ada3: &lt;WDC WD20SPZX-08UA7 02.01A02&gt; ACS-3 ATA SATA 3.x device</code>
+<code>ada3: Serial Number WD-WXP2E31CV0WZ</code>
+<code>--</code>
+<code>ada4: &lt;APPLE SSD SM0256G BXW8SA0Q&gt; ATA8-ACS SATA 3.x device</code>
+<code>ada4: Serial Number S216NYAH100559</code>
+</pre>
+</div>
+
+<p>
+Now let&rsquo;s initialize the drives.<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> ZFS will enable TRIM by default
+for drives that support it.
+</p>
+
+<blockquote>
+<p>
+<b>WARNING! You could destroy your system if you type the wrong drive number here!</b>
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-text"><code>$ gpart create -s gpt ada0</code>
+<code>ada0 created</code>
+<code></code>
+<code>$ gpart add -t freebsd-zfs -l ESA8N416111408609 -a 1M ada0</code>
+<code>ada0p1 added</code>
+<code></code>
+<code>$ gpart create -s gpt ada1</code>
+<code>ada1 created</code>
+<code></code>
+<code>$ gpart add -t freebsd-zfs -l ESA8N41611140860U -a 1M ada1</code>
+<code>ada1p1 added</code>
+<code></code>
+<code>$ gpart create -s gpt ada3</code>
+<code>ada3 created</code>
+<code></code>
+<code>$ gpart add -t freebsd-zfs -l WD-WXP2E31CV0WZ -a 1M ada3</code>
+<code>ada3p1 added</code>
+</pre>
+</div>
+
+<p>
+After creating all of your new partitions you can check out the
+results with <code>gpart show -lp</code>. After setting the GPT drive labels the
+partitions can be referenced by <code>/dev/gpt/$SERIAL_NUMBER</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7a37685" class="outline-2">
+<h2 id="org7a37685">Configuring ZFS</h2>
+<div class="outline-text-2" id="text-org7a37685">
+<p>
+I&rsquo;m hoping the <a href="https://docs.freebsd.org/en/books/handbook/zfs/">FreeBSD handbook&rsquo;s entry on ZFS</a> will be enough to get everything setup.
+</p>
+
+<p>
+The first thing it wants us to do is enable ZFS on the system.
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ echo 'zfs_enable="YES' &gt;&gt; /etc/rc.conf</code>
+<code>$ service zfs start</code>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orga2a2197" class="outline-3">
+<h3 id="orga2a2197">Single drive (backup)</h3>
+<div class="outline-text-3" id="text-orga2a2197">
+<p>
+Even for a single drive, the first step is to create our <code>zpool</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ zpool create backup /dev/gpt/WD-WXP2E31CV0WZ</code>
+</pre>
+</div>
+
+<p>
+If you get the error: <code>must be a block device or regular file</code>, make
+sure you are running <code>zpool create</code> as root.
+</p>
+
+<p>
+We can see that it worked by checking the output of <code>df</code>, <code>zpool status</code>, or <code>zpool list</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ df</code>
+<code>Filesystem         Size    Used   Avail Capacity  Mounted on</code>
+<code>/dev/gpt/rootfs     77G    5.1G     66G     7%    /</code>
+<code>devfs              1.0K    1.0K      0B   100%    /dev</code>
+<code>backup             1.8T     96K    1.8T     0%    /backup</code>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-text"><code>$ zpool status</code>
+<code>  pool: backup</code>
+<code> state: ONLINE</code>
+<code>config:</code>
+<code></code>
+<code>        NAME                   STATE     READ WRITE CKSUM</code>
+<code>        backup                 ONLINE       0     0     0</code>
+<code>          gpt/WD-WXP2E31CV0WZ  ONLINE       0     0     0</code>
+<code></code>
+<code>errors: No known data errors</code>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-text"><code>$ zpool list</code>
+<code>NAME     SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT</code>
+<code>backup  1.81T   360K  1.81T        -         -     0%     0%  1.00x    ONLINE  -</code>
+</pre>
+</div>
+
+<p>
+Now we can create the filesystem, also known as a <code>dataset</code>. I think
+adding compression and turning off access time are enough customization&rsquo;s for now.
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ zfs create -v -o atime=off -o compression=on backup/backup-data</code>
+<code>create backup/backup-data</code>
+<code>        atime=off</code>
+<code>        compression=on</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge3f59ff" class="outline-3">
+<h3 id="orge3f59ff">Mirrored drives (data)</h3>
+<div class="outline-text-3" id="text-orge3f59ff">
+<p>
+The first step is to create a mirrored <code>zpool</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ zpool create storage mirror /dev/gpt/ESA8N416111408609 /dev/gpt/ESA8N41611140860U</code>
+</pre>
+</div>
+
+<p>
+Now, create the <code>dataset</code>.
+</p>
+<pre class="example">
+<code>$ zfs create -v -o atime=off -o compression=on storage/storage-data</code>
+<code>create storage/storage-data</code>
+<code>        atime=off</code>
+<code>        compression=on</code>
+</pre>
+
+<p>
+Looks good!
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ df -h</code>
+<code>Filesystem              Size    Used   Avail Capacity  Mounted on</code>
+<code>/dev/gpt/rootfs          77G    5.1G     66G     7%    /</code>
+<code>devfs                   1.0K    1.0K      0B   100%    /dev</code>
+<code>backup                  1.8T     96K    1.8T     0%    /backup</code>
+<code>backup/backup-data      1.8T     96K    1.8T     0%    /backup/backup-data</code>
+<code>storage                 449G     96K    449G     0%    /storage</code>
+<code>storage/storage-data    449G     96K    449G     0%    /storage/storage-data</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org80a61af" class="outline-3">
+<h3 id="org80a61af">Networked Storage with NFS</h3>
+<div class="outline-text-3" id="text-org80a61af">
+<p>
+<a href="https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs">https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0c9ec16" class="outline-2">
+<h2 id="org0c9ec16">Creating my UFS scratch disk</h2>
+<div class="outline-text-2" id="text-org0c9ec16">
+<p>
+(I&rsquo;m using the serial number I got earlier and double-triple-checked my drive number!)
+</p>
+
+<p>
+First, initialize the drive:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ gpart create -s gpt ada2</code>
+<code>ada2 created</code>
+<code></code>
+<code>$ gpart add -t freebsd-ufs -l 0000000012020907C404 -a 1M ada2</code>
+<code>ada2p1 added</code>
+</pre>
+</div>
+
+<p>
+Then create the filesystem with TRIM enabled:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ newfs -U -j -t -L scratch /dev/ada2p1</code>
+<code>/dev/ada2p1: 122103.0MB (250066944 sectors) block size 32768, fragment size 4096</code>
+<code>        using 196 cylinder groups of 625.22MB, 20007 blks, 80128 inodes.</code>
+<code>        with soft updates</code>
+<code>super-block backups (for fsck_ffs -b #) at: [...]</code>
+</pre>
+</div>
+
+<p>
+List the active filesystem options:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ tunefs -p /dev/ada2p1</code>
+<code>tunefs: POSIX.1e ACLs: (-a)                                disabled</code>
+<code>tunefs: NFSv4 ACLs: (-N)                                   disabled</code>
+<code>tunefs: MAC multilabel: (-l)                               disabled</code>
+<code>tunefs: soft updates: (-n)                                 enabled</code>
+<code>tunefs: soft update journaling: (-j)                       disabled</code>
+<code>tunefs: gjournal: (-J)                                     disabled</code>
+<code>tunefs: trim: (-t)                                         enabled</code>
+<code>tunefs: maximum blocks per file in a cylinder group: (-e)  4096</code>
+<code>tunefs: average file size: (-f)                            16384</code>
+<code>tunefs: average number of files in a directory: (-s)       64</code>
+<code>tunefs: minimum percentage of free space: (-m)             8%</code>
+<code>tunefs: space to hold for metadata blocks: (-k)            6400</code>
+<code>tunefs: optimization preference: (-o)                      time</code>
+<code>tunefs: volume label: (-L)</code>
+</pre>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Following the <a href="https://docs.freebsd.org/en/books/handbook/disks/#disks-adding">FreeBSD handbook&rsquo;s advice</a> of using 1 MiB
+alignments. Hopefully this is a good idea, I think letting <code>gpart</code>
+decide an alignment would be fine too.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p>Last&nbsp;updated:&nbsp;2022-01-24</p>
+</div>
+</body>
+</html>

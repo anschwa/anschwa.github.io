@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-01-17 -->
+<!-- 2022-01-24 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Installing FreeBSD on a 2013 Mac Pro</title>
@@ -34,7 +34,7 @@ steal. I was wrong.
 </p>
 
 
-<figure id="orga8d1a35">
+<figure id="org0add0b7">
 <img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;">
 
 <figcaption><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</figcaption>
@@ -91,11 +91,18 @@ the operating system that Linux deeply struggles with.
 <div class="outline-text-2" id="text-orgfe8b203">
 <p>
 This was going to be my first time installing FreeBSD, so luckily I
-had my T470<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> lying around to experiment with. I wasn&rsquo;t expecting the
+had my T470 lying around to experiment with. I wasn&rsquo;t expecting the
 installation on the Mac Pro to go smoothly, so having a computer that
 was known to be compatible with FreeBSD was really convenient. I was
 able to run though several installations to get a sense of how things
 will go on the Mac.
+</p>
+
+<p>
+The very first thing I did was disable disk encryption (FireVault) on
+the Mac Pro. I&rsquo;m not sure it would have been a problem, but I didn&rsquo;t
+feel like finding out. I didn&rsquo;t have any issues turning FireVault back
+on after completing the FreeBSD installation process.
 </p>
 
 <p>
@@ -115,14 +122,14 @@ boot on the Mac.
 </p>
 
 
-<figure id="orgcd01541">
+<figure id="org06ac2f4">
 <a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</figcaption>
 </figure>
 
 
-<figure id="orgddab8b5">
+<figure id="org068c180">
 <a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 3: </span>Nice! This might actually work</figcaption>
@@ -139,7 +146,7 @@ unresponsive.
 </p>
 
 
-<figure id="org4e6d51e">
+<figure id="org73b5980">
 <a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. We&rsquo;re stuck.</figcaption>
@@ -188,7 +195,7 @@ Here is all I needed to get FreeBSD to boot on the Mac Pro:
 </ol>
 
 
-<figure id="org31d5cf1">
+<figure id="org2c73ca5">
 <a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></figcaption>
@@ -229,28 +236,28 @@ overwrite macOS.
 </p>
 
 
-<figure id="orgea79d2a">
+<figure id="orge7ef58c">
 <a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</figcaption>
 </figure>
 
 
-<figure id="org22159eb">
+<figure id="orga3f32e8">
 <a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 7: </span>Set the new size for your disk</figcaption>
 </figure>
 
 
-<figure id="org93698d6">
+<figure id="orgc9f2c9b">
 <a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</figcaption>
 </figure>
 
 
-<figure id="org65dfc70">
+<figure id="orgcff090d">
 <a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px"></a>
 
 <figcaption><span class="figure-number">Figure 9: </span>Eventually the resize will finish</figcaption>
@@ -280,49 +287,49 @@ installation, you will need to add them and update the entries in
 </p>
 
 
-<figure id="org0e852a1">
+<figure id="org94a8e72">
 <a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</figcaption>
 </figure>
 
 
-<figure id="orgc6a614b">
+<figure id="orgd44699e">
 <a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</figcaption>
 </figure>
 
 
-<figure id="org5a150fe">
+<figure id="orgfb2c1f5">
 <a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</figcaption>
 </figure>
 
 
-<figure id="orgcc71718">
+<figure id="orgc10d970">
 <a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</figcaption>
 </figure>
 
 
-<figure id="orge395df5">
+<figure id="orgf0aef66">
 <a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</figcaption>
 </figure>
 
 
-<figure id="orgbd9f666">
+<figure id="orgbb40925">
 <a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 15: </span>Final partition table</figcaption>
 </figure>
 
 
-<figure id="org9a0d08a">
+<figure id="org7e48f13">
 <a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 16: </span>FreeBSD installation progress</figcaption>
@@ -336,14 +343,14 @@ remember to add <code>hw.pci.enable_pcie_hp="0"</code> to your
 </p>
 
 
-<figure id="org8b584e1">
+<figure id="org2888909">
 <a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</figcaption>
 </figure>
 
 
-<figure id="org8f66c78">
+<figure id="orgacdbe81">
 <a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></figcaption>
@@ -613,14 +620,14 @@ Here&rsquo;s how to install it:
 </ol>
 
 
-<figure id="orgfc5f930">
+<figure id="org9f664f5">
 <a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 19: </span>Installing rEFInd</figcaption>
 </figure>
 
 
-<figure id="orgcec8ef8">
+<figure id="org56b2453">
 <a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 20: </span>The rEFInd boot menu</figcaption>
@@ -694,18 +701,16 @@ comprehensive and the whole process took about two hours.
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
-Honorable mention for no GPL.
-</p></div></div>
-
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
-Lenovo ThinkPad T470
+Honorable mention for no GPL. Please note that <i>systemd</i> is not
+mentioned. Linux is clearly much better off with <i>systemd</i> and the
+complaining needs to stop.
 </p></div></div>
 
 
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2022-01-17</p>
+<p>Last&nbsp;updated:&nbsp;2022-01-24</p>
 </div>
 </body>
 </html>

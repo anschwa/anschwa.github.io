@@ -1,0 +1,229 @@
+#+TITLE: Getting Started with ZFS
+#+AUTHOR: Adam Schwartz
+#+DATE: January 23, 2022
+#+OPTIONS: title:nil
+#+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../../../../index.org][About]]
+- [[file:../../../index.org][Blog]]
+- [[file:../../../../ceramics/index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* Getting Started with ZFS
+These are my notes from setting up a ZFS file server on FreeBSD.
+
+For this project, I will be configuring four drives in an external
+[[https://eshop.macsales.com/item/OWC/TB4MSR0GB/][2.5" enclosure from OWC]] that connects to my [[file:../03/installing-freebsd-on-2013-macpro.org][2013 Mac Pro]] via
+Thunderbolt 2.
+
+My plan is to create a mirrored ~zpool~ with two 500GB SSDs and have a
+single-disk zpool for my 2TB drive. I have another 128GB SSD in the
+enclosure that will be formatted as UFS for "scratch" data.
+
+* Initializing Drives
+I like the idea of setting each disk's serial number as the drive
+label because it is an unambiguous reference. Importantly, the serial
+number is nearly always accessible. It's both printed on the physical
+drive and available via disk utility programs. When you need to
+replace a drive, it's /really helpful/ to know exactly what drive to
+touch. (Or type!)
+
+With that in mind, the first thing we want to do is find where our
+drives are currently located in the machine:
+#+begin_src text
+$ camcontrol devlist
+<SHGS31-500GS-2 90000Q00>          at scbus0 target 0 lun 0 (pass0,ada0)
+<SHGS31-500GS-2 90000Q00>          at scbus1 target 0 lun 0 (pass1,ada1)
+<M4-CT128M4SSD2 0309>              at scbus2 target 0 lun 0 (pass2,ada2)
+<WDC WD20SPZX-08UA7 02.01A02>      at scbus3 target 0 lun 0 (pass3,ada3)
+<APPLE SSD SM0256G BXW8SA0Q>       at scbus4 target 0 lun 0 (pass4,ada4)
+#+end_src
+
+Now, we have a few ways of getting the serial number, but if you
+decide to grab it from software, please also make sure the same value
+is printed on the actual physical drive label.
+
+We could use ~camcontrol identify~ or ~geom disk list~, but in this
+case we can ~grep~ over ~dmesg~ in a clever way to grab all our drive
+serial numbers at once.
+#+begin_src text
+$ dmesg | grep -B1 'Serial Number'
+ada0: <SHGS31-500GS-2 90000Q00> ACS-3 ATA SATA 3.x device
+ada0: Serial Number ESA8N416111408609
+--
+ada1: <SHGS31-500GS-2 90000Q00> ACS-3 ATA SATA 3.x device
+ada1: Serial Number ESA8N41611140860U
+--
+ada2: <M4-CT128M4SSD2 0309> ACS-2 ATA SATA 3.x device
+ada2: Serial Number 0000000012020907C404
+--
+ada3: <WDC WD20SPZX-08UA7 02.01A02> ACS-3 ATA SATA 3.x device
+ada3: Serial Number WD-WXP2E31CV0WZ
+--
+ada4: <APPLE SSD SM0256G BXW8SA0Q> ATA8-ACS SATA 3.x device
+ada4: Serial Number S216NYAH100559
+#+end_src
+
+Now let's initialize the drives.[fn:1] ZFS will enable TRIM by default
+for drives that support it.
+
+#+begin_quote
+*WARNING! You could destroy your system if you type the wrong drive number here!*
+#+end_quote
+
+#+begin_src text
+$ gpart create -s gpt ada0
+ada0 created
+
+$ gpart add -t freebsd-zfs -l ESA8N416111408609 -a 1M ada0
+ada0p1 added
+
+$ gpart create -s gpt ada1
+ada1 created
+
+$ gpart add -t freebsd-zfs -l ESA8N41611140860U -a 1M ada1
+ada1p1 added
+
+$ gpart create -s gpt ada3
+ada3 created
+
+$ gpart add -t freebsd-zfs -l WD-WXP2E31CV0WZ -a 1M ada3
+ada3p1 added
+#+end_src
+
+After creating all of your new partitions you can check out the
+results with ~gpart show -lp~. After setting the GPT drive labels the
+partitions can be referenced by ~/dev/gpt/$SERIAL_NUMBER~.
+
+* Configuring ZFS
+I'm hoping the [[https://docs.freebsd.org/en/books/handbook/zfs/][FreeBSD handbook's entry on ZFS]] will be enough to get everything setup.
+
+The first thing it wants us to do is enable ZFS on the system.
+#+begin_src text
+$ echo 'zfs_enable="YES' >> /etc/rc.conf
+$ service zfs start
+#+end_src
+
+** Single drive (backup)
+Even for a single drive, the first step is to create our ~zpool~:
+#+begin_src text
+$ zpool create backup /dev/gpt/WD-WXP2E31CV0WZ
+#+end_src
+
+If you get the error: ~must be a block device or regular file~, make
+sure you are running ~zpool create~ as root.
+
+We can see that it worked by checking the output of ~df~, ~zpool status~, or ~zpool list~.
+#+begin_src text
+$ df
+Filesystem         Size    Used   Avail Capacity  Mounted on
+/dev/gpt/rootfs     77G    5.1G     66G     7%    /
+devfs              1.0K    1.0K      0B   100%    /dev
+backup             1.8T     96K    1.8T     0%    /backup
+#+end_src
+
+#+begin_src text
+$ zpool status
+  pool: backup
+ state: ONLINE
+config:
+
+        NAME                   STATE     READ WRITE CKSUM
+        backup                 ONLINE       0     0     0
+          gpt/WD-WXP2E31CV0WZ  ONLINE       0     0     0
+
+errors: No known data errors
+#+end_src
+
+#+begin_src text
+$ zpool list
+NAME     SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
+backup  1.81T   360K  1.81T        -         -     0%     0%  1.00x    ONLINE  -
+#+end_src
+
+Now we can create the filesystem, also known as a ~dataset~. I think
+adding compression and turning off access time are enough customization's for now.
+#+begin_src text
+$ zfs create -v -o atime=off -o compression=on backup/backup-data
+create backup/backup-data
+        atime=off
+        compression=on
+#+end_src
+
+** Mirrored drives (data)
+The first step is to create a mirrored ~zpool~:
+#+begin_src text
+$ zpool create storage mirror /dev/gpt/ESA8N416111408609 /dev/gpt/ESA8N41611140860U
+#+end_src
+
+Now, create the ~dataset~.
+#+begin_src
+$ zfs create -v -o atime=off -o compression=on storage/storage-data
+create storage/storage-data
+        atime=off
+        compression=on
+#+end_src
+
+Looks good!
+#+begin_src text
+$ df -h
+Filesystem              Size    Used   Avail Capacity  Mounted on
+/dev/gpt/rootfs          77G    5.1G     66G     7%    /
+devfs                   1.0K    1.0K      0B   100%    /dev
+backup                  1.8T     96K    1.8T     0%    /backup
+backup/backup-data      1.8T     96K    1.8T     0%    /backup/backup-data
+storage                 449G     96K    449G     0%    /storage
+storage/storage-data    449G     96K    449G     0%    /storage/storage-data
+#+end_src
+
+** Networked Storage with NFS
+https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs
+
+* Creating my UFS scratch disk
+(I'm using the serial number I got earlier and double-triple-checked my drive number!)
+
+First, initialize the drive:
+#+begin_src text
+$ gpart create -s gpt ada2
+ada2 created
+
+$ gpart add -t freebsd-ufs -l 0000000012020907C404 -a 1M ada2
+ada2p1 added
+#+end_src
+
+Then create the filesystem with TRIM enabled:
+#+begin_src text
+$ newfs -U -j -t -L scratch /dev/ada2p1
+/dev/ada2p1: 122103.0MB (250066944 sectors) block size 32768, fragment size 4096
+        using 196 cylinder groups of 625.22MB, 20007 blks, 80128 inodes.
+        with soft updates
+super-block backups (for fsck_ffs -b #) at: [...]
+#+end_src
+
+List the active filesystem options:
+#+begin_src text
+$ tunefs -p /dev/ada2p1
+tunefs: POSIX.1e ACLs: (-a)                                disabled
+tunefs: NFSv4 ACLs: (-N)                                   disabled
+tunefs: MAC multilabel: (-l)                               disabled
+tunefs: soft updates: (-n)                                 enabled
+tunefs: soft update journaling: (-j)                       disabled
+tunefs: gjournal: (-J)                                     disabled
+tunefs: trim: (-t)                                         enabled
+tunefs: maximum blocks per file in a cylinder group: (-e)  4096
+tunefs: average file size: (-f)                            16384
+tunefs: average number of files in a directory: (-s)       64
+tunefs: minimum percentage of free space: (-m)             8%
+tunefs: space to hold for metadata blocks: (-k)            6400
+tunefs: optimization preference: (-o)                      time
+tunefs: volume label: (-L)
+#+end_src
+
+* Footnotes
+
+[fn:1] Following the [[https://docs.freebsd.org/en/books/handbook/disks/#disks-adding][FreeBSD handbook's advice]] of using 1 MiB
+alignments. Hopefully this is a good idea, I think letting ~gpart~
+decide an alignment would be fine too.
