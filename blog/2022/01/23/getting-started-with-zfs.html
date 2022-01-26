@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-01-24 -->
+<!-- 2022-01-26 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Getting Started with ZFS</title>
@@ -31,13 +31,12 @@ These are my notes from setting up a ZFS file server on FreeBSD.
 
 <p>
 For this project, I will be configuring four drives in an external
-<a href="https://eshop.macsales.com/item/OWC/TB4MSR0GB/">2.5&ldquo; enclosure from OWC</a> that connects to my <a href="../03/installing-freebsd-on-2013-macpro.html">2013 Mac Pro</a> via
-Thunderbolt 2.
+<a href="https://eshop.macsales.com/item/OWC/TB4MSR0GB/">Thunderbolt 2 enclosure from OWC</a> that connects to my <a href="../03/installing-freebsd-on-2013-macpro.html">2013 Mac Pro</a>.
 </p>
 
 <p>
 My plan is to create a mirrored <code>zpool</code> with two 500GB SSDs and have a
-single-disk zpool for my 2TB drive. I have another 128GB SSD in the
+single-disk <code>zpool</code> for my 2TB drive. I have another 128GB SSD in the
 enclosure that will be formatted as UFS for &ldquo;scratch&rdquo; data.
 </p>
 </div>
@@ -210,7 +209,7 @@ Now we can create the filesystem, also known as a <code>dataset</code>. I think
 adding compression and turning off access time are enough customization&rsquo;s for now.
 </p>
 <div class="org-src-container">
-<pre class="src src-text"><code>$ zfs create -v -o atime=off -o compression=on backup/backup-data</code>
+<pre class="src src-text"><code>$ zfs create -v -o atime=off -o compression=on backup/data</code>
 <code>create backup/backup-data</code>
 <code>        atime=off</code>
 <code>        compression=on</code>
@@ -234,7 +233,7 @@ The first step is to create a mirrored <code>zpool</code>:
 Now, create the <code>dataset</code>.
 </p>
 <pre class="example">
-<code>$ zfs create -v -o atime=off -o compression=on storage/storage-data</code>
+<code>$ zfs create -v -o atime=off -o compression=on storage/data</code>
 <code>create storage/storage-data</code>
 <code>        atime=off</code>
 <code>        compression=on</code>
@@ -249,9 +248,9 @@ Looks good!
 <code>/dev/gpt/rootfs          77G    5.1G     66G     7%    /</code>
 <code>devfs                   1.0K    1.0K      0B   100%    /dev</code>
 <code>backup                  1.8T     96K    1.8T     0%    /backup</code>
-<code>backup/backup-data      1.8T     96K    1.8T     0%    /backup/backup-data</code>
+<code>backup/data      1.8T     96K    1.8T     0%    /backup/data</code>
 <code>storage                 449G     96K    449G     0%    /storage</code>
-<code>storage/storage-data    449G     96K    449G     0%    /storage/storage-data</code>
+<code>storage/data    449G     96K    449G     0%    /storage/data</code>
 </pre>
 </div>
 </div>
@@ -260,18 +259,142 @@ Looks good!
 <div id="outline-container-org80a61af" class="outline-3">
 <h3 id="org80a61af">Networked Storage with NFS</h3>
 <div class="outline-text-3" id="text-org80a61af">
+<ul class="org-ul">
+<li><a href="https://docs.freebsd.org/en/books/handbook/zfs/#zfs-zfs-set-share">https://docs.freebsd.org/en/books/handbook/zfs/#zfs-zfs-set-share</a></li>
+<li><a href="https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs">https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs</a></li>
+<li>nfsv4(4)</li>
+</ul>
+
 <p>
-<a href="https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs">https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs</a>
+Enable NFSv4 by adding the following services to <code>/etc/rc.conf</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>rpcbind_enable="YES"</code>
+<code>mountd_enable="YES"</code>
+<code>nfs_server_enable="YES"</code>
+<code>nfsv4_server_enable="YES"</code>
+<code>nfsuserd_enable="YES"</code>
+</pre>
+</div>
+
+<p>
+If you don&rsquo;t have an <code>/etc/exports</code> file yet, you can create a blank one.
+</p>
+
+<p>
+Start NFS without rebooting:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ service nfsd start</code>
+<code>Starting rpcbind.</code>
+<code>/etc/rc.d/mountd.</code>
+<code>Starting mountd.</code>
+<code>Starting nfsd.</code>
+<code></code>
+<code>$ service nfsuserd start</code>
+<code>Starting nfsuserd.</code>
+</pre>
+</div>
+
+<p>
+Sharing ZFS <code>dataset</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>zfs set sharenfs=on storage/data</code>
+</pre>
+</div>
+
+<p>
+This will share our <code>dataset</code> over NFS with the default options
+mentioned in <a href="https://www.freebsd.org/cgi/man.cgi?query=zfsprops&amp;sektion=8">zfsprops(8)</a>.
+</p>
+
+<p>
+We can list all the custom options in a <code>dataset</code> like this:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ zfs get -r -s local all storage/data</code>
+<code>NAME          PROPERTY              VALUE                  SOURCE</code>
+<code>storage/data  sharenfs              on                     local</code>
+<code>storage/data  compression           on                     local</code>
+<code>storage/data  atime                 off                    local</code>
+</pre>
+</div>
+
+<p>
+Or get the value for specific options:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ zfs get sharenfs</code>
+<code>NAME          PROPERTY  VALUE     SOURCE</code>
+<code>backup        sharenfs  off       default</code>
+<code>backup/data   sharenfs  off       default</code>
+<code>storage       sharenfs  off       default</code>
+<code>storage/data  sharenfs  on        local</code>
+</pre>
+</div>
+
+<p>
+Now we should be able to mount <code>storage/data</code> on another machine with
+an NFS client installed:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>mount -t nfs $HOST:/storage/data /mnt/zdata</code>
+</pre>
+</div>
+
+<p>
+I haven&rsquo;t gone through the necessary configuration for NFSv4, so my
+connection is getting demoted to NFSv3. This is okay for now because
+I&rsquo;m the only user anyway and I&rsquo;m connecting on a local network.
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>$ mount -vvv -t nfs $HOST:/storage/data /mnt/zdata/</code>
+<code>mount.nfs: timeout set for Wed Jan 26 01:02:03 2022</code>
+<code>%mount.nfs: trying text-based options 'vers=4.2,addr=10.0.0.42,clientaddr=10.0.0.123'</code>
+<code>mount.nfs: mount(2): Permission denied</code>
+<code>mount.nfs: trying text-based options 'vers=4,minorversion=1,addr=10.0.0.42,clientaddr=10.0.0.123'</code>
+<code>mount.nfs: mount(2): Permission denied</code>
+<code>mount.nfs: trying text-based options 'vers=4,addr=10.0.0.42,clientaddr=10.0.0.123'</code>
+<code>mount.nfs: mount(2): Permission denied</code>
+<code>mount.nfs: trying text-based options 'addr=10.0.0.42'</code>
+<code>mount.nfs: prog 100003, trying vers=3, prot=6</code>
+<code>mount.nfs: trying 10.0.0.42 prog 100003 vers 3 prot TCP port 2049</code>
+<code>mount.nfs: prog 100005, trying vers=3, prot=17</code>
+<code>mount.nfs: trying 10.0.0.42 prog 100005 vers 3 prot UDP port 797</code>
+</pre>
+</div>
+
+<p>
+While I continue to set things up, I made <code>/storage/data</code>
+&ldquo;word-writable&rdquo; so I can actually start using the file server.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>chmod -R 777 /storage</code>
+</pre>
+</div>
+
+<p>
+Ultimately, I would like to use &ldquo;ZFS over NFS&rdquo; as my primary storage
+medium because it would keep everything in one place and let me access
+it from any computer.
+</p>
+
+<p>
+Overall, ZFS is a really flexible filesystem and using ECC memory
+provides a lot of protection against data corruption. I can manage
+local and remote backups with <code>zfs send</code> and seamlessly add or
+replace drives by linking new <code>zpools</code> to my existing <code>datasets</code>.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org0c9ec16" class="outline-2">
-<h2 id="org0c9ec16">Creating my UFS scratch disk</h2>
-<div class="outline-text-2" id="text-org0c9ec16">
+<div id="outline-container-orge5398f6" class="outline-2">
+<h2 id="orge5398f6">Bonus: Creating my UFS scratch disk</h2>
+<div class="outline-text-2" id="text-orge5398f6">
 <p>
-(I&rsquo;m using the serial number I got earlier and double-triple-checked my drive number!)
+(I&rsquo;m using the serial number I got earlier and <b>double-triple-checked</b> my drive number!)
 </p>
 
 <p>
@@ -331,11 +454,15 @@ alignments. Hopefully this is a good idea, I think letting <code>gpart</code>
 decide an alignment would be fine too.
 </p></div></div>
 
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+It&rsquo;s only temporary if it doesn&rsquo;t work…
+</p></div></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2022-01-24</p>
+<p>Last&nbsp;updated:&nbsp;2022-01-26</p>
 </div>
 </body>
 </html>

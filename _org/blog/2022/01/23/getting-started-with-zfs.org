@@ -16,11 +16,10 @@
 These are my notes from setting up a ZFS file server on FreeBSD.
 
 For this project, I will be configuring four drives in an external
-[[https://eshop.macsales.com/item/OWC/TB4MSR0GB/][2.5" enclosure from OWC]] that connects to my [[file:../03/installing-freebsd-on-2013-macpro.org][2013 Mac Pro]] via
-Thunderbolt 2.
+[[https://eshop.macsales.com/item/OWC/TB4MSR0GB/][Thunderbolt 2 enclosure from OWC]] that connects to my [[file:../03/installing-freebsd-on-2013-macpro.org][2013 Mac Pro]].
 
 My plan is to create a mirrored ~zpool~ with two 500GB SSDs and have a
-single-disk zpool for my 2TB drive. I have another 128GB SSD in the
+single-disk ~zpool~ for my 2TB drive. I have another 128GB SSD in the
 enclosure that will be formatted as UFS for "scratch" data.
 
 * Initializing Drives
@@ -147,7 +146,7 @@ backup  1.81T   360K  1.81T        -         -     0%     0%  1.00x    ONLINE  -
 Now we can create the filesystem, also known as a ~dataset~. I think
 adding compression and turning off access time are enough customization's for now.
 #+begin_src text
-$ zfs create -v -o atime=off -o compression=on backup/backup-data
+$ zfs create -v -o atime=off -o compression=on backup/data
 create backup/backup-data
         atime=off
         compression=on
@@ -161,7 +160,7 @@ $ zpool create storage mirror /dev/gpt/ESA8N416111408609 /dev/gpt/ESA8N416111408
 
 Now, create the ~dataset~.
 #+begin_src
-$ zfs create -v -o atime=off -o compression=on storage/storage-data
+$ zfs create -v -o atime=off -o compression=on storage/data
 create storage/storage-data
         atime=off
         compression=on
@@ -174,16 +173,108 @@ Filesystem              Size    Used   Avail Capacity  Mounted on
 /dev/gpt/rootfs          77G    5.1G     66G     7%    /
 devfs                   1.0K    1.0K      0B   100%    /dev
 backup                  1.8T     96K    1.8T     0%    /backup
-backup/backup-data      1.8T     96K    1.8T     0%    /backup/backup-data
+backup/data      1.8T     96K    1.8T     0%    /backup/data
 storage                 449G     96K    449G     0%    /storage
-storage/storage-data    449G     96K    449G     0%    /storage/storage-data
+storage/data    449G     96K    449G     0%    /storage/data
 #+end_src
 
 ** Networked Storage with NFS
-https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs
+- https://docs.freebsd.org/en/books/handbook/zfs/#zfs-zfs-set-share
+- https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs
+- nfsv4(4)
 
-* Creating my UFS scratch disk
-(I'm using the serial number I got earlier and double-triple-checked my drive number!)
+Enable NFSv4 by adding the following services to ~/etc/rc.conf~:
+#+begin_src text
+rpcbind_enable="YES"
+mountd_enable="YES"
+nfs_server_enable="YES"
+nfsv4_server_enable="YES"
+nfsuserd_enable="YES"
+#+end_src
+
+If you don't have an ~/etc/exports~ file yet, you can create a blank one.
+
+Start NFS without rebooting:
+#+begin_src text
+$ service nfsd start
+Starting rpcbind.
+/etc/rc.d/mountd.
+Starting mountd.
+Starting nfsd.
+
+$ service nfsuserd start
+Starting nfsuserd.
+#+end_src
+
+Sharing ZFS ~dataset~:
+#+begin_src text
+zfs set sharenfs=on storage/data
+#+end_src
+
+This will share our ~dataset~ over NFS with the default options
+mentioned in [[https://www.freebsd.org/cgi/man.cgi?query=zfsprops&sektion=8][zfsprops(8)]].
+
+We can list all the custom options in a ~dataset~ like this:
+#+begin_src text
+$ zfs get -r -s local all storage/data
+NAME          PROPERTY              VALUE                  SOURCE
+storage/data  sharenfs              on                     local
+storage/data  compression           on                     local
+storage/data  atime                 off                    local
+#+end_src
+
+Or get the value for specific options:
+#+begin_src text
+$ zfs get sharenfs
+NAME          PROPERTY  VALUE     SOURCE
+backup        sharenfs  off       default
+backup/data   sharenfs  off       default
+storage       sharenfs  off       default
+storage/data  sharenfs  on        local
+#+end_src
+
+Now we should be able to mount ~storage/data~ on another machine with
+an NFS client installed:
+#+begin_src text
+mount -t nfs $HOST:/storage/data /mnt/zdata
+#+end_src
+
+I haven't gone through the necessary configuration for NFSv4, so my
+connection is getting demoted to NFSv3. This is okay for now because
+I'm the only user anyway and I'm connecting on a local network.
+#+begin_src text
+$ mount -vvv -t nfs $HOST:/storage/data /mnt/zdata/
+mount.nfs: timeout set for Wed Jan 26 01:02:03 2022
+%mount.nfs: trying text-based options 'vers=4.2,addr=10.0.0.42,clientaddr=10.0.0.123'
+mount.nfs: mount(2): Permission denied
+mount.nfs: trying text-based options 'vers=4,minorversion=1,addr=10.0.0.42,clientaddr=10.0.0.123'
+mount.nfs: mount(2): Permission denied
+mount.nfs: trying text-based options 'vers=4,addr=10.0.0.42,clientaddr=10.0.0.123'
+mount.nfs: mount(2): Permission denied
+mount.nfs: trying text-based options 'addr=10.0.0.42'
+mount.nfs: prog 100003, trying vers=3, prot=6
+mount.nfs: trying 10.0.0.42 prog 100003 vers 3 prot TCP port 2049
+mount.nfs: prog 100005, trying vers=3, prot=17
+mount.nfs: trying 10.0.0.42 prog 100005 vers 3 prot UDP port 797
+#+end_src
+
+While I continue to set things up, I made ~/storage/data~
+"word-writable" so I can actually start using the file server.[fn:2]
+#+begin_src text
+chmod -R 777 /storage
+#+end_src
+
+Ultimately, I would like to use "ZFS over NFS" as my primary storage
+medium because it would keep everything in one place and let me access
+it from any computer.
+
+Overall, ZFS is a really flexible filesystem and using ECC memory
+provides a lot of protection against data corruption. I can manage
+local and remote backups with ~zfs send~ and seamlessly add or
+replace drives by linking new ~zpools~ to my existing ~datasets~.
+
+* Bonus: Creating my UFS scratch disk
+(I'm using the serial number I got earlier and *double-triple-checked* my drive number!)
 
 First, initialize the drive:
 #+begin_src text
@@ -227,3 +318,5 @@ tunefs: volume label: (-L)
 [fn:1] Following the [[https://docs.freebsd.org/en/books/handbook/disks/#disks-adding][FreeBSD handbook's advice]] of using 1 MiB
 alignments. Hopefully this is a good idea, I think letting ~gpart~
 decide an alignment would be fine too.
+
+[fn:2] It's only temporary if it doesn't work…
