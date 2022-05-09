@@ -284,17 +284,18 @@ Apple SMC driver in FreeBSD. If my patch gets accepted, all you will
 need to do is add ~asmc_load="YES"~ to ~boot/loader.conf~.
 
 #+begin_src diff
+diff -u original/asmc.c my-patch/asmc.c
 --- original/asmc.c	2021-12-28 23:43:20.905442244 -0600
 +++ my-patch/asmc.c	2021-12-29 00:10:38.424770226 -0600
 @@ -328,6 +328,15 @@
      ASMC_MP5_TEMPS, ASMC_MP5_TEMPNAMES, ASMC_MP5_TEMPDESCS
    },
 
-+	/* Idem for the MacPro 2013 (cylinder) */
++	/* Idem for the Mac Pro 2013 (cylinder) */
 +	{
-+    "MacPro6,1", "Apple SMC MacPro (2013)",
++    "MacPro6,1", "Apple SMC Mac Pro (2013)",
 +    ASMC_SMS_FUNCS_DISABLED,
-+    ASMC_FAN_FUNCS,
++    ASMC_FAN_FUNCS2,
 +    ASMC_LIGHT_FUNCS_DISABLED,
 +    ASMC_MP6_TEMPS, ASMC_MP6_TEMPNAMES, ASMC_MP6_TEMPDESCS
 +	},
@@ -305,6 +306,7 @@ need to do is add ~asmc_load="YES"~ to ~boot/loader.conf~.
 #+end_src
 
 #+begin_src diff
+diff -u original/asmcvar.h my-patch/asmcvar.h
 --- original/asmcvar.h	2021-12-28 23:43:12.163365462 -0600
 +++ my-patch/asmcvar.h	2021-12-29 00:11:36.207227372 -0600
 @@ -581,6 +581,18 @@

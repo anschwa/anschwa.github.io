@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-01-29 -->
+<!-- 2022-05-08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Installing FreeBSD on a 2013 Mac Pro</title>
@@ -34,7 +34,7 @@ steal. I was wrong.
 </p>
 
 
-<figure id="org58d1d07">
+<figure id="org53e42cb">
 <img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;">
 
 <figcaption><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</figcaption>
@@ -122,14 +122,14 @@ boot on the Mac.
 </p>
 
 
-<figure id="orga84221f">
+<figure id="orgb351dfe">
 <a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</figcaption>
 </figure>
 
 
-<figure id="org7415dc7">
+<figure id="orga1050a4">
 <a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 3: </span>Nice! This might actually work</figcaption>
@@ -146,7 +146,7 @@ unresponsive.
 </p>
 
 
-<figure id="orga3aa6a7">
+<figure id="orge1222de">
 <a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. We&rsquo;re stuck.</figcaption>
@@ -195,7 +195,7 @@ Here is all I needed to get FreeBSD to boot on the Mac Pro:
 </ol>
 
 
-<figure id="org7a2f88b">
+<figure id="org65349ad">
 <a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></figcaption>
@@ -236,28 +236,28 @@ overwrite macOS.
 </p>
 
 
-<figure id="org7d43dae">
+<figure id="org3d470d8">
 <a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</figcaption>
 </figure>
 
 
-<figure id="org5f5a9b3">
+<figure id="org99b9b3e">
 <a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 7: </span>Set the new size for your disk</figcaption>
 </figure>
 
 
-<figure id="org5fb046b">
+<figure id="org944551b">
 <a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</figcaption>
 </figure>
 
 
-<figure id="org65476fe">
+<figure id="org86a0b6e">
 <a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px"></a>
 
 <figcaption><span class="figure-number">Figure 9: </span>Eventually the resize will finish</figcaption>
@@ -287,49 +287,49 @@ installation, you will need to add them and update the entries in
 </p>
 
 
-<figure id="orgb8f9bb8">
+<figure id="orga34f9a5">
 <a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</figcaption>
 </figure>
 
 
-<figure id="orgf5896d9">
+<figure id="orgf7ef552">
 <a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</figcaption>
 </figure>
 
 
-<figure id="orgc486142">
+<figure id="org702f530">
 <a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</figcaption>
 </figure>
 
 
-<figure id="org3d70b45">
+<figure id="orgc7bc539">
 <a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</figcaption>
 </figure>
 
 
-<figure id="org87ac304">
+<figure id="org7bcd725">
 <a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</figcaption>
 </figure>
 
 
-<figure id="org505a763">
+<figure id="orgf1603c4">
 <a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 15: </span>Final partition table</figcaption>
 </figure>
 
 
-<figure id="org18165ce">
+<figure id="org330b5a2">
 <a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 16: </span>FreeBSD installation progress</figcaption>
@@ -343,14 +343,14 @@ remember to add <code>hw.pci.enable_pcie_hp="0"</code> to your
 </p>
 
 
-<figure id="org028552d">
+<figure id="orgfe4bc7c">
 <a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</figcaption>
 </figure>
 
 
-<figure id="orgd71549f">
+<figure id="orga1bda69">
 <a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></figcaption>
@@ -477,17 +477,18 @@ need to do is add <code>asmc_load="YES"</code> to <code>boot/loader.conf</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><code><span style="background-color: #d9d9d9;">--- </span><span style="background-color: #bfbfbf; font-weight: bold;">original/asmc.c</span><span style="background-color: #d9d9d9;">     2021-12-28 23:43:20.905442244 -0600</span></code>
+<pre class="src src-diff"><code><span style="background-color: #d9d9d9;">diff -u original/asmc.c my-patch/asmc.c</span></code>
+<code><span style="background-color: #d9d9d9;">--- </span><span style="background-color: #bfbfbf; font-weight: bold;">original/asmc.c</span><span style="background-color: #d9d9d9;">     2021-12-28 23:43:20.905442244 -0600</span></code>
 <code><span style="background-color: #d9d9d9;">+++ </span><span style="background-color: #bfbfbf; font-weight: bold;">my-patch/asmc.c</span><span style="background-color: #d9d9d9;">     2021-12-29 00:10:38.424770226 -0600</span></code>
 <code><span style="background-color: #d9d9d9;">@@ -328,6 +328,15 @@</span></code>
 <code>     ASMC_MP5_TEMPS, ASMC_MP5_TEMPNAMES, ASMC_MP5_TEMPDESCS</code>
 <code>   },</code>
 <code></code>
-<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       /* Idem for the MacPro 2013 (cylinder) */</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       /* Idem for the Mac Pro 2013 (cylinder) */</span></code>
 <code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       {</span></code>
-<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    "MacPro6,1", "Apple SMC MacPro (2013)",</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    "MacPro6,1", "Apple SMC Mac Pro (2013)",</span></code>
 <code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_SMS_FUNCS_DISABLED,</span></code>
-<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_FAN_FUNCS,</span></code>
+<code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_FAN_FUNCS2,</span></code>
 <code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_LIGHT_FUNCS_DISABLED,</span></code>
 <code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">    ASMC_MP6_TEMPS, ASMC_MP6_TEMPNAMES, ASMC_MP6_TEMPDESCS</span></code>
 <code><span style="color: #22aa22; background-color: #eeffee;">+</span><span style="background-color: #eeffee;">       },</span></code>
@@ -499,7 +500,8 @@ need to do is add <code>asmc_load="YES"</code> to <code>boot/loader.conf</code>.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-diff"><code><span style="background-color: #d9d9d9;">--- </span><span style="background-color: #bfbfbf; font-weight: bold;">original/asmcvar.h</span><span style="background-color: #d9d9d9;">  2021-12-28 23:43:12.163365462 -0600</span></code>
+<pre class="src src-diff"><code><span style="background-color: #d9d9d9;">diff -u original/asmcvar.h my-patch/asmcvar.h</span></code>
+<code><span style="background-color: #d9d9d9;">--- </span><span style="background-color: #bfbfbf; font-weight: bold;">original/asmcvar.h</span><span style="background-color: #d9d9d9;">  2021-12-28 23:43:12.163365462 -0600</span></code>
 <code><span style="background-color: #d9d9d9;">+++ </span><span style="background-color: #bfbfbf; font-weight: bold;">my-patch/asmcvar.h</span><span style="background-color: #d9d9d9;">  2021-12-29 00:11:36.207227372 -0600</span></code>
 <code><span style="background-color: #d9d9d9;">@@ -581,6 +581,18 @@</span></code>
 <code>           "Te3F", "Te3S", "Te4F", "Te4S", "Te5F", \</code>
@@ -620,14 +622,14 @@ Here&rsquo;s how to install it:
 </ol>
 
 
-<figure id="org6837054">
+<figure id="orgb7759ed">
 <a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 19: </span>Installing rEFInd</figcaption>
 </figure>
 
 
-<figure id="org2690b86">
+<figure id="org9bea345">
 <a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;"></a>
 
 <figcaption><span class="figure-number">Figure 20: </span>The rEFInd boot menu</figcaption>
@@ -710,7 +712,7 @@ complaining needs to stop.
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2022-01-29</p>
+<p>Last&nbsp;updated:&nbsp;2022-05-08</p>
 </div>
 </body>
 </html>
