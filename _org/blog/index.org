@@ -1,4 +1,4 @@
-#+TITLE: Schwa's Blog
+#+TITLE: Blog
 #+AUTHOR: Adam Schwartz
 #+DATE: January 17, 2021
 #+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"

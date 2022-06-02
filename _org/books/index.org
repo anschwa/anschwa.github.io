@@ -1,0 +1,181 @@
+#+TITLE: What I'm reading
+#+AUTHOR: Adam Schwartz
+#+DATE: June 2, 2022
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
+
+* 2022
+** May 2022
+1. [[file:The-methodology-of-scientific-research-programmes.pdf][The methodology of scientific research programmes]]
+   - Imre Lakatos
+
+** March - April 2022
+1. [[file:Ecce-Homo.pdf][Ecce Homo]]
+   - Friedrich Nietzsche, translated by Walter Kaufmann
+
+** November 2021 - February 2022
+1. [[file:On-the-Genealogy-of-Morals.pdf][On the Genealogy of Morals]]
+   - Friedrich Nietzsche, translated by Walter Kaufmann and RJ Hollingdale
+
+* 2021
+** November 2021
+1. Start with Why
+   - Simon Sinek
+
+** October 2021
+1. [[file:The-Making-of-a-Counter-Culture.pdf][The Making of a Counter Culture: Reflections on the Technocratic Society and Its Youthful Opposition]]
+   - Theodore Roszak
+** September 2021
+1. Philosophy in the Tragic Age of the Greeks
+   - Friedrich Nietzsche
+** March 2021
+1. REWORK
+   - Jason Fried and David Heinemeier Hansson
+
+* 2020
+** September 2019 - February 2020
+1. Four Existential Theologians
+   - Will Herberg
+
+* 2019
+** September 2019
+1. The Work of Art in the Age of Mechanical Reproduction
+   - Walter Benjamin
+** March 2019
+1. Wittgenstein's Poker
+   - David Edmonds & John Eidinow
+
+* 2018
+** March - June
+1. Ethics, Treatise on the Emendation of the Intellect and Selected Letters
+   - Baruch Spinoza
+** February 2018
+1. The Structure of Scientific Revolutions
+   - Thomas S. Kuhn
+2. How to Talk About Books You Haven’t Read
+   - Pierre Bayard
+** January 2018
+1. Discourse on Method and Meditations on First Philosophy
+   - René Descartes
+
+* 2017
+** January - November 2017
+1. Farewell to Reason
+   - Paul Feyerabend
+** October 2017
+1. Billy Budd, Sailor
+   - Herman Melville
+
+* 2016
+** November 2016
+1. Ubik
+   - Philip K. Dick
+** June 2016
+1. Cat's Cradle
+   - Kurt Vonnegut
+2. Style: Toward Clarity and Grace
+   - Joseph M. Williams
+3. The Art of War
+   - Sun Tzu
+4. Against Method
+   - Paul Feyerabend
+
+** January 2016
+1. Orientalism
+   - Edward W. Said
+
+* 2015
+** December 2015
+1. A Clockwork Orange
+   - Anthony Burgess
+** November 2015
+1. What Makes You Not a Buddhist
+   - Dzongsar Jamyang Khyentse
+2. Fahrenheit 451
+   - Ray Bradbury
+** September 2015
+1. My Land and My People
+   - /His Holiness the Dalai Lama/
+2. The Meaning of Life
+   - /His Holiness the Dalai Lama/
+** August 2015
+1. Siddhartha
+   - Hermann Hesse, translated by Hilda Rosner
+2. Brave New World
+   - Aldous Huxley
+** July 2015
+1. Hackers & Painters
+   - Paul Graham
+** April - May 2015
+1. Crypto: How the Code Rebels Beat the Government—Saving Privacy in the Digital Age
+   - Steven Levy
+** March 2015
+1. The Dark Haired Girl
+   - Philip K. Dick
+2. The Mythical Man-Month
+   - Fred Brooks
+** February 2015
+1. The Republic
+   - Plato
+
+* 2014
+** November 2014
+1. The Cathedral and the Bazaar
+   - Essay by Eric S. Raymond
+2. The Icarus Deception: How High Will You Fly?
+   - Seth Godin
+** September 2014
+1. "What Do You Care What Other People Think?": Further Adventures of a Curious Character
+   - Richard P. Feynman
+2. The Meaning of It All: Thoughts of a Citizen-Scientist
+   - Richard P. Feynman
+** August 2014
+1. Americanah
+   - Chimamanda Ngozi Adichie
+2. Animal Farm
+   - George Orwell
+3. Nineteen Eighty-Four
+   - George Orwell
+4. The Salmon of Doubt
+   - Douglas Adams
+5. Surely You're Joking, Mr. Feynman! (Adventures of a Curious Character)
+   - Richard P. Feynman
+
+* 2013
+1. How to Read a Book
+   - Mortimer J. Adler and Charles Van Doren
+2. Oedipus Rex
+   - Sophocles, translated by Dudley Fitts and Robert Fitzgerald
+3. Antigone
+   - Sophocles, translated by Dudley Fitts and Robert Fitzgerald
+4. Civilization and its Discontents
+   - Sigmund Freud
+5. Man's Search For Meaning
+   - Viktor E. Frankl
+
+* Books I plan to read
+1. The Soul of A New Machine
+   - Tracy Kidder
+2. /The Birth of Tragedy/
+   - Friedrich Nietzsche
+3. /Being and Nothingness/
+   - Jean-Paul Sartre
+4. /The Second Sex/
+   - Simone de Beauvoir
+5. /Either/Or/
+   - Søren Kierkegaard
+6. /Beyond Good and Evil/
+   - Friedrich Nietzsche
+
+* Books I have partially read
+1. Structure and Interpretation of Computer Programs
+   - Harold Abelson
+   - Gerald Jay Sussman
+   - Julie Sussman
+2. The Little Schemer
+   - Daniel P. Friedman
+   - Matthias Felleisen
+3. The Rust Programming Language
+   - https://doc.rust-lang.org/book/
+4. Site Reliability Engineering
+   - Betsy Beyer, Chris Jones, Jennifer Petoff, and Niall Murphy

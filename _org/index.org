@@ -22,16 +22,15 @@ Hi, I graduated from [[https://earlham.edu/][Earlham College]] in 2018 with a BA
 Science, minor in Philosophy, and a few semesters of Studio Ceramics.
 
 * Books
-I'm currently reading /The methodology of scientific research programmes/ by Imre Lakatos.
+I'm currently reading /The Birth of Tragedy/ by Friedrich Nietzsche.
 
 Up next is:
-- /The Birth of Tragedy/ by Friedrich Nietzsche
-- /Either/Or/ by Søren Kierkegaard
+- /Being and Nothingness/ by Jean-Paul Sartre
+- /The Second Sex/ by Simone de Beauvoir
 
-Check out what else [[https://github.com/anschwa/books][I've been reading]].
+Check out what else [[file:books/index.org][I've been reading]].
 
 * Work                                                             :noexport:
-I'm building the future of healthcare communication at [[https://www.diagnotes.com/][Diagnotes]].
 
 * Resume / CV
 Previously I've enjoyed keeping [[file:cv/index.org][my resume]] in LaTeX, but now I prefer
