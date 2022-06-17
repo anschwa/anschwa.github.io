@@ -5,17 +5,24 @@
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
 
 * 2022
-** May 2022
-1. [[file:The-methodology-of-scientific-research-programmes.pdf][The methodology of scientific research programmes]]
-   - Imre Lakatos
-
-** March - April 2022
-1. [[file:Ecce-Homo.pdf][Ecce Homo]]
+** June 2022
+1. The Birth of Tragedy
    - Friedrich Nietzsche, translated by Walter Kaufmann
 
+** May 2022
+1. The methodology of scientific research programmes
+   - Imre Lakatos
+   - [[file:The-methodology-of-scientific-research-programmes.pdf][notes]]
+
+** March - April 2022
+1. Ecce Homo
+   - Friedrich Nietzsche, translated by Walter Kaufmann
+   - [[file:Ecce-Homo.pdf][notes]]
+
 ** November 2021 - February 2022
-1. [[file:On-the-Genealogy-of-Morals.pdf][On the Genealogy of Morals]]
+1. On the Genealogy of Morals
    - Friedrich Nietzsche, translated by Walter Kaufmann and RJ Hollingdale
+   - [[file:On-the-Genealogy-of-Morals.pdf][notes]]
 
 * 2021
 ** November 2021
@@ -23,11 +30,14 @@
    - Simon Sinek
 
 ** October 2021
-1. [[file:The-Making-of-a-Counter-Culture.pdf][The Making of a Counter Culture: Reflections on the Technocratic Society and Its Youthful Opposition]]
+1. The Making of a Counter Culture: Reflections on the Technocratic Society and Its Youthful Opposition
    - Theodore Roszak
+   - [[file:The-Making-of-a-Counter-Culture.pdf][notes]]
+
 ** September 2021
 1. Philosophy in the Tragic Age of the Greeks
    - Friedrich Nietzsche
+
 ** March 2021
 1. REWORK
    - Jason Fried and David Heinemeier Hansson
@@ -41,6 +51,7 @@
 ** September 2019
 1. The Work of Art in the Age of Mechanical Reproduction
    - Walter Benjamin
+
 ** March 2019
 1. Wittgenstein's Poker
    - David Edmonds & John Eidinow
@@ -49,11 +60,13 @@
 ** March - June
 1. Ethics, Treatise on the Emendation of the Intellect and Selected Letters
    - Baruch Spinoza
+
 ** February 2018
 1. The Structure of Scientific Revolutions
    - Thomas S. Kuhn
 2. How to Talk About Books You Haven’t Read
    - Pierre Bayard
+
 ** January 2018
 1. Discourse on Method and Meditations on First Philosophy
    - René Descartes
@@ -62,6 +75,7 @@
 ** January - November 2017
 1. Farewell to Reason
    - Paul Feyerabend
+
 ** October 2017
 1. Billy Budd, Sailor
    - Herman Melville
@@ -70,6 +84,7 @@
 ** November 2016
 1. Ubik
    - Philip K. Dick
+
 ** June 2016
 1. Cat's Cradle
    - Kurt Vonnegut
@@ -88,32 +103,39 @@
 ** December 2015
 1. A Clockwork Orange
    - Anthony Burgess
+
 ** November 2015
 1. What Makes You Not a Buddhist
    - Dzongsar Jamyang Khyentse
 2. Fahrenheit 451
    - Ray Bradbury
+
 ** September 2015
 1. My Land and My People
    - /His Holiness the Dalai Lama/
 2. The Meaning of Life
    - /His Holiness the Dalai Lama/
+
 ** August 2015
 1. Siddhartha
    - Hermann Hesse, translated by Hilda Rosner
 2. Brave New World
    - Aldous Huxley
+
 ** July 2015
 1. Hackers & Painters
    - Paul Graham
+
 ** April - May 2015
 1. Crypto: How the Code Rebels Beat the Government—Saving Privacy in the Digital Age
    - Steven Levy
+
 ** March 2015
 1. The Dark Haired Girl
    - Philip K. Dick
 2. The Mythical Man-Month
    - Fred Brooks
+
 ** February 2015
 1. The Republic
    - Plato
@@ -124,11 +146,13 @@
    - Essay by Eric S. Raymond
 2. The Icarus Deception: How High Will You Fly?
    - Seth Godin
+
 ** September 2014
 1. "What Do You Care What Other People Think?": Further Adventures of a Curious Character
    - Richard P. Feynman
 2. The Meaning of It All: Thoughts of a Citizen-Scientist
    - Richard P. Feynman
+
 ** August 2014
 1. Americanah
    - Chimamanda Ngozi Adichie
@@ -153,21 +177,21 @@
 5. Man's Search For Meaning
    - Viktor E. Frankl
 
-* Books I plan to read
-1. The Soul of A New Machine
-   - Tracy Kidder
-2. /The Birth of Tragedy/
+* Up next
+1. /Beyond Good and Evil/
    - Friedrich Nietzsche
-3. /Being and Nothingness/
+2. /Being and Nothingness/
    - Jean-Paul Sartre
-4. /The Second Sex/
+3. /The Second Sex/
    - Simone de Beauvoir
-5. /Either/Or/
+4. /Either/Or/
    - Søren Kierkegaard
-6. /Beyond Good and Evil/
-   - Friedrich Nietzsche
+5. The Soul of A New Machine
+   - Tracy Kidder
 
-* Books I have partially read
+* Programming textbooks
+These have been mostly used as references. I haven't rigorously worked through them cover-to-cover.
+
 1. Structure and Interpretation of Computer Programs
    - Harold Abelson
    - Gerald Jay Sussman
