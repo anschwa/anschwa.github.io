@@ -10,7 +10,7 @@
 - Website: [[https://anschwa.com]]
 - GitHub: [[https://github.com/anschwa]]
 - Coffee, Dvorak, Emacs, Sriracha, Zappa
-- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user, [[https://www.nomodes.com/Larry_Tesler_Consulting/CV_files/NOMODES.jpg][No Modes]]
+- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user, [[https://en.wikipedia.org/wiki/Larry_Tesler][No Modes]]
 
 #+BEGIN_EXPORT html
 <figure style="margin: 2em 0;">
