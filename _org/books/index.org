@@ -4,25 +4,31 @@
 #+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
 
+* Up Next
+1. /Being and Nothingness/
+   - Jean-Paul Sartre
+2. /The Second Sex/
+   - Simone de Beauvoir
+3. /Either/Or/
+   - Søren Kierkegaard
+4. The Soul of A New Machine
+   - Tracy Kidder
+
 * 2022
 ** June 2022
 1. The Birth of Tragedy
    - Friedrich Nietzsche, translated by Walter Kaufmann
+   - [[file:The-Birth-of-Tragedy.pdf][bookmarks]]
 
 ** May 2022
 1. The methodology of scientific research programmes
    - Imre Lakatos
-   - [[file:The-methodology-of-scientific-research-programmes.pdf][notes]]
+   - [[file:The-methodology-of-scientific-research-programmes.pdf][bookmarks]]
 
-** March - April 2022
-1. Ecce Homo
-   - Friedrich Nietzsche, translated by Walter Kaufmann
-   - [[file:Ecce-Homo.pdf][notes]]
-
-** November 2021 - February 2022
-1. On the Genealogy of Morals
+** November 2021 - April 2022
+1. On the Genealogy of Morals and Ecce Homo
    - Friedrich Nietzsche, translated by Walter Kaufmann and RJ Hollingdale
-   - [[file:On-the-Genealogy-of-Morals.pdf][notes]]
+   - [[file:On-the-Genealogy-of-Morals-and-Ecce-Homo.pdf][bookmarks]]
 
 * 2021
 ** November 2021
@@ -32,7 +38,7 @@
 ** October 2021
 1. The Making of a Counter Culture: Reflections on the Technocratic Society and Its Youthful Opposition
    - Theodore Roszak
-   - [[file:The-Making-of-a-Counter-Culture.pdf][notes]]
+   - [[file:The-Making-of-a-Counter-Culture.pdf][bookmarks]]
 
 ** September 2021
 1. Philosophy in the Tragic Age of the Greeks
@@ -177,20 +183,8 @@
 5. Man's Search For Meaning
    - Viktor E. Frankl
 
-* Up next
-1. /Beyond Good and Evil/
-   - Friedrich Nietzsche
-2. /Being and Nothingness/
-   - Jean-Paul Sartre
-3. /The Second Sex/
-   - Simone de Beauvoir
-4. /Either/Or/
-   - Søren Kierkegaard
-5. The Soul of A New Machine
-   - Tracy Kidder
-
 * Programming textbooks
-These have been mostly used as references. I haven't rigorously worked through them cover-to-cover.
+These have been mostly used as references. I haven't worked through them cover-to-cover.
 
 1. Structure and Interpretation of Computer Programs
    - Harold Abelson

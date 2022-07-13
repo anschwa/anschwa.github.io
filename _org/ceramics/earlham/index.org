@@ -11,62 +11,62 @@
 - [[https://github.com/anschwa][Github]]
 
 * May 2017
-#+CAPTION: High fired stoneware tumblers
+#+CAPTION: Stoneware tumblers
 [[file:img/2017-05-02_stoneware-tumblers-1.jpg][file:img/thumbs/2017-05-02_stoneware-tumblers-1.jpg]]
 
 * December 2017
-#+CAPTION: High fired stoneware stein series
+#+CAPTION: Stoneware steins
 [[file:img/2017-12-12_stoneware-steins-series-1.jpg][file:img/thumbs/2017-12-12_stoneware-steins-series-1.jpg]]
 
-#+CAPTION: High fired porcelain mug series
+#+CAPTION: Porcelain mugs
 [[file:img/2017-12-12_porcelain-mugs-series-1.jpg][file:img/thumbs/2017-12-12_porcelain-mugs-series-1.jpg]]
 
-#+CAPTION: High fired porcelain /Glider/ mugs
+#+CAPTION: Porcelain /Glider/ mugs
 [[file:img/2017-12-12_porcelain-glider-mugs-1.jpg][file:img/thumbs/2017-12-12_porcelain-glider-mugs-1.jpg]]
 
 * April 2018
-#+CAPTION: High fired stoneware /Glider/ mug series (1)
+#+CAPTION: Stoneware /Glider/ mugs (1)
 [[file:img/2018-04-29_stoneware-glider-mugs-series-1.jpg][file:img/thumbs/2018-04-29_stoneware-glider-mugs-series-1.jpg]]
 
-#+CAPTION: High fired stoneware /Glider/ mug series (2)
+#+CAPTION: Stoneware /Glider/ mugs (2)
 [[file:img/2018-04-29_stoneware-glider-mugs-series-2.jpg][file:img/thumbs/2018-04-29_stoneware-glider-mugs-series-2.jpg]]
 
-#+CAPTION: High fired porcelain teapot (1)
+#+CAPTION: Porcelain teapot (1)
 [[file:img/2018-04-29_porcelain-teapot-1.jpg][file:img/thumbs/2018-04-29_porcelain-teapot-1.jpg]]
 
-#+CAPTION: High fired porcelain teapot (2a)
+#+CAPTION: Porcelain teapot (2a)
 [[file:img/2018-04-29_porcelain-teapot-2a.jpg][file:img/thumbs/2018-04-29_porcelain-teapot-2a.jpg]]
 
-#+CAPTION: High fired porcelain teapot (2b)
+#+CAPTION: Porcelain teapot (2b)
 [[file:img/2018-04-29_porcelain-teapot-2b.jpg][file:img/thumbs/2018-04-29_porcelain-teapot-2b.jpg]]
 
-#+CAPTION: High fired porcelain teapot (3a)
+#+CAPTION: Porcelain teapot (3a)
 [[file:img/2018-04-29_porcelain-teapot-3a.jpg][file:img/thumbs/2018-04-29_porcelain-teapot-3a.jpg]]
 
-#+CAPTION: High fired porcelain teapot (3b)
+#+CAPTION: Porcelain teapot (3b)
 [[file:img/2018-04-29_porcelain-teapot-3b.jpg][file:img/thumbs/2018-04-29_porcelain-teapot-3b.jpg]]
 
-#+CAPTION: High fired porcelain teapot (4a)
+#+CAPTION: Porcelain teapot (4a)
 [[file:img/2018-04-29_porcelain-teapot-4a.jpg][file:img/thumbs/2018-04-29_porcelain-teapot-4a.jpg]]
 
-#+CAPTION: High fired porcelain teapot (4b)
+#+CAPTION: Porcelain teapot (4b)
 [[file:img/2018-04-29_porcelain-teapot-4b.jpg][file:img/thumbs/2018-04-29_porcelain-teapot-4b.jpg]]
 
-#+CAPTION: High fired porcelain chattered bowls (1a)
+#+CAPTION: Porcelain chattered bowls (1a)
 [[file:img/2018-04-29_porcelain-chatter-bowls-1a.jpg][file:img/thumbs/2018-04-29_porcelain-chatter-bowls-1a.jpg]]
 
-#+CAPTION: High fired porcelain chattered bowls (1b)
+#+CAPTION: Porcelain chattered bowls (1b)
 [[file:img/2018-04-29_porcelain-chatter-bowls-1b.jpg][file:img/thumbs/2018-04-29_porcelain-chatter-bowls-1b.jpg]]
 
-#+CAPTION: High fired porcelain chattered bowls (1c)
+#+CAPTION: Porcelain chattered bowls (1c)
 [[file:img/2018-04-29_porcelain-chatter-bowls-1c.jpg][file:img/thumbs/2018-04-29_porcelain-chatter-bowls-1c.jpg]]
 
 * May 2018
-#+CAPTION: High fired porcelain chatterd mugs
+#+CAPTION: Porcelain chatterd mugs
 [[file:img/2018-05-03_porcelain-chatter-mugs-1.jpg][file:img/thumbs/2018-05-03_porcelain-chatter-mugs-1.jpg]]
 
-#+CAPTION: High fired porcelain /Glider/ tiles with mug (1)
+#+CAPTION: Porcelain /Glider/ tiles with mug (1)
 [[file:img/2018-05-03_porcelain-glider-tiles-and-mug-1.jpg][file:img/thumbs/2018-05-03_porcelain-glider-tiles-and-mug-1.jpg]]
 
-#+CAPTION: High fired porcelain /Glider/ tiles with mug (2)
+#+CAPTION: Porcelain /Glider/ tiles with mug (2)
 [[file:img/2018-05-03_porcelain-glider-tiles-and-mug-2.jpg][file:img/thumbs/2018-05-03_porcelain-glider-tiles-and-mug-2.jpg]]
