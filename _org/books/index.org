@@ -5,20 +5,27 @@
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
 
 * Up Next
-1. /The Second Sex/
-   - Simone de Beauvoir
-2. /Being and Nothingness/
+1. /Being and Nothingness/
    - Jean-Paul Sartre
-3. /Either/Or/
+2. /Either/Or/
    - Søren Kierkegaard
-4. The Soul of A New Machine
-   - Tracy Kidder
 
 * 2022
+** September 2022
+1. /The Soul of a New Machine/
+   - Tracy Kidder
+   - audiobook
+
+** August 2022
+1. /The Second Sex/
+   - Simone de Beauvoir
+   - audiobook
+
 ** July 2022
 1. Beyond Good and Evil
   - Friedrich Nietzsche, translated by Walter Kaufmann
   - [[file:Beyond-Good-and-Evil.pdf][bookmarks]]
+
 ** June 2022
 1. The Birth of Tragedy
    - Friedrich Nietzsche, translated by Walter Kaufmann

@@ -11,7 +11,6 @@
 - [[https://github.com/anschwa][Github]]
 
 * About
-
 #+BEGIN_EXPORT html
 <p style="text-align: center;">
   <img src="img/me.jpg" alt="Me circa 2015 in Dharamshala, India." width="200" height="200" style="width: 200px; border-radius: 50%;" />
@@ -22,11 +21,10 @@ Hi, I graduated from [[https://earlham.edu/][Earlham College]] in 2018 with a BA
 Science, minor in Philosophy, and a few semesters of Studio Ceramics.
 
 * Books
-I'm currently reading /Beyond Good and Evil/ by Friedrich Nietzsche.
 
 Up next is:
 - /Being and Nothingness/ by Jean-Paul Sartre
-- /The Second Sex/ by Simone de Beauvoir
+- /Either/Or/ by Søren Kierkegaard
 
 Check out what else [[file:books/index.org][I've been reading]].
 
