@@ -4,7 +4,6 @@
 /* Override CSS properties for printing or saving as PDF from the browser */
 /**************************************************************************/
 
-
 h1 { display: none; }
 h1, h2 { font-size: 1.5em; }
 body { font-size: 70%; }

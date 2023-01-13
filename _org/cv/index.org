@@ -9,8 +9,6 @@
 - Adam Schwartz
 - Website: [[https://anschwa.com]]
 - GitHub: [[https://github.com/anschwa]]
-- Coffee, Dvorak, Emacs, Sriracha, Zappa
-- [[https://en.wikipedia.org/wiki/The_UNIX-HATERS_Handbook][Unix-hater]], Linux user, [[https://en.wikipedia.org/wiki/Larry_Tesler][No Modes]]
 
 #+BEGIN_EXPORT html
 <figure style="margin: 2em 0;">
@@ -34,7 +32,7 @@
 - Awards
   - 2018: /Wendell M. Stanley Senior Scholar-Athlete Award/
   - 2015, 2017: /All-HCAC Sportsmanship Award/, Heartland College Athletic Conference, Division III Men's Tennis
-  - December 2013: /Earlham Dean's Scholarship/
+  - 2013: /Earlham Dean's Scholarship/
 
 ** 2010 - 2014: New Trier Township High School, Winnetka, IL       :noexport:
 - GPA: 4.05
@@ -44,15 +42,19 @@
     - Senior Award of Distinction: Demonstrating professionalism and commitment to leadership
 
 * Experience
+** September 2022 - Present: *Technologist*, [[https://www.cvpcorp.com][CVP]], Washington, DC
+- Software Engineer for the [[https://www.uscis.gov/about-us/organization/directorates-and-program-offices/refugee-asylum-and-international-operations-directorate][Refugee and Asylum directorate]] of the
+  United States Citizenship and Immigration Services ([[https://www.uscis.gov/about-us/mission-and-core-values][USCIS]]).
+
 ** May 2018 - August 2021: *Software Engineer*, [[https://www.diagnotes.com/][Diagnotes, Inc.]], Indianapolis, IN
 - Feature development and maintenance on a large Ruby on Rails application.
 - Worked on several projects to migrate core platform functionality
   into standalone services such as messaging, notification delivery,
   and file uploads.
-- Lead frontend engineer for several Vue.js single-page-apps (SPAs)
-  to improve user experience and take advantage of new backend
-  services and product features.
-- Assist with platform upgrades, deployments, and monitoring of
+- Lead frontend engineer for several Vue.js single-page-apps (SPAs) to
+  improve user experience and take advantage of new backend services
+  and product features.
+- Assisted with platform upgrades, deployments, and monitoring of
   production services on AWS.
 - Primary Technologies: Go, JavaScript, Ruby, PostgreSQL, Docker, AWS
 

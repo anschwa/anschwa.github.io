@@ -20,6 +20,8 @@
 Hi, I graduated from [[https://earlham.edu/][Earlham College]] in 2018 with a BA in Computer
 Science, minor in Philosophy, and a few semesters of Studio Ceramics.
 
+Now I work for [[https://www.uscis.gov/about-us/mission-and-core-values][USCIS]] as a software engineer in the Refugee and Asylum directorate.
+
 * Books
 
 Up next is:
@@ -32,7 +34,7 @@ Check out what else [[file:books/index.org][I've been reading]].
 
 * Resume / CV
 Previously I've enjoyed keeping [[file:cv/index.org][my resume]] in LaTeX, but now I prefer
-using HTML with a custom [[https://developer.mozilla.org/en-US/docs/Web/Guide/Printing#using_a_print_style_sheet][print.css]] file.
+using HTML with a custom [[file:cv/print.css][print.css]] file.
 
 #+BEGIN_EXPORT html
 <hr/>

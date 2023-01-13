@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-10-11 -->
-<meta charset="utf-8" />
+<!-- 2023-01-12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Getting Started with ZFS</title>
 <meta name="author" content="Adam Schwartz" />
@@ -22,9 +24,9 @@
 <li><a href="https://github.com/anschwa">Github</a></li>
 </ul>
 
-<div id="outline-container-org5509be3" class="outline-2">
-<h2 id="org5509be3">Getting Started with ZFS</h2>
-<div class="outline-text-2" id="text-org5509be3">
+<div id="outline-container-org3bd8c2e" class="outline-2">
+<h2 id="org3bd8c2e">Getting Started with ZFS</h2>
+<div class="outline-text-2" id="text-org3bd8c2e">
 <p>
 These are my notes from setting up a ZFS file server on FreeBSD.
 </p>
@@ -42,9 +44,9 @@ enclosure that will be formatted as UFS for &ldquo;scratch&rdquo; data.
 </div>
 </div>
 
-<div id="outline-container-org821a859" class="outline-2">
-<h2 id="org821a859">Initializing Drives</h2>
-<div class="outline-text-2" id="text-org821a859">
+<div id="outline-container-org3268986" class="outline-2">
+<h2 id="org3268986">Initializing Drives</h2>
+<div class="outline-text-2" id="text-org3268986">
 <p>
 I like the idea of setting each disk&rsquo;s serial number as the drive
 label because it is an unambiguous reference. Importantly, the serial
@@ -55,7 +57,7 @@ touch. (Or type!)
 </p>
 
 <p>
-With that in mind, the first thing we want to do is find where our
+With that in mind, the first thing I did was to find where the
 drives are currently located in the machine:
 </p>
 <div class="org-src-container">
@@ -69,14 +71,14 @@ drives are currently located in the machine:
 </div>
 
 <p>
-Now, we have a few ways of getting the serial number, but if you
+There are a few ways of getting the serial number, but if you
 decide to grab it from software, please also make sure the same value
-is printed on the actual physical drive label.
+is printed on the physical drive label.
 </p>
 
 <p>
-We could use <code>camcontrol identify</code> or <code>geom disk list</code>, but in this
-case we can <code>grep</code> over <code>dmesg</code> in a clever way to grab all our drive
+You can use <code>camcontrol identify</code> or <code>geom disk list</code>, but in this I
+decided to <code>grep</code> over <code>dmesg</code> in a clever way to grab all the drive
 serial numbers at once.
 </p>
 <div class="org-src-container">
@@ -99,7 +101,7 @@ serial numbers at once.
 </div>
 
 <p>
-Now let&rsquo;s initialize the drives.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> ZFS will enable TRIM by default
+Now I can initialize the drives <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>. Conveniently, ZFS will enable TRIM by default
 for drives that support it.
 </p>
 
@@ -131,22 +133,22 @@ for drives that support it.
 </div>
 
 <p>
-After creating all of your new partitions you can check out the
-results with <code>gpart show -lp</code>. After setting the GPT drive labels the
+After creating all of the new partitions you can check the results
+with <code>gpart show -lp</code>. After setting the GPT drive labels the
 partitions can be referenced by <code>/dev/gpt/$SERIAL_NUMBER</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgd4dc2e3" class="outline-2">
-<h2 id="orgd4dc2e3">Configuring ZFS</h2>
-<div class="outline-text-2" id="text-orgd4dc2e3">
+<div id="outline-container-org7a37685" class="outline-2">
+<h2 id="org7a37685">Configuring ZFS</h2>
+<div class="outline-text-2" id="text-org7a37685">
 <p>
 I&rsquo;m hoping the <a href="https://docs.freebsd.org/en/books/handbook/zfs/">FreeBSD handbook&rsquo;s entry on ZFS</a> will be enough to get everything setup.
 </p>
 
 <p>
-The first thing it wants us to do is enable ZFS on the system.
+The first thing it says to do is enable ZFS on the system.
 </p>
 <div class="org-src-container">
 <pre class="src src-text"><code>$ echo 'zfs_enable="YES' &gt;&gt; /etc/rc.conf</code>
@@ -155,11 +157,11 @@ The first thing it wants us to do is enable ZFS on the system.
 </div>
 </div>
 
-<div id="outline-container-org2d70384" class="outline-3">
-<h3 id="org2d70384">Single drive (backup)</h3>
-<div class="outline-text-3" id="text-org2d70384">
+<div id="outline-container-orga2a2197" class="outline-3">
+<h3 id="orga2a2197">Single drive (backup)</h3>
+<div class="outline-text-3" id="text-orga2a2197">
 <p>
-Even for a single drive, the first step is to create our <code>zpool</code>:
+Even for a single drive, the first step is to create a <code>zpool</code>:
 </p>
 <div class="org-src-container">
 <pre class="src src-text"><code>$ zpool create backup /dev/gpt/WD-WXP2E31CV0WZ</code>
@@ -172,7 +174,7 @@ sure you are running <code>zpool create</code> as root.
 </p>
 
 <p>
-We can see that it worked by checking the output of <code>df</code>, <code>zpool status</code>, or <code>zpool list</code>.
+You can see that it worked by checking the output of <code>df</code>, <code>zpool status</code>, or <code>zpool list</code>.
 </p>
 <div class="org-src-container">
 <pre class="src src-text"><code>$ df</code>
@@ -205,7 +207,7 @@ We can see that it worked by checking the output of <code>df</code>, <code>zpool
 </div>
 
 <p>
-Now we can create the filesystem, also known as a <code>dataset</code>. I think
+Now you can create the filesystem, also known as a <code>dataset</code>. I think
 adding compression and turning off access time are enough customization&rsquo;s for now.
 </p>
 <div class="org-src-container">
@@ -218,9 +220,9 @@ adding compression and turning off access time are enough customization&rsquo;s 
 </div>
 </div>
 
-<div id="outline-container-org83c4ae1" class="outline-3">
-<h3 id="org83c4ae1">Mirrored drives (data)</h3>
-<div class="outline-text-3" id="text-org83c4ae1">
+<div id="outline-container-orge3f59ff" class="outline-3">
+<h3 id="orge3f59ff">Mirrored drives (data)</h3>
+<div class="outline-text-3" id="text-orge3f59ff">
 <p>
 The first step is to create a mirrored <code>zpool</code>:
 </p>
@@ -256,9 +258,9 @@ Looks good!
 </div>
 </div>
 
-<div id="outline-container-org0da6811" class="outline-3">
-<h3 id="org0da6811">Networked Storage with NFS</h3>
-<div class="outline-text-3" id="text-org0da6811">
+<div id="outline-container-org80a61af" class="outline-3">
+<h3 id="org80a61af">Networked Storage with NFS</h3>
+<div class="outline-text-3" id="text-org80a61af">
 <ul class="org-ul">
 <li><a href="https://docs.freebsd.org/en/books/handbook/zfs/#zfs-zfs-set-share">https://docs.freebsd.org/en/books/handbook/zfs/#zfs-zfs-set-share</a></li>
 <li><a href="https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs">https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs</a></li>
@@ -305,12 +307,12 @@ Sharing ZFS <code>dataset</code>:
 </div>
 
 <p>
-This will share our <code>dataset</code> over NFS with the default options
+This will share the <code>dataset</code> over NFS with the default options
 mentioned in <a href="https://www.freebsd.org/cgi/man.cgi?query=zfsprops&amp;sektion=8">zfsprops(8)</a>.
 </p>
 
 <p>
-We can list all the custom options in a <code>dataset</code> like this:
+You can list all of the custom options in a <code>dataset</code> like this:
 </p>
 <div class="org-src-container">
 <pre class="src src-text"><code>$ zfs get -r -s local all storage/data</code>
@@ -335,7 +337,7 @@ Or get the value for specific options:
 </div>
 
 <p>
-Now we should be able to mount <code>storage/data</code> on another machine with
+Now you should be able to mount <code>storage/data</code> on another machine with
 an NFS client installed:
 </p>
 <div class="org-src-container">
@@ -367,7 +369,7 @@ I&rsquo;m the only user anyway and I&rsquo;m connecting on a local network.
 
 <p>
 While I continue to set things up, I made <code>/storage/data</code>
-&ldquo;word-writable&rdquo; so I can actually start using the file server.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>
+&ldquo;world-writable&rdquo; so I can start using the file server <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
 </p>
 <div class="org-src-container">
 <pre class="src src-text"><code>chmod -R 777 /storage</code>
@@ -377,22 +379,22 @@ While I continue to set things up, I made <code>/storage/data</code>
 <p>
 Ultimately, I would like to use &ldquo;ZFS over NFS&rdquo; as my primary storage
 medium because it would keep everything in one place and let me access
-it from any computer.
+it from any computer on my network.
 </p>
 
 <p>
-Overall, ZFS is a really flexible filesystem and using ECC memory
-provides a lot of protection against data corruption. I can manage
-local and remote backups with <code>zfs send</code> and seamlessly add or
+Overall, I think ZFS is a really flexible filesystem and using ECC
+memory provides a lot of protection against data corruption. I can
+manage local and remote backups with <code>zfs send</code> and seamlessly add or
 replace drives by linking new <code>zpools</code> to my existing <code>datasets</code>.
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge2b77d3" class="outline-2">
-<h2 id="orge2b77d3">Bonus: Creating my UFS scratch disk</h2>
-<div class="outline-text-2" id="text-orge2b77d3">
+<div id="outline-container-orge5398f6" class="outline-2">
+<h2 id="orge5398f6">Bonus: Creating my UFS scratch disk</h2>
+<div class="outline-text-2" id="text-orge5398f6">
 <p>
 (I&rsquo;m using the serial number I got earlier and <b>double-triple-checked</b> my drive number!)
 </p>
@@ -462,7 +464,7 @@ It&rsquo;s only temporary if it doesn&rsquo;t work…
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2022-10-05</p>
+<p>Last&nbsp;updated:&nbsp;2023-01-12</p>
 </div>
 </body>
 </html>

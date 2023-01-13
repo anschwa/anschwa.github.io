@@ -16,8 +16,8 @@
 In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
 listed on Craigslist. Some might have considered this to be a "bad
 move" from the start, but I thought the 2013 Mac Pro was simply the
-most amazing computer ever made and $950 seemed like an absolute
-steal. I was wrong.
+most amazing computer ever made and $950 seemed like a great
+deal [fn:1].
 
 #+CAPTION: My 2013 Mac Pro
 #+ATTR_HTML: :style max-width: 400px;
@@ -30,30 +30,30 @@ Apple's proprietary dual AMD FirePro GPUs.
 
 If I was in the market for a new Mac, the right thing to do would have
 been to get an M1 Mac mini. Not only are the M1 Macs faster, they are
-also cheaper and consume significantly less energy.[fn:1] However, I
+also cheaper and consume significantly less energy. [fn:2] However, I
 wasn't really in the market for a Mac, what I wanted was a server.
 
-As it turns out, my 2013 Mac Pro is a very compelling server. It is
+As it turns out, the 2013 Mac Pro is a very compelling server. It is
 extremely quiet, compact, and rocks a 12-core Intel Xeon E5 with 64GB
-of ECC memory.[fn:2] Unfortunately, I wasn't expecting the thermal
+of ECC memory. Unfortunately, I wasn't expecting the thermal
 issues and kernel panics, which made me skeptical of this machine's
-viability as a reliable home server, so mostly it sat on the shelf.
+viability as a reliable home server, so mostly it sat on a shelf.
 
 Eventually, I decided to see if I could install Linux or maybe even
 FreeBSD alongside macOS. My hope was that by running on a minimal
 "headless" environment, I could avoid any stability issues due to the
 GPUs. Furthermore, I've been interested in trying out FreeBSD for a
 while because of two very compelling features: ZFS and the base
-system.[fn:3]
+system [fn:3].
 
-While ZFS has been available on Linux for several years now, I
-consider that to be more "piece of mind" than anything else. I doubt
-the Linux community will ever adopt ZFS as their primary filesystem.
-Meanwhile, FreeBSD has proudly supported ZFS since 2008.
+While ZFS has been available on Linux for several years now, it has
+always been somewhat of an outcast, with Btrfs being the "modern"
+flagship filesystem. Meanwhile, FreeBSD has proudly supported ZFS as a
+first-class filesystem since 2008.
 
 Besides ZFS, I really like the unified deployment model of the FreeBSD
 base system. This provides a level of consistency and correctness in
-the operating system that Linux deeply struggles with.
+the operating system that I think the Linux deeply struggles with.
 
 * FreeBSD Installation Notes
 This was going to be my first time installing FreeBSD, so luckily I
@@ -61,12 +61,12 @@ had my T470 lying around to experiment with. I wasn't expecting the
 installation on the Mac Pro to go smoothly, so having a computer that
 was known to be compatible with FreeBSD was really convenient. I was
 able to run though several installations to get a sense of how things
-will go on the Mac.
+would go on the Mac.
 
 The very first thing I did was disable disk encryption (FireVault) on
 the Mac Pro. I'm not sure it would have been a problem, but I didn't
-feel like finding out. I didn't have any issues turning FireVault back
-on after completing the FreeBSD installation process.
+have any issues turning FireVault back on after completing the FreeBSD
+installation process.
 
 One of the biggest drawbacks to FreeBSD is that there is much less
 content online to help troubleshoot issues or answer all the random
@@ -76,9 +76,8 @@ enough information to get a successful multi-booting environment setup
 on the Mac Pro.
 
 After testing my bootable FreeBSD USB drive on my ThinkPad, I tried to
-boot into it from the Mac by holding down the /Option (Alt)/ key during
-startup. I didn't want to waste my time if I couldn't get FreeBSD to
-boot on the Mac.
+boot into it from the Mac by holding down the /Option (Alt)/ key
+during startup.
 
 #+CAPTION: Holding Option (Alt) to boot with my FreeBSD USB drive
 #+ATTR_HTML: :style max-width: 400px;
@@ -92,11 +91,11 @@ I was pretty excited after seeing the FreeBSD boot menu show up. I
 wasn't sure what to expect because the Xeon E5 doesn't have integrated
 graphics and I wasn't sure the AMD FirePro's were going to work.
 Although my enthusiasm didn't last long, only a few seconds into the
-boot process later and it was game over. The console was endlessly
+boot process and it was game over: The console was endlessly
 streaming the text /pcib8: Power Fault Detected/ and became completely
 unresponsive.
 
-#+CAPTION: Oh NO! pcib8: Power Fault Detected. We're stuck.
+#+CAPTION: Oh NO! pcib8: Power Fault Detected. I'm stuck.
 #+ATTR_HTML: :style max-width: 400px;
 [[file:img/power-fault-detected.jpg][file:img/thumbs/power-fault-detected.jpg]]
 
@@ -110,18 +109,17 @@ the same problem and I wasn't really sure how to use the /Loader
 prompt/. However, I felt like I was making progress.
 
 My biggest clue was the ~pcib8~ bit. Since this was an error message
-during PCI device initialization, I start searching the web for things
+during PCI device initialization, I started searching the web for things
 like "FreeBSD pci won't boot" and "FreeBSD power fault detected".
 
 Once it became clear that I was on my own with this one, I pulled up
-the FreeBSD manual pages for [[https://www.freebsd.org/cgi/man.cgi?query=boot&sektion=8][boot(8)]], [[https://www.freebsd.org/cgi/man.cgi?loader(8)][loader(8)]], and [[https://www.freebsd.org/cgi/man.cgi?query=pci&sektion=4][pci(4)]] then
-started reading through them. I started to get a sense for how the
+the FreeBSD manual pages for [[https://www.freebsd.org/cgi/man.cgi?query=boot&sektion=8][boot(8)]], [[https://www.freebsd.org/cgi/man.cgi?loader(8)][loader(8)]], and [[https://www.freebsd.org/cgi/man.cgi?query=pci&sektion=4][pci(4)]] and
+started reading through them. I began to get a sense for how the
 FreeBSD boot process worked and was ready to try setting custom boot
 options.
 
-Miraculously, I discovered a single boot option that fixed my issue.
-Now I could finally get into the FreeBSD installer and live
-environment!
+Amazingly, I discovered a single boot option that fixed the issue. Now
+I could finally get into the FreeBSD installer and live environment!
 
 Here is all I needed to get FreeBSD to boot on the Mac Pro:
 1. Press ~3~ to "Escape to loader prompt"
@@ -142,16 +140,16 @@ macOS uses powers of 10 (eg: Gigabyte). I decided on a 4GiB swap and
 - ~(84 GiB / 1 GiB) * (2^30 bytes / 1 GB) = 90,194,313,216 bytes~
 - ~(90,194,313,216 bytes / 1 byte) * (1 GB / 10^9 bytes) = 90.194313216~
 
-So we want to resize our macOS partition to *90.19 GB*
+This means I will need to resize the macOS partition to *90.19 GB*.
 
 One of the great features of the "new" Apple File System [[https://en.wikipedia.org/wiki/Apple_File_System][(APFS)]] is
-that you can resize our startup disk while it's mounted. There's no
+that you can resize the startup disk while it's mounted. There's no
 need to reboot into recovery or another live environment.
 
-It doesn't matter what filesystem you choose because you will create
-the new partitions in the FreeBSD installer. The important part is
-being able to know which partition is which so you don't accidentally
-overwrite macOS.
+Now, it doesn't matter which filesystem you choose in Disk Utility
+because the FreeBSD installer will create the real partition. The
+important part is being able to know which of the resized partition is
+which so you don't accidentally overwrite macOS.
 
 #+CAPTION: Choose macOS partition to resize
 #+ATTR_HTML: :style max-width: 400px;
@@ -170,7 +168,7 @@ overwrite macOS.
 [[file:img/macOS-resize-4.png][file:img/macOS-resize-4.png]]
 
 ** Installing FreeBSD
-The first step is create the ~freebsd-root~ and ~freebsd-swap~
+The first step is to create the ~freebsd-root~ and ~freebsd-swap~
 partitions. Don't forget to add drive labels and enable TRIM support
 if you're using an SSD.
 
@@ -210,10 +208,9 @@ installation, you will need to add them and update the entries in
 #+ATTR_HTML: :style max-width: 400px;
 [[file:img/installing-progress.jpg][file:img/thumbs/installing-progress.jpg]]
 
-After creating your custom partitions, the only thing left to do is
-remember to add ~hw.pci.enable_pcie_hp="0"~ to your
-~/boot/loader.conf~ before rebooting. I also ended up adding
-~autoboot_delay="5"~.
+After creating these custom partitions, the only thing left to do is
+remember to add ~hw.pci.enable_pcie_hp="0"~ to ~/boot/loader.conf~
+before rebooting. I also ended up adding ~autoboot_delay="5"~.
 
 #+CAPTION: Don't forget to edit ~/boot/loader.conf~ before rebooting
 #+ATTR_HTML: :style max-width: 400px;
@@ -280,8 +277,11 @@ It would be nice to be able to mount USB drives…
 - Check temperature with: ~sysctl dev.cpu | grep temperature~
 
 Getting the rest of the Mac Pro's sensor data required patching the
-Apple SMC driver in FreeBSD. If my patch gets accepted, all you will
-need to do is add ~asmc_load="YES"~ to ~boot/loader.conf~.
+Apple SMC driver in FreeBSD.
+
+*/Update/:* Now that my patch has been accepted into
+FreeBSD, all you will need to do is add ~asmc_load="YES"~ to
+~boot/loader.conf~.
 
 #+begin_src diff
 diff -u original/asmc.c my-patch/asmc.c
@@ -382,14 +382,15 @@ Resources:
 - [[https://github.com/freebsd/freebsd-src/tree/main/sys/dev/asmc]]
 
 ** Installing the rEFInd Boot Manager
-Rather than holding down the /Option (Alt)/ key every time we want to
-boot into a different OS, we can get a graphical boot menu by installing [[http://www.rodsbooks.com/refind][rEFInd]].
+Rather than holding down the /Option (Alt)/ key every time you want to
+boot into a different OS, you can get a graphical boot menu by
+installing [[http://www.rodsbooks.com/refind][rEFInd]].
 
 Here's how to install it:
 1. Download rEFInd and copy it onto a USB drive.
 2. Reboot your Mac into recovery by holding down /Command (Win) + R/.
 3. Open /Terminal.app/.
-4. Disable /System Integrity Protection (SIP)/: ~csrutil disable~.
+4. Temporarily disable /System Integrity Protection (SIP)/: ~csrutil disable~.
 5. Reboot and enter recovery again.
 6. Open /Terminal.app/ and plug in your USB drive.
 7. Navigate to the ~refind~ directory on your USB drive (Look in ~/Volumes/~).
@@ -415,7 +416,13 @@ Here's how to install it:
 - http://www.rodsbooks.com/refind/configfile.html
 
 * Footnotes
-[fn:1]
+[fn:1] I decided to upgrade the CPU and RAM to the maximum
+configuration originally offered by Apple. Back in 2013 this machine
+would have cost over $8,000. Swapping out the CPU was a bit more
+involved than a typical PC but the [[https://www.ifixit.com/Guide/Mac+Pro+Late+2013+CPU+Replacement/21947][iFixit guide]] was really
+comprehensive and the whole process took about two hours.
+
+[fn:2]
 | Power Consumption | Idle  | Max   |
 |-------------------+-------+-------|
 | 2020 Mac mini     | 6.8 W | 39 W  |
@@ -424,12 +431,6 @@ Here's how to install it:
 - https://support.apple.com/en-us/HT201897
 - https://support.apple.com/en-us/HT201796
 - https://support.apple.com/kb/SP697?locale=en_US
-
-[fn:2] I decided to upgrade the CPU and RAM to the maximum
-configuration originally offered by Apple. Back in 2013 this machine
-would have cost over $8,000. Swapping out the CPU was a bit more
-involved than a typical PC but the [[https://www.ifixit.com/Guide/Mac+Pro+Late+2013+CPU+Replacement/21947][iFixit guide]] was really
-comprehensive and the whole process took about two hours.
 
 [fn:3] Honorable mention for no GPL. Please note that /systemd/ is not
 mentioned. Linux is clearly much better off with /systemd/ and the

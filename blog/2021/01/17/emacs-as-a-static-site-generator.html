@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-10-11 -->
-<meta charset="utf-8" />
+<!-- 2023-01-12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs as a static site generator</title>
 <meta name="author" content="Adam Schwartz" />
@@ -22,9 +24,9 @@
 <li><a href="https://github.com/anschwa">Github</a></li>
 </ul>
 
-<div id="outline-container-orgae35761" class="outline-2">
-<h2 id="orgae35761">Emacs as a Static Site Generator</h2>
-<div class="outline-text-2" id="text-orgae35761">
+<div id="outline-container-orgaa8ca28" class="outline-2">
+<h2 id="orgaa8ca28">Emacs as a Static Site Generator</h2>
+<div class="outline-text-2" id="text-orgaa8ca28">
 <p>
 I&rsquo;ve been hosting my website on <a href="https://pages.github.com/">GitHub Pages</a> since 2014. Over the years
 I have tended to rewrite my website whenever I was learning a new
@@ -63,7 +65,7 @@ This website is generated from Emacs using <code>M-x org-publish</code>
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><code>(<span style="color: nil; font-weight: bold;">require</span> '<span style="color: nil;">ox-publish</span>)</code>
 <code></code>
-<code>(<span style="color: nil; font-weight: bold;">defvar</span> <span style="color: nil;">my/website-org-path</span> <span style="color: #0f3d8c;">"~/anschwa.github.io"</span>)</code>
+<code>(<span style="color: nil; font-weight: bold;">defvar</span> <span style="color: nil;">my/website-org-path</span> <span style="color: #0f3d8c;">"~/src/anschwa.github.io"</span>)</code>
 <code>(<span style="color: nil; font-weight: bold;">defvar</span> <span style="color: nil;">my/website-org-base-directory</span> (concat my/website-org-path <span style="color: #0f3d8c;">"/org/"</span>))</code>
 <code>(<span style="color: nil; font-weight: bold;">defvar</span> <span style="color: nil;">my/website-org-publishing-directory</span> (concat my/website-org-path <span style="color: #0f3d8c;">"/public_html/"</span>))</code>
 <code>(<span style="color: nil; font-weight: bold;">defvar</span> <span style="color: nil;">my/website-head-extra</span></code>
@@ -108,7 +110,7 @@ This website is generated from Emacs using <code>M-x org-publish</code>
 <code>         (<span style="color: #0f3d8c;">"website-static"</span></code>
 <code>          <span style="color: nil; font-weight: bold;">:base-directory</span> ,my/website-org-base-directory</code>
 <code>          <span style="color: nil; font-weight: bold;">:publishing-directory</span> ,my/website-org-publishing-directory</code>
-<code>          <span style="color: nil; font-weight: bold;">:base-extension</span> <span style="color: #0f3d8c;">"css</span><span style="color: #5d5000; font-weight: bold;">\\</span><span style="color: #7f002f; font-weight: bold;">|</span><span style="color: #0f3d8c;">js</span><span style="color: #5d5000; font-weight: bold;">\\</span><span style="color: #7f002f; font-weight: bold;">|</span><span style="color: #0f3d8c;">jpg</span><span style="color: #5d5000; font-weight: bold;">\\</span><span style="color: #7f002f; font-weight: bold;">|</span><span style="color: #0f3d8c;">png</span><span style="color: #5d5000; font-weight: bold;">\\</span><span style="color: #7f002f; font-weight: bold;">|</span><span style="color: #0f3d8c;">pdf"</span></code>
+<code>          <span style="color: nil; font-weight: bold;">:base-extension</span> <span style="color: #0f3d8c;">"css</span><span style="color: #5d5000;">\\</span><span style="color: #7f002f;">|</span><span style="color: #0f3d8c;">js</span><span style="color: #5d5000;">\\</span><span style="color: #7f002f;">|</span><span style="color: #0f3d8c;">jpg</span><span style="color: #5d5000;">\\</span><span style="color: #7f002f;">|</span><span style="color: #0f3d8c;">png</span><span style="color: #5d5000;">\\</span><span style="color: #7f002f;">|</span><span style="color: #0f3d8c;">pdf"</span></code>
 <code>          <span style="color: nil; font-weight: bold;">:publishing-function</span> org-publish-attachment</code>
 <code>          <span style="color: nil; font-weight: bold;">:recursive</span> t)))</code>
 </pre>
@@ -117,7 +119,7 @@ This website is generated from Emacs using <code>M-x org-publish</code>
 </div>
 </div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2022-10-05</p>
+<p>Last&nbsp;updated:&nbsp;2023-01-12</p>
 </div>
 </body>
 </html>

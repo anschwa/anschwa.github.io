@@ -30,7 +30,7 @@ drive and available via disk utility programs. When you need to
 replace a drive, it's /really helpful/ to know exactly what drive to
 touch. (Or type!)
 
-With that in mind, the first thing we want to do is find where our
+With that in mind, the first thing I did was to find where the
 drives are currently located in the machine:
 #+begin_src text
 $ camcontrol devlist
@@ -41,12 +41,12 @@ $ camcontrol devlist
 <APPLE SSD SM0256G BXW8SA0Q>       at scbus4 target 0 lun 0 (pass4,ada4)
 #+end_src
 
-Now, we have a few ways of getting the serial number, but if you
+There are a few ways of getting the serial number, but if you
 decide to grab it from software, please also make sure the same value
-is printed on the actual physical drive label.
+is printed on the physical drive label.
 
-We could use ~camcontrol identify~ or ~geom disk list~, but in this
-case we can ~grep~ over ~dmesg~ in a clever way to grab all our drive
+You can use ~camcontrol identify~ or ~geom disk list~, but in this I
+decided to ~grep~ over ~dmesg~ in a clever way to grab all the drive
 serial numbers at once.
 #+begin_src text
 $ dmesg | grep -B1 'Serial Number'
@@ -66,7 +66,7 @@ ada4: <APPLE SSD SM0256G BXW8SA0Q> ATA8-ACS SATA 3.x device
 ada4: Serial Number S216NYAH100559
 #+end_src
 
-Now let's initialize the drives.[fn:1] ZFS will enable TRIM by default
+Now I can initialize the drives [fn:1]. Conveniently, ZFS will enable TRIM by default
 for drives that support it.
 
 #+begin_quote
@@ -93,21 +93,21 @@ $ gpart add -t freebsd-zfs -l WD-WXP2E31CV0WZ -a 1M ada3
 ada3p1 added
 #+end_src
 
-After creating all of your new partitions you can check out the
-results with ~gpart show -lp~. After setting the GPT drive labels the
+After creating all of the new partitions you can check the results
+with ~gpart show -lp~. After setting the GPT drive labels the
 partitions can be referenced by ~/dev/gpt/$SERIAL_NUMBER~.
 
 * Configuring ZFS
 I'm hoping the [[https://docs.freebsd.org/en/books/handbook/zfs/][FreeBSD handbook's entry on ZFS]] will be enough to get everything setup.
 
-The first thing it wants us to do is enable ZFS on the system.
+The first thing it says to do is enable ZFS on the system.
 #+begin_src text
 $ echo 'zfs_enable="YES' >> /etc/rc.conf
 $ service zfs start
 #+end_src
 
 ** Single drive (backup)
-Even for a single drive, the first step is to create our ~zpool~:
+Even for a single drive, the first step is to create a ~zpool~:
 #+begin_src text
 $ zpool create backup /dev/gpt/WD-WXP2E31CV0WZ
 #+end_src
@@ -115,7 +115,7 @@ $ zpool create backup /dev/gpt/WD-WXP2E31CV0WZ
 If you get the error: ~must be a block device or regular file~, make
 sure you are running ~zpool create~ as root.
 
-We can see that it worked by checking the output of ~df~, ~zpool status~, or ~zpool list~.
+You can see that it worked by checking the output of ~df~, ~zpool status~, or ~zpool list~.
 #+begin_src text
 $ df
 Filesystem         Size    Used   Avail Capacity  Mounted on
@@ -143,7 +143,7 @@ NAME     SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  A
 backup  1.81T   360K  1.81T        -         -     0%     0%  1.00x    ONLINE  -
 #+end_src
 
-Now we can create the filesystem, also known as a ~dataset~. I think
+Now you can create the filesystem, also known as a ~dataset~. I think
 adding compression and turning off access time are enough customization's for now.
 #+begin_src text
 $ zfs create -v -o atime=off -o compression=on backup/data
@@ -211,10 +211,10 @@ Sharing ZFS ~dataset~:
 zfs set sharenfs=on storage/data
 #+end_src
 
-This will share our ~dataset~ over NFS with the default options
+This will share the ~dataset~ over NFS with the default options
 mentioned in [[https://www.freebsd.org/cgi/man.cgi?query=zfsprops&sektion=8][zfsprops(8)]].
 
-We can list all the custom options in a ~dataset~ like this:
+You can list all of the custom options in a ~dataset~ like this:
 #+begin_src text
 $ zfs get -r -s local all storage/data
 NAME          PROPERTY              VALUE                  SOURCE
@@ -233,7 +233,7 @@ storage       sharenfs  off       default
 storage/data  sharenfs  on        local
 #+end_src
 
-Now we should be able to mount ~storage/data~ on another machine with
+Now you should be able to mount ~storage/data~ on another machine with
 an NFS client installed:
 #+begin_src text
 mount -t nfs $HOST:/storage/data /mnt/zdata
@@ -259,18 +259,18 @@ mount.nfs: trying 10.0.0.42 prog 100005 vers 3 prot UDP port 797
 #+end_src
 
 While I continue to set things up, I made ~/storage/data~
-"word-writable" so I can actually start using the file server.[fn:2]
+"world-writable" so I can start using the file server [fn:2].
 #+begin_src text
 chmod -R 777 /storage
 #+end_src
 
 Ultimately, I would like to use "ZFS over NFS" as my primary storage
 medium because it would keep everything in one place and let me access
-it from any computer.
+it from any computer on my network.
 
-Overall, ZFS is a really flexible filesystem and using ECC memory
-provides a lot of protection against data corruption. I can manage
-local and remote backups with ~zfs send~ and seamlessly add or
+Overall, I think ZFS is a really flexible filesystem and using ECC
+memory provides a lot of protection against data corruption. I can
+manage local and remote backups with ~zfs send~ and seamlessly add or
 replace drives by linking new ~zpools~ to my existing ~datasets~.
 
 * Bonus: Creating my UFS scratch disk

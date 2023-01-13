@@ -42,7 +42,7 @@ This website is generated from Emacs using ~M-x org-publish~
 #+BEGIN_SRC emacs-lisp
 (require 'ox-publish)
 
-(defvar my/website-org-path "~/anschwa.github.io")
+(defvar my/website-org-path "~/src/anschwa.github.io")
 (defvar my/website-org-base-directory (concat my/website-org-path "/org/"))
 (defvar my/website-org-publishing-directory (concat my/website-org-path "/public_html/"))
 (defvar my/website-head-extra

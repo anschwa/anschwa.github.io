@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-10-11 -->
-<meta charset="utf-8" />
+<!-- 2023-01-12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Installing FreeBSD on a 2013 Mac Pro</title>
 <meta name="author" content="Adam Schwartz" />
@@ -22,23 +24,23 @@
 <li><a href="https://github.com/anschwa">Github</a></li>
 </ul>
 
-<div id="outline-container-org433a20a" class="outline-2">
-<h2 id="org433a20a">Installing FreeBSD on a 2013 Mac Pro</h2>
-<div class="outline-text-2" id="text-org433a20a">
+<div id="outline-container-orgb220911" class="outline-2">
+<h2 id="orgb220911">Installing FreeBSD on a 2013 Mac Pro</h2>
+<div class="outline-text-2" id="text-orgb220911">
 <p>
 In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
 listed on Craigslist. Some might have considered this to be a &ldquo;bad
 move&rdquo; from the start, but I thought the 2013 Mac Pro was simply the
-most amazing computer ever made and $950 seemed like an absolute
-steal. I was wrong.
+most amazing computer ever made and $950 seemed like a great
+deal <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
 </p>
 
 
-<figure id="orge43e8b8">
-<img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;">
-
-<figcaption><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</figcaption>
-</figure>
+<div id="orga233286" class="figure">
+<p><img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;" />
+</p>
+<p><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</p>
+</div>
 
 <p>
 Little did I know, the 2013 Mac Pro suffered from severe thermal
@@ -50,16 +52,16 @@ Apple&rsquo;s proprietary dual AMD FirePro GPUs.
 <p>
 If I was in the market for a new Mac, the right thing to do would have
 been to get an M1 Mac mini. Not only are the M1 Macs faster, they are
-also cheaper and consume significantly less energy.<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> However, I
+also cheaper and consume significantly less energy. <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> However, I
 wasn&rsquo;t really in the market for a Mac, what I wanted was a server.
 </p>
 
 <p>
-As it turns out, my 2013 Mac Pro is a very compelling server. It is
+As it turns out, the 2013 Mac Pro is a very compelling server. It is
 extremely quiet, compact, and rocks a 12-core Intel Xeon E5 with 64GB
-of ECC memory.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> Unfortunately, I wasn&rsquo;t expecting the thermal
+of ECC memory. Unfortunately, I wasn&rsquo;t expecting the thermal
 issues and kernel panics, which made me skeptical of this machine&rsquo;s
-viability as a reliable home server, so mostly it sat on the shelf.
+viability as a reliable home server, so mostly it sat on a shelf.
 </p>
 
 <p>
@@ -68,41 +70,41 @@ FreeBSD alongside macOS. My hope was that by running on a minimal
 &ldquo;headless&rdquo; environment, I could avoid any stability issues due to the
 GPUs. Furthermore, I&rsquo;ve been interested in trying out FreeBSD for a
 while because of two very compelling features: ZFS and the base
-system.<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>
+system <sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>.
 </p>
 
 <p>
-While ZFS has been available on Linux for several years now, I
-consider that to be more &ldquo;piece of mind&rdquo; than anything else. I doubt
-the Linux community will ever adopt ZFS as their primary filesystem.
-Meanwhile, FreeBSD has proudly supported ZFS since 2008.
+While ZFS has been available on Linux for several years now, it has
+always been somewhat of an outcast, with Btrfs being the &ldquo;modern&rdquo;
+flagship filesystem. Meanwhile, FreeBSD has proudly supported ZFS as a
+first-class filesystem since 2008.
 </p>
 
 <p>
 Besides ZFS, I really like the unified deployment model of the FreeBSD
 base system. This provides a level of consistency and correctness in
-the operating system that Linux deeply struggles with.
+the operating system that I think the Linux deeply struggles with.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org042f329" class="outline-2">
-<h2 id="org042f329">FreeBSD Installation Notes</h2>
-<div class="outline-text-2" id="text-org042f329">
+<div id="outline-container-orgfe8b203" class="outline-2">
+<h2 id="orgfe8b203">FreeBSD Installation Notes</h2>
+<div class="outline-text-2" id="text-orgfe8b203">
 <p>
 This was going to be my first time installing FreeBSD, so luckily I
 had my T470 lying around to experiment with. I wasn&rsquo;t expecting the
 installation on the Mac Pro to go smoothly, so having a computer that
 was known to be compatible with FreeBSD was really convenient. I was
 able to run though several installations to get a sense of how things
-will go on the Mac.
+would go on the Mac.
 </p>
 
 <p>
 The very first thing I did was disable disk encryption (FireVault) on
 the Mac Pro. I&rsquo;m not sure it would have been a problem, but I didn&rsquo;t
-feel like finding out. I didn&rsquo;t have any issues turning FireVault back
-on after completing the FreeBSD installation process.
+have any issues turning FireVault back on after completing the FreeBSD
+installation process.
 </p>
 
 <p>
@@ -116,41 +118,40 @@ on the Mac Pro.
 
 <p>
 After testing my bootable FreeBSD USB drive on my ThinkPad, I tried to
-boot into it from the Mac by holding down the <i>Option (Alt)</i> key during
-startup. I didn&rsquo;t want to waste my time if I couldn&rsquo;t get FreeBSD to
-boot on the Mac.
+boot into it from the Mac by holding down the <i>Option (Alt)</i> key
+during startup.
 </p>
 
 
-<figure id="orge853172">
-<a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;"></a>
+<div id="orgaa30e4a" class="figure">
+<p><a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</p>
+</div>
 
-<figcaption><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</figcaption>
-</figure>
 
-
-<figure id="org046e59b">
-<a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 3: </span>Nice! This might actually work</figcaption>
-</figure>
+<div id="org8493649" class="figure">
+<p><a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 3: </span>Nice! This might actually work</p>
+</div>
 
 <p>
 I was pretty excited after seeing the FreeBSD boot menu show up. I
 wasn&rsquo;t sure what to expect because the Xeon E5 doesn&rsquo;t have integrated
 graphics and I wasn&rsquo;t sure the AMD FirePro&rsquo;s were going to work.
 Although my enthusiasm didn&rsquo;t last long, only a few seconds into the
-boot process later and it was game over. The console was endlessly
+boot process and it was game over: The console was endlessly
 streaming the text <i>pcib8: Power Fault Detected</i> and became completely
 unresponsive.
 </p>
 
 
-<figure id="orge9404d2">
-<a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. We&rsquo;re stuck.</figcaption>
-</figure>
+<div id="org281159c" class="figure">
+<p><a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. I&rsquo;m stuck.</p>
+</div>
 
 <p>
 Somehow, I was able to dig up <a href="https://forum.netgate.com/topic/126119/pfsense-on-mac-pro">an old forum post</a> by someone with this
@@ -167,22 +168,21 @@ prompt</i>. However, I felt like I was making progress.
 
 <p>
 My biggest clue was the <code>pcib8</code> bit. Since this was an error message
-during PCI device initialization, I start searching the web for things
+during PCI device initialization, I started searching the web for things
 like &ldquo;FreeBSD pci won&rsquo;t boot&rdquo; and &ldquo;FreeBSD power fault detected&rdquo;.
 </p>
 
 <p>
 Once it became clear that I was on my own with this one, I pulled up
-the FreeBSD manual pages for <a href="https://www.freebsd.org/cgi/man.cgi?query=boot&amp;sektion=8">boot(8)</a>, <a href="https://www.freebsd.org/cgi/man.cgi?loader(8)">loader(8)</a>, and <a href="https://www.freebsd.org/cgi/man.cgi?query=pci&amp;sektion=4">pci(4)</a> then
-started reading through them. I started to get a sense for how the
+the FreeBSD manual pages for <a href="https://www.freebsd.org/cgi/man.cgi?query=boot&amp;sektion=8">boot(8)</a>, <a href="https://www.freebsd.org/cgi/man.cgi?loader(8)">loader(8)</a>, and <a href="https://www.freebsd.org/cgi/man.cgi?query=pci&amp;sektion=4">pci(4)</a> and
+started reading through them. I began to get a sense for how the
 FreeBSD boot process worked and was ready to try setting custom boot
 options.
 </p>
 
 <p>
-Miraculously, I discovered a single boot option that fixed my issue.
-Now I could finally get into the FreeBSD installer and live
-environment!
+Amazingly, I discovered a single boot option that fixed the issue. Now
+I could finally get into the FreeBSD installer and live environment!
 </p>
 
 <p>
@@ -195,16 +195,16 @@ Here is all I needed to get FreeBSD to boot on the Mac Pro:
 </ol>
 
 
-<figure id="org247ea6b">
-<a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></figcaption>
-</figure>
+<div id="org8facb08" class="figure">
+<p><a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></p>
+</div>
 </div>
 
-<div id="outline-container-org38d2d90" class="outline-3">
-<h3 id="org38d2d90">Resizing macOS</h3>
-<div class="outline-text-3" id="text-org38d2d90">
+<div id="outline-container-orga068402" class="outline-3">
+<h3 id="orga068402">Resizing macOS</h3>
+<div class="outline-text-3" id="text-orga068402">
 <p>
 When installing FreeBSD on an machine already using <a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">EFI</a>, you only need
 two partitions: <code>freebsd-root</code> and <code>freebsd-swap</code>. The FreeBSD
@@ -219,57 +219,57 @@ macOS uses powers of 10 (eg: Gigabyte). I decided on a 4GiB swap and
 </ul>
 
 <p>
-So we want to resize our macOS partition to <b>90.19 GB</b>
+This means I will need to resize the macOS partition to <b>90.19 GB</b>.
 </p>
 
 <p>
 One of the great features of the &ldquo;new&rdquo; Apple File System <a href="https://en.wikipedia.org/wiki/Apple_File_System">(APFS)</a> is
-that you can resize our startup disk while it&rsquo;s mounted. There&rsquo;s no
+that you can resize the startup disk while it&rsquo;s mounted. There&rsquo;s no
 need to reboot into recovery or another live environment.
 </p>
 
 <p>
-It doesn&rsquo;t matter what filesystem you choose because you will create
-the new partitions in the FreeBSD installer. The important part is
-being able to know which partition is which so you don&rsquo;t accidentally
-overwrite macOS.
+Now, it doesn&rsquo;t matter which filesystem you choose in Disk Utility
+because the FreeBSD installer will create the real partition. The
+important part is being able to know which of the resized partition is
+which so you don&rsquo;t accidentally overwrite macOS.
 </p>
 
 
-<figure id="orga47a78d">
-<a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</figcaption>
-</figure>
-
-
-<figure id="orgcfd4494">
-<a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 7: </span>Set the new size for your disk</figcaption>
-</figure>
-
-
-<figure id="org20b090e">
-<a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</figcaption>
-</figure>
-
-
-<figure id="org96ef88e">
-<a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px"></a>
-
-<figcaption><span class="figure-number">Figure 9: </span>Eventually the resize will finish</figcaption>
-</figure>
-</div>
+<div id="org0561d9e" class="figure">
+<p><a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</p>
 </div>
 
-<div id="outline-container-org2355cf5" class="outline-3">
-<h3 id="org2355cf5">Installing FreeBSD</h3>
-<div class="outline-text-3" id="text-org2355cf5">
+
+<div id="orge5f99b4" class="figure">
+<p><a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 7: </span>Set the new size for your disk</p>
+</div>
+
+
+<div id="org98c6972" class="figure">
+<p><a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</p>
+</div>
+
+
+<div id="org1c22522" class="figure">
+<p><a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px" /></a>
+</p>
+<p><span class="figure-number">Figure 9: </span>Eventually the resize will finish</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org525ebf6" class="outline-3">
+<h3 id="org525ebf6">Installing FreeBSD</h3>
+<div class="outline-text-3" id="text-org525ebf6">
 <p>
-The first step is create the <code>freebsd-root</code> and <code>freebsd-swap</code>
+The first step is to create the <code>freebsd-root</code> and <code>freebsd-swap</code>
 partitions. Don&rsquo;t forget to add drive labels and enable TRIM support
 if you&rsquo;re using an SSD.
 </p>
@@ -287,80 +287,79 @@ installation, you will need to add them and update the entries in
 </p>
 
 
-<figure id="orgd0dd73c">
-<a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</figcaption>
-</figure>
-
-
-<figure id="org84364ae">
-<a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</figcaption>
-</figure>
+<div id="orgc5982cc" class="figure">
+<p><a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</p>
+</div>
 
 
-<figure id="org479c1a7">
-<a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</figcaption>
-</figure>
-
-
-<figure id="org4677aa1">
-<a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</figcaption>
-</figure>
+<div id="org76a30d6" class="figure">
+<p><a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</p>
+</div>
 
 
-<figure id="org5b741f0">
-<a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</figcaption>
-</figure>
-
-
-<figure id="orga4f2da0">
-<a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 15: </span>Final partition table</figcaption>
-</figure>
+<div id="org1bc81b2" class="figure">
+<p><a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</p>
+</div>
 
 
-<figure id="orgf26d438">
-<a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;"></a>
+<div id="org751d210" class="figure">
+<p><a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</p>
+</div>
 
-<figcaption><span class="figure-number">Figure 16: </span>FreeBSD installation progress</figcaption>
-</figure>
+
+<div id="org277cd4a" class="figure">
+<p><a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</p>
+</div>
+
+
+<div id="org1223d4b" class="figure">
+<p><a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 15: </span>Final partition table</p>
+</div>
+
+
+<div id="org870bf2c" class="figure">
+<p><a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 16: </span>FreeBSD installation progress</p>
+</div>
 
 <p>
-After creating your custom partitions, the only thing left to do is
-remember to add <code>hw.pci.enable_pcie_hp="0"</code> to your
-<code>/boot/loader.conf</code> before rebooting. I also ended up adding
-<code>autoboot_delay="5"</code>.
+After creating these custom partitions, the only thing left to do is
+remember to add <code>hw.pci.enable_pcie_hp="0"</code> to <code>/boot/loader.conf</code>
+before rebooting. I also ended up adding <code>autoboot_delay="5"</code>.
 </p>
 
 
-<figure id="orgf5b0852">
-<a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</figcaption>
-</figure>
-
-
-<figure id="org26d0e6b">
-<a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></figcaption>
-</figure>
-</div>
+<div id="org8923859" class="figure">
+<p><a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</p>
 </div>
 
-<div id="outline-container-org8b4ada4" class="outline-3">
-<h3 id="org8b4ada4">Post-Installation</h3>
-<div class="outline-text-3" id="text-org8b4ada4">
+
+<div id="org3ae42c9" class="figure">
+<p><a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org75fce95" class="outline-3">
+<h3 id="org75fce95">Post-Installation</h3>
+<div class="outline-text-3" id="text-org75fce95">
 <p>
 It&rsquo;s possible the Mac will default to booting FreeBSD, but you can
 always hold down the <i>Option (Alt)</i> key during boot to select a
@@ -368,9 +367,9 @@ different OS.
 </p>
 </div>
 
-<div id="outline-container-org3814b0b" class="outline-4">
-<h4 id="org3814b0b">Use Drive Labels</h4>
-<div class="outline-text-4" id="text-org3814b0b">
+<div id="outline-container-org263c999" class="outline-4">
+<h4 id="org263c999">Use Drive Labels</h4>
+<div class="outline-text-4" id="text-org263c999">
 <p>
 The first thing you should do is open <code>/etc/fstab</code> and switch out the
 drive numbers for your disk labels (Don&rsquo;t forget to make a backup
@@ -389,9 +388,9 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-orge415104" class="outline-4">
-<h4 id="orge415104">Disable Hyperthreading</h4>
-<div class="outline-text-4" id="text-orge415104">
+<div id="outline-container-orgf3e5b19" class="outline-4">
+<h4 id="orgf3e5b19">Disable Hyperthreading</h4>
+<div class="outline-text-4" id="text-orgf3e5b19">
 <ul class="org-ul">
 <li>Check for hyperthreading options: <code>sysctl machdep | grep hyper</code></li>
 <li><code>echo 'machdep.hyperthreading_allowed="0"' &gt;&gt; /boot/loader.conf</code></li>
@@ -401,9 +400,9 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-org6d2674c" class="outline-4">
-<h4 id="org6d2674c">Dvorak and Switching Caps-Lock to Control</h4>
-<div class="outline-text-4" id="text-org6d2674c">
+<div id="outline-container-org304cc0b" class="outline-4">
+<h4 id="org304cc0b">Dvorak and Switching Caps-Lock to Control</h4>
+<div class="outline-text-4" id="text-org304cc0b">
 <ul class="org-ul">
 <li><code>kbdmap</code> Choose desired keymap (eg: us.dvorak)</li>
 <li><code>kbdcontrol -d | sed 's/clock/lctrl/g' &gt; ctrlcaps.keymap</code> Dump current keymap</li>
@@ -412,9 +411,9 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-orgf6284e3" class="outline-4">
-<h4 id="orgf6284e3">Networking</h4>
-<div class="outline-text-4" id="text-orgf6284e3">
+<div id="outline-container-org129db64" class="outline-4">
+<h4 id="org129db64">Networking</h4>
+<div class="outline-text-4" id="text-org129db64">
 <ul class="org-ul">
 <li>Check interfaces and enable DHCP on ipv4 and ipv6: <code>ifconfig -a</code></li>
 <li>Add the following to <code>/etc/rc.conf</code>:
@@ -427,18 +426,18 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-org23d7eb2" class="outline-4">
-<h4 id="org23d7eb2">SSH</h4>
-<div class="outline-text-4" id="text-org23d7eb2">
+<div id="outline-container-org17c76b0" class="outline-4">
+<h4 id="org17c76b0">SSH</h4>
+<div class="outline-text-4" id="text-org17c76b0">
 <p>
 The default <code>/etc/ssh/sshd_config</code>, looked good to me (i.e., no password or root logins).
 </p>
 </div>
 </div>
 
-<div id="outline-container-org3e6d19b" class="outline-4">
-<h4 id="org3e6d19b">Fuse and exFAT support</h4>
-<div class="outline-text-4" id="text-org3e6d19b">
+<div id="outline-container-org6c3062b" class="outline-4">
+<h4 id="org6c3062b">Fuse and exFAT support</h4>
+<div class="outline-text-4" id="text-org6c3062b">
 <p>
 It would be nice to be able to mount USB drives…
 </p>
@@ -451,9 +450,9 @@ It would be nice to be able to mount USB drives…
 </div>
 </div>
 
-<div id="outline-container-org0d4a4a5" class="outline-4">
-<h4 id="org0d4a4a5">Checking Disk Performance</h4>
-<div class="outline-text-4" id="text-org0d4a4a5">
+<div id="outline-container-org1a71310" class="outline-4">
+<h4 id="org1a71310">Checking Disk Performance</h4>
+<div class="outline-text-4" id="text-org1a71310">
 <ul class="org-ul">
 <li><code>camcontrol devlist</code></li>
 <li><code>diskinfo -tv /dev/adN</code></li>
@@ -461,9 +460,9 @@ It would be nice to be able to mount USB drives…
 </div>
 </div>
 
-<div id="outline-container-orgb11bdf9" class="outline-4">
-<h4 id="orgb11bdf9">CPU and Sensor Data</h4>
-<div class="outline-text-4" id="text-orgb11bdf9">
+<div id="outline-container-orgf161fd1" class="outline-4">
+<h4 id="orgf161fd1">CPU and Sensor Data</h4>
+<div class="outline-text-4" id="text-orgf161fd1">
 <ul class="org-ul">
 <li><code>echo 'coretemp_load="YES"' &gt;&gt; /boot/loader.conf</code></li>
 <li><code>kldload coretemp</code></li>
@@ -472,8 +471,13 @@ It would be nice to be able to mount USB drives…
 
 <p>
 Getting the rest of the Mac Pro&rsquo;s sensor data required patching the
-Apple SMC driver in FreeBSD. If my patch gets accepted, all you will
-need to do is add <code>asmc_load="YES"</code> to <code>boot/loader.conf</code>.
+Apple SMC driver in FreeBSD.
+</p>
+
+<p>
+<b><i>Update</i>:</b> Now that my patch has been accepted into
+FreeBSD, all you will need to do is add <code>asmc_load="YES"</code> to
+<code>boot/loader.conf</code>.
 </p>
 
 <div class="org-src-container">
@@ -597,12 +601,13 @@ Resources:
 </div>
 </div>
 
-<div id="outline-container-org50e2fa1" class="outline-3">
-<h3 id="org50e2fa1">Installing the rEFInd Boot Manager</h3>
-<div class="outline-text-3" id="text-org50e2fa1">
+<div id="outline-container-orgb6cf675" class="outline-3">
+<h3 id="orgb6cf675">Installing the rEFInd Boot Manager</h3>
+<div class="outline-text-3" id="text-orgb6cf675">
 <p>
-Rather than holding down the <i>Option (Alt)</i> key every time we want to
-boot into a different OS, we can get a graphical boot menu by installing <a href="http://www.rodsbooks.com/refind">rEFInd</a>.
+Rather than holding down the <i>Option (Alt)</i> key every time you want to
+boot into a different OS, you can get a graphical boot menu by
+installing <a href="http://www.rodsbooks.com/refind">rEFInd</a>.
 </p>
 
 <p>
@@ -612,7 +617,7 @@ Here&rsquo;s how to install it:
 <li>Download rEFInd and copy it onto a USB drive.</li>
 <li>Reboot your Mac into recovery by holding down <i>Command (Win) + R</i>.</li>
 <li>Open <i>Terminal.app</i>.</li>
-<li>Disable <i>System Integrity Protection (SIP)</i>: <code>csrutil disable</code>.</li>
+<li>Temporarily disable <i>System Integrity Protection (SIP)</i>: <code>csrutil disable</code>.</li>
 <li>Reboot and enter recovery again.</li>
 <li>Open <i>Terminal.app</i> and plug in your USB drive.</li>
 <li>Navigate to the <code>refind</code> directory on your USB drive (Look in <code>/Volumes/</code>).</li>
@@ -622,23 +627,23 @@ Here&rsquo;s how to install it:
 </ol>
 
 
-<figure id="orge81a14f">
-<a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 19: </span>Installing rEFInd</figcaption>
-</figure>
-
-
-<figure id="org5b55505">
-<a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 20: </span>The rEFInd boot menu</figcaption>
-</figure>
+<div id="org62b0e81" class="figure">
+<p><a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 19: </span>Installing rEFInd</p>
 </div>
 
-<div id="outline-container-orgf690a13" class="outline-4">
-<h4 id="orgf690a13">Customizing rEFInd</h4>
-<div class="outline-text-4" id="text-orgf690a13">
+
+<div id="orgf1bf3dd" class="figure">
+<p><a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 20: </span>The rEFInd boot menu</p>
+</div>
+</div>
+
+<div id="outline-container-org902ae94" class="outline-4">
+<h4 id="org902ae94">Customizing rEFInd</h4>
+<div class="outline-text-4" id="text-org902ae94">
 <ul class="org-ul">
 <li>rEFInd will default to the most recently booted OS, so the only
 configuration I&rsquo;m doing is setting the timeout to 5s instead of 20.</li>
@@ -656,15 +661,23 @@ configuration I&rsquo;m doing is setting the timeout to 5s instead of 20.</li>
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><table>
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+I decided to upgrade the CPU and RAM to the maximum
+configuration originally offered by Apple. Back in 2013 this machine
+would have cost over $8,000. Swapping out the CPU was a bit more
+involved than a typical PC but the <a href="https://www.ifixit.com/Guide/Mac+Pro+Late+2013+CPU+Replacement/21947">iFixit guide</a> was really
+comprehensive and the whole process took about two hours.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
@@ -694,14 +707,6 @@ configuration I&rsquo;m doing is setting the timeout to 5s instead of 20.</li>
 <li><a href="https://support.apple.com/kb/SP697?locale=en_US">https://support.apple.com/kb/SP697?locale=en_US</a></li>
 </ul></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-I decided to upgrade the CPU and RAM to the maximum
-configuration originally offered by Apple. Back in 2013 this machine
-would have cost over $8,000. Swapping out the CPU was a bit more
-involved than a typical PC but the <a href="https://www.ifixit.com/Guide/Mac+Pro+Late+2013+CPU+Replacement/21947">iFixit guide</a> was really
-comprehensive and the whole process took about two hours.
-</p></div></div>
-
 <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 Honorable mention for no GPL. Please note that <i>systemd</i> is not
 mentioned. Linux is clearly much better off with <i>systemd</i> and the
@@ -712,7 +717,7 @@ complaining needs to stop.
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2022-10-05</p>
+<p>Last&nbsp;updated:&nbsp;2023-01-12</p>
 </div>
 </body>
 </html>
