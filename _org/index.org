@@ -30,11 +30,9 @@ Up next is:
 
 Check out what else [[file:books/index.org][I've been reading]].
 
-* Work                                                             :noexport:
-
 * Resume / CV
 Previously I've enjoyed keeping [[file:cv/index.org][my resume]] in LaTeX, but now I prefer
-using HTML with a custom [[file:cv/print.css][print.css]] file.
+using HTML with a custom print CSS file.
 
 #+BEGIN_EXPORT html
 <hr/>

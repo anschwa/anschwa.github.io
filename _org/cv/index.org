@@ -111,9 +111,9 @@
   conditionally compile files into your Go program. In this talk we
   will write a make-believe serverless function that uses build tags
   to substitute ~package main~ so that we can develop and debug our
-  program locally, while being able to deploy a “pure” production
-  binary. As a bonus, we will look at setting package variables using
-  the ~ldflags -X~ option (see ~go doc cmd/link~).
+  program locally, while still being able to deploy a “pure”
+  production binary. As a bonus, we will look at setting package
+  variables using the ~ldflags -X~ option (see ~go doc cmd/link~).
 
 ** April 16, 2020: /Keep it Simple Dotfiles/, Dotfiles-Indy
 - How I manage my dotfiles without any symlinks using a "bare" git repository.
@@ -126,8 +126,7 @@
 ** October 23, 2019: /Using Go Modules "replace"/, Golang Indianapolis
 - Go modules give us new ways to manage the dependencies in our own
   apps and packages. This talk explores how to substitute package
-  versions or branches on the fly using ~replace~, ~exclude~, and ~go
-  get~.
+  versions or branches on the fly using ~replace~, ~exclude~, and ~go get~.
 
 ** August 21, 2019: /Lightning Talk: Using "go present"/, Golang Indianapolis
 - ~present~ is a neat tool that offers some unique features for giving

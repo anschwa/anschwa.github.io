@@ -10,6 +10,11 @@
 2. /Either/Or/
    - Søren Kierkegaard
 
+* 2023
+** February 2023
+1. Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations
+   - Nicole Forsgren, Jez Humble, and Gene Kim
+
 * 2022
 ** September 2022
 1. /The Soul of a New Machine/
@@ -23,8 +28,8 @@
 
 ** July 2022
 1. Beyond Good and Evil
-  - Friedrich Nietzsche, translated by Walter Kaufmann
-  - [[file:Beyond-Good-and-Evil.pdf][bookmarks]]
+   - Friedrich Nietzsche, translated by Walter Kaufmann
+   - [[file:Beyond-Good-and-Evil.pdf][bookmarks]]
 
 ** June 2022
 1. The Birth of Tragedy
@@ -56,8 +61,10 @@
    - Friedrich Nietzsche
 
 ** March 2021
-1. REWORK
-   - Jason Fried and David Heinemeier Hansson
+1. Shape Up
+   - Ryan Singer
+2. REWORK
+   - Jason Fried & David Heinemeier Hansson
 
 * 2020
 ** September 2019 - February 2020
@@ -68,12 +75,18 @@
 ** September 2019
 1. The Work of Art in the Age of Mechanical Reproduction
    - Walter Benjamin
+2. Ceramic Design
+   - John B. Kenny
 
 ** March 2019
 1. Wittgenstein's Poker
    - David Edmonds & John Eidinow
 
 * 2018
+** May 2018
+1. Art/Work: Everything You Need to Know (and Do) As You Pursue Your Art Career
+   - Heather Darcy Bhandari & Jonathan Melber
+
 ** March - June
 1. Ethics, Treatise on the Emendation of the Intellect and Selected Letters
    - Baruch Spinoza
@@ -89,7 +102,7 @@
    - René Descartes
 
 * 2017
-** January - November 2017
+** November 2017
 1. Farewell to Reason
    - Paul Feyerabend
 
@@ -97,19 +110,50 @@
 1. Billy Budd, Sailor
    - Herman Melville
 
+** September 2017
+1. Politics
+   - Aristotle, translated by Benjamin Jowett
+2. The Social Contract: Or Principles Of Political Right
+   - Jean Jacques Rousseau, translated by G. D. H. Cole
+
+** August 2017
+1. Philosophy Of Law: A Very Short Introduction
+   - Raymond Wacks
+
+** April 2017
+1. The Grounding for the Metaphysics of Morals
+   - Immanuel Kant, translated by James W. Ellington
+2. Philosophical Investigations into the Essence of Human Freedom
+   - F. W. J. Schelling
+
+** January - March 2017
+1. Critique of Pure Reason
+   - Immanuel Kant, translated by Werner S. Pluhar
+2. The Phenomenology of Spirit
+   - G. W. F. Hegel, translated by A. V. Miller and J. N. Findlay
+
 * 2016
 ** November 2016
 1. Ubik
    - Philip K. Dick
+
+** August - October 2016
+1. The Trial and Execution of Socrates: Sources and Controversies
+   - Thomas C. Brickhouse & Nicholas D. Smith
+     1. The Clouds - Aristophanes
+     2. The Euthyphro - Plato
+     3. The Apology of Socrates - Plato
+     4. The Crito - Plato
+     5. The Phaedo - Plato
+     6. The Apology of Socrates - Xenophon
+     7. Memorabilia - Xenophon
 
 ** June 2016
 1. Cat's Cradle
    - Kurt Vonnegut
 2. Style: Toward Clarity and Grace
    - Joseph M. Williams
-3. The Art of War
-   - Sun Tzu
-4. Against Method
+3. Against Method
    - Paul Feyerabend
 
 ** January 2016
@@ -171,16 +215,24 @@
    - Richard P. Feynman
 
 ** August 2014
-1. Americanah
+1. Colleges That Change Lives: 40 Schools That Will Change the Way You Think About Colleges
+   - Loren Pope
+2. Americanah
    - Chimamanda Ngozi Adichie
-2. Animal Farm
+3. Animal Farm
    - George Orwell
-3. Nineteen Eighty-Four
+4. Nineteen Eighty-Four
    - George Orwell
-4. The Salmon of Doubt
+5. The Salmon of Doubt
    - Douglas Adams
-5. Surely You're Joking, Mr. Feynman! (Adventures of a Curious Character)
+6. Surely You're Joking, Mr. Feynman! (Adventures of a Curious Character)
    - Richard P. Feynman
+
+** January - May 2014
+1. The Art of War
+   - Sun Tzu
+2. The Google Way: How One Company is Revolutionizing Management As We Know It
+   - Bernard Girard
 
 * 2013
 1. How to Read a Book
@@ -193,18 +245,41 @@
    - Sigmund Freud
 5. Man's Search For Meaning
    - Viktor E. Frankl
+6. Steve Jobs
+   - Walter Isaacson
 
-* Programming textbooks
-These have been mostly used as references. I haven't worked through them cover-to-cover.
+* Programming & Computer Science
 
-1. Structure and Interpretation of Computer Programs
-   - Harold Abelson
-   - Gerald Jay Sussman
-   - Julie Sussman
-2. The Little Schemer
-   - Daniel P. Friedman
-   - Matthias Felleisen
-3. The Rust Programming Language
-   - https://doc.rust-lang.org/book/
-4. Site Reliability Engineering
+** 2023
+1. Sustainable Web Development with Ruby on Rails
+   -  David Bryant Copeland
+
+** 2021
+1. Elixir in Action
+   - Saša Jurić
+
+** 2019
+1. Site Reliability Engineering
    - Betsy Beyer, Chris Jones, Jennifer Petoff, and Niall Murphy
+
+** 2018
+1. Practical Common Lisp
+   - Peter Seibel
+2. The Rust Programming Language
+   - Steve Klabnik & Carol Nichols
+3. The Go Programming Language
+   - Alan A. A. Donovan & Brian W. Kernighan
+
+** 2017
+1. Computer Networks
+   - Andrew S. Tanenbaum
+
+** 2015
+1. The TeXbook
+   - Donald Knuth
+2. Structure and Interpretation of Computer Programs
+   - Harold Abelson, Gerald Jay Sussman, and Julie Sussman
+
+** 2014
+1. The Little Schemer
+   - Daniel P. Friedman & Matthias Felleisen
