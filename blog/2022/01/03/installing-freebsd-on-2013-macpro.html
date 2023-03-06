@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2023-01-12 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<!-- 2023-03-05 -->
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Installing FreeBSD on a 2013 Mac Pro</title>
 <meta name="author" content="Adam Schwartz" />
@@ -24,9 +22,9 @@
 <li><a href="https://github.com/anschwa">Github</a></li>
 </ul>
 
-<div id="outline-container-orgb220911" class="outline-2">
-<h2 id="orgb220911">Installing FreeBSD on a 2013 Mac Pro</h2>
-<div class="outline-text-2" id="text-orgb220911">
+<div id="outline-container-org98e0e2c" class="outline-2">
+<h2 id="org98e0e2c">Installing FreeBSD on a 2013 Mac Pro</h2>
+<div class="outline-text-2" id="text-org98e0e2c">
 <p>
 In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
 listed on Craigslist. Some might have considered this to be a &ldquo;bad
@@ -36,11 +34,11 @@ deal <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></
 </p>
 
 
-<div id="orga233286" class="figure">
-<p><img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;" />
-</p>
-<p><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</p>
-</div>
+<figure id="org45a041e">
+<img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;">
+
+<figcaption><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</figcaption>
+</figure>
 
 <p>
 Little did I know, the 2013 Mac Pro suffered from severe thermal
@@ -88,9 +86,9 @@ the operating system that I think the Linux deeply struggles with.
 </div>
 </div>
 
-<div id="outline-container-orgfe8b203" class="outline-2">
-<h2 id="orgfe8b203">FreeBSD Installation Notes</h2>
-<div class="outline-text-2" id="text-orgfe8b203">
+<div id="outline-container-org62f7f25" class="outline-2">
+<h2 id="org62f7f25">FreeBSD Installation Notes</h2>
+<div class="outline-text-2" id="text-org62f7f25">
 <p>
 This was going to be my first time installing FreeBSD, so luckily I
 had my T470 lying around to experiment with. I wasn&rsquo;t expecting the
@@ -123,18 +121,18 @@ during startup.
 </p>
 
 
-<div id="orgaa30e4a" class="figure">
-<p><a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</p>
-</div>
+<figure id="orgd62844f">
+<a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</figcaption>
+</figure>
 
 
-<div id="org8493649" class="figure">
-<p><a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 3: </span>Nice! This might actually work</p>
-</div>
+<figure id="org834c046">
+<a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 3: </span>Nice! This might actually work</figcaption>
+</figure>
 
 <p>
 I was pretty excited after seeing the FreeBSD boot menu show up. I
@@ -147,11 +145,11 @@ unresponsive.
 </p>
 
 
-<div id="org281159c" class="figure">
-<p><a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. I&rsquo;m stuck.</p>
-</div>
+<figure id="org9a3776e">
+<a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. I&rsquo;m stuck.</figcaption>
+</figure>
 
 <p>
 Somehow, I was able to dig up <a href="https://forum.netgate.com/topic/126119/pfsense-on-mac-pro">an old forum post</a> by someone with this
@@ -195,16 +193,16 @@ Here is all I needed to get FreeBSD to boot on the Mac Pro:
 </ol>
 
 
-<div id="org8facb08" class="figure">
-<p><a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></p>
-</div>
+<figure id="orgccc4d49">
+<a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></figcaption>
+</figure>
 </div>
 
-<div id="outline-container-orga068402" class="outline-3">
-<h3 id="orga068402">Resizing macOS</h3>
-<div class="outline-text-3" id="text-orga068402">
+<div id="outline-container-org79ae824" class="outline-3">
+<h3 id="org79ae824">Resizing macOS</h3>
+<div class="outline-text-3" id="text-org79ae824">
 <p>
 When installing FreeBSD on an machine already using <a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">EFI</a>, you only need
 two partitions: <code>freebsd-root</code> and <code>freebsd-swap</code>. The FreeBSD
@@ -236,38 +234,38 @@ which so you don&rsquo;t accidentally overwrite macOS.
 </p>
 
 
-<div id="org0561d9e" class="figure">
-<p><a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</p>
+<figure id="org1460f32">
+<a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</figcaption>
+</figure>
+
+
+<figure id="orge7de7ba">
+<a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 7: </span>Set the new size for your disk</figcaption>
+</figure>
+
+
+<figure id="org4154ec1">
+<a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</figcaption>
+</figure>
+
+
+<figure id="org42dacfc">
+<a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px"></a>
+
+<figcaption><span class="figure-number">Figure 9: </span>Eventually the resize will finish</figcaption>
+</figure>
+</div>
 </div>
 
-
-<div id="orge5f99b4" class="figure">
-<p><a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 7: </span>Set the new size for your disk</p>
-</div>
-
-
-<div id="org98c6972" class="figure">
-<p><a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</p>
-</div>
-
-
-<div id="org1c22522" class="figure">
-<p><a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px" /></a>
-</p>
-<p><span class="figure-number">Figure 9: </span>Eventually the resize will finish</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org525ebf6" class="outline-3">
-<h3 id="org525ebf6">Installing FreeBSD</h3>
-<div class="outline-text-3" id="text-org525ebf6">
+<div id="outline-container-org0a577c8" class="outline-3">
+<h3 id="org0a577c8">Installing FreeBSD</h3>
+<div class="outline-text-3" id="text-org0a577c8">
 <p>
 The first step is to create the <code>freebsd-root</code> and <code>freebsd-swap</code>
 partitions. Don&rsquo;t forget to add drive labels and enable TRIM support
@@ -287,53 +285,53 @@ installation, you will need to add them and update the entries in
 </p>
 
 
-<div id="orgc5982cc" class="figure">
-<p><a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</p>
-</div>
+<figure id="org0946388">
+<a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</figcaption>
+</figure>
 
 
-<div id="org76a30d6" class="figure">
-<p><a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</p>
-</div>
+<figure id="orgdb69c90">
+<a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</figcaption>
+</figure>
 
 
-<div id="org1bc81b2" class="figure">
-<p><a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</p>
-</div>
+<figure id="orgdb74659">
+<a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</figcaption>
+</figure>
 
 
-<div id="org751d210" class="figure">
-<p><a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</p>
-</div>
+<figure id="org3dabba4">
+<a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</figcaption>
+</figure>
 
 
-<div id="org277cd4a" class="figure">
-<p><a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</p>
-</div>
+<figure id="orga0d8677">
+<a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</figcaption>
+</figure>
 
 
-<div id="org1223d4b" class="figure">
-<p><a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 15: </span>Final partition table</p>
-</div>
+<figure id="org5ded0aa">
+<a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 15: </span>Final partition table</figcaption>
+</figure>
 
 
-<div id="org870bf2c" class="figure">
-<p><a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 16: </span>FreeBSD installation progress</p>
-</div>
+<figure id="org6acab6a">
+<a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 16: </span>FreeBSD installation progress</figcaption>
+</figure>
 
 <p>
 After creating these custom partitions, the only thing left to do is
@@ -342,24 +340,24 @@ before rebooting. I also ended up adding <code>autoboot_delay="5"</code>.
 </p>
 
 
-<div id="org8923859" class="figure">
-<p><a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</p>
-</div>
+<figure id="orga895f81">
+<a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</figcaption>
+</figure>
 
 
-<div id="org3ae42c9" class="figure">
-<p><a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></p>
-</div>
+<figure id="org0b9325b">
+<a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></figcaption>
+</figure>
 </div>
 </div>
 
-<div id="outline-container-org75fce95" class="outline-3">
-<h3 id="org75fce95">Post-Installation</h3>
-<div class="outline-text-3" id="text-org75fce95">
+<div id="outline-container-orgec55e31" class="outline-3">
+<h3 id="orgec55e31">Post-Installation</h3>
+<div class="outline-text-3" id="text-orgec55e31">
 <p>
 It&rsquo;s possible the Mac will default to booting FreeBSD, but you can
 always hold down the <i>Option (Alt)</i> key during boot to select a
@@ -367,9 +365,9 @@ different OS.
 </p>
 </div>
 
-<div id="outline-container-org263c999" class="outline-4">
-<h4 id="org263c999">Use Drive Labels</h4>
-<div class="outline-text-4" id="text-org263c999">
+<div id="outline-container-org441c39d" class="outline-4">
+<h4 id="org441c39d">Use Drive Labels</h4>
+<div class="outline-text-4" id="text-org441c39d">
 <p>
 The first thing you should do is open <code>/etc/fstab</code> and switch out the
 drive numbers for your disk labels (Don&rsquo;t forget to make a backup
@@ -388,9 +386,9 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-orgf3e5b19" class="outline-4">
-<h4 id="orgf3e5b19">Disable Hyperthreading</h4>
-<div class="outline-text-4" id="text-orgf3e5b19">
+<div id="outline-container-org527eca8" class="outline-4">
+<h4 id="org527eca8">Disable Hyperthreading</h4>
+<div class="outline-text-4" id="text-org527eca8">
 <ul class="org-ul">
 <li>Check for hyperthreading options: <code>sysctl machdep | grep hyper</code></li>
 <li><code>echo 'machdep.hyperthreading_allowed="0"' &gt;&gt; /boot/loader.conf</code></li>
@@ -400,9 +398,9 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-org304cc0b" class="outline-4">
-<h4 id="org304cc0b">Dvorak and Switching Caps-Lock to Control</h4>
-<div class="outline-text-4" id="text-org304cc0b">
+<div id="outline-container-orgea60a51" class="outline-4">
+<h4 id="orgea60a51">Dvorak and Switching Caps-Lock to Control</h4>
+<div class="outline-text-4" id="text-orgea60a51">
 <ul class="org-ul">
 <li><code>kbdmap</code> Choose desired keymap (eg: us.dvorak)</li>
 <li><code>kbdcontrol -d | sed 's/clock/lctrl/g' &gt; ctrlcaps.keymap</code> Dump current keymap</li>
@@ -411,9 +409,9 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-org129db64" class="outline-4">
-<h4 id="org129db64">Networking</h4>
-<div class="outline-text-4" id="text-org129db64">
+<div id="outline-container-org1fdf9e8" class="outline-4">
+<h4 id="org1fdf9e8">Networking</h4>
+<div class="outline-text-4" id="text-org1fdf9e8">
 <ul class="org-ul">
 <li>Check interfaces and enable DHCP on ipv4 and ipv6: <code>ifconfig -a</code></li>
 <li>Add the following to <code>/etc/rc.conf</code>:
@@ -426,18 +424,18 @@ machine is going to use Apple&rsquo;s EFI partition instead.
 </div>
 </div>
 
-<div id="outline-container-org17c76b0" class="outline-4">
-<h4 id="org17c76b0">SSH</h4>
-<div class="outline-text-4" id="text-org17c76b0">
+<div id="outline-container-org5dedfc7" class="outline-4">
+<h4 id="org5dedfc7">SSH</h4>
+<div class="outline-text-4" id="text-org5dedfc7">
 <p>
 The default <code>/etc/ssh/sshd_config</code>, looked good to me (i.e., no password or root logins).
 </p>
 </div>
 </div>
 
-<div id="outline-container-org6c3062b" class="outline-4">
-<h4 id="org6c3062b">Fuse and exFAT support</h4>
-<div class="outline-text-4" id="text-org6c3062b">
+<div id="outline-container-orgaecb7ea" class="outline-4">
+<h4 id="orgaecb7ea">Fuse and exFAT support</h4>
+<div class="outline-text-4" id="text-orgaecb7ea">
 <p>
 It would be nice to be able to mount USB drives…
 </p>
@@ -450,9 +448,9 @@ It would be nice to be able to mount USB drives…
 </div>
 </div>
 
-<div id="outline-container-org1a71310" class="outline-4">
-<h4 id="org1a71310">Checking Disk Performance</h4>
-<div class="outline-text-4" id="text-org1a71310">
+<div id="outline-container-orgfc2246e" class="outline-4">
+<h4 id="orgfc2246e">Checking Disk Performance</h4>
+<div class="outline-text-4" id="text-orgfc2246e">
 <ul class="org-ul">
 <li><code>camcontrol devlist</code></li>
 <li><code>diskinfo -tv /dev/adN</code></li>
@@ -460,9 +458,9 @@ It would be nice to be able to mount USB drives…
 </div>
 </div>
 
-<div id="outline-container-orgf161fd1" class="outline-4">
-<h4 id="orgf161fd1">CPU and Sensor Data</h4>
-<div class="outline-text-4" id="text-orgf161fd1">
+<div id="outline-container-orgb5ffa2e" class="outline-4">
+<h4 id="orgb5ffa2e">CPU and Sensor Data</h4>
+<div class="outline-text-4" id="text-orgb5ffa2e">
 <ul class="org-ul">
 <li><code>echo 'coretemp_load="YES"' &gt;&gt; /boot/loader.conf</code></li>
 <li><code>kldload coretemp</code></li>
@@ -481,50 +479,50 @@ FreeBSD, all you will need to do is add <code>asmc_load="YES"</code> to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><code><span style="color: #000000;">diff -u original/asmc.c my-patch/asmc.c</span></code>
-<code><span style="color: #000000;">--- </span><span style="color: #000000; font-weight: bold;">original/asmc.c</span><span style="color: #000000;">     2021-12-28 23:43:20.905442244 -0600</span></code>
-<code><span style="color: #000000;">+++ </span><span style="color: #000000; font-weight: bold;">my-patch/asmc.c</span><span style="color: #000000;">     2021-12-29 00:10:38.424770226 -0600</span></code>
-<code><span style="color: #041645; background-color: #b7cfe0; font-weight: bold;">@@ -328,6 +328,15 @@</span></code>
-<code><span style="color: #56576d;">     ASMC_MP5_TEMPS, ASMC_MP5_TEMPNAMES, ASMC_MP5_TEMPDESCS</span></code>
-<code><span style="color: #56576d;">   },</span></code>
+<pre class="src src-diff"><code>diff -u original/asmc.c my-patch/asmc.c</code>
+<code>--- <span style="font-weight: bold;">original/asmc.c</span>     2021-12-28 23:43:20.905442244 -0600</code>
+<code>+++ <span style="font-weight: bold;">my-patch/asmc.c</span>     2021-12-29 00:10:38.424770226 -0600</code>
+<code><span style="background-color: #e0e0e0; font-weight: bold;">@@ -328,6 +328,15 @@</span></code>
+<code>     ASMC_MP5_TEMPS, ASMC_MP5_TEMPNAMES, ASMC_MP5_TEMPDESCS</code>
+<code>   },</code>
 <code></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       /* Idem for the Mac Pro 2013 (cylinder) */</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       {</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">    "MacPro6,1", "Apple SMC Mac Pro (2013)",</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">    ASMC_SMS_FUNCS_DISABLED,</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">    ASMC_FAN_FUNCS2,</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">    ASMC_LIGHT_FUNCS_DISABLED,</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">    ASMC_MP6_TEMPS, ASMC_MP6_TEMPNAMES, ASMC_MP6_TEMPDESCS</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       },</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span></code>
-<code><span style="color: #56576d;">   {</span></code>
-<code><span style="color: #56576d;">     "MacBookAir1,1", "Apple SMC MacBook Air",</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       /* Idem for the Mac Pro 2013 (cylinder) */</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       {</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">    "MacPro6,1", "Apple SMC Mac Pro (2013)",</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">    ASMC_SMS_FUNCS_DISABLED,</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">    ASMC_FAN_FUNCS2,</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">    ASMC_LIGHT_FUNCS_DISABLED,</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">    ASMC_MP6_TEMPS, ASMC_MP6_TEMPNAMES, ASMC_MP6_TEMPDESCS</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       },</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span></code>
+<code>   {</code>
+<code>     "MacBookAir1,1", "Apple SMC MacBook Air",</code>
 <code>     ASMC_SMS_FUNCS, ASMC_FAN_FUNCS, NULL, NULL, NULL,</code>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-diff"><code><span style="color: #000000;">diff -u original/asmcvar.h my-patch/asmcvar.h</span></code>
-<code><span style="color: #000000;">--- </span><span style="color: #000000; font-weight: bold;">original/asmcvar.h</span><span style="color: #000000;">  2021-12-28 23:43:12.163365462 -0600</span></code>
-<code><span style="color: #000000;">+++ </span><span style="color: #000000; font-weight: bold;">my-patch/asmcvar.h</span><span style="color: #000000;">  2021-12-29 00:11:36.207227372 -0600</span></code>
-<code><span style="color: #041645; background-color: #b7cfe0; font-weight: bold;">@@ -581,6 +581,18 @@</span></code>
-<code><span style="color: #56576d;">           "Te3F", "Te3S", "Te4F", "Te4S", "Te5F", \</span></code>
-<code><span style="color: #56576d;">           "Te5S", "TeGG", "TeGP", "TeRG", "TeRP", \</span></code>
-<code><span style="color: #56576d;">           "TeRV", "Tp0C", "Tp1C", "TpPS", "TpTG", }</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">#define ASMC_MP6_TEMPS { "TA0P", "TA1P", "TC0P", "TG0D", "TG0P", \</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       "TG1D", "TG1P", "TM0P", "TM1P", NULL }</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">#define ASMC_MP6_TEMPNAMES     { "ambient_air_1", "ambient_air_2", \</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       "cpu_proximity", "gpu_diode_1", "gpu_proximity_1", "gpu_diode_2", \</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       "gpu_proximity_2", "mem_proximity_1", "mem_proximity_2" }</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">#define ASMC_MP6_TEMPDESCS     { "Ambient Air 1", "Ambient Air 2", \</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       "CPU Proximity", "GPU Diode 1", "GPU Proximity 1", "GPU Diode 2", \</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span><span style="color: #002c00; background-color: #bbeabb;">       "GPU Proximity 2", "Memory Bank A", "Memory Bank B" }</span></code>
-<code><span style="color: #005e00; background-color: #bbeabb; font-weight: bold;">+</span></code>
-<code><span style="color: #56576d;"> #define        ASMC_MBA_TEMPS          { "TB0T", NULL }</span></code>
-<code><span style="color: #56576d;"> #define        ASMC_MBA_TEMPNAMES      { "enclosure" }</span></code>
+<pre class="src src-diff"><code>diff -u original/asmcvar.h my-patch/asmcvar.h</code>
+<code>--- <span style="font-weight: bold;">original/asmcvar.h</span>  2021-12-28 23:43:12.163365462 -0600</code>
+<code>+++ <span style="font-weight: bold;">my-patch/asmcvar.h</span>  2021-12-29 00:11:36.207227372 -0600</code>
+<code><span style="background-color: #e0e0e0; font-weight: bold;">@@ -581,6 +581,18 @@</span></code>
+<code>           "Te3F", "Te3S", "Te4F", "Te4S", "Te5F", \</code>
+<code>           "Te5S", "TeGG", "TeGP", "TeRG", "TeRP", \</code>
+<code>           "TeRV", "Tp0C", "Tp1C", "TpPS", "TpTG", }</code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">#define ASMC_MP6_TEMPS { "TA0P", "TA1P", "TC0P", "TG0D", "TG0P", \</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       "TG1D", "TG1P", "TM0P", "TM1P", NULL }</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">#define ASMC_MP6_TEMPNAMES     { "ambient_air_1", "ambient_air_2", \</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       "cpu_proximity", "gpu_diode_1", "gpu_proximity_1", "gpu_diode_2", \</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       "gpu_proximity_2", "mem_proximity_1", "mem_proximity_2" }</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">#define ASMC_MP6_TEMPDESCS     { "Ambient Air 1", "Ambient Air 2", \</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       "CPU Proximity", "GPU Diode 1", "GPU Proximity 1", "GPU Diode 2", \</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span><span style="color: #005000; background-color: #c1f2d1;">       "GPU Proximity 2", "Memory Bank A", "Memory Bank B" }</span></code>
+<code><span style="color: #006700; background-color: #c1f2d1;">+</span></code>
+<code> #define        ASMC_MBA_TEMPS          { "TB0T", NULL }</code>
+<code> #define        ASMC_MBA_TEMPNAMES      { "enclosure" }</code>
 <code> #define        ASMC_MBA_TEMPDESCS      { "Enclosure Bottom" }</code>
 </pre>
 </div>
@@ -601,9 +599,9 @@ Resources:
 </div>
 </div>
 
-<div id="outline-container-orgb6cf675" class="outline-3">
-<h3 id="orgb6cf675">Installing the rEFInd Boot Manager</h3>
-<div class="outline-text-3" id="text-orgb6cf675">
+<div id="outline-container-org80ac902" class="outline-3">
+<h3 id="org80ac902">Installing the rEFInd Boot Manager</h3>
+<div class="outline-text-3" id="text-org80ac902">
 <p>
 Rather than holding down the <i>Option (Alt)</i> key every time you want to
 boot into a different OS, you can get a graphical boot menu by
@@ -627,23 +625,23 @@ Here&rsquo;s how to install it:
 </ol>
 
 
-<div id="org62b0e81" class="figure">
-<p><a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 19: </span>Installing rEFInd</p>
-</div>
+<figure id="org7682e82">
+<a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 19: </span>Installing rEFInd</figcaption>
+</figure>
 
 
-<div id="orgf1bf3dd" class="figure">
-<p><a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;" /></a>
-</p>
-<p><span class="figure-number">Figure 20: </span>The rEFInd boot menu</p>
-</div>
+<figure id="org1a6d7ee">
+<a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;"></a>
+
+<figcaption><span class="figure-number">Figure 20: </span>The rEFInd boot menu</figcaption>
+</figure>
 </div>
 
-<div id="outline-container-org902ae94" class="outline-4">
-<h4 id="org902ae94">Customizing rEFInd</h4>
-<div class="outline-text-4" id="text-org902ae94">
+<div id="outline-container-org0187cb9" class="outline-4">
+<h4 id="org0187cb9">Customizing rEFInd</h4>
+<div class="outline-text-4" id="text-org0187cb9">
 <ul class="org-ul">
 <li>rEFInd will default to the most recently booted OS, so the only
 configuration I&rsquo;m doing is setting the timeout to 5s instead of 20.</li>
@@ -669,15 +667,15 @@ involved than a typical PC but the <a href="https://www.ifixit.com/Guide/Mac+Pro
 comprehensive and the whole process took about two hours.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><table>
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="org-left">
 
-<col  class="org-left" />
+<col  class="org-left">
 
-<col  class="org-left" />
+<col  class="org-left">
 </colgroup>
 <thead>
 <tr>

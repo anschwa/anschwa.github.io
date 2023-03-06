@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<!-- 2023-01-12 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<!-- 2023-03-05 -->
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Getting Started with ZFS</title>
 <meta name="author" content="Adam Schwartz" />
@@ -24,9 +22,9 @@
 <li><a href="https://github.com/anschwa">Github</a></li>
 </ul>
 
-<div id="outline-container-org3bd8c2e" class="outline-2">
-<h2 id="org3bd8c2e">Getting Started with ZFS</h2>
-<div class="outline-text-2" id="text-org3bd8c2e">
+<div id="outline-container-org5cf30c0" class="outline-2">
+<h2 id="org5cf30c0">Getting Started with ZFS</h2>
+<div class="outline-text-2" id="text-org5cf30c0">
 <p>
 These are my notes from setting up a ZFS file server on FreeBSD.
 </p>
@@ -44,9 +42,9 @@ enclosure that will be formatted as UFS for &ldquo;scratch&rdquo; data.
 </div>
 </div>
 
-<div id="outline-container-org3268986" class="outline-2">
-<h2 id="org3268986">Initializing Drives</h2>
-<div class="outline-text-2" id="text-org3268986">
+<div id="outline-container-org98153b8" class="outline-2">
+<h2 id="org98153b8">Initializing Drives</h2>
+<div class="outline-text-2" id="text-org98153b8">
 <p>
 I like the idea of setting each disk&rsquo;s serial number as the drive
 label because it is an unambiguous reference. Importantly, the serial
@@ -140,9 +138,9 @@ partitions can be referenced by <code>/dev/gpt/$SERIAL_NUMBER</code>.
 </div>
 </div>
 
-<div id="outline-container-org7a37685" class="outline-2">
-<h2 id="org7a37685">Configuring ZFS</h2>
-<div class="outline-text-2" id="text-org7a37685">
+<div id="outline-container-orgd62d74d" class="outline-2">
+<h2 id="orgd62d74d">Configuring ZFS</h2>
+<div class="outline-text-2" id="text-orgd62d74d">
 <p>
 I&rsquo;m hoping the <a href="https://docs.freebsd.org/en/books/handbook/zfs/">FreeBSD handbook&rsquo;s entry on ZFS</a> will be enough to get everything setup.
 </p>
@@ -157,9 +155,9 @@ The first thing it says to do is enable ZFS on the system.
 </div>
 </div>
 
-<div id="outline-container-orga2a2197" class="outline-3">
-<h3 id="orga2a2197">Single drive (backup)</h3>
-<div class="outline-text-3" id="text-orga2a2197">
+<div id="outline-container-org446e43f" class="outline-3">
+<h3 id="org446e43f">Single drive (backup)</h3>
+<div class="outline-text-3" id="text-org446e43f">
 <p>
 Even for a single drive, the first step is to create a <code>zpool</code>:
 </p>
@@ -220,9 +218,9 @@ adding compression and turning off access time are enough customization&rsquo;s 
 </div>
 </div>
 
-<div id="outline-container-orge3f59ff" class="outline-3">
-<h3 id="orge3f59ff">Mirrored drives (data)</h3>
-<div class="outline-text-3" id="text-orge3f59ff">
+<div id="outline-container-orgac2b252" class="outline-3">
+<h3 id="orgac2b252">Mirrored drives (data)</h3>
+<div class="outline-text-3" id="text-orgac2b252">
 <p>
 The first step is to create a mirrored <code>zpool</code>:
 </p>
@@ -258,9 +256,9 @@ Looks good!
 </div>
 </div>
 
-<div id="outline-container-org80a61af" class="outline-3">
-<h3 id="org80a61af">Networked Storage with NFS</h3>
-<div class="outline-text-3" id="text-org80a61af">
+<div id="outline-container-org25eb6e3" class="outline-3">
+<h3 id="org25eb6e3">Networked Storage with NFS</h3>
+<div class="outline-text-3" id="text-org25eb6e3">
 <ul class="org-ul">
 <li><a href="https://docs.freebsd.org/en/books/handbook/zfs/#zfs-zfs-set-share">https://docs.freebsd.org/en/books/handbook/zfs/#zfs-zfs-set-share</a></li>
 <li><a href="https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs">https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs</a></li>
@@ -392,9 +390,9 @@ replace drives by linking new <code>zpools</code> to my existing <code>datasets<
 </div>
 </div>
 
-<div id="outline-container-orge5398f6" class="outline-2">
-<h2 id="orge5398f6">Bonus: Creating my UFS scratch disk</h2>
-<div class="outline-text-2" id="text-orge5398f6">
+<div id="outline-container-org89e697b" class="outline-2">
+<h2 id="org89e697b">Bonus: Creating my UFS scratch disk</h2>
+<div class="outline-text-2" id="text-org89e697b">
 <p>
 (I&rsquo;m using the serial number I got earlier and <b>double-triple-checked</b> my drive number!)
 </p>

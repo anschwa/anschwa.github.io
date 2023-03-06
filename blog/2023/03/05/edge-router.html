@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2023-03-06 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Using an EdgeRouter for my Home Network</title>
+<meta name="author" content="Adam Schwartz" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="../../../../css/style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div id="preamble" class="status">
+<p>Published:&nbsp;March 5, 2023</p>
+</div>
+<div id="content" class="content">
+<ul class="org-ul nav">
+<li><a href="../../../../index.html">About</a></li>
+<li><a href="../../../index.html">Blog</a></li>
+<li><a href="../../../../ceramics/index.html">Ceramics</a></li>
+<li><a href="https://github.com/anschwa">Github</a></li>
+</ul>
+
+<div id="outline-container-orgd48f350" class="outline-2">
+<h2 id="orgd48f350">Using an EdgeRouter for my Home Network</h2>
+<div class="outline-text-2" id="text-orgd48f350">
+<p>
+A couple of years ago I was given a very nice Ubiquiti EdgeRouter Lite
+but never set it up. Although I have accumulated a variety of
+networking gear and experimented with running small web servers at
+home for a long time, I had always used typical consumer routers like
+the Linksys WRT54G or Apple AirPort Express.
+</p>
+
+<p>
+Recently, after moving into a new apartment I decided it was time to
+give the EdgeRouter a try. I have been very impressed with the results
+and become quite proud of my new home-lab.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0fe283a" class="outline-2">
+<h2 id="org0fe283a">Devices</h2>
+<div class="outline-text-2" id="text-org0fe283a">
+<p>
+Think about your devices. This is the most important step in setting
+up your home network.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org44dceae" class="outline-2">
+<h2 id="org44dceae">Network</h2>
+<div class="outline-text-2" id="text-org44dceae">
+<ul class="org-ul">
+<li>Router: Ubiquiti EdgeRouter Lite 3</li>
+<li>Managed Switch: TPlink SG-108pe</li>
+<li>Access Points (WiFi): TPLink EAP225 Omada</li>
+</ul>
+
+
+<figure id="org229360b">
+<a href="img/network-devices.png"><img src="img/network-devices.png" alt="network-devices.png"></a>
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org39cd7ea" class="outline-2">
+<h2 id="org39cd7ea">Basic Router Setup</h2>
+<div class="outline-text-2" id="text-org39cd7ea">
+<p>
+Reset the EdgeRouter to the default configuration and login to the web
+interface to get started. It is a good idea to run the basic setup
+because it will give you a fully functioning home router.
+</p>
+
+<p>
+Connect to the EdgeRouter on <code>eth0</code> and open a web browser to
+<code>192.168.1.1</code>. The default username and password is <code>ubnt</code>.
+</p>
+
+<p>
+You might need to assign yourself to an IP within the default subnet, like <code>192.168.1.42</code>.
+</p>
+
+<p>
+Don&rsquo;t forget to create a new admin user during the initial setup. This
+will also remove the default <code>ubnt</code> user from the EdgeRouter.
+</p>
+
+<p>
+After the EdgeRouter reboots, you will need to re-connect to <code>eth1</code>.
+You can connect a modem to <code>eth0</code> and you should have internet access.
+The basic setup wizard defines an appropriate firewall ruleset that
+prevents unauthorized inbound connections to your home network.
+</p>
+</div>
+
+<div id="outline-container-org71f3e45" class="outline-3">
+<h3 id="org71f3e45">Configure SSH</h3>
+<div class="outline-text-3" id="text-org71f3e45">
+<p>
+Standard SSH key configuration, except you can&rsquo;t use <code>ssh-copy-id</code> and
+have to use the <code>loadkey</code> command from within EdgeOS.
+</p>
+
+<p>
+Create new ssh key for managing the EdgeRouter:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>ssh-keygen -t ed_25519 -C "email@example.com" -f ~/.ssh/path/edge-id_ed25519</code>
+</pre>
+</div>
+
+<p>
+Copy key to EdgeRouter (only <code>/tmp</code> is writable):
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>scp ~/.ssh/path/edge-id_ed25519.pub user@192.168.1.1:/tmp</code>
+</pre>
+</div>
+
+<p>
+Then access the EdgeRouter console and load your key:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>configure</code>
+<code>loadkey &lt;user&gt; /tmp/edge-id_25519.pub</code>
+<code>commit</code>
+<code>save</code>
+<code>exit</code>
+</pre>
+</div>
+
+<p>
+Now add a new entry in <code>$HOME/.ssh/config</code> and test the connection.
+</p>
+
+<p>
+Try to <code>ssh</code> into your new admin account and verify the ownership of your home directory:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>ssh &lt;user&gt;@192.168.1.1</code>
+<code></code>
+<code>ls -la</code>
+<code></code>
+<code># if needed run</code>
+<code>sudo chmod -R &lt;user&gt; /home/&lt;user&gt;</code>
+</pre>
+</div>
+
+<p>
+Finally, you can disable password based login to the router:
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code>configure</code>
+<code>set service ssh disable-password-authentication</code>
+<code>commit</code>
+<code>save</code>
+<code>exit</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgabbc1cb" class="outline-3">
+<h3 id="orgabbc1cb">Initial Configuration</h3>
+<div class="outline-text-3" id="text-orgabbc1cb">
+<p>
+Poke around in the web UI and do some quick initial configuration
+using the System tab at the bottom of the page.
+</p>
+
+<ul class="org-ul">
+<li>Set host name</li>
+<li>Set timezone</li>
+<li>Disable analytics</li>
+<li>Disable UISP</li>
+<li>Disable UBNT Discovery</li>
+<li>Update firmware if available</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf8e5421" class="outline-3">
+<h3 id="orgf8e5421">Enable Hardware Offloading</h3>
+<div class="outline-text-3" id="text-orgf8e5421">
+<div class="org-src-container">
+<pre class="src src-text"><code>configure</code>
+<code></code>
+<code>set system offload ipv4 forwarding enable</code>
+<code>set system offload ipv4 gre enable</code>
+<code>set system offload ipv4 pppoe enable</code>
+<code>set system offload ipv4 vlan enable</code>
+<code>set system offload ipv4 bonding enable</code>
+<code></code>
+<code>set system offload ipv6 forwarding enable</code>
+<code>set system offload ipv6 pppoe disable</code>
+<code>set system offload ipv6 vlan enable</code>
+<code></code>
+<code>set system offload ipsec enable</code>
+<code></code>
+<code>commit</code>
+<code>save</code>
+<code>exit</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0f63723" class="outline-2">
+<h2 id="org0f63723">Firewall</h2>
+<div class="outline-text-2" id="text-org0f63723">
+<p>
+From the Ubiquiti&rsquo;s EdgeRouter documentation:
+</p>
+<blockquote>
+<p>
+A Zone-Based Firewall assigns each interface to a specific zone. The
+firewall zones will be used to define what traffic is allowed to flow
+between the interfaces. The traffic that originates in the EdgeRouter
+itself will also be assigned to a zone: the local zone.
+</p>
+</blockquote>
+
+<p>
+<b>REMEMBER TO DISCONNECT THE EDGE ROUTER FROM THE INTERNET BEFORE CHANGING THE FIREWALL</b>
+</p>
+
+<p>
+My home network has quickly evolved from a single subnet to an
+environment with several VLAN&rsquo;s and multiple wireless networks.
+</p>
+
+<p>
+I decided that a zone-based firewall policy was going to offer the
+best trade-offs: More complicated to setup, but conceptually much
+simpler. Hopefully this makes things easier to maintain and less
+likely to get wrong.
+</p>
+
+<p>
+I want several layers of isolation:
+</p>
+<ol class="org-ol">
+<li>A <code>HOME</code> network for personal and guest devices. This will be the main
+network, but none of these devices should have management access to
+the router or establish connections to outside subnets or vlans.</li>
+<li>A <code>WORK</code> network. Only work devices are allowed on this network. Same rules as home, but for work.</li>
+<li>An &ldquo;untrusted&rdquo; <code>DMZ</code>. More restrictive network than home or work.</li>
+<li>Trusted network for management (<code>MGMT</code>). Access to the router, switches, and access points are limited to this network.</li>
+</ol>
+
+
+<figure id="org8a63b5c">
+<a href="img/network-interfaces.png"><img src="img/network-interfaces.png" alt="network-interfaces.png"></a>
+
+</figure>
+</div>
+
+<div id="outline-container-org03da16a" class="outline-3">
+<h3 id="org03da16a">Rules</h3>
+<div class="outline-text-3" id="text-org03da16a">
+<p>
+Each zone is defined using a combination of the following firewall
+rule sets. Each rule set provides support for both IPv4 and IPv6 networks.
+</p>
+
+<p>
+Firewall rule names are limited to 28 characters.
+</p>
+</div>
+
+<div id="outline-container-org1acaef2" class="outline-4">
+<h4 id="org1acaef2">Prevent Unauthorized Inbound Traffic from the Internet</h4>
+<div class="outline-text-4" id="text-org1acaef2">
+<p>
+Only allow valid and established connections. Log unauthorized requests.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text"><code># IPv4</code>
+<code>set firewall name wan-lan-4 default-action drop</code>
+<code>set firewall name wan-lan-4 enable-default-log</code>
+<code>set firewall name wan-lan-4 rule 1 action accept</code>
+<code>set firewall name wan-lan-4 rule 1 description 'allow established connections'</code>
+<code>set firewall name wan-lan-4 rule 1 log disable</code>
+<code>set firewall name wan-lan-4 rule 1 protocol all</code>
+<code>set firewall name wan-lan-4 rule 1 state established enable</code>
+<code>set firewall name wan-lan-4 rule 1 state related enable</code>
+<code>set firewall name wan-lan-4 rule 2 action drop</code>
+<code>set firewall name wan-lan-4 rule 2 description 'drop invalid packets'</code>
+<code>set firewall name wan-lan-4 rule 2 log disable</code>
+<code>set firewall name wan-lan-4 rule 2 protocol all</code>
+<code>set firewall name wan-lan-4 rule 2 state invalid enable</code>
+<code></code>
+<code># IPv6</code>
+<code>set firewall ipv6-name wan-lan-6 default-action drop</code>
+<code>set firewall ipv6-name wan-lan-6 enable-default-log</code>
+<code>set firewall ipv6-name wan-lan-6 rule 1 action accept</code>
+<code>set firewall ipv6-name wan-lan-6 rule 1 description 'allow established connections'</code>
+<code>set firewall ipv6-name wan-lan-6 rule 1 log disable</code>
+<code>set firewall ipv6-name wan-lan-6 rule 1 state established enable</code>
+<code>set firewall ipv6-name wan-lan-6 rule 1 state related enable</code>
+<code>set firewall ipv6-name wan-lan-6 rule 2 action drop</code>
+<code>set firewall ipv6-name wan-lan-6 rule 2 description 'drop invalid packets'</code>
+<code>set firewall ipv6-name wan-lan-6 rule 2 log disable</code>
+<code>set firewall ipv6-name wan-lan-6 rule 2 state invalid enable</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org04ce2f3" class="outline-4">
+<h4 id="org04ce2f3">Internet Access</h4>
+<div class="outline-text-4" id="text-org04ce2f3">
+<p>
+The typical thing to do is allow any outgoing traffic to reach the
+internet. However, I want to block certain devices from ever being
+able to communicate to the outside world, such as my printer and
+&ldquo;smart&rdquo; TV.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text"><code># IPv4</code>
+<code>set firewall name lan-wan-4 default-action accept</code>
+<code>set firewall name lan-wan-4 rule 1 action drop</code>
+<code>set firewall name lan-wan-4 rule 1 description 'block outbound traffic from printer'</code>
+<code>set firewall name lan-wan-4 rule 1 log disable</code>
+<code>set firewall name lan-wan-4 rule 1 protocol all</code>
+<code>set firewall name lan-wan-4 rule 1 source mac-address '00:15:99:b3:05:77'</code>
+<code>set firewall name lan-wan-4 rule 2 action drop</code>
+<code>set firewall name lan-wan-4 rule 2 description 'block outbound traffic from tv'</code>
+<code>set firewall name lan-wan-4 rule 2 log disable</code>
+<code>set firewall name lan-wan-4 rule 2 protocol all</code>
+<code>set firewall name lan-wan-4 rule 2 source mac-address '98:06:3c:a7:0b:07'</code>
+<code></code>
+<code># IPv6</code>
+<code>set firewall ipv6-name lan-wan-6 default-action accept</code>
+<code>set firewall ipv6-name lan-wan-6 rule 1 action drop</code>
+<code>set firewall ipv6-name lan-wan-6 rule 1 description 'block outbound traffic from printer'</code>
+<code>set firewall ipv6-name lan-wan-6 rule 1 log disable</code>
+<code>set firewall ipv6-name lan-wan-6 rule 1 protocol all</code>
+<code>set firewall ipv6-name lan-wan-6 rule 1 source mac-address '00:15:99:b3:05:77'</code>
+<code>set firewall ipv6-name lan-wan-6 rule 2 action drop</code>
+<code>set firewall ipv6-name lan-wan-6 rule 2 description 'block outbound traffic from tv'</code>
+<code>set firewall ipv6-name lan-wan-6 rule 2 log disable</code>
+<code>set firewall ipv6-name lan-wan-6 rule 2 protocol all</code>
+<code>set firewall ipv6-name lan-wan-6 rule 2 source mac-address '98:06:3c:a7:0b:07'</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc1805d8" class="outline-4">
+<h4 id="orgc1805d8">Allow All Traffic</h4>
+<div class="outline-text-4" id="text-orgc1805d8">
+<div class="org-src-container">
+<pre class="src src-text"><code># IPv4</code>
+<code>set firewall name allow-all-4 default-action accept</code>
+<code></code>
+<code># IPv6</code>
+<code>set firewall ipv6-name allow-all-6 default-action accept</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf0b5a8d" class="outline-4">
+<h4 id="orgf0b5a8d">Block All Traffic</h4>
+<div class="outline-text-4" id="text-orgf0b5a8d">
+<div class="org-src-container">
+<pre class="src src-text"><code># IPv4</code>
+<code>set firewall name block-all-4 default-action drop</code>
+<code></code>
+<code># IPv6</code>
+<code>set firewall ipv6-name block-all-6 default-action drop</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfb2c284" class="outline-4">
+<h4 id="orgfb2c284">Allow Pi-hole</h4>
+<div class="outline-text-4" id="text-orgfb2c284">
+<p>
+I use Pi-hole for local DNS so I need to allow incoming queries to the
+management network. Otherwise, it should only allow valid and
+established connections and log any unauthorized requests.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text"><code># IPv4</code>
+<code>set firewall name lan-mgmt-4 default-action drop</code>
+<code>set firewall name lan-mgmt-4 enable-default-log</code>
+<code>set firewall name lan-mgmt-4 rule 1 action accept</code>
+<code>set firewall name lan-mgmt-4 rule 1 description 'allow established connections'</code>
+<code>set firewall name lan-mgmt-4 rule 1 log disable</code>
+<code>set firewall name lan-mgmt-4 rule 1 protocol all</code>
+<code>set firewall name lan-mgmt-4 rule 1 state established enable</code>
+<code>set firewall name lan-mgmt-4 rule 1 state related enable</code>
+<code>set firewall name lan-mgmt-4 rule 2 action drop</code>
+<code>set firewall name lan-mgmt-4 rule 2 description 'drop invalid packets'</code>
+<code>set firewall name lan-mgmt-4 rule 2 log disable</code>
+<code>set firewall name lan-mgmt-4 rule 2 protocol all</code>
+<code>set firewall name lan-mgmt-4 rule 2 state invalid enable</code>
+<code>set firewall name lan-mgmt-4 rule 3 action accept</code>
+<code>set firewall name lan-mgmt-4 rule 3 description 'allow dns'</code>
+<code>set firewall name lan-mgmt-4 rule 3 log disable</code>
+<code>set firewall name lan-mgmt-4 rule 3 protocol tcp_udp</code>
+<code>set firewall name lan-mgmt-4 rule 3 destination port 53</code>
+<code></code>
+<code># IPv6</code>
+<code>set firewall ipv6-name lan-mgmt-6 default-action drop</code>
+<code>set firewall ipv6-name lan-mgmt-6 enable-default-log</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 1 action accept</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 1 description 'allow established connections'</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 1 state log disable</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 1 state established enable</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 1 state related enable</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 2 action drop</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 2 description 'drop invalid packets'</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 2 log disable</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 2 state invalid enable</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 3 action accept</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 3 description 'allow dhcpv6'</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 3 destination port 546</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 3 protocol udp</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 3 log disable</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 3 source port 547</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 4 action accept</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 4 description 'allow icmpv6'</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 4 log disable</code>
+<code>set firewall ipv6-name lan-mgmt-6 rule 4 protocol ipv6-icmp</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5206162" class="outline-4">
+<h4 id="org5206162">Restrict Management Access</h4>
+<div class="outline-text-4" id="text-org5206162">
+<p>
+Do not allow management access to the EdgeRouter. Log unauthorized requests.
+</p>
+
+<p>
+This rule will be used to define what local traffic is allowed into
+the EdgeRouter. For now this means only DHCP requests.
+</p>
+<div class="org-src-container">
+<pre class="src src-text"><code># IPv4</code>
+<code>set firewall name lan-local-4 default-action drop</code>
+<code>set firewall name lan-local-4 enable-default-log</code>
+<code>set firewall name lan-local-4 rule 1 action accept</code>
+<code>set firewall name lan-local-4 rule 1 description 'allow dhcp'</code>
+<code>set firewall name lan-local-4 rule 1 log disable</code>
+<code>set firewall name lan-local-4 rule 1 protocol udp</code>
+<code>set firewall name lan-local-4 rule 1 destination port 67</code>
+<code></code>
+<code># IPv6</code>
+<code>set firewall ipv6-name lan-local-6 default-action drop</code>
+<code>set firewall ipv6-name lan-local-6 enable-default-log</code>
+<code>set firewall ipv6-name lan-local-6 rule 1 action accept</code>
+<code>set firewall ipv6-name lan-local-6 rule 1 description 'allow established connections'</code>
+<code>set firewall ipv6-name lan-local-6 rule 1 state log disable</code>
+<code>set firewall ipv6-name lan-local-6 rule 1 state established enable</code>
+<code>set firewall ipv6-name lan-local-6 rule 1 state related enable</code>
+<code>set firewall ipv6-name lan-local-6 rule 2 action drop</code>
+<code>set firewall ipv6-name lan-local-6 rule 2 description 'drop invalid packets'</code>
+<code>set firewall ipv6-name lan-local-6 rule 2 log disable</code>
+<code>set firewall ipv6-name lan-local-6 rule 2 state invalid enable</code>
+<code>set firewall ipv6-name lan-local-6 rule 3 action accept</code>
+<code>set firewall ipv6-name lan-local-6 rule 3 description 'allow dhcpv6'</code>
+<code>set firewall ipv6-name lan-local-6 rule 3 destination port 546</code>
+<code>set firewall ipv6-name lan-local-6 rule 3 protocol udp</code>
+<code>set firewall ipv6-name lan-local-6 rule 3 log disable</code>
+<code>set firewall ipv6-name lan-local-6 rule 3 source port 547</code>
+<code>set firewall ipv6-name lan-local-6 rule 4 action accept</code>
+<code>set firewall ipv6-name lan-local-6 rule 4 description 'allow icmpv6'</code>
+<code>set firewall ipv6-name lan-local-6 rule 4 log disable</code>
+<code>set firewall ipv6-name lan-local-6 rule 4 protocol ipv6-icmp</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2297a01" class="outline-3">
+<h3 id="org2297a01">Zones</h3>
+<div class="outline-text-3" id="text-org2297a01">
+<p>
+A zone must define how to handle incoming traffic from every other
+zone in the network. This is part of what makes a zone-based firewall
+robust and resilient to mistakes. Any flow of traffic between two
+zones that has not been defined (at both ends!) will get dropped.
+</p>
+</div>
+
+<div id="outline-container-org054e203" class="outline-4">
+<h4 id="org054e203">WAN</h4>
+<div class="outline-text-4" id="text-org054e203">
+<div class="org-src-container">
+<pre class="src src-text"><code>set zone-policy zone wan default-action drop</code>
+<code>set zone-policy zone wan interface eth0</code>
+<code>set zone-policy zone wan from local firewall name allow-all-4</code>
+<code>set zone-policy zone wan from local firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone wan from mgmt firewall name lan-wan-4</code>
+<code>set zone-policy zone wan from mgmt firewall ipv6-name lan-wan-6</code>
+<code>set zone-policy zone wan from home firewall name lan-wan-4</code>
+<code>set zone-policy zone wan from home firewall ipv6-name lan-wan-6</code>
+<code>set zone-policy zone wan from work firewall name lan-wan-4</code>
+<code>set zone-policy zone wan from work firewall ipv6-name lan-wan-6</code>
+<code>set zone-policy zone wan from dmz firewall name lan-wan-4</code>
+<code>set zone-policy zone wan from dmz firewall ipv6-name lan-wan-6</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbd644ae" class="outline-4">
+<h4 id="orgbd644ae">HOME</h4>
+<div class="outline-text-4" id="text-orgbd644ae">
+<div class="org-src-container">
+<pre class="src src-text"><code>set zone-policy zone home default-action drop</code>
+<code>set zone-policy zone home interface eth1.2</code>
+<code>set zone-policy zone home from wan firewall name wan-lan-4</code>
+<code>set zone-policy zone home from wan firewall ipv6-name wan-lan-6</code>
+<code>set zone-policy zone home from local firewall name allow-all-4</code>
+<code>set zone-policy zone home from local firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone home from mgmt firewall name allow-all-4</code>
+<code>set zone-policy zone home from mgmt firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone home from work firewall name block-all-4</code>
+<code>set zone-policy zone home from work firewall ipv6-name block-all-6</code>
+<code>set zone-policy zone home from dmz firewall name block-all-4</code>
+<code>set zone-policy zone home from dmz firewall ipv6-name block-all-6</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org21b451b" class="outline-4">
+<h4 id="org21b451b">WORK</h4>
+<div class="outline-text-4" id="text-org21b451b">
+<div class="org-src-container">
+<pre class="src src-text"><code>set zone-policy zone work default-action drop</code>
+<code>set zone-policy zone work interface eth1.3</code>
+<code>set zone-policy zone work from wan firewall name wan-lan-4</code>
+<code>set zone-policy zone work from wan firewall ipv6-name wan-lan-6</code>
+<code>set zone-policy zone work from local firewall name allow-all-4</code>
+<code>set zone-policy zone work from local firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone work from mgmt firewall name allow-all-4</code>
+<code>set zone-policy zone work from mgmt firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone work from home firewall name block-all-4</code>
+<code>set zone-policy zone work from home firewall ipv6-name block-all-6</code>
+<code>set zone-policy zone work from dmz firewall name block-all-4</code>
+<code>set zone-policy zone work from dmz firewall ipv6-name block-all-6</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org12f0f50" class="outline-4">
+<h4 id="org12f0f50">DMZ</h4>
+<div class="outline-text-4" id="text-org12f0f50">
+<div class="org-src-container">
+<pre class="src src-text"><code>set zone-policy zone dmz default-action drop</code>
+<code>set zone-policy zone dmz interface eth2</code>
+<code>set zone-policy zone dmz from wan firewall name wan-lan-4</code>
+<code>set zone-policy zone dmz from wan firewall ipv6-name wan-lan-6</code>
+<code>set zone-policy zone dmz from local firewall name allow-all-4</code>
+<code>set zone-policy zone dmz from local firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone dmz from home firewall name block-all-4</code>
+<code>set zone-policy zone dmz from home firewall ipv6-name block-all-6</code>
+<code>set zone-policy zone dmz from work firewall name block-all-4</code>
+<code>set zone-policy zone dmz from work firewall ipv6-name block-all-6</code>
+<code>set zone-policy zone dmz from mgmt firewall name allow-all-4</code>
+<code>set zone-policy zone dmz from mgmt firewall ipv6-name allow-all-6</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org14c493e" class="outline-4">
+<h4 id="org14c493e">MGMT</h4>
+<div class="outline-text-4" id="text-org14c493e">
+<div class="org-src-container">
+<pre class="src src-text"><code>set zone-policy zone mgmt default-action drop</code>
+<code>set zone-policy zone mgmt interface eth1</code>
+<code>set zone-policy zone mgmt from wan firewall name wan-lan-4</code>
+<code>set zone-policy zone mgmt from wan firewall ipv6-name wan-lan-6</code>
+<code>set zone-policy zone mgmt from local firewall name allow-all-4</code>
+<code>set zone-policy zone mgmt from local firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone mgmt from home firewall name lan-mgmt-4</code>
+<code>set zone-policy zone mgmt from home firewall ipv6-name lan-mgmt-6</code>
+<code>set zone-policy zone mgmt from work firewall name lan-mgmt-4</code>
+<code>set zone-policy zone mgmt from work firewall ipv6-name lan-mgmt-6</code>
+<code>set zone-policy zone mgmt from dmz firewall name lan-mgmt-4</code>
+<code>set zone-policy zone mgmt from dmz firewall ipv6-name lan-mgmt-6</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff8e15c" class="outline-4">
+<h4 id="orgff8e15c">LOCAL</h4>
+<div class="outline-text-4" id="text-orgff8e15c">
+<div class="org-src-container">
+<pre class="src src-text"><code>set zone-policy zone local default-action drop</code>
+<code>set zone-policy zone local local-zone</code>
+<code>set zone-policy zone local from wan firewall name wan-lan-4</code>
+<code>set zone-policy zone local from wan firewall ipv6-name wan-lan-6</code>
+<code>set zone-policy zone local from mgmt firewall name allow-all-4</code>
+<code>set zone-policy zone local from mgmt firewall ipv6-name allow-all-6</code>
+<code>set zone-policy zone local from home firewall name lan-local-4</code>
+<code>set zone-policy zone local from home firewall ipv6-name lan-local-6</code>
+<code>set zone-policy zone local from work firewall name lan-local-4</code>
+<code>set zone-policy zone local from work firewall ipv6-name lan-local-6</code>
+<code>set zone-policy zone local from dmz firewall name lan-local-4</code>
+<code>set zone-policy zone local from dmz firewall ipv6-name lan-local-6</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org30bee06" class="outline-2">
+<h2 id="org30bee06">VLAN</h2>
+<div class="outline-text-2" id="text-org30bee06">
+</div>
+<div id="outline-container-orgb01f2e3" class="outline-3">
+<h3 id="orgb01f2e3">Tagged, Untagged, and Not Member.</h3>
+<div class="outline-text-3" id="text-orgb01f2e3">
+<p>
+Tagging a VLAN ID to a port allows devices that support VLAN tagging
+(such as your access point) to route packets according to their tag.
+</p>
+
+<p>
+Setting a port as &ldquo;untagged&rdquo; for a VLAN ID will let &ldquo;regular&rdquo; devices
+receive traffic from the specified VLAN(s).
+</p>
+
+<p>
+When a port is set to not be a member of a VLAN ID, traffic on that
+VLAN will not get sent to that port.
+</p>
+
+<p>
+For example, the TP-Link TL-SG108PE has management access only on
+<code>VLAN 1</code>. If you want your computer to have access to the management
+interface, the switch port you plug you computer into must be marked
+as &ldquo;untagged&rdquo;. If you want to restrict access to the management
+interface on the switch, all of the other ports must set <code>VLAN 1</code> as &ldquo;Not Member&rdquo;.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0ba3d77" class="outline-3">
+<h3 id="org0ba3d77">TP-Link TL-SG108PE</h3>
+<div class="outline-text-3" id="text-org0ba3d77">
+<ol class="org-ol">
+<li>Set enable <code>802.1Q VLAN</code>.</li>
+<li>Use the <code>802.1Q PVID</code> tab to configure the VLAN ID for untagged ports.</li>
+</ol>
+
+<p>
+This table represents a VLAN configuration where ports 1, 2, 3, 4, and
+8 all belong to the management network and will receive traffic for
+all VLAN IDs.
+</p>
+
+<p>
+Ports 5, 6, and 7 will only receive traffic tagged for VLAN 2, however
+the ports must be marked as &ldquo;untagged&rdquo; on the switch so that regular
+devices (computers, printers, etc.) will get the packets.
+</p>
+
+<p>
+Additionally, ports 5, 6, and 7 have been removed as members for VLAN
+1 and 3 so that traffic from my <code>MGMT</code> and <code>WORK</code> network will not end
+up on devices intended to be used on the <code>HOME</code> network.
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">VLAN ID</th>
+<th scope="col" class="org-left">VLAN Name</th>
+<th scope="col" class="org-left">Member Ports</th>
+<th scope="col" class="org-left">Tagged Ports</th>
+<th scope="col" class="org-right">Untagged Ports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Default</td>
+<td class="org-left">1-4,8</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">1-4,8</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">Home</td>
+<td class="org-left">1-8</td>
+<td class="org-left">1-4,8</td>
+<td class="org-right">5-7</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Work</td>
+<td class="org-left">1-4,8</td>
+<td class="org-left">1-4,8</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcabea53" class="outline-2">
+<h2 id="orgcabea53">DHCP</h2>
+<div class="outline-text-2" id="text-orgcabea53">
+<p>
+Each network gets its own interface and subnet to make it easier to
+see where devices are connected.
+</p>
+
+<p>
+Static IP address assignments are managed through DHCP reservations.
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Network</th>
+<th scope="col" class="org-left">Interface</th>
+<th scope="col" class="org-left">Subnet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">mgmt</td>
+<td class="org-left">eth1</td>
+<td class="org-left">192.168.1.1/24</td>
+</tr>
+
+<tr>
+<td class="org-left">home</td>
+<td class="org-left">eth1.2</td>
+<td class="org-left">10.0.2.1/24</td>
+</tr>
+
+<tr>
+<td class="org-left">work</td>
+<td class="org-left">eth1.3</td>
+<td class="org-left">10.0.3.1/24</td>
+</tr>
+
+<tr>
+<td class="org-left">dmz</td>
+<td class="org-left">eth2</td>
+<td class="org-left">172.16.1.1/24</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-orgc7a78bf" class="outline-3">
+<h3 id="orgc7a78bf">Static Reservations</h3>
+<div class="outline-text-3" id="text-orgc7a78bf">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-right">IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">TL-SG108PE (Switch)</td>
+<td class="org-right">192.168.1.2</td>
+</tr>
+
+<tr>
+<td class="org-left">pihole</td>
+<td class="org-right">192.168.1.3</td>
+</tr>
+
+<tr>
+<td class="org-left">EAP225-home (AP)</td>
+<td class="org-right">192.168.1.4</td>
+</tr>
+
+<tr>
+<td class="org-left">EAP225-office (AP)</td>
+<td class="org-right">192.168.1.5</td>
+</tr>
+
+<tr>
+<td class="org-left">ML-2955DW (Printer)</td>
+<td class="org-right">10.0.2.13</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6a5a417" class="outline-2">
+<h2 id="org6a5a417">Using Pi-hole for DNS</h2>
+<div class="outline-text-2" id="text-org6a5a417">
+<p>
+I use Pi-hole for my home DNS server. It lives on the management
+network and can is the only DNS entry for each DHCP server on the
+EdgeRouter.
+</p>
+
+<p>
+In order to use pi-hole across different network subnets you have to
+enable the option <code>Bind only to interface eth0</code> on the DNS settings
+page.
+</p>
+
+
+<figure id="org82115bc">
+<a href="img/pihole-dns.png"><img src="img/pihole-dns.png" alt="pihole-dns.png"></a>
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-org9178ad6" class="outline-2">
+<h2 id="org9178ad6">WiFi &amp; Access Points</h2>
+<div class="outline-text-2" id="text-org9178ad6">
+<ul class="org-ul">
+<li>5GHz only</li>
+<li>Broadcast at lowest power</li>
+<li>Each network is on a separate vlan and subnet</li>
+<li>Each access point is on a non-interfering channel</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd507c5e" class="outline-2">
+<h2 id="orgd507c5e">AirPlay, Printing, and mDNS</h2>
+<div class="outline-text-2" id="text-orgd507c5e">
+<p>
+You can use &ldquo;mDNS repeating&rdquo; to allow access to airplay and printing
+across subnets/vlans. This can be enabled using the Config Tree tab
+and going to <code>Services -&gt; mDNS</code>.
+</p>
+
+<p>
+You must enable at least two interfaces.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text"><code>configure</code>
+<code></code>
+<code>set service mdns repeater interface eth1</code>
+<code>set service mdns repeater interface eth1.2</code>
+<code></code>
+<code>commit</code>
+<code>save</code>
+<code>exit</code>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c5fd87" class="outline-2">
+<h2 id="org7c5fd87">Bufferbloat and Smart Queue Management (SQM)</h2>
+<div class="outline-text-2" id="text-org7c5fd87">
+<p>
+The EdgeRouter supports Smart Queue Management, which can reduce the overall latency of your internet connection.
+</p>
+
+<ol class="org-ol">
+<li>Go to QoS tab</li>
+<li>Add a new smart queue policy</li>
+<li>Set WAN interface to <code>eth0</code></li>
+<li>Set upload and/or download bandwidth to 20% of internet speedtest results</li>
+
+<li><a href="https://fast.com/">https://fast.com/</a></li>
+<li><a href="https://www.waveform.com/tools/bufferbloat">https://www.waveform.com/tools/bufferbloat</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgaaf1b78" class="outline-2">
+<h2 id="orgaaf1b78">References</h2>
+<div class="outline-text-2" id="text-orgaaf1b78">
+<ul class="org-ul">
+<li><a href="https://help.ui.com/hc/en-us/articles/115006567467-EdgeRouter-Hardware-Offloading#4">https://help.ui.com/hc/en-us/articles/115006567467-EdgeRouter-Hardware-Offloading#4</a></li>
+<li><a href="https://help.ui.com/hc/en-us/articles/204952154-EdgeRouter-Zone-Based-Firewall">https://help.ui.com/hc/en-us/articles/204952154-EdgeRouter-Zone-Based-Firewall</a></li>
+<li><a href="https://help.ui.com/hc/en-us/articles/204960094-EdgeRouter-Configuration-and-Operational-Mode">https://help.ui.com/hc/en-us/articles/204960094-EdgeRouter-Configuration-and-Operational-Mode</a></li>
+<li><a href="https://help.ui.com/hc/en-us/articles/204976374">https://help.ui.com/hc/en-us/articles/204976374</a></li>
+<li><a href="https://networkjutsu.com/how-to-configure-edgerouter-lite-part-two/">https://networkjutsu.com/how-to-configure-edgerouter-lite-part-two/</a></li>
+<li><a href="https://www.forshee.me/ubiquiti-edgerouter-lite-setup-part-1-the-basics/">https://www.forshee.me/ubiquiti-edgerouter-lite-setup-part-1-the-basics/</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p>Last&nbsp;updated:&nbsp;2023-03-06</p>
+</div>
+</body>
+</html>

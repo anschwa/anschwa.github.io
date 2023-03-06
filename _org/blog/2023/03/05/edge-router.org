@@ -1,0 +1,558 @@
+#+TITLE: Using an EdgeRouter for my Home Network
+#+AUTHOR: Adam Schwartz
+#+DATE: March 5, 2023
+#+OPTIONS: title:nil
+#+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
+#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
+
+#+ATTR_HTML: :class nav
+- [[file:../../../../index.org][About]]
+- [[file:../../../index.org][Blog]]
+- [[file:../../../../ceramics/index.org][Ceramics]]
+- [[https://github.com/anschwa][Github]]
+
+* Using an EdgeRouter for my Home Network
+A couple of years ago I was given a very nice Ubiquiti EdgeRouter Lite
+but never set it up. Although I have accumulated a variety of
+networking gear and experimented with running small web servers at
+home for a long time, I had always used typical consumer routers like
+the Linksys WRT54G or Apple AirPort Express.
+
+Recently, after moving into a new apartment I decided it was time to
+give the EdgeRouter a try. I have been very impressed with the results
+and become quite proud of my new home-lab.
+
+* Devices
+Think about your devices. This is the most important step in setting
+up your home network.
+
+* Network
+- Router: Ubiquiti EdgeRouter Lite 3
+- Managed Switch: TPlink SG-108pe
+- Access Points (WiFi): TPLink EAP225 Omada
+
+[[file:img/network-devices.png][file:img/network-devices.png]]
+
+* Basic Router Setup
+Reset the EdgeRouter to the default configuration and login to the web
+interface to get started. It is a good idea to run the basic setup
+because it will give you a fully functioning home router.
+
+Connect to the EdgeRouter on ~eth0~ and open a web browser to
+~192.168.1.1~. The default username and password is ~ubnt~.
+
+You might need to assign yourself to an IP within the default subnet, like ~192.168.1.42~.
+
+Don't forget to create a new admin user during the initial setup. This
+will also remove the default ~ubnt~ user from the EdgeRouter.
+
+After the EdgeRouter reboots, you will need to re-connect to ~eth1~.
+You can connect a modem to ~eth0~ and you should have internet access.
+The basic setup wizard defines an appropriate firewall ruleset that
+prevents unauthorized inbound connections to your home network.
+
+** Configure SSH
+Standard SSH key configuration, except you can't use ~ssh-copy-id~ and
+have to use the ~loadkey~ command from within EdgeOS.
+
+Create new ssh key for managing the EdgeRouter:
+#+begin_src text
+ssh-keygen -t ed_25519 -C "email@example.com" -f ~/.ssh/path/edge-id_ed25519
+#+end_src
+
+Copy key to EdgeRouter (only ~/tmp~ is writable):
+#+begin_src text
+scp ~/.ssh/path/edge-id_ed25519.pub user@192.168.1.1:/tmp
+#+end_src
+
+Then access the EdgeRouter console and load your key:
+#+begin_src text
+configure
+loadkey <user> /tmp/edge-id_25519.pub
+commit
+save
+exit
+#+end_src
+
+Now add a new entry in ~$HOME/.ssh/config~ and test the connection.
+
+Try to ~ssh~ into your new admin account and verify the ownership of your home directory:
+#+begin_src text
+ssh <user>@192.168.1.1
+
+ls -la
+
+# if needed run
+sudo chmod -R <user> /home/<user>
+#+end_src
+
+Finally, you can disable password based login to the router:
+#+begin_src text
+configure
+set service ssh disable-password-authentication
+commit
+save
+exit
+#+end_src
+
+** Initial Configuration
+Poke around in the web UI and do some quick initial configuration
+using the System tab at the bottom of the page.
+
+- Set host name
+- Set timezone
+- Disable analytics
+- Disable UISP
+- Disable UBNT Discovery
+- Update firmware if available
+
+** Enable Hardware Offloading
+#+begin_src text
+configure
+
+set system offload ipv4 forwarding enable
+set system offload ipv4 gre enable
+set system offload ipv4 pppoe enable
+set system offload ipv4 vlan enable
+set system offload ipv4 bonding enable
+
+set system offload ipv6 forwarding enable
+set system offload ipv6 pppoe disable
+set system offload ipv6 vlan enable
+
+set system offload ipsec enable
+
+commit
+save
+exit
+#+end_src
+
+
+* Firewall
+From the Ubiquiti's EdgeRouter documentation:
+ #+begin_quote
+A Zone-Based Firewall assigns each interface to a specific zone. The
+firewall zones will be used to define what traffic is allowed to flow
+between the interfaces. The traffic that originates in the EdgeRouter
+itself will also be assigned to a zone: the local zone.
+#+end_quote
+
+*REMEMBER TO DISCONNECT THE EDGE ROUTER FROM THE INTERNET BEFORE CHANGING THE FIREWALL*
+
+My home network has quickly evolved from a single subnet to an
+environment with several VLAN's and multiple wireless networks.
+
+I decided that a zone-based firewall policy was going to offer the
+best trade-offs: More complicated to setup, but conceptually much
+simpler. Hopefully this makes things easier to maintain and less
+likely to get wrong.
+
+I want several layers of isolation:
+1. A ~HOME~ network for personal and guest devices. This will be the main
+   network, but none of these devices should have management access to
+   the router or establish connections to outside subnets or vlans.
+2. A ~WORK~ network. Only work devices are allowed on this network. Same rules as home, but for work.
+3. An "untrusted" ~DMZ~. More restrictive network than home or work.
+4. Trusted network for management (~MGMT~). Access to the router, switches, and access points are limited to this network.
+
+[[file:img/network-interfaces.png][file:img/network-interfaces.png]]
+
+** Rules
+Each zone is defined using a combination of the following firewall
+rule sets. Each rule set provides support for both IPv4 and IPv6 networks.
+
+Firewall rule names are limited to 28 characters.
+
+*** Prevent Unauthorized Inbound Traffic from the Internet
+Only allow valid and established connections. Log unauthorized requests.
+
+#+begin_src text
+# IPv4
+set firewall name wan-lan-4 default-action drop
+set firewall name wan-lan-4 enable-default-log
+set firewall name wan-lan-4 rule 1 action accept
+set firewall name wan-lan-4 rule 1 description 'allow established connections'
+set firewall name wan-lan-4 rule 1 log disable
+set firewall name wan-lan-4 rule 1 protocol all
+set firewall name wan-lan-4 rule 1 state established enable
+set firewall name wan-lan-4 rule 1 state related enable
+set firewall name wan-lan-4 rule 2 action drop
+set firewall name wan-lan-4 rule 2 description 'drop invalid packets'
+set firewall name wan-lan-4 rule 2 log disable
+set firewall name wan-lan-4 rule 2 protocol all
+set firewall name wan-lan-4 rule 2 state invalid enable
+
+# IPv6
+set firewall ipv6-name wan-lan-6 default-action drop
+set firewall ipv6-name wan-lan-6 enable-default-log
+set firewall ipv6-name wan-lan-6 rule 1 action accept
+set firewall ipv6-name wan-lan-6 rule 1 description 'allow established connections'
+set firewall ipv6-name wan-lan-6 rule 1 log disable
+set firewall ipv6-name wan-lan-6 rule 1 state established enable
+set firewall ipv6-name wan-lan-6 rule 1 state related enable
+set firewall ipv6-name wan-lan-6 rule 2 action drop
+set firewall ipv6-name wan-lan-6 rule 2 description 'drop invalid packets'
+set firewall ipv6-name wan-lan-6 rule 2 log disable
+set firewall ipv6-name wan-lan-6 rule 2 state invalid enable
+#+end_src
+
+*** Internet Access
+The typical thing to do is allow any outgoing traffic to reach the
+internet. However, I want to block certain devices from ever being
+able to communicate to the outside world, such as my printer and
+"smart" TV.
+
+#+begin_src text
+# IPv4
+set firewall name lan-wan-4 default-action accept
+set firewall name lan-wan-4 rule 1 action drop
+set firewall name lan-wan-4 rule 1 description 'block outbound traffic from printer'
+set firewall name lan-wan-4 rule 1 log disable
+set firewall name lan-wan-4 rule 1 protocol all
+set firewall name lan-wan-4 rule 1 source mac-address '00:15:99:b3:05:77'
+set firewall name lan-wan-4 rule 2 action drop
+set firewall name lan-wan-4 rule 2 description 'block outbound traffic from tv'
+set firewall name lan-wan-4 rule 2 log disable
+set firewall name lan-wan-4 rule 2 protocol all
+set firewall name lan-wan-4 rule 2 source mac-address '98:06:3c:a7:0b:07'
+
+# IPv6
+set firewall ipv6-name lan-wan-6 default-action accept
+set firewall ipv6-name lan-wan-6 rule 1 action drop
+set firewall ipv6-name lan-wan-6 rule 1 description 'block outbound traffic from printer'
+set firewall ipv6-name lan-wan-6 rule 1 log disable
+set firewall ipv6-name lan-wan-6 rule 1 protocol all
+set firewall ipv6-name lan-wan-6 rule 1 source mac-address '00:15:99:b3:05:77'
+set firewall ipv6-name lan-wan-6 rule 2 action drop
+set firewall ipv6-name lan-wan-6 rule 2 description 'block outbound traffic from tv'
+set firewall ipv6-name lan-wan-6 rule 2 log disable
+set firewall ipv6-name lan-wan-6 rule 2 protocol all
+set firewall ipv6-name lan-wan-6 rule 2 source mac-address '98:06:3c:a7:0b:07'
+#+end_src
+
+*** Allow All Traffic
+#+begin_src text
+# IPv4
+set firewall name allow-all-4 default-action accept
+
+# IPv6
+set firewall ipv6-name allow-all-6 default-action accept
+#+end_src
+
+*** Block All Traffic
+#+begin_src text
+# IPv4
+set firewall name block-all-4 default-action drop
+
+# IPv6
+set firewall ipv6-name block-all-6 default-action drop
+#+end_src
+
+*** Allow Pi-hole
+I use Pi-hole for local DNS so I need to allow incoming queries to the
+management network. Otherwise, it should only allow valid and
+established connections and log any unauthorized requests.
+
+#+begin_src text
+# IPv4
+set firewall name lan-mgmt-4 default-action drop
+set firewall name lan-mgmt-4 enable-default-log
+set firewall name lan-mgmt-4 rule 1 action accept
+set firewall name lan-mgmt-4 rule 1 description 'allow established connections'
+set firewall name lan-mgmt-4 rule 1 log disable
+set firewall name lan-mgmt-4 rule 1 protocol all
+set firewall name lan-mgmt-4 rule 1 state established enable
+set firewall name lan-mgmt-4 rule 1 state related enable
+set firewall name lan-mgmt-4 rule 2 action drop
+set firewall name lan-mgmt-4 rule 2 description 'drop invalid packets'
+set firewall name lan-mgmt-4 rule 2 log disable
+set firewall name lan-mgmt-4 rule 2 protocol all
+set firewall name lan-mgmt-4 rule 2 state invalid enable
+set firewall name lan-mgmt-4 rule 3 action accept
+set firewall name lan-mgmt-4 rule 3 description 'allow dns'
+set firewall name lan-mgmt-4 rule 3 log disable
+set firewall name lan-mgmt-4 rule 3 protocol tcp_udp
+set firewall name lan-mgmt-4 rule 3 destination port 53
+
+# IPv6
+set firewall ipv6-name lan-mgmt-6 default-action drop
+set firewall ipv6-name lan-mgmt-6 enable-default-log
+set firewall ipv6-name lan-mgmt-6 rule 1 action accept
+set firewall ipv6-name lan-mgmt-6 rule 1 description 'allow established connections'
+set firewall ipv6-name lan-mgmt-6 rule 1 state log disable
+set firewall ipv6-name lan-mgmt-6 rule 1 state established enable
+set firewall ipv6-name lan-mgmt-6 rule 1 state related enable
+set firewall ipv6-name lan-mgmt-6 rule 2 action drop
+set firewall ipv6-name lan-mgmt-6 rule 2 description 'drop invalid packets'
+set firewall ipv6-name lan-mgmt-6 rule 2 log disable
+set firewall ipv6-name lan-mgmt-6 rule 2 state invalid enable
+set firewall ipv6-name lan-mgmt-6 rule 3 action accept
+set firewall ipv6-name lan-mgmt-6 rule 3 description 'allow dhcpv6'
+set firewall ipv6-name lan-mgmt-6 rule 3 destination port 546
+set firewall ipv6-name lan-mgmt-6 rule 3 protocol udp
+set firewall ipv6-name lan-mgmt-6 rule 3 log disable
+set firewall ipv6-name lan-mgmt-6 rule 3 source port 547
+set firewall ipv6-name lan-mgmt-6 rule 4 action accept
+set firewall ipv6-name lan-mgmt-6 rule 4 description 'allow icmpv6'
+set firewall ipv6-name lan-mgmt-6 rule 4 log disable
+set firewall ipv6-name lan-mgmt-6 rule 4 protocol ipv6-icmp
+#+end_src
+
+*** Restrict Management Access
+Do not allow management access to the EdgeRouter. Log unauthorized requests.
+
+This rule will be used to define what local traffic is allowed into
+the EdgeRouter. For now this means only DHCP requests.
+#+begin_src text
+# IPv4
+set firewall name lan-local-4 default-action drop
+set firewall name lan-local-4 enable-default-log
+set firewall name lan-local-4 rule 1 action accept
+set firewall name lan-local-4 rule 1 description 'allow dhcp'
+set firewall name lan-local-4 rule 1 log disable
+set firewall name lan-local-4 rule 1 protocol udp
+set firewall name lan-local-4 rule 1 destination port 67
+
+# IPv6
+set firewall ipv6-name lan-local-6 default-action drop
+set firewall ipv6-name lan-local-6 enable-default-log
+set firewall ipv6-name lan-local-6 rule 1 action accept
+set firewall ipv6-name lan-local-6 rule 1 description 'allow established connections'
+set firewall ipv6-name lan-local-6 rule 1 state log disable
+set firewall ipv6-name lan-local-6 rule 1 state established enable
+set firewall ipv6-name lan-local-6 rule 1 state related enable
+set firewall ipv6-name lan-local-6 rule 2 action drop
+set firewall ipv6-name lan-local-6 rule 2 description 'drop invalid packets'
+set firewall ipv6-name lan-local-6 rule 2 log disable
+set firewall ipv6-name lan-local-6 rule 2 state invalid enable
+set firewall ipv6-name lan-local-6 rule 3 action accept
+set firewall ipv6-name lan-local-6 rule 3 description 'allow dhcpv6'
+set firewall ipv6-name lan-local-6 rule 3 destination port 546
+set firewall ipv6-name lan-local-6 rule 3 protocol udp
+set firewall ipv6-name lan-local-6 rule 3 log disable
+set firewall ipv6-name lan-local-6 rule 3 source port 547
+set firewall ipv6-name lan-local-6 rule 4 action accept
+set firewall ipv6-name lan-local-6 rule 4 description 'allow icmpv6'
+set firewall ipv6-name lan-local-6 rule 4 log disable
+set firewall ipv6-name lan-local-6 rule 4 protocol ipv6-icmp
+#+end_src
+
+** Zones
+A zone must define how to handle incoming traffic from every other
+zone in the network. This is part of what makes a zone-based firewall
+robust and resilient to mistakes. Any flow of traffic between two
+zones that has not been defined (at both ends!) will get dropped.
+
+*** WAN
+#+begin_src text
+set zone-policy zone wan default-action drop
+set zone-policy zone wan interface eth0
+set zone-policy zone wan from local firewall name allow-all-4
+set zone-policy zone wan from local firewall ipv6-name allow-all-6
+set zone-policy zone wan from mgmt firewall name lan-wan-4
+set zone-policy zone wan from mgmt firewall ipv6-name lan-wan-6
+set zone-policy zone wan from home firewall name lan-wan-4
+set zone-policy zone wan from home firewall ipv6-name lan-wan-6
+set zone-policy zone wan from work firewall name lan-wan-4
+set zone-policy zone wan from work firewall ipv6-name lan-wan-6
+set zone-policy zone wan from dmz firewall name lan-wan-4
+set zone-policy zone wan from dmz firewall ipv6-name lan-wan-6
+#+end_src
+
+*** HOME
+#+begin_src text
+set zone-policy zone home default-action drop
+set zone-policy zone home interface eth1.2
+set zone-policy zone home from wan firewall name wan-lan-4
+set zone-policy zone home from wan firewall ipv6-name wan-lan-6
+set zone-policy zone home from local firewall name allow-all-4
+set zone-policy zone home from local firewall ipv6-name allow-all-6
+set zone-policy zone home from mgmt firewall name allow-all-4
+set zone-policy zone home from mgmt firewall ipv6-name allow-all-6
+set zone-policy zone home from work firewall name block-all-4
+set zone-policy zone home from work firewall ipv6-name block-all-6
+set zone-policy zone home from dmz firewall name block-all-4
+set zone-policy zone home from dmz firewall ipv6-name block-all-6
+#+end_src
+
+*** WORK
+#+begin_src text
+set zone-policy zone work default-action drop
+set zone-policy zone work interface eth1.3
+set zone-policy zone work from wan firewall name wan-lan-4
+set zone-policy zone work from wan firewall ipv6-name wan-lan-6
+set zone-policy zone work from local firewall name allow-all-4
+set zone-policy zone work from local firewall ipv6-name allow-all-6
+set zone-policy zone work from mgmt firewall name allow-all-4
+set zone-policy zone work from mgmt firewall ipv6-name allow-all-6
+set zone-policy zone work from home firewall name block-all-4
+set zone-policy zone work from home firewall ipv6-name block-all-6
+set zone-policy zone work from dmz firewall name block-all-4
+set zone-policy zone work from dmz firewall ipv6-name block-all-6
+#+end_src
+
+*** DMZ
+#+begin_src text
+set zone-policy zone dmz default-action drop
+set zone-policy zone dmz interface eth2
+set zone-policy zone dmz from wan firewall name wan-lan-4
+set zone-policy zone dmz from wan firewall ipv6-name wan-lan-6
+set zone-policy zone dmz from local firewall name allow-all-4
+set zone-policy zone dmz from local firewall ipv6-name allow-all-6
+set zone-policy zone dmz from home firewall name block-all-4
+set zone-policy zone dmz from home firewall ipv6-name block-all-6
+set zone-policy zone dmz from work firewall name block-all-4
+set zone-policy zone dmz from work firewall ipv6-name block-all-6
+set zone-policy zone dmz from mgmt firewall name allow-all-4
+set zone-policy zone dmz from mgmt firewall ipv6-name allow-all-6
+#+end_src
+
+*** MGMT
+#+begin_src text
+set zone-policy zone mgmt default-action drop
+set zone-policy zone mgmt interface eth1
+set zone-policy zone mgmt from wan firewall name wan-lan-4
+set zone-policy zone mgmt from wan firewall ipv6-name wan-lan-6
+set zone-policy zone mgmt from local firewall name allow-all-4
+set zone-policy zone mgmt from local firewall ipv6-name allow-all-6
+set zone-policy zone mgmt from home firewall name lan-mgmt-4
+set zone-policy zone mgmt from home firewall ipv6-name lan-mgmt-6
+set zone-policy zone mgmt from work firewall name lan-mgmt-4
+set zone-policy zone mgmt from work firewall ipv6-name lan-mgmt-6
+set zone-policy zone mgmt from dmz firewall name lan-mgmt-4
+set zone-policy zone mgmt from dmz firewall ipv6-name lan-mgmt-6
+#+end_src
+
+*** LOCAL
+#+begin_src text
+set zone-policy zone local default-action drop
+set zone-policy zone local local-zone
+set zone-policy zone local from wan firewall name wan-lan-4
+set zone-policy zone local from wan firewall ipv6-name wan-lan-6
+set zone-policy zone local from mgmt firewall name allow-all-4
+set zone-policy zone local from mgmt firewall ipv6-name allow-all-6
+set zone-policy zone local from home firewall name lan-local-4
+set zone-policy zone local from home firewall ipv6-name lan-local-6
+set zone-policy zone local from work firewall name lan-local-4
+set zone-policy zone local from work firewall ipv6-name lan-local-6
+set zone-policy zone local from dmz firewall name lan-local-4
+set zone-policy zone local from dmz firewall ipv6-name lan-local-6
+#+end_src
+
+* VLAN
+** Tagged, Untagged, and Not Member.
+Tagging a VLAN ID to a port allows devices that support VLAN tagging
+(such as your access point) to route packets according to their tag.
+
+Setting a port as "untagged" for a VLAN ID will let "regular" devices
+receive traffic from the specified VLAN(s).
+
+When a port is set to not be a member of a VLAN ID, traffic on that
+VLAN will not get sent to that port.
+
+For example, the TP-Link TL-SG108PE has management access only on
+~VLAN 1~. If you want your computer to have access to the management
+interface, the switch port you plug you computer into must be marked
+as "untagged". If you want to restrict access to the management
+interface on the switch, all of the other ports must set ~VLAN 1~ as "Not Member".
+
+** TP-Link TL-SG108PE
+1. Set enable ~802.1Q VLAN~.
+2. Use the ~802.1Q PVID~ tab to configure the VLAN ID for untagged ports.
+
+This table represents a VLAN configuration where ports 1, 2, 3, 4, and
+8 all belong to the management network and will receive traffic for
+all VLAN IDs.
+
+Ports 5, 6, and 7 will only receive traffic tagged for VLAN 2, however
+the ports must be marked as "untagged" on the switch so that regular
+devices (computers, printers, etc.) will get the packets.
+
+Additionally, ports 5, 6, and 7 have been removed as members for VLAN
+1 and 3 so that traffic from my ~MGMT~ and ~WORK~ network will not end
+up on devices intended to be used on the ~HOME~ network.
+
+| VLAN ID | VLAN Name | Member Ports | Tagged Ports | Untagged Ports |
+|---------+-----------+--------------+--------------+----------------|
+|       1 | Default   | 1-4,8        |              | 1-4,8          |
+|       2 | Home      | 1-8          | 1-4,8        | 5-7            |
+|       3 | Work      | 1-4,8        | 1-4,8        |                |
+
+* DHCP
+Each network gets its own interface and subnet to make it easier to
+see where devices are connected.
+
+Static IP address assignments are managed through DHCP reservations.
+
+| Network | Interface | Subnet         |
+|---------+-----------+----------------|
+| mgmt    | eth1      | 192.168.1.1/24 |
+| home    | eth1.2    | 10.0.2.1/24    |
+| work    | eth1.3    | 10.0.3.1/24    |
+| dmz     | eth2      | 172.16.1.1/24  |
+
+** Static Reservations
+| Name                |          IP |
+|---------------------+-------------|
+| TL-SG108PE (Switch) | 192.168.1.2 |
+| pihole              | 192.168.1.3 |
+| EAP225-home (AP)    | 192.168.1.4 |
+| EAP225-office (AP)  | 192.168.1.5 |
+| ML-2955DW (Printer) |   10.0.2.13 |
+
+* Using Pi-hole for DNS
+
+I use Pi-hole for my home DNS server. It lives on the management
+network and can is the only DNS entry for each DHCP server on the
+EdgeRouter.
+
+In order to use pi-hole across different network subnets you have to
+enable the option ~Bind only to interface eth0~ on the DNS settings
+page.
+
+[[file:img/pihole-dns.png][file:img/pihole-dns.png]]
+
+* WiFi & Access Points
+- 5GHz only
+- Broadcast at lowest power
+- Each network is on a separate vlan and subnet
+- Each access point is on a non-interfering channel
+
+* AirPlay, Printing, and mDNS
+You can use "mDNS repeating" to allow access to airplay and printing
+across subnets/vlans. This can be enabled using the Config Tree tab
+and going to ~Services -> mDNS~.
+
+You must enable at least two interfaces.
+
+#+begin_src text
+configure
+
+set service mdns repeater interface eth1
+set service mdns repeater interface eth1.2
+
+commit
+save
+exit
+#+end_src
+
+* Bufferbloat and Smart Queue Management (SQM)
+
+The EdgeRouter supports Smart Queue Management, which can reduce the overall latency of your internet connection.
+
+1. Go to QoS tab
+2. Add a new smart queue policy
+3. Set WAN interface to ~eth0~
+4. Set upload and/or download bandwidth to 20% of internet speedtest results
+
+- https://fast.com/
+- https://www.waveform.com/tools/bufferbloat
+
+* References
+- https://help.ui.com/hc/en-us/articles/115006567467-EdgeRouter-Hardware-Offloading#4
+- https://help.ui.com/hc/en-us/articles/204952154-EdgeRouter-Zone-Based-Firewall
+- https://help.ui.com/hc/en-us/articles/204960094-EdgeRouter-Configuration-and-Operational-Mode
+- https://help.ui.com/hc/en-us/articles/204976374
+- https://networkjutsu.com/how-to-configure-edgerouter-lite-part-two/
+- https://www.forshee.me/ubiquiti-edgerouter-lite-setup-part-1-the-basics/
