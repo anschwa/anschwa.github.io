@@ -3,14 +3,7 @@
 #+DATE: June 24, 2018
 #+OPTIONS: title:nil
 #+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
-
-#+ATTR_HTML: :class nav
-- [[file:../../../../index.org][About]]
-- [[file:../../../index.org][Blog]]
-- [[file:../../../../ceramics/index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
 
 * Mostly Harmless
 /The Hitchhiker's Guide to the Galaxy/ is one of my favorite books.

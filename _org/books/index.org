@@ -1,14 +1,9 @@
 #+TITLE: What I'm reading
 #+AUTHOR: Adam Schwartz
 #+DATE: June 2, 2022
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
 
 * Up Next
-1. /Being and Nothingness/
-   - Jean-Paul Sartre
-2. /Either/Or/
-   - Søren Kierkegaard
 
 * 2023
 ** February 2023
@@ -140,13 +135,6 @@
 ** August - October 2016
 1. The Trial and Execution of Socrates: Sources and Controversies
    - Thomas C. Brickhouse & Nicholas D. Smith
-     1. The Clouds - Aristophanes
-     2. The Euthyphro - Plato
-     3. The Apology of Socrates - Plato
-     4. The Crito - Plato
-     5. The Phaedo - Plato
-     6. The Apology of Socrates - Xenophon
-     7. Memorabilia - Xenophon
 
 ** June 2016
 1. Cat's Cradle
@@ -237,15 +225,11 @@
 * 2013
 1. How to Read a Book
    - Mortimer J. Adler and Charles Van Doren
-2. Oedipus Rex
-   - Sophocles, translated by Dudley Fitts and Robert Fitzgerald
-3. Antigone
-   - Sophocles, translated by Dudley Fitts and Robert Fitzgerald
-4. Civilization and its Discontents
+2. Civilization and its Discontents
    - Sigmund Freud
-5. Man's Search For Meaning
+3. Man's Search For Meaning
    - Viktor E. Frankl
-6. Steve Jobs
+4. Steve Jobs
    - Walter Isaacson
 
 * Programming & Computer Science

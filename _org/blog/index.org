@@ -1,14 +1,7 @@
 #+TITLE: Blog
 #+AUTHOR: Adam Schwartz
 #+DATE: January 17, 2021
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
-
-#+ATTR_HTML: :class nav
-- [[file:../index.org][About]]
-- [[file:index.org][Blog]]
-- [[file:../ceramics/index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
 
 * 2023
 - [2023-03-05] [[file:2023/03/05/edge-router.org][Using an EdgeRouter for my Home Network]]

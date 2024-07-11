@@ -3,14 +3,7 @@
 #+DATE: January 23, 2022
 #+OPTIONS: title:nil
 #+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
-
-#+ATTR_HTML: :class nav
-- [[file:../../../../index.org][About]]
-- [[file:../../../index.org][Blog]]
-- [[file:../../../../ceramics/index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
 
 * Getting Started with ZFS
 These are my notes from setting up a ZFS file server on FreeBSD.

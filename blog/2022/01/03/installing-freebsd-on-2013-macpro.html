@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-05 -->
-<meta charset="utf-8" />
+<!-- 2024-07-11 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Installing FreeBSD on a 2013 Mac Pro</title>
 <meta name="author" content="Adam Schwartz" />
@@ -15,34 +17,25 @@
 <p>Published:&nbsp;January 03, 2022</p>
 </div>
 <div id="content" class="content">
-<ul class="org-ul nav">
-<li><a href="../../../../index.html">About</a></li>
-<li><a href="../../../index.html">Blog</a></li>
-<li><a href="../../../../ceramics/index.html">Ceramics</a></li>
-<li><a href="https://github.com/anschwa">Github</a></li>
-</ul>
 
 <div id="outline-container-org98e0e2c" class="outline-2">
 <h2 id="org98e0e2c">Installing FreeBSD on a 2013 Mac Pro</h2>
 <div class="outline-text-2" id="text-org98e0e2c">
+
+<div id="orge9856e5" class="figure">
+<p><img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;" />
+</p>
+<p><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</p>
+</div>
+
 <p>
-In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
-listed on Craigslist. Some might have considered this to be a &ldquo;bad
-move&rdquo; from the start, but I thought the 2013 Mac Pro was simply the
-most amazing computer ever made and $950 seemed like a great
-deal <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+In 2021 I decided to go all-in <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> on a 2013 (trashcan) Mac Pro I saw
+listed on Craigslist.
 </p>
 
-
-<figure id="org45a041e">
-<img src="img/my-mac-pro.jpg" alt="my-mac-pro.jpg" style="max-width: 400px;">
-
-<figcaption><span class="figure-number">Figure 1: </span>My 2013 Mac Pro</figcaption>
-</figure>
-
 <p>
-Little did I know, the 2013 Mac Pro suffered from severe thermal
-issues and I soon became one of the thousands of unhappy users
+However, I soon discovered that this machine suffered from severe
+thermal issues and quickly became one of the many unhappy users
 experiencing spontaneous freezing and crashes thought to be caused by
 Apple&rsquo;s proprietary dual AMD FirePro GPUs.
 </p>
@@ -121,18 +114,18 @@ during startup.
 </p>
 
 
-<figure id="orgd62844f">
-<a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;"></a>
+<div id="org4d74740" class="figure">
+<p><a href="img/live-boot-1.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-1.jpg" alt="live-boot-1.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</p>
+</div>
 
-<figcaption><span class="figure-number">Figure 2: </span>Holding Option (Alt) to boot with my FreeBSD USB drive</figcaption>
-</figure>
 
-
-<figure id="org834c046">
-<a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 3: </span>Nice! This might actually work</figcaption>
-</figure>
+<div id="org9dc57b9" class="figure">
+<p><a href="img/live-boot-2.jpg" style="max-width: 400px;"><img src="img/thumbs/live-boot-2.jpg" alt="live-boot-2.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 3: </span>Nice! This might actually work</p>
+</div>
 
 <p>
 I was pretty excited after seeing the FreeBSD boot menu show up. I
@@ -145,11 +138,11 @@ unresponsive.
 </p>
 
 
-<figure id="org9a3776e">
-<a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. I&rsquo;m stuck.</figcaption>
-</figure>
+<div id="org8ed2c02" class="figure">
+<p><a href="img/power-fault-detected.jpg" style="max-width: 400px;"><img src="img/thumbs/power-fault-detected.jpg" alt="power-fault-detected.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 4: </span>Oh NO! pcib8: Power Fault Detected. I&rsquo;m stuck.</p>
+</div>
 
 <p>
 Somehow, I was able to dig up <a href="https://forum.netgate.com/topic/126119/pfsense-on-mac-pro">an old forum post</a> by someone with this
@@ -193,11 +186,11 @@ Here is all I needed to get FreeBSD to boot on the Mac Pro:
 </ol>
 
 
-<figure id="orgccc4d49">
-<a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></figcaption>
-</figure>
+<div id="org4b1cc6e" class="figure">
+<p><a href="img/boot-options.jpg" style="max-width: 400px;"><img src="img/boot-options.jpg" alt="boot-options.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 5: </span>Sucessful boot after setting <code>hw.pci.enable_pcie_hp="0"</code></p>
+</div>
 </div>
 
 <div id="outline-container-org79ae824" class="outline-3">
@@ -234,32 +227,32 @@ which so you don&rsquo;t accidentally overwrite macOS.
 </p>
 
 
-<figure id="org1460f32">
-<a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</figcaption>
-</figure>
-
-
-<figure id="orge7de7ba">
-<a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 7: </span>Set the new size for your disk</figcaption>
-</figure>
+<div id="org97616f6" class="figure">
+<p><a href="img/macOS-resize-1.png" style="max-width: 400px;"><img src="img/macOS-resize-1.png" alt="macOS-resize-1.png" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 6: </span>Choose macOS partition to resize</p>
+</div>
 
 
-<figure id="org4154ec1">
-<a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;"></a>
+<div id="org174d87f" class="figure">
+<p><a href="img/macOS-resize-2.png" style="max-width: 400px;"><img src="img/macOS-resize-2.png" alt="macOS-resize-2.png" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 7: </span>Set the new size for your disk</p>
+</div>
 
-<figcaption><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</figcaption>
-</figure>
+
+<div id="org610d2b9" class="figure">
+<p><a href="img/macOS-resize-3.png" style="max-width: 400px;"><img src="img/macOS-resize-3.png" alt="macOS-resize-3.png" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 8: </span>Don&rsquo;t be afraid</p>
+</div>
 
 
-<figure id="org42dacfc">
-<a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px"></a>
-
-<figcaption><span class="figure-number">Figure 9: </span>Eventually the resize will finish</figcaption>
-</figure>
+<div id="org4dcbdb9" class="figure">
+<p><a href="img/macOS-resize-4.png" style="max-width: 400px"><img src="img/macOS-resize-4.png" alt="macOS-resize-4.png" style="max-width: 400px" /></a>
+</p>
+<p><span class="figure-number">Figure 9: </span>Eventually the resize will finish</p>
+</div>
 </div>
 </div>
 
@@ -285,53 +278,53 @@ installation, you will need to add them and update the entries in
 </p>
 
 
-<figure id="org0946388">
-<a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</figcaption>
-</figure>
-
-
-<figure id="orgdb69c90">
-<a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</figcaption>
-</figure>
+<div id="org6e6f0b2" class="figure">
+<p><a href="img/manual-partition.jpg" style="max-width: 400px;"><img src="img/thumbs/manual-partition.jpg" alt="manual-partition.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 10: </span>Choose &ldquo;Manual Disk Setup&rdquo;</p>
+</div>
 
 
-<figure id="orgdb74659">
-<a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</figcaption>
-</figure>
-
-
-<figure id="org3dabba4">
-<a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</figcaption>
-</figure>
+<div id="org3fa16ef" class="figure">
+<p><a href="img/initial-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/initial-partition-table.jpg" alt="initial-partition-table.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 11: </span>Initial partition table after resizing from macOS</p>
+</div>
 
 
-<figure id="orga0d8677">
-<a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</figcaption>
-</figure>
-
-
-<figure id="org5ded0aa">
-<a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 15: </span>Final partition table</figcaption>
-</figure>
+<div id="orgaae1bd2" class="figure">
+<p><a href="img/freebsd-root.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-root.jpg" alt="freebsd-root.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 12: </span>Creating freebsd-root partition</p>
+</div>
 
 
-<figure id="org6acab6a">
-<a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;"></a>
+<div id="org5dca103" class="figure">
+<p><a href="img/enable-trim.jpg" style="max-width: 400px;"><img src="img/enable-trim.jpg" alt="enable-trim.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 13: </span>Enabling TRIM on SSD</p>
+</div>
 
-<figcaption><span class="figure-number">Figure 16: </span>FreeBSD installation progress</figcaption>
-</figure>
+
+<div id="org47b2c76" class="figure">
+<p><a href="img/freebsd-swap.jpg" style="max-width: 400px;"><img src="img/thumbs/freebsd-swap.jpg" alt="freebsd-swap.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 14: </span>Creating freebsd-swap partition</p>
+</div>
+
+
+<div id="orgc804221" class="figure">
+<p><a href="img/final-partition-table.jpg" style="max-width: 400px;"><img src="img/thumbs/final-partition-table.jpg" alt="final-partition-table.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 15: </span>Final partition table</p>
+</div>
+
+
+<div id="org4a0be01" class="figure">
+<p><a href="img/installing-progress.jpg" style="max-width: 400px;"><img src="img/thumbs/installing-progress.jpg" alt="installing-progress.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 16: </span>FreeBSD installation progress</p>
+</div>
 
 <p>
 After creating these custom partitions, the only thing left to do is
@@ -340,18 +333,18 @@ before rebooting. I also ended up adding <code>autoboot_delay="5"</code>.
 </p>
 
 
-<figure id="orga895f81">
-<a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;"></a>
+<div id="org7aac0de" class="figure">
+<p><a href="img/install-done.jpg" style="max-width: 400px;"><img src="img/thumbs/install-done.jpg" alt="install-done.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</p>
+</div>
 
-<figcaption><span class="figure-number">Figure 17: </span>Don&rsquo;t forget to edit <code>/boot/loader.conf</code> before rebooting</figcaption>
-</figure>
 
-
-<figure id="org0b9325b">
-<a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></figcaption>
-</figure>
+<div id="org563d2fa" class="figure">
+<p><a href="img/set-loader-conf.jpg" style="max-width: 400px;"><img src="img/thumbs/set-loader-conf.jpg" alt="set-loader-conf.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 18: </span>Editing <code>/boot/loader.conf</code></p>
+</div>
 </div>
 </div>
 
@@ -625,18 +618,18 @@ Here&rsquo;s how to install it:
 </ol>
 
 
-<figure id="org7682e82">
-<a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;"></a>
+<div id="org6c2fd32" class="figure">
+<p><a href="img/refind-install.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-install.jpg" alt="refind-install.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 19: </span>Installing rEFInd</p>
+</div>
 
-<figcaption><span class="figure-number">Figure 19: </span>Installing rEFInd</figcaption>
-</figure>
 
-
-<figure id="org1a6d7ee">
-<a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;"></a>
-
-<figcaption><span class="figure-number">Figure 20: </span>The rEFInd boot menu</figcaption>
-</figure>
+<div id="org7f62a67" class="figure">
+<p><a href="img/refind-boot.jpg" style="max-width: 400px;"><img src="img/thumbs/refind-boot.jpg" alt="refind-boot.jpg" style="max-width: 400px;" /></a>
+</p>
+<p><span class="figure-number">Figure 20: </span>The rEFInd boot menu</p>
+</div>
 </div>
 
 <div id="outline-container-org0187cb9" class="outline-4">
@@ -667,15 +660,15 @@ involved than a typical PC but the <a href="https://www.ifixit.com/Guide/Mac+Pro
 comprehensive and the whole process took about two hours.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><table>
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
@@ -715,7 +708,7 @@ complaining needs to stop.
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2023-01-12</p>
+<p>Last&nbsp;updated:&nbsp;2024-07-11</p><p class="nav"><a href="/">Home</a> :: <a href="/blog">Blog</a> :: <a href="/ceramics">Ceramics</a>
 </div>
 </body>
 </html>

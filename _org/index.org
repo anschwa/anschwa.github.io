@@ -1,38 +1,20 @@
 #+TITLE: Adam Schwartz
-#+AUTHOR: Adam Schwartz
-#+DESCRIPTION: emacs, sriracha, zappa.
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
+#+OPTIONS: html-postamble:nil
 #+HTML_HEAD: <link rel="stylesheet" href="css/style.css" />
 
-#+ATTR_HTML: :class nav
-- [[file:index.org][About]]
 - [[file:blog/index.org][Blog]]
 - [[file:ceramics/index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
+- [[https://github.com/anschwa][GitHub]]
+- [[file:cv/index.org][Resume / CV]]
 
 * About
-#+BEGIN_EXPORT html
-<p style="text-align: center;">
-  <img src="img/me.jpg" alt="Me circa 2015 in Dharamshala, India." width="200" height="200" style="width: 200px; border-radius: 50%;" />
-</p>
-#+END_EXPORT
-
 Hi, I graduated from [[https://earlham.edu/][Earlham College]] in 2018 with a BA in Computer
 Science, minor in Philosophy, and a few semesters of Studio Ceramics.
 
 Now I work for [[https://www.uscis.gov/about-us/mission-and-core-values][USCIS]] as a software engineer in the Refugee and Asylum directorate.
 
 * Books
-
-Up next is:
-- /Being and Nothingness/ by Jean-Paul Sartre
-- /Either/Or/ by Søren Kierkegaard
-
-Check out what else [[file:books/index.org][I've been reading]].
-
-* Resume / CV
-Previously I've enjoyed keeping [[file:cv/index.org][my resume]] in LaTeX, but now I prefer
-using HTML with a custom print CSS file.
+Check out what [[file:books/index.org][I've been reading]].
 
 #+BEGIN_EXPORT html
 <hr/>

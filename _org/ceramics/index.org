@@ -1,14 +1,7 @@
 #+TITLE: Ceramics
 #+AUTHOR: Adam Schwartz
 #+DATE: January 17, 2021
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../css/style.css" />
-
-#+ATTR_HTML: :class nav
-- [[file:../index.org][About]]
-- [[file:../blog/index.org][Blog]]
-- [[file:index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
 
 #+CAPTION: My old AMACO potters wheel.
 #+ATTR_HTML: :style max-width: 600px;

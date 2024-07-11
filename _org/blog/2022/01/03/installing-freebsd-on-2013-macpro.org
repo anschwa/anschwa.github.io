@@ -3,28 +3,18 @@
 #+DATE: January 03, 2022
 #+OPTIONS: title:nil
 #+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
 
-#+ATTR_HTML: :class nav
-- [[file:../../../../index.org][About]]
-- [[file:../../../index.org][Blog]]
-- [[file:../../../../ceramics/index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
-
 * Installing FreeBSD on a 2013 Mac Pro
-In 2021 I decided to go all-in on a 2013 (trashcan) Mac Pro I saw
-listed on Craigslist. Some might have considered this to be a "bad
-move" from the start, but I thought the 2013 Mac Pro was simply the
-most amazing computer ever made and $950 seemed like a great
-deal [fn:1].
-
 #+CAPTION: My 2013 Mac Pro
 #+ATTR_HTML: :style max-width: 400px;
 [[file:img/my-mac-pro.jpg]]
 
-Little did I know, the 2013 Mac Pro suffered from severe thermal
-issues and I soon became one of the thousands of unhappy users
+In 2021 I decided to go all-in [fn:1] on a 2013 (trashcan) Mac Pro I saw
+listed on Craigslist.
+
+However, I soon discovered that this machine suffered from severe
+thermal issues and quickly became one of the many unhappy users
 experiencing spontaneous freezing and crashes thought to be caused by
 Apple's proprietary dual AMD FirePro GPUs.
 

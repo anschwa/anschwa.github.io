@@ -4,12 +4,11 @@
 /* Override CSS properties for printing or saving as PDF from the browser */
 /**************************************************************************/
 
-h1 { display: none; }
 h1, h2 { font-size: 1.5em; }
-body { font-size: 70%; }
+body { padding: 10px 20px; font-size: 70%; }
 a, a:active, a:visited { color: black; text-decoration: underline; }
 
-ul.print { display: flex; align-items: baseline; justify-content: space-between; }
+ul.print { margin: 0; display: flex; gap: 1em; position: fixed; top: 10px; right: 20px; }
 ul.print > li { list-style: none; font-size: 1em; }
-ul.print > li:first-child { font-weight: bold; font-size: 1.5em; }
-ul.print > li:nth-child(n+4) { display: none; }
+
+.outline-2 { margin: 16px 0; }

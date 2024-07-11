@@ -11,8 +11,11 @@ h1 { margin-bottom: 0.25em; 0; }
 #preamble { text-align: center; }
 #postamble { margin-top: 1em; text-align: center; font-style: italic; }
 
+.nav { margin-top: 1em; }
+/* .nav { display: flex; justify-content: center; gap: 1em; } */
+/* .nav > li { list-style: none; } */
+
 #content { max-width: 80ch; margin: 0 auto; }
-#content > ul.nav { margin-bottom: 20px; }
 #content p { margin: 1em 0; line-height: 1.5em; }
 
 #content .listing-number,

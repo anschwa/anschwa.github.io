@@ -33,7 +33,7 @@ My personal website is generated from Emacs using ~org-publish~.
            :html-head-include-default-style nil
            :html-head-include-scripts nil
            :html-preamble nil
-           :html-postamble nil
+           :html-postamble "<p>Last&nbsp;updated:&nbsp;%C</p><p class=\"nav\"><a href=\"/\">Home</a> :: <a href=\"/blog\">Blog</a> :: <a href=\"/ceramics\">Ceramics</a>"
 
            ;; Custom options
            :language "en"

@@ -1,14 +1,7 @@
 #+TITLE: Earlham Studio Ceramics
 #+AUTHOR: Adam Schwartz
 #+DATE: November 13, 2021
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../../css/style.css" />
-
-#+ATTR_HTML: :class nav
-- [[file:../../index.org][About]]
-- [[file:../../blog/index.org][Blog]]
-- [[file:../index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
 
 * May 2017
 #+CAPTION: Stoneware tumblers

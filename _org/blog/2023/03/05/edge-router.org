@@ -3,35 +3,16 @@
 #+DATE: March 5, 2023
 #+OPTIONS: title:nil
 #+OPTIONS: html-preamble:"<p>Published:&nbsp;%d</p>"
-#+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
 #+HTML_HEAD: <link rel="stylesheet" href="../../../../css/style.css" />
 
-#+ATTR_HTML: :class nav
-- [[file:../../../../index.org][About]]
-- [[file:../../../index.org][Blog]]
-- [[file:../../../../ceramics/index.org][Ceramics]]
-- [[https://github.com/anschwa][Github]]
-
-* Using an EdgeRouter for my Home Network
-A couple of years ago I was given a very nice Ubiquiti EdgeRouter Lite
-but never set it up. Although I have accumulated a variety of
-networking gear and experimented with running small web servers at
-home for a long time, I had always used typical consumer routers like
-the Linksys WRT54G or Apple AirPort Express.
-
-Recently, after moving into a new apartment I decided it was time to
-give the EdgeRouter a try. I have been very impressed with the results
-and become quite proud of my new home-lab.
-
-* Devices
-Think about your devices. This is the most important step in setting
-up your home network.
+* Using an EdgeRouter for my home network
 
 * Network
 - Router: Ubiquiti EdgeRouter Lite 3
 - Managed Switch: TPlink SG-108pe
 - Access Points (WiFi): TPLink EAP225 Omada
 
+#+ATTR_HTML: :style max-width: 600px;
 [[file:img/network-devices.png][file:img/network-devices.png]]
 
 * Basic Router Setup
@@ -156,6 +137,7 @@ I want several layers of isolation:
 3. An "untrusted" ~DMZ~. More restrictive network than home or work.
 4. Trusted network for management (~MGMT~). Access to the router, switches, and access points are limited to this network.
 
+#+ATTR_HTML: :style max-width: 600px;
 [[file:img/network-interfaces.png][file:img/network-interfaces.png]]
 
 ** Rules
@@ -511,6 +493,7 @@ In order to use pi-hole across different network subnets you have to
 enable the option ~Bind only to interface eth0~ on the DNS settings
 page.
 
+#+ATTR_HTML: :style max-width: 600px;
 [[file:img/pihole-dns.png][file:img/pihole-dns.png]]
 
 * WiFi & Access Points

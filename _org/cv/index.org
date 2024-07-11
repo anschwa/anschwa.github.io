@@ -1,4 +1,4 @@
-#+TITLE: Resume / CV
+#+TITLE: Adam Schwartz
 #+AUTHOR: Adam Schwartz
 #+DATE: June 6, 2021
 #+OPTIONS: html-postamble:"<p>Last&nbsp;updated:&nbsp;%C</p>"
@@ -6,7 +6,6 @@
 #+HTML_HEAD: <link rel="stylesheet" href="./print.css" media="print" />
 
 #+ATTR_HTML: :class print
-- Adam Schwartz
 - Website: [[https://anschwa.com]]
 - GitHub: [[https://github.com/anschwa]]
 

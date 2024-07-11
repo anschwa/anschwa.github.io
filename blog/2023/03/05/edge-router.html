@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-06 -->
-<meta charset="utf-8" />
+<!-- 2024-07-11 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Using an EdgeRouter for my Home Network</title>
 <meta name="author" content="Adam Schwartz" />
@@ -15,40 +17,9 @@
 <p>Published:&nbsp;March 5, 2023</p>
 </div>
 <div id="content" class="content">
-<ul class="org-ul nav">
-<li><a href="../../../../index.html">About</a></li>
-<li><a href="../../../index.html">Blog</a></li>
-<li><a href="../../../../ceramics/index.html">Ceramics</a></li>
-<li><a href="https://github.com/anschwa">Github</a></li>
-</ul>
 
-<div id="outline-container-orgd48f350" class="outline-2">
-<h2 id="orgd48f350">Using an EdgeRouter for my Home Network</h2>
-<div class="outline-text-2" id="text-orgd48f350">
-<p>
-A couple of years ago I was given a very nice Ubiquiti EdgeRouter Lite
-but never set it up. Although I have accumulated a variety of
-networking gear and experimented with running small web servers at
-home for a long time, I had always used typical consumer routers like
-the Linksys WRT54G or Apple AirPort Express.
-</p>
-
-<p>
-Recently, after moving into a new apartment I decided it was time to
-give the EdgeRouter a try. I have been very impressed with the results
-and become quite proud of my new home-lab.
-</p>
-</div>
-</div>
-
-<div id="outline-container-org0fe283a" class="outline-2">
-<h2 id="org0fe283a">Devices</h2>
-<div class="outline-text-2" id="text-org0fe283a">
-<p>
-Think about your devices. This is the most important step in setting
-up your home network.
-</p>
-</div>
+<div id="outline-container-orge25e243" class="outline-2">
+<h2 id="orge25e243">Using an EdgeRouter for my home network</h2>
 </div>
 
 <div id="outline-container-org44dceae" class="outline-2">
@@ -61,10 +32,10 @@ up your home network.
 </ul>
 
 
-<figure id="org229360b">
-<a href="img/network-devices.png"><img src="img/network-devices.png" alt="network-devices.png"></a>
-
-</figure>
+<div id="orgc30b1da" class="figure">
+<p><a href="img/network-devices.png" style="max-width: 600px;"><img src="img/network-devices.png" alt="network-devices.png" style="max-width: 600px;" /></a>
+</p>
+</div>
 </div>
 </div>
 
@@ -257,10 +228,10 @@ the router or establish connections to outside subnets or vlans.</li>
 </ol>
 
 
-<figure id="org8a63b5c">
-<a href="img/network-interfaces.png"><img src="img/network-interfaces.png" alt="network-interfaces.png"></a>
-
-</figure>
+<div id="orgb103dca" class="figure">
+<p><a href="img/network-interfaces.png" style="max-width: 600px;"><img src="img/network-interfaces.png" alt="network-interfaces.png" style="max-width: 600px;" /></a>
+</p>
+</div>
 </div>
 
 <div id="outline-container-org03da16a" class="outline-3">
@@ -688,19 +659,19 @@ Additionally, ports 5, 6, and 7 have been removed as members for VLAN
 up on devices intended to be used on the <code>HOME</code> network.
 </p>
 
-<table>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-right">
+<col  class="org-right" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-right">
+<col  class="org-right" />
 </colgroup>
 <thead>
 <tr>
@@ -753,15 +724,15 @@ see where devices are connected.
 Static IP address assignments are managed through DHCP reservations.
 </p>
 
-<table>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-left">
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
@@ -801,13 +772,13 @@ Static IP address assignments are managed through DHCP reservations.
 <div id="outline-container-orgc7a78bf" class="outline-3">
 <h3 id="orgc7a78bf">Static Reservations</h3>
 <div class="outline-text-3" id="text-orgc7a78bf">
-<table>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="org-left">
+<col  class="org-left" />
 
-<col  class="org-right">
+<col  class="org-right" />
 </colgroup>
 <thead>
 <tr>
@@ -862,10 +833,10 @@ page.
 </p>
 
 
-<figure id="org82115bc">
-<a href="img/pihole-dns.png"><img src="img/pihole-dns.png" alt="pihole-dns.png"></a>
-
-</figure>
+<div id="org8a0e536" class="figure">
+<p><a href="img/pihole-dns.png" style="max-width: 600px;"><img src="img/pihole-dns.png" alt="pihole-dns.png" style="max-width: 600px;" /></a>
+</p>
+</div>
 </div>
 </div>
 
@@ -942,7 +913,7 @@ The EdgeRouter supports Smart Queue Management, which can reduce the overall lat
 </div>
 </div>
 <div id="postamble" class="status">
-<p>Last&nbsp;updated:&nbsp;2023-03-06</p>
+<p>Last&nbsp;updated:&nbsp;2024-07-11</p><p class="nav"><a href="/">Home</a> :: <a href="/blog">Blog</a> :: <a href="/ceramics">Ceramics</a>
 </div>
 </body>
 </html>
