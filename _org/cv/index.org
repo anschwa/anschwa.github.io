@@ -46,18 +46,7 @@
   United States Citizenship and Immigration Services ([[https://www.uscis.gov/about-us/mission-and-core-values][USCIS]]).
 - Platform Team lead: Supported 80 engineers working across the full
   life cycle of asylum and refugee case management.
-- Worked closely with team members and stake holders to troubleshoot issues, run reports, and develop new features.
-- Investigated performance issues and contributed fixes /
-  optimizations to resolve outages and improve reliability of services.
-- Established alert policies and participated in on-call rotations for production services.
-- Created and maintained CICD pipelines for over a dozen production
-  applications and several internal services.
-- Created and maintained Helm charts for deploying Ruby on Rails
-  applications on Kubernetes.
-- Managed application secrets, certificates, and cluster role-based access (RBAC).
-- Tracked vulnerabilities and applied patches.
-- Participated in Authorization to Operate (ATO) and Plan of Action and Milestones (POA&M) processes.
-- Primary technologies: Ruby, PostgreSQL, Kubernetes, GitHub Actions, NewRelic, AWS
+- Primary technologies: Ruby, PostgreSQL, GitHub Actions, Kubernetes
 
 ** May 2018 - August 2021: *Software Engineer*, [[https://www.diagnotes.com/][Diagnotes, Inc.]], Indianapolis, IN
 - Feature development and maintenance on a large Ruby on Rails application.
