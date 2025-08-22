@@ -8,8 +8,8 @@
 [[file:amaco.jpg]]
 
 * Photo Gallery
-- [[file:earlham/index.org][Earlham Studio Ceramics]]
-- [[file:woodfire-1/index.org][Wood Fire I]]
-- [[file:woodfire-2/index.org][Wood Fire II]]
 - [[file:woodfire-3/index.org][Wood Fire III]]
+- [[file:woodfire-2/index.org][Wood Fire II]]
+- [[file:woodfire-1/index.org][Wood Fire I]]
+- [[file:earlham/index.org][Earlham Studio Ceramics]]
 - [[file:ideas/index.org][Ideas]]
