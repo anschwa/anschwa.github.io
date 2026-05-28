@@ -26,8 +26,8 @@
 ** (BA) 2014 - 2018: Earlham College, Richmond, IN
 - Major: Computer Science
 - Minor: Philosophy
-- GPA: 3.78
 - College Honors
+- GPA: 3.78
 - Awards
   - 2018: /Wendell M. Stanley Senior Scholar-Athlete Award/
   - 2015, 2017: /All-HCAC Sportsmanship Award/, Heartland College Athletic Conference, Division III Men's Tennis
@@ -39,17 +39,17 @@
 - Awards
   - May 2014: /Business Education Student of the Year Finalist/, New Trier Township High School
     - Senior Award of Distinction: Demonstrating professionalism and commitment to leadership
-
 * Experience
 ** September 2022 - Present: *Technologist*, [[https://www.cvpcorp.com][CVP]], Washington, DC
-- Engineering Lead for the [[https://www.uscis.gov/about-us/organization/directorates-and-program-offices/refugee-asylum-and-international-operations-directorate][Refugee and Asylum directorate]] of the
+- Engineering / DevOps Lead for the [[https://www.uscis.gov/about-us/organization/directorates-and-program-offices/refugee-asylum-and-international-operations-directorate][Refugee and Asylum directorate]] of the
   United States Citizenship and Immigration Services ([[https://www.uscis.gov/about-us/mission-and-core-values][USCIS]]).
-- Supported 80 engineers working across the full life cycle of asylum
-  and refugee case management.
-- Primary technologies: Ruby, PostgreSQL, Kubernetes
+- Supporting 40-80 engineers working across the full life cycle of asylum and refugee case management.
+- Primary technologies: Ruby, JS, PostgreSQL, Docker, Kubernetes, ArgoCD, AWS
 
 ** May 2018 - August 2021: *Software Engineer*, [[https://www.diagnotes.com/][Diagnotes, Inc.]], Indianapolis, IN
 - Helped launch the next generation of Diagnotes' secure messaging and telehealth platform.
+- Supported production maintenance, monitoring, migrations, and CICD pipelines.
+- Developed new product features and integrations.
 - Primary Technologies: Go, JS, Ruby, PostgreSQL, Docker, AWS
 
 ** May 2017 - August 2017: *Software Engineer*, Healthx, Indianapolis, IN
@@ -112,7 +112,7 @@
 
 ** January 8, 2020: /Emacs and the Joy of Text Editing/, Indy.rb
 - Let’s explore text editing as a tool for thought as we examine the
-  way of EMACS. This talk covers the history of text editors as well
+  way of emacs. This talk covers the history of text editors as well
   as what sets them apart from commercial software and IDEs.
 
 ** October 23, 2019: /Using Go Modules "replace"/, Golang Indianapolis
